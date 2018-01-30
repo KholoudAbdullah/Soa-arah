@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "604382886230",
+    "firebase_url": "https://soa-arah.firebaseio.com",
+    "project_id": "soa-arah",
+    "storage_bucket": "soa-arah.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604382886230:android:0805eb1f1eb38e93",
+        "android_client_info": {
+          "package_name": "com.soa_arah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604382886230-3kbiboonlihi4r3s60fa1u7dg62cdi4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApeL79bdA1zLXlykBv15DIs9W4DpMji1k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
