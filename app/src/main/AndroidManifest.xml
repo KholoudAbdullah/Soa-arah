@@ -5,17 +5,23 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/sa"
-        android:label="سُعرة"
+        android:label="سُعرة                               "
+
         android:roundIcon="@mipmap/sa"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".home_page_guest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".home_page_register" />
+
     </application>
+
+
 
 </manifest>
