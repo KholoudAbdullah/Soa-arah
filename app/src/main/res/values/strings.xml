@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Soa-arah</string>
+    <array name="gender">
 
+        <item name="1"></item>
+        <item name="2">أنثى</item>
+        <item name="3">ذكر</item>
+
+
+    </array>
 </resources>
