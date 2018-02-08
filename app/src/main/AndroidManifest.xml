@@ -16,10 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <uses-permission android:name="android.permission.SEND_SMS" />
 
         <activity android:name=".home_page_register" />
         <activity android:name=".Registration" />
+        <activity android:name=".LoginPage" />
+        <activity android:name=".home_page_IT_admin" />
+        <activity android:name=".home_page_Nutrition_admin"></activity>
     </application>
 
 </manifest>

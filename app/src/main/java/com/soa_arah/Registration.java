@@ -155,7 +155,7 @@ name=(EditText)findViewById(R.id.name);
             //calling register method on click
             registerUser();}
         if(view == log ) {
-            startActivity(new Intent(this, home_page_guest.class) ); //profile=login
+            startActivity(new Intent(this, LoginPage.class) ); //profile=login
 
         }
 
@@ -172,7 +172,7 @@ name=(EditText)findViewById(R.id.name);
 
 
         String Password  = password.getText().toString().trim();
-        String email =Password +"@"+ Name+".com" ;
+        String email =Name +"@soaarah.com" ;
 
 
         //checking if email and passwords are empty

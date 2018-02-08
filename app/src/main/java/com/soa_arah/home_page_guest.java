@@ -27,7 +27,7 @@ public class home_page_guest extends AppCompatActivity  {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                startActivity(new Intent(getApplicationContext(), LoginPage.class));
             }
         });
     }
