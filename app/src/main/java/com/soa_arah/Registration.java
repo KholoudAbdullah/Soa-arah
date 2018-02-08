@@ -139,7 +139,7 @@ name=(EditText)findViewById(R.id.name);
                 month = month + 1;
                 Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
-                 date = month + "/" + day + "/" + year;
+                 date = day + "/" + month + "/" + year;
                 mDisplayDate.setText(date);
             }
         };
@@ -172,7 +172,7 @@ name=(EditText)findViewById(R.id.name);
 
 
         String Password  = password.getText().toString().trim();
-        String email =Password +"@"+ Name+".com" ;
+        String email =Name +"@soaarah.com" ;
 
 
         //checking if email and passwords are empty
@@ -215,7 +215,7 @@ name=(EditText)findViewById(R.id.name);
 
                                 user1.setName(name.getText().toString());
                                 user1.setPhoneNum(phone.getText().toString());
-                                String email=password.getText().toString()+"@"+name.getText().toString()+".com";
+                                String email=name.getText().toString()+"@soaarah.com";
                                 user1.setEmail(email);
                                 user1.setID(User_ID);
                                 user1.setPassword(password.getText().toString());
