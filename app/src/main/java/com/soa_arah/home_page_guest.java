@@ -90,7 +90,7 @@ public class home_page_guest extends AppCompatActivity  {
         reg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                startActivity(new Intent(getApplicationContext(), Registration.class));
+                startActivity(new Intent(getApplicationContext(), ActivityPhoneAuth.class));
             }
         });
         button.setOnClickListener(new View.OnClickListener() {

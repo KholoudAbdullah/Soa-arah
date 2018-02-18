@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Soa-arah</string>
+    <string name="sign_credential_fail" />
+    <string name="signed_success" />
+    <string name="now_logged_in" />
     <array name="gender">
 
         <item name="1"></item>
