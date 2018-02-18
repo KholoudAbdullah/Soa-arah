@@ -23,7 +23,8 @@
         <activity android:name=".Registration" />
         <activity android:name=".LoginPage" />
         <activity android:name=".home_page_IT_admin" />
-        <activity android:name=".home_page_Nutrition_admin"></activity>
+        <activity android:name=".home_page_Nutrition_admin" />
+        <activity android:name=".searchByName"></activity>
     </application>
 
 </manifest>
