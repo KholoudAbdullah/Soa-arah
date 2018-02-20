@@ -53,7 +53,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth firebaseAuth;
     String Phone;
     String message;
-    User user1;
+    RegisteredUser user1;
     private static final String TAG = "MainActivity";
 
     private TextView mDisplayDate;
@@ -187,7 +187,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                             if (task.isSuccessful()) {
                                 String User_ID = firebaseAuth.getCurrentUser().getUid();
                                 final String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
-                                user1=new User();
+                                user1=new RegisteredUser();
 
                                 user1.setName(name.getText().toString());
                                 user1.setPhoneNum(phone.getText().toString());

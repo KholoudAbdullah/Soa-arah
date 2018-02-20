@@ -23,6 +23,7 @@
 
         <activity android:name=".home_page_register" />
         <activity android:name=".Registration" />
+        <activity android:name=".view_account_register" />
         <activity android:name=".LoginPage" />
         <activity android:name=".home_page_IT_admin" />
         <activity android:name=".ActivityPhoneAuth" />

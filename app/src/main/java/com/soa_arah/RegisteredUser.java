@@ -4,13 +4,17 @@ package com.soa_arah;
  * Created by abeeral-olayan on 2/4/18.
  */
 
-public class User {
-    private String name,phoneNum,password,gender,ID;
+public class RegisteredUser {
+    private String name;
+    private String phoneNum;
+    private String password;
+    private String gender;
+    private String id;
     private String wight;
     private String hip;
     private String waist;
 
-    public String getEmail() {
+    public String getemail() {
         return email;
     }
 
@@ -47,7 +51,7 @@ public class User {
     }
 
     public void setID(String ID) {
-        this.ID = ID;
+        this.id = ID;
     }
 
     public void setWight(String wight) {
@@ -82,8 +86,8 @@ public class User {
         return gender;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
     public String getWight() {
