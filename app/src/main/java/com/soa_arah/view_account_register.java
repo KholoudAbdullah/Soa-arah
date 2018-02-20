@@ -1,9 +1,11 @@
 package com.soa_arah;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.TextView;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -84,5 +86,22 @@ public class view_account_register  extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.viewaccount) {
+            startActivity(new Intent(getApplicationContext(), view_account_register.class));
+        } else if (item.getItemId() == R.id.editaccount) {
+            startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+        } else if (item.getItemId() == R.id.Logout){
+            firebaseAuth.signOut();
+            //closing activity
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginPage.class));
+
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 
 }
