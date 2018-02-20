@@ -43,13 +43,11 @@ public class view_account_register  extends AppCompatActivity {
         gender = (TextView) findViewById(R.id.gender);
         waist = (TextView) findViewById(R.id.waist);
         hip = (TextView) findViewById(R.id.hip);
-        hip.setText("55");
         User_ID = firebaseAuth.getCurrentUser().getEmail();
-String na =User_ID.substring(0,User_ID.lastIndexOf("@"));
+        String na =User_ID.substring(0,User_ID.lastIndexOf("@"));
 
 
-        mDatabase1 = FirebaseDatabase.getInstance().getReference();
-        mDatabase1.child("RegisteredUser").child(na);
+        mDatabase1 = FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(na);
 
 
         mDatabase1.addValueEventListener(new ValueEventListener() {
@@ -57,9 +55,17 @@ String na =User_ID.substring(0,User_ID.lastIndexOf("@"));
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                       user = dataSnapshot.getValue(RegisteredUser.class);
+                user = dataSnapshot.getValue(RegisteredUser.class);
+                username.setText(user.getName());
+                phone.setText(user.getPhoneNum());
+                wight.setText(user.getWight());
+                hight.setText(user.getHight());
+                date.setText(user.getDateOfBarth());
+                gender.setText(user.getGender());
+                hip.setText(user.gethip());
+                waist.setText(user.getWaist());
 
-                Toast.makeText(getApplicationContext(),user.getWaist(),Toast.LENGTH_LONG).show();
+
 
             }
 

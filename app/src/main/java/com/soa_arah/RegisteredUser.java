@@ -94,7 +94,7 @@ public class RegisteredUser {
         return wight;
     }
 
-    public String getHip() {
+    public String gethip() {
         return hip;
     }
 
