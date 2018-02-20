@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.soa_arah.home_page_guest">
+    tools:context="com.soa_arah.home_page_guest"
+    >
 
 
     <android.support.design.widget.BottomNavigationView
@@ -25,6 +26,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         design:menu="@menu/bottom_bar">
+
 
     </android.support.design.widget.BottomNavigationView>
 
