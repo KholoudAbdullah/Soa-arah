@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.soa_arah">
 
     <application
@@ -17,12 +18,16 @@
             </intent-filter>
         </activity>
 
-        <uses-permission android:name="android.permission.SEND_SMS" />
+        <uses-permission android:name="android.permission.SEND_SMS"
+            tools:ignore="WrongManifestParent" />
 
         <activity android:name=".home_page_register" />
         <activity android:name=".Registration" />
         <activity android:name=".LoginPage" />
         <activity android:name=".home_page_IT_admin" />
+        <activity android:name=".ActivityPhoneAuth" />
+        <activity android:name=".searchByName" />
+
         <activity android:name=".home_page_Nutrition_admin"></activity>
     </application>
 
