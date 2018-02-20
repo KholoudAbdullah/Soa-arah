@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.soa_arah.ActivityPhoneAuth">
 
     <ImageView
@@ -17,7 +18,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/sa" />
+        app:srcCompat="@drawable/soaarah_icon" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

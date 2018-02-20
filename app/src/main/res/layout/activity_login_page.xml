@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.soa_arah.LoginPage">
 
 
@@ -17,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/sa"
+            app:srcCompat="@drawable/soaarah_icon"
             tools:ignore="MissingConstraints" />
 
         <android.support.v7.widget.Toolbar
