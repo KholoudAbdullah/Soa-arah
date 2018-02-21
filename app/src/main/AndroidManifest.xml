@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.soa_arah">
 
+<uses-permission android:name="android.permission.CAMERA" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/sa"
@@ -29,7 +30,7 @@
         <activity android:name=".home_page_IT_admin" />
         <activity android:name=".ActivityPhoneAuth" />
         <activity android:name=".searchByName" />
-
+        <activity android:name=".Barcode" />
         <activity android:name=".home_page_Nutrition_admin"></activity>
     </application>
 
