@@ -33,11 +33,13 @@ public class home_page_guest extends AppCompatActivity  {
     boolean flag;
     String stand;
     String grams;
+    private Button scan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_guest_activity);
 
+        scan=(Button)findViewById(R.id.scan);
         button = (Button)findViewById(R.id.login);
         reg=(Button) findViewById(R.id.register);
         searchtext=(EditText)findViewById(R.id.searchword);
@@ -99,5 +101,16 @@ public class home_page_guest extends AppCompatActivity  {
                 startActivity(new Intent(getApplicationContext(), LoginPage.class));
             }
         });
+
+        scan.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                startActivity(new Intent(getApplicationContext(), Barcode.class));
+            }
+        });
+
     }
+
+
 }
+

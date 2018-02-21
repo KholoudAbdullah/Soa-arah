@@ -20,7 +20,7 @@ public class Barcode extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_page_guest_activity);
+        setContentView(R.layout.barcode_activity);
     }
 
     public void scanCode (View view){
