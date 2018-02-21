@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import javax.xml.transform.Result;
-
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 /**

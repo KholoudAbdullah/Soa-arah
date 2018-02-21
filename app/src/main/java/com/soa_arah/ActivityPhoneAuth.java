@@ -1,6 +1,5 @@
 package com.soa_arah;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,7 +24,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
     private EditText etxtPhoneCode;
     private String mVerificationId;
     Intent intent;
-    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onStart() {
@@ -58,6 +57,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
 
         if (TextUtils.isEmpty(phoneNumber))
             return;
+        Toast.makeText(ActivityPhoneAuth.this, "الرجاء الانتظار حتى يتم الارسال" , Toast.LENGTH_SHORT).show();
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber, 60, TimeUnit.SECONDS, ActivityPhoneAuth.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
@@ -87,6 +87,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                     }
                 }
         );
+
     }
 
 
@@ -95,6 +96,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
         String code = etxtPhoneCode.getText().toString();
         if (TextUtils.isEmpty(code))
             return;
+
         intent = new Intent(ActivityPhoneAuth.this, Registration.class);
         intent.putExtra("Phone",etxtPhone.getText().toString().trim().toString());
         startActivity(intent);

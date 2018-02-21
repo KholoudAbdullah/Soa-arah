@@ -155,7 +155,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     private void registerUser() {
         //getting email and password from edit texts
 
-        final String Name = name.getText().toString().trim();
+        final String Name = name.getText().toString().trim().toLowerCase();
         final String Phone= phone.getText().toString().trim();
         final String Wedith =wedith.getText().toString().trim();
         final String Hight =hight.getText().toString().trim();
@@ -174,7 +174,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         if(!(name.getText().toString().trim().isEmpty()&&password.getText().toString().trim().isEmpty())) {
             //if the email and password and Location are not empty
             //displaying a progress dialog
-            progressDialog.setMessage("تسجيل، الرجاء الانتظار..");
+            progressDialog.setMessage(" الرجاء الانتظار حتى يتم التسجيل");
             progressDialog.show();
 
             //creating a new user
@@ -191,7 +191,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
                                 user1.setName(name.getText().toString().toLowerCase());
                                 user1.setPhoneNum(phone.getText().toString());
-                                String email=name.getText().toString()+"@soaarah.com";
+                                String email=name.getText().toString().toLowerCase()+"@soaarah.com";
                                 user1.setEmail(email);
                                 user1.setID(User_ID);
                                 user1.setPassword(password.getText().toString());
@@ -208,7 +208,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
                                 user1.setGender(record);
                                 user1.setDateOfBarth(date);
-                                mDatabase.child(name.getText().toString()).setValue(user1);
+                                mDatabase.child(name.getText().toString().toLowerCase()).setValue(user1);
                                 // Intent intent=new Intent(RegisterOrgActivity.this, ProfileActivity.class);
                                 // intent.putExtra("org", (Serializable) org1);
                                 //display message to the user here
