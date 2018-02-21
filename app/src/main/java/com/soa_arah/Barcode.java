@@ -48,7 +48,7 @@ public class Barcode extends AppCompatActivity {
 
             String resultCode =result.getText();
             Toast.makeText(Barcode.this, resultCode, Toast.LENGTH_SHORT).show();
-            setContentView(R.layout.home_page_guest_activity);
+            setContentView(R.layout.barcode_activity);
             scannerView.stopCamera();
         }
     }
