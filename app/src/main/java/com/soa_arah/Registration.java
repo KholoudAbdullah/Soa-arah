@@ -189,7 +189,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                 final String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
                                 user1=new RegisteredUser();
 
-                                user1.setName(name.getText().toString());
+                                user1.setName(name.getText().toString().toLowerCase());
                                 user1.setPhoneNum(phone.getText().toString());
                                 String email=name.getText().toString()+"@soaarah.com";
                                 user1.setEmail(email);
