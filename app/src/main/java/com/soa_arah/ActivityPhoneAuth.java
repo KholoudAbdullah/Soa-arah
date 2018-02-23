@@ -112,7 +112,6 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                                     ActivityPhoneAuth.this);
 
 
-                            alert.setMessage("");
                             alert.setTitle("تمت عملية التسجيل بنجاح").setIcon(R.drawable.t1);
                             AlertDialog dialog = alert.create();
 
@@ -157,9 +156,44 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                             AlertDialog.Builder alert = new AlertDialog.Builder(
                                     ActivityPhoneAuth.this);
 
+                            alert.setTitle("يوجد خطأ في الرمز").setIcon(R.drawable.f1);
+                            AlertDialog dialog = alert.create();
 
-                            alert.setMessage("يوجد خطأ في الرمز");
-                            alert.show();
+                            // Finally, display the alert dialog
+                            dialog.show();
+
+                            // Get screen width and height in pixels
+                            DisplayMetrics displayMetrics = new DisplayMetrics();
+                            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                            // The absolute width of the available display size in pixels.
+                            int displayWidth = displayMetrics.widthPixels;
+                            // The absolute height of the available display size in pixels.
+                            int displayHeight = displayMetrics.heightPixels;
+
+                            // Initialize a new window manager layout parameters
+                            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+                            // Copy the alert dialog window attributes to new layout parameter instance
+                            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+                            // Set the alert dialog window width and height
+                            // Set alert dialog width equal to screen width 90%
+                            // int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                            // Set alert dialog height equal to screen height 90%
+                            // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+
+                            // Set alert dialog width equal to screen width 70%
+                            int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                            // Set alert dialog height equal to screen height 70%
+                            int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+                            // Set the width and height for the layout parameters
+                            // This will bet the width and height of alert dialog
+                            layoutParams.width = dialogWindowWidth;
+                            layoutParams.height = dialogWindowHeight;
+
+                            // Apply the newly created layout parameters to the alert dialog window
+                            dialog.getWindow().setAttributes(layoutParams);
 
                         }
 
