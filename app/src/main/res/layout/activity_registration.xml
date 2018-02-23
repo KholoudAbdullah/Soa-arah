@@ -107,7 +107,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="-14dp"
         android:ems="10"
         android:gravity="right"
         android:hint="الرقم السري"
@@ -116,6 +115,7 @@
         android:singleLine="false"
         android:textColor="#494949"
         android:textColorHighlight="#494949"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textnameempty" />
@@ -125,51 +125,44 @@
         android:id="@+id/textView16"
         android:layout_width="33dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="36dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:text="*"
         android:textColor="@android:color/holo_red_dark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
-    <TextView
-        android:id="@+id/p"
-        android:layout_width="231dp"
-        android:layout_height="37dp"
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="211dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
         android:ems="10"
         android:gravity="right"
-        android:hint="رقم الجوال "
-        android:inputType="phone"
-        android:textAllCaps="false"
-        android:textColor="#494949"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
-
-    <TextView
-        android:id="@+id/phone"
-        android:layout_width="139dp"
-        android:layout_height="29dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="132dp"
-        android:ems="10"
-        android:gravity="left"
-        android:hint="+9665********"
+        android:hint="رقم الجوال ******966+"
         android:inputType="phone"
         android:textAllCaps="false"
         android:textColor="#494949"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="33dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="16dp"
+        android:text="*"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/log"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.015" />
     <TextView
         android:id="@+id/textphoneempty"
         android:layout_width="0dp"
@@ -191,11 +184,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="-3dp"
         android:ems="10"
         android:hint="الوزن بالكجم"
         android:inputType="textPersonName"
         android:textColor="#494949"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone" />
@@ -222,12 +215,10 @@
         android:layout_height="41dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="-18dp"
         android:ems="10"
         android:hint="محيط الخصر بالسم "
         android:inputType="textPersonName"
         android:textColor="#494949"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hight" />
@@ -238,11 +229,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="-10dp"
         android:ems="10"
         android:hint="محيط الفخذ بالسم "
         android:inputType="textPersonName"
         android:textColor="#494949"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Waist" />
@@ -253,28 +244,28 @@
         android:layout_height="24dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="408dp"
+        android:layout_marginTop="412dp"
         android:layout_weight="0.26"
         android:text="الجنس"
         android:textAlignment="textStart"
         android:textColor="#494949"
         android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.793"
+        app:layout_constraintHorizontal_bias="0.771"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/gen"
-        android:layout_width="86dp"
-        android:layout_height="25dp"
+        android:layout_width="81dp"
+        android:layout_height="23dp"
         android:layout_below="@+id/textgender"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="408dp"
+        android:layout_marginTop="412dp"
         android:layout_weight="0.58"
         android:hint="الجنس"
-        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -285,13 +276,13 @@
         android:layout_height="22dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="432dp"
+        android:layout_marginTop="444dp"
         android:layout_weight="0.26"
         android:text="تاريخ الميلاد"
         android:textAlignment="textStart"
         android:textColor="#494949"
         android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.775"
+        app:layout_constraintHorizontal_bias="0.758"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -299,14 +290,15 @@
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="105dp"
-        android:layout_height="24dp"
+        android:layout_height="0dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="96dp"
-        android:layout_marginTop="432dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="444dp"
         android:gravity="right"
         android:hint="اختر التاريخ"
         android:textColor="#494949"
         android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/textdate"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -316,11 +308,12 @@
         android:layout_height="31dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="464dp"
+        android:layout_marginTop="476dp"
         android:background="#7ba452"
         android:text="تسجيل"
         android:textColor="@android:color/white"
         android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -338,7 +331,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-
+    <ImageView
+        android:id="@+id/t1"
+        android:layout_width="42dp"
+        android:layout_height="38dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/t1"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 
 </android.support.constraint.ConstraintLayout>

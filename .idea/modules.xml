@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Soa-arah.iml" filepath="$PROJECT_DIR$/Soa-arah.iml" />
-      <module fileurl="file://C:\Users\HP\AndroidStudioProjects\Soa-arah\Soa-arah.iml" filepath="C:\Users\HP\AndroidStudioProjects\Soa-arah\Soa-arah.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

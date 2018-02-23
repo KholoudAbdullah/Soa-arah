@@ -12,8 +12,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,8 +53,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     private FirebaseDatabase database;
     private DatabaseReference mDatabase;
     private FirebaseAuth firebaseAuth;
-    String Phone;
-    String message;
+    Intent intent;
     RegisteredUser user1;
     private static final String TAG = "MainActivity";
 
@@ -74,9 +75,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
         password=(EditText)findViewById(R.id.password);
         phone=(TextView)findViewById(R.id.phone);
-        Intent intent = getIntent();
-        String p = intent.getExtras().getString("Phone", "");
-        phone.setText(p);
+
         wedith=(EditText)findViewById(R.id.wedith);
         hight=(EditText)findViewById(R.id.hight);
         Waist=(EditText)findViewById(R.id.Waist);
@@ -178,6 +177,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             progressDialog.show();
 
             //creating a new user
+
+
+
+
             firebaseAuth.createUserWithEmailAndPassword(email, Password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @SuppressLint("ResourceType")
@@ -212,24 +215,59 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                 // Intent intent=new Intent(RegisterOrgActivity.this, ProfileActivity.class);
                                 // intent.putExtra("org", (Serializable) org1);
                                 //display message to the user here
-                                AlertDialog.Builder alert = new AlertDialog.Builder(
-                                        Registration.this);
 
-
-                                alert.setMessage("تمت عملية التسجيل بنجاح");
-                                alert.show();
                                 //Toast.makeText(Registration.this, "تمت العملية بنجاح", Toast.LENGTH_LONG).show();
                                 //close this activity
                                 finish();
                                 //opening login activity
-                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                intent = new Intent(Registration.this, ActivityPhoneAuth.class);
+                                intent.putExtra("Phone",phone.getText().toString().trim().toString());
+                                startActivity(intent);
+
                             }
                             else {
                                 //display some message here
                                 AlertDialog.Builder alert = new AlertDialog.Builder(
                                         Registration.this);
-                                alert.setMessage("عذراً يوجد مستخدم بهذا الاسم");
-                                alert.show();
+
+                                alert.setTitle("عذراً يوجد مستخدم بهذا الاسم").setIcon(R.drawable.f1);
+                                AlertDialog dialog = alert.create();
+
+                                // Finally, display the alert dialog
+                                dialog.show();
+
+                                // Get screen width and height in pixels
+                                DisplayMetrics displayMetrics = new DisplayMetrics();
+                                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                                // The absolute width of the available display size in pixels.
+                                int displayWidth = displayMetrics.widthPixels;
+                                // The absolute height of the available display size in pixels.
+                                int displayHeight = displayMetrics.heightPixels;
+
+                                // Initialize a new window manager layout parameters
+                                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+                                // Copy the alert dialog window attributes to new layout parameter instance
+                                layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+                                // Set the alert dialog window width and height
+                                // Set alert dialog width equal to screen width 90%
+                                // int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                                // Set alert dialog height equal to screen height 90%
+                                // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+
+                                // Set alert dialog width equal to screen width 70%
+                                int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                                // Set alert dialog height equal to screen height 70%
+                                int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+                                // Set the width and height for the layout parameters
+                                // This will bet the width and height of alert dialog
+                                layoutParams.width = dialogWindowWidth;
+                                layoutParams.height = dialogWindowHeight;
+
+                                // Apply the newly created layout parameters to the alert dialog window
+                                dialog.getWindow().setAttributes(layoutParams);
                                 //Toast.makeText(Registration.this, "هناك خلل..", Toast.LENGTH_LONG).show();
                             }
                             progressDialog.dismiss();
@@ -240,9 +278,45 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             AlertDialog.Builder alert = new AlertDialog.Builder(
                     Registration.this);
 
+                   alert.setTitle("عذراً أحد الحقول الإلزامية فارغ").setIcon(R.drawable.f1);
 
-            alert.setMessage("عذراً أحد الحقول الإلزامية فارغ");
-            alert.show();
+            AlertDialog dialog = alert.create();
+
+            // Finally, display the alert dialog
+            dialog.show();
+
+            // Get screen width and height in pixels
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            // The absolute width of the available display size in pixels.
+            int displayWidth = displayMetrics.widthPixels;
+            // The absolute height of the available display size in pixels.
+            int displayHeight = displayMetrics.heightPixels;
+
+            // Initialize a new window manager layout parameters
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+            // Copy the alert dialog window attributes to new layout parameter instance
+            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+            // Set the alert dialog window width and height
+            // Set alert dialog width equal to screen width 90%
+            // int dialogWindowWidth = (int) (displayWidth * 0.9f);
+            // Set alert dialog height equal to screen height 90%
+            // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+
+            // Set alert dialog width equal to screen width 70%
+            int dialogWindowWidth = (int) (displayWidth * 0.9f);
+            // Set alert dialog height equal to screen height 70%
+            int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+            // Set the width and height for the layout parameters
+            // This will bet the width and height of alert dialog
+            layoutParams.width = dialogWindowWidth;
+            layoutParams.height = dialogWindowHeight;
+
+            // Apply the newly created layout parameters to the alert dialog window
+            dialog.getWindow().setAttributes(layoutParams);
         }
     }
 

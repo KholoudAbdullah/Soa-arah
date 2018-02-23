@@ -1,11 +1,20 @@
 package com.soa_arah;
 
-import android.content.Intent;
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 
 
 public class edit_account_register extends AppCompatActivity implements View.OnClickListener {
@@ -25,12 +36,19 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
     private ImageButton edit_waist;
     private ImageButton edit_hip;
     private EditText hight,waist,hip,wight;
-
+    private  ProgressDialog progressDialog;
+    private Spinner gen;
+    private TextView mDisplayDate;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    String date;
+    String record="";
+    String gender[]={"أنثى","ذكر"};
+    ArrayAdapter<String> adapter;
     //firebase auth object
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
 
-
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +91,8 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
                 hight.setText(user.getHight());
                 hip.setText(user.gethip());
                 waist.setText(user.getWaist());
+                mDisplayDate.setText(user.getDateOfBarth());
+
 
             }
 
@@ -81,6 +101,65 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
 
             }
         });
+        gen=(Spinner)findViewById(R.id.gen);
+        mDisplayDate = (TextView) findViewById(R.id.tvDate);
+        adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,gender);
+        gen.setAdapter(adapter);
+        gen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        record = "أنثى";
+                        break;
+                    case 1:
+                        record = "ذكر";
+                        break;
+
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
+
+
+        progressDialog = new ProgressDialog(this);
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        edit_account_register.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+
+                date = day + "/" + month + "/" + year;
+                mDisplayDate.setText(date);
+            }
+        };
+
     }
 
     @Override
@@ -95,9 +174,12 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
                 Toast.makeText(getApplicationContext(),"تم تغيير الطول بنجاح",Toast.LENGTH_LONG).show();
             }
             if (view == edit_date) {
-
+                mDatabase.child("dateOfBarth").setValue(mDisplayDate.getText().toString());
+                Toast.makeText(getApplicationContext(),"تم تغيير تاريخ الميلاد بنجاح",Toast.LENGTH_LONG).show();
             }
             if (view == edit_gender) {
+                mDatabase.child("gender").setValue(record);
+                Toast.makeText(getApplicationContext(),"تم تغيير الجنس بنجاح",Toast.LENGTH_LONG).show();
 
             }
             if (view == edit_waist) {

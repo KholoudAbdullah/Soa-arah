@@ -2,21 +2,17 @@ package com.soa_arah;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.time.Instant;
 
 public class home_page_guest extends AppCompatActivity  {
 
@@ -92,7 +88,7 @@ public class home_page_guest extends AppCompatActivity  {
         reg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                startActivity(new Intent(getApplicationContext(), ActivityPhoneAuth.class));
+                startActivity(new Intent(getApplicationContext(), Registration.class));
             }
         });
         button.setOnClickListener(new View.OnClickListener() {
