@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +33,8 @@ public class ActivityPhoneAuth extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private EditText etxtPhoneCode;
     private String mVerificationId;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference mDatabase;
 
     private static final String TAG = "ActivityPhoneAuth";
 
@@ -58,6 +62,12 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                 }
             }
         };
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        String User_ID = firebaseAuth.getCurrentUser().getEmail();
+        String username =User_ID.substring(0,User_ID.lastIndexOf("@"));
+
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(username);
     }
 
     public void requestCode(View view) {
@@ -111,7 +121,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                             AlertDialog.Builder alert = new AlertDialog.Builder(
                                     ActivityPhoneAuth.this);
 
-
+                            mDatabase.child("phoneNum").setValue(etxtPhone.getText().toString());
                             alert.setTitle("تمت عملية التسجيل بنجاح").setIcon(R.drawable.t1);
                             AlertDialog dialog = alert.create();
 
