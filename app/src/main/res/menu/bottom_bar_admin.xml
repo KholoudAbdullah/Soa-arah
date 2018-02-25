@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- bottom navigation for three icon search,diet plan and send request -->
+    <item
+        android:id="@+id/search"
+        android:title="بحث"
+        android:visible="true"
+        android:icon="@drawable/search"/>
+
+
+    <item
+        android:id="@+id/request"
+        android:title="طلبت الإضافة"
+        android:icon="@drawable/send_request"
+        />
+
+
+
+</menu>
