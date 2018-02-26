@@ -45,6 +45,7 @@ public class home_page_register extends AppCompatActivity{
         firebaseAuth = FirebaseAuth.getInstance();
         scan=(Button)findViewById(R.id.scan);
 
+
         searchtext=(EditText)findViewById(R.id.searchword);
         searchBtn=(Button)findViewById(R.id.searchButton);
         //progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
