@@ -3,6 +3,8 @@ package com.soa_arah;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.view.Menu;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -98,6 +100,29 @@ public class home_page_register extends AppCompatActivity{
                 startActivity(new Intent(getApplicationContext(), Barcode.class));
             }
         });
+        //menu bottom bar
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.search:
+                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                break;
+                            case R.id.diet_plan:
+                                startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+
+                                break;
+                            case R.id.request:
+                                startActivity(new Intent(getApplicationContext(), RequestByName.class));
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
+
     }
 
 

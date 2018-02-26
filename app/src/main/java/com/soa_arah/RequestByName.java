@@ -5,18 +5,16 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -31,7 +29,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.roughike.bottombar.BottomBar;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -243,7 +240,7 @@ public class RequestByName extends AppCompatActivity {
                                 stander="ملي لتر,كوب";
 
                             Food RF = new Food(foodname.getText().toString().trim(),
-                                    taskSnapshot.getDownloadUrl().toString(),calory.getText().toString().trim(),stander,gram.getText().toString().trim());
+                                    taskSnapshot.getDownloadUrl().toString(),null,calory.getText().toString().trim(),stander,gram.getText().toString().trim());
                             String uploadId = databaseReference.push().getKey();
                             databaseReference.child(uploadId).setValue(RF);
 

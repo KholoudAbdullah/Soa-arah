@@ -10,10 +10,20 @@ public class Food {
     private String Keyword;
     private String Calories;
     private String Garms;
+    private String standard;
 
     public Food(){
 
     }
+
+    public void setStandard(String standard) {
+        this.standard = standard;
+    }
+
+    public String getStandard() {
+        return standard;
+    }
+
     public String getName() {
         return Name;
     }
@@ -54,12 +64,13 @@ public class Food {
         Garms = garms;
     }
 
-    public Food(String name, String image, String keyword, String calories, String garms) {
+    public Food(String name, String image, String keyword, String calories, String standard,String garms) {
         Name = name;
         Image = image;
         Keyword = keyword;
         Calories = calories;
         Garms = garms;
+        this.standard=standard;
     }
 
 }
