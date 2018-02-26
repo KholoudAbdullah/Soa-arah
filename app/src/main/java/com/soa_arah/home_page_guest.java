@@ -7,12 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class home_page_guest extends AppCompatActivity  {
 
@@ -30,6 +33,7 @@ public class home_page_guest extends AppCompatActivity  {
     String stand;
     String grams;
     private Button scan;
+    private ZXingScannerView scannerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,15 +102,38 @@ public class home_page_guest extends AppCompatActivity  {
             }
         });
 
-        scan.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                startActivity(new Intent(getApplicationContext(), Barcode.class));
-            }
-        });
+
 
     }
 
+    public void scanCode (View view){
 
+        scannerView =new ZXingScannerView(this);
+        scannerView.setResultHandler( new home_page_guest.ZXingScannerResultHandler());
+
+        setContentView(scannerView);
+        scannerView.startCamera();
+
+
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        scannerView.startCamera();
+    }
+
+    class ZXingScannerResultHandler implements ZXingScannerView.ResultHandler
+    {
+
+
+        @Override
+        public void handleResult(com.google.zxing.Result result) {
+
+            String resultCode =result.getText();
+            Toast.makeText(home_page_guest.this, resultCode, Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.home_page_guest_activity);
+            scannerView.stopCamera();
+        }
+    }
 }
 

@@ -109,19 +109,22 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/scan"
-        android:layout_width="98dp"
-        android:layout_height="35dp"
+        android:id="@+id/button3"
+        android:layout_width="103dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="#7ba452"
+        android:onClick="scanCode"
         android:text="التقط الصورة"
         android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.573" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709" />
 </android.support.constraint.ConstraintLayout>

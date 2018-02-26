@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.view.Menu;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 /**
  * Created by Lama on 31/01/18.
@@ -39,6 +42,7 @@ public class home_page_register extends AppCompatActivity{
     String stand;
     String grams;
     private Button scan;
+    private ZXingScannerView scannerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,12 +98,7 @@ public class home_page_register extends AppCompatActivity{
 
             }
         });
-        scan.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                startActivity(new Intent(getApplicationContext(), Barcode.class));
-            }
-        });
+
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -124,7 +123,35 @@ public class home_page_register extends AppCompatActivity{
                 });
 
     }
+    public void scanCode (View view){
 
+        scannerView =new ZXingScannerView(this);
+        scannerView.setResultHandler( new home_page_register.ZXingScannerResultHandler());
+
+        setContentView(scannerView);
+        scannerView.startCamera();
+
+
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        scannerView.startCamera();
+    }
+
+    class ZXingScannerResultHandler implements ZXingScannerView.ResultHandler
+    {
+
+
+        @Override
+        public void handleResult(com.google.zxing.Result result) {
+
+            String resultCode =result.getText();
+            Toast.makeText(home_page_register.this, resultCode, Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.home_page_guest_activity);
+            scannerView.stopCamera();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
