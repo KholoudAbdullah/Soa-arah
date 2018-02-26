@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+
+    android:background="@color/white"
     tools:context="com.soa_arah.home_page_IT_admin">
     <ImageView
         android:id="@+id/imageView2"
@@ -121,7 +124,28 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.573" />
+        app:layout_constraintVertical_bias="0.661" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/Navigation"
+        android:layout_width="600dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="-10dp"
+        android:background="#acd680"
+        android:paddingLeft="150dp"
+        android:paddingRight="5dp"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        design:menu="@menu/bottom_bar_admin">
+
+
+    </android.support.design.widget.BottomNavigationView>
 </android.support.constraint.ConstraintLayout>
