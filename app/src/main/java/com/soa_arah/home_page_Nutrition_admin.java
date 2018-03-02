@@ -3,7 +3,10 @@ package com.soa_arah;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -82,38 +85,39 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
             }
         });
 
+        //menu bottom bar
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.search:
+                                startActivity(new Intent(getApplicationContext(), home_page_Nutrition_admin.class));
+                                break;
+                            case R.id.request:
+                                startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
+                                break;
+                            case R.id.account:
+                                startActivity(new Intent(getApplicationContext(), account_Nutrition_admin.class));
 
-
+                                break;
+                        }
+                        return false;
+                    }
+                });
 
     }
+
+
+
+
     public void scanCode (View view){
 
-        scannerView =new ZXingScannerView(this);
-        scannerView.setResultHandler( new home_page_Nutrition_admin.ZXingScannerResultHandler());
-
-        setContentView(scannerView);
-        scannerView.startCamera();
+        startActivity(new Intent(getApplicationContext(), Barcode.class));
 
 
     }
-    @Override
-    public void onPause(){
-        super.onPause();
-        scannerView.startCamera();
-    }
 
-    class ZXingScannerResultHandler implements ZXingScannerView.ResultHandler
-    {
-
-
-        @Override
-        public void handleResult(com.google.zxing.Result result) {
-
-            String resultCode =result.getText();
-            Toast.makeText(home_page_Nutrition_admin.this, resultCode, Toast.LENGTH_SHORT).show();
-            setContentView(R.layout.home_page_guest_activity);
-            scannerView.stopCamera();
-        }
-    }
 }

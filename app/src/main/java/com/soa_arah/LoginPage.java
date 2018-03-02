@@ -109,7 +109,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                                 startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
                             }
                             // Nutrition addmin
-                            else if(id.equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                            else if(id.equals("YoP81hCq4FQiPW9u0e0MNJVi85X2")){
                                 startActivity(new Intent(getApplicationContext(),home_page_Nutrition_admin.class));
                             }
                             else {
