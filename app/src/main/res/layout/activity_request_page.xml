@@ -69,24 +69,36 @@
         android:id="@+id/byName"
         android:layout_width="193dp"
         android:layout_height="68dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:background="#7ba452"
+        android:text="بالاسم"
+
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        android:text="بالاسم"
         android:textStyle="bold"
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/byBarcode"
-        tools:layout_editor_absoluteX="109dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="285dp"
         android:layout_height="135dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        design:srcCompat="@drawable/soaarah_icon"
-        tools:layout_editor_absoluteX="73dp" />
+        app:layout_constraintVertical_bias="0.042"
+        design:srcCompat="@drawable/soaarah_icon" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -25,6 +25,8 @@ public class Request_page extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        name=(Button)findViewById(R.id.byName);
+        barcode=(Button)findViewById(R.id.byBarcode);
 
 
         //menu bottom bar
@@ -41,7 +43,7 @@ public class Request_page extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
                                 break;
-                            case R.id.request:
+                            case R.id.upload:
                                 startActivity(new Intent(getApplicationContext(), Request_page.class));
 
                                 break;
@@ -62,7 +64,7 @@ public class Request_page extends AppCompatActivity {
         barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), RequestByBarcode.class));
+                startActivity(new Intent(getApplicationContext(), RequestByName.class));
             }
         });
 

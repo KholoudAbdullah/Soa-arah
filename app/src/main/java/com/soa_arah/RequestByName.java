@@ -63,20 +63,18 @@ public class RequestByName extends AppCompatActivity {
 
 
 
-        cancle= findViewById(R.id.cancel);
-        send= findViewById(R.id.send);
-        upload= findViewById(R.id.upload);
-        foodname= findViewById(R.id.FName);
-        foodImage= findViewById(R.id.Foodimage);
-        calory=findViewById(R.id.calbyg);
+        cancle= (Button)findViewById(R.id.cancel);
+        send=(Button) findViewById(R.id.send);
+        upload=(Button) findViewById(R.id.upload);
+        foodname=(EditText) findViewById(R.id.FName);
+        foodImage=(ImageView) findViewById(R.id.Foodimage);
+        calory=(EditText) findViewById(R.id.calbyg);
         progressDialog = new ProgressDialog(RequestByName.this);
-        Rfood= findViewById(R.id.food);
-        Rdrink= findViewById(R.id.dark);
-        gram= findViewById(R.id.gramL);
+        Rfood= (RadioButton) findViewById(R.id.food);
+        Rdrink=(RadioButton) findViewById(R.id.dark);
+        gram=(EditText) findViewById(R.id.gramL);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
-
 
 
 
@@ -116,7 +114,7 @@ public class RequestByName extends AppCompatActivity {
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RequestByName.this, home_page_register.class));
+                startActivity(new Intent(getApplicationContext(), home_page_register.class));
             }
         });
 
