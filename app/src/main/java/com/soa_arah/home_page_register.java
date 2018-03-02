@@ -49,7 +49,6 @@ public class home_page_register extends AppCompatActivity{
         setContentView(R.layout.home_page_register_activity);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        scan=(Button)findViewById(R.id.scan);
 
 
         searchtext=(EditText)findViewById(R.id.searchword);
@@ -114,7 +113,7 @@ public class home_page_register extends AppCompatActivity{
 
                                 break;
                             case R.id.request:
-                                startActivity(new Intent(getApplicationContext(), RequestByName.class));
+                                startActivity(new Intent(getApplicationContext(), Request_page.class));
 
                                 break;
                         }
@@ -152,6 +151,8 @@ public class home_page_register extends AppCompatActivity{
             scannerView.stopCamera();
         }
     }
+
+    //menu
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

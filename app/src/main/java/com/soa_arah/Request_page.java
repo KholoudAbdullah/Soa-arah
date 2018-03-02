@@ -62,7 +62,7 @@ public class Request_page extends AppCompatActivity {
         barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), RequestByName.class));
+                startActivity(new Intent(getApplicationContext(), RequestByBarcode.class));
             }
         });
 

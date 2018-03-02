@@ -34,7 +34,6 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_nutrition_admin_activity);
-        scan=(Button)findViewById(R.id.scan);
 
         searchtext=(EditText)findViewById(R.id.searchword);
         searchBtn=(Button)findViewById(R.id.searchButton);
