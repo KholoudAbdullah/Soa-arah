@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -123,34 +122,8 @@ public class home_page_register extends AppCompatActivity{
                 });
 
     }
-    public void scanCode (View view){
-
-        scannerView =new ZXingScannerView(this);
-        scannerView.setResultHandler( new home_page_register.ZXingScannerResultHandler());
-
-        setContentView(scannerView);
-        scannerView.startCamera();
-
-
-    }
-    @Override
-    public void onPause(){
-        super.onPause();
-        scannerView.startCamera();
-    }
-
-    class ZXingScannerResultHandler implements ZXingScannerView.ResultHandler
-    {
-
-
-        @Override
-        public void handleResult(com.google.zxing.Result result) {
-
-            String resultCode =result.getText();
-            Toast.makeText(home_page_register.this, resultCode, Toast.LENGTH_SHORT).show();
-            setContentView(R.layout.home_page_guest_activity);
-            scannerView.stopCamera();
-        }
+    public void scanCode (View view) {
+        startActivity(new Intent(getApplicationContext(), Barcode.class));
     }
 
     @Override
