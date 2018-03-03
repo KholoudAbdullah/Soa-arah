@@ -78,7 +78,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         }
 
         else if(TextUtils.isEmpty(pass)){
-            Toast.makeText(LoginPage.this, "الرجاء التاكد من كلمة المرور", Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginPage.this, "الرجاء ادخال من كلمة المرور", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -109,7 +109,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                                 startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
                             }
                             // Nutrition addmin
-                            else if(id.equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                            else if(id.equals("YoP81hCq4FQiPW9u0e0MNJVi85X2")){
                                 startActivity(new Intent(getApplicationContext(),home_page_Nutrition_admin.class));
                             }
                             else {
@@ -117,13 +117,13 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
                             }
                         }
-                        else if(password.length()<6){
+                       /* else if(password.length()<6){
                             Toast.makeText(getApplicationContext(),"الرجاء التأكد من  كلمة المرور",Toast.LENGTH_LONG).show();
-                        }
+                        }*/
                         else {
                             //display some message here
 
-                            Toast.makeText(getApplicationContext(),"الرجاء التأكد من اسم المستخدم", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"الرجاء التأكد من اسم المستخدم او كلمة المرور", Toast.LENGTH_LONG).show();
                         }
 
                         progressDialog.dismiss();

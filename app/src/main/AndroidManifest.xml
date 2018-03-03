@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.soa_arah">
 
-<uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/sa"
@@ -19,7 +20,8 @@
             </intent-filter>
         </activity>
 
-        <uses-permission android:name="android.permission.SEND_SMS"
+        <uses-permission
+            android:name="android.permission.SEND_SMS"
             tools:ignore="WrongManifestParent" />
 
         <activity android:name=".home_page_register" />
@@ -32,7 +34,10 @@
         <activity android:name=".searchByName" />
         <activity android:name=".Barcode" />
         <activity android:name=".RequestByName" />
-        <activity android:name=".home_page_Nutrition_admin"></activity>
+        <activity android:name=".Request_page" />
+        <activity android:name=".account_Nutrition_admin" />
+        <activity android:name=".home_page_Nutrition_admin" />
+        <activity android:name=".RequestByBarcode"></activity>
     </application>
 
 </manifest>

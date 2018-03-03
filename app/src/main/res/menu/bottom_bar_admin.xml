@@ -11,10 +11,14 @@
 
     <item
         android:id="@+id/request"
-        android:title="طلبت الإضافة"
-        android:icon="@drawable/send_request"
+        android:title="طلبات الإضافة"
+        android:icon="@drawable/upload"
         />
-
+    <item
+        android:id="@+id/account"
+        android:title="الحساب الشخصي"
+        android:icon="@drawable/account_icon1"
+        />
 
 
 </menu>

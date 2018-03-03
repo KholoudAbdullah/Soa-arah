@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -62,20 +63,18 @@ public class RequestByName extends AppCompatActivity {
 
 
 
-        cancle= findViewById(R.id.cancel);
-        send= findViewById(R.id.send);
-        upload= findViewById(R.id.upload);
-        foodname= findViewById(R.id.FName);
-        foodImage= findViewById(R.id.Foodimage);
-        calory=findViewById(R.id.calbyg);
+        cancle= (Button)findViewById(R.id.cancel);
+        send=(Button) findViewById(R.id.send);
+        upload=(Button) findViewById(R.id.upload);
+        foodname=(EditText) findViewById(R.id.FName);
+        foodImage=(ImageView) findViewById(R.id.Foodimage);
+        calory=(EditText) findViewById(R.id.calbyg);
         progressDialog = new ProgressDialog(RequestByName.this);
-        Rfood= findViewById(R.id.food);
-        Rdrink= findViewById(R.id.dark);
-        gram= findViewById(R.id.gramL);
+        Rfood= (RadioButton) findViewById(R.id.food);
+        Rdrink=(RadioButton) findViewById(R.id.dark);
+        gram=(EditText) findViewById(R.id.gramL);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
-
 
 
 
@@ -115,7 +114,7 @@ public class RequestByName extends AppCompatActivity {
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RequestByName.this, home_page_register.class));
+                startActivity(new Intent(getApplicationContext(), home_page_register.class));
             }
         });
 
@@ -137,7 +136,7 @@ public class RequestByName extends AppCompatActivity {
 
                                 break;
                             case R.id.request:
-                                startActivity(new Intent(getApplicationContext(), RequestByName.class));
+                                startActivity(new Intent(getApplicationContext(), Request_page.class));
 
                                 break;
                         }
@@ -221,8 +220,6 @@ public class RequestByName extends AppCompatActivity {
                     + "." + getFileExtension(mImageUri));
             // Setting progressDialog Title.
             progressDialog.setTitle("يتم ارسال الطلب ...");
-
-            // Showing progressDialog.
             progressDialog.show();
 
             mUploadTask = fileReference.putFile(mImageUri)
@@ -230,10 +227,7 @@ public class RequestByName extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-
-
-                            //Toast.makeText(RequestByName.this, "تم تحميل الصوره بنجاح", Toast.LENGTH_LONG).show();
-                            //fot standard measurement
+                            //for standard measurement
                             if (Rfood.isChecked())
                                 stander="جرام,ملعقة شاي,ملعقة اكل,كوب";
                             else if (Rdrink.isChecked())
@@ -245,8 +239,12 @@ public class RequestByName extends AppCompatActivity {
                             databaseReference.child(uploadId).setValue(RF);
 
                             // Hiding the progressDialog after done uploading.
-                            progressDialog.setTitle("تم ارسال الطلب بنجاح");
                             progressDialog.dismiss();
+
+                            AlertDialog.Builder alert = new AlertDialog.Builder(
+                                    RequestByName.this);
+                            alert.setTitle("تم ارسال الطلب بنجاح").setIcon(R.drawable.t1);
+
                             startActivity(new Intent(RequestByName.this, home_page_register.class));
 
 
