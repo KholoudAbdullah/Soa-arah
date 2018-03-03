@@ -86,6 +86,7 @@ public class home_page_IT_admin extends AppCompatActivity {
 
 
 
+
     }
     public void scanCode (View view) {
         startActivity(new Intent(getApplicationContext(), Barcode.class));
