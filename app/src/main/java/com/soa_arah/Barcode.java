@@ -2,8 +2,10 @@ package com.soa_arah;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -11,43 +13,44 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
  * Created by Lama on 20/02/18.
  */
 
-public class Barcode extends AppCompatActivity {
+public class Barcode extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
 
-    private ZXingScannerView scannerView;
+    private ZXingScannerView mScannerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.barcode_activity);
+        mScannerView = new ZXingScannerView(this);
+        setContentView(mScannerView);
     }
 
-    public void scanCode (View view){
 
-        scannerView =new ZXingScannerView(this);
-        scannerView.setResultHandler( new ZXingScannerResultHandler());
+    @Override
+    public void handleResult(Result rawResult) {
+        // Do something with the result here
+        Log.v("TAG", rawResult.getText()); // Prints scan results
+        // Prints the scan format (qrcode, pdf417 etc.)
+        Log.v("TAG", rawResult.getBarcodeFormat().toString());
+        Toast.makeText(Barcode.this, rawResult.getText(), Toast.LENGTH_SHORT).show();
 
-        setContentView(scannerView);
-        scannerView.startCamera();
 
 
+        // If you would like to resume scanning, call this method below:
+        mScannerView.resumeCameraPreview(this);
     }
     @Override
-    public void onPause(){
-        super.onPause();
-        scannerView.startCamera();
+    public void onResume() {
+        super.onResume();
+        // Register ourselves as a handler for scan results.
+        mScannerView.setResultHandler(this);
+        // Start camera on resume
+        mScannerView.startCamera();
     }
 
-    class ZXingScannerResultHandler implements ZXingScannerView.ResultHandler
-    {
-
-
-        @Override
-        public void handleResult(com.google.zxing.Result result) {
-
-            String resultCode =result.getText();
-            Toast.makeText(Barcode.this, resultCode, Toast.LENGTH_SHORT).show();
-            setContentView(R.layout.barcode_activity);
-            scannerView.stopCamera();
-        }
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Stop camera on pause
+        mScannerView.stopCamera();
     }
 }

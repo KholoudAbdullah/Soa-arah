@@ -3,14 +3,10 @@ package com.soa_arah;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +33,7 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_nutrition_admin_activity);
+        scan=(Button)findViewById(R.id.scan);
 
         searchtext=(EditText)findViewById(R.id.searchword);
         searchBtn=(Button)findViewById(R.id.searchButton);
@@ -85,39 +82,12 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
             }
         });
 
-        //menu bottom bar
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.search:
-                                startActivity(new Intent(getApplicationContext(), home_page_Nutrition_admin.class));
-                                break;
-                            case R.id.request:
-                                startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
-                                break;
-                            case R.id.account:
-                                startActivity(new Intent(getApplicationContext(), account_Nutrition_admin.class));
 
-                                break;
-                        }
-                        return false;
-                    }
-                });
+
 
     }
-
-
-
-
-    public void scanCode (View view){
-
+    public void scanCode (View view) {
         startActivity(new Intent(getApplicationContext(), Barcode.class));
-
-
     }
-
 }

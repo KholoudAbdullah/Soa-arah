@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +38,7 @@ public class home_page_guest extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_guest_activity);
 
+        scan=(Button)findViewById(R.id.scan);
         button = (Button)findViewById(R.id.login);
         reg=(Button) findViewById(R.id.register);
         searchtext=(EditText)findViewById(R.id.searchword);
@@ -90,11 +90,13 @@ public class home_page_guest extends AppCompatActivity  {
 
         reg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // Code here executes on main thread after user presses button
                 startActivity(new Intent(getApplicationContext(), Registration.class));
             }
         });
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // Code here executes on main thread after user presses button
                 startActivity(new Intent(getApplicationContext(), LoginPage.class));
             }
         });
@@ -103,12 +105,8 @@ public class home_page_guest extends AppCompatActivity  {
 
     }
 
-    public void scanCode (View view){
-
-
+    public void scanCode (View view) {
         startActivity(new Intent(getApplicationContext(), Barcode.class));
-
     }
-
 }
 

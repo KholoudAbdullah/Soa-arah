@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -49,6 +48,7 @@ public class home_page_register extends AppCompatActivity{
         setContentView(R.layout.home_page_register_activity);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        scan=(Button)findViewById(R.id.scan);
 
 
         searchtext=(EditText)findViewById(R.id.searchword);
@@ -112,8 +112,8 @@ public class home_page_register extends AppCompatActivity{
                                 startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
                                 break;
-                            case R.id.upload:
-                                startActivity(new Intent(getApplicationContext(), Request_page.class));
+                            case R.id.request:
+                                startActivity(new Intent(getApplicationContext(), RequestByName.class));
 
                                 break;
                         }
@@ -122,15 +122,9 @@ public class home_page_register extends AppCompatActivity{
                 });
 
     }
-    public void scanCode (View view){
-
+    public void scanCode (View view) {
         startActivity(new Intent(getApplicationContext(), Barcode.class));
-
-
     }
-
-
-    //menu
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
