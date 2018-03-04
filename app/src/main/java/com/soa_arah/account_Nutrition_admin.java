@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -46,7 +47,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_nutrition_admin);
-
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         name = (TextView)findViewById(R.id.name);
         password = (EditText)findViewById(R.id.password);
         password1 = (EditText)findViewById(R.id.password1);

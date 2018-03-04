@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -48,6 +49,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_auth);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         //Note that this will not work on emulator, this requires a real device
         etxtPhone = (EditText) findViewById(R.id.etxtPhone);
         Intent intent = getIntent();

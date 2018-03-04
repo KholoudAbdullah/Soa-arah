@@ -1,7 +1,5 @@
 package com.soa_arah;
 
-import android.app.Notification;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,21 +15,13 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class Barcode extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
-    String data;
 
     private ZXingScannerView mScannerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
-
-
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        if(extras != null)
-            data = extras.getString("keyName");
     }
 
 
@@ -47,13 +37,6 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
 
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
-
-        if(data=="request"){
-
-        }
-
-
-
     }
     @Override
     public void onResume() {

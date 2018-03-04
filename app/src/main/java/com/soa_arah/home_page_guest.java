@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -37,6 +38,7 @@ public class home_page_guest extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_guest_activity);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         scan=(Button)findViewById(R.id.scan);
         button = (Button)findViewById(R.id.login);

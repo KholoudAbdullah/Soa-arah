@@ -3,6 +3,7 @@ package com.soa_arah;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -57,7 +58,7 @@ public class RequestByName extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_by_name);
-
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         storageReference = FirebaseStorage.getInstance().getReference("Request");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Requests");
 
