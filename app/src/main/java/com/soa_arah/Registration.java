@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -68,6 +69,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         firebaseAuth = FirebaseAuth.getInstance();
 
         mDatabase= FirebaseDatabase.getInstance().getReference().child("RegisteredUser");

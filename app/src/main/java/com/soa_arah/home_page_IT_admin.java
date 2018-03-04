@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -34,7 +35,7 @@ public class home_page_IT_admin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page__it_admin_activity);
-
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         searchtext=(EditText)findViewById(R.id.searchword);
         searchBtn=(Button)findViewById(R.id.searchButton);
         //progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");

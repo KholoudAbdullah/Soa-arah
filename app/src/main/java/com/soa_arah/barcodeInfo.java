@@ -1,17 +1,13 @@
 package com.soa_arah;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class barcodeInfo extends AppCompatActivity {
 String cal,img,table,q,name,bar,f,id;
@@ -21,6 +17,7 @@ String cal,img,table,q,name,bar,f,id;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_info);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         bar=getIntent().getStringExtra("bar");
         name=getIntent().getStringExtra("Name");
         cal=getIntent().getStringExtra("cal");

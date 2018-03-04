@@ -33,12 +33,12 @@
         <activity android:name=".ActivityPhoneAuth" />
         <activity android:name=".searchByName" />
         <activity android:name=".Barcode" />
+        <activity android:name=".barcodeInfo" />
         <activity android:name=".RequestByName" />
         <activity android:name=".Request_page" />
         <activity android:name=".account_Nutrition_admin" />
         <activity android:name=".home_page_Nutrition_admin" />
-        <activity android:name=".RequestByBarcode" />
-        <activity android:name=".barcodeInfo"></activity>
+        <activity android:name=".RequestByBarcode"></activity>
     </application>
 
 </manifest>
