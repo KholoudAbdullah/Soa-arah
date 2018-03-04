@@ -49,12 +49,12 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             f=snapshot.child("Name").getValue(String.class);
-                            cal=snapshot.child("Calories").getValue(String.class);
-                            img=snapshot.child("Image").getValue(String.class);
-                            stand=snapshot.child("Standardm").getValue(String.class);
-                            grams=snapshot.child("Grams").getValue(String.class);
-                            id=snapshot.getKey();
                             if(f.equals(searchtext.getText().toString())){
+                                cal=snapshot.child("Calories").getValue(String.class);
+                                img=snapshot.child("Image").getValue(String.class);
+                                stand=snapshot.child("Standardm").getValue(String.class);
+                                grams=snapshot.child("Grams").getValue(String.class);
+                                id=snapshot.getKey();
                                 Intent intent = new Intent(getApplicationContext(), searchByName.class);
                                 intent.putExtra("name", f);
                                 intent.putExtra("id",id );

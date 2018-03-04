@@ -61,6 +61,7 @@ public class searchByName extends AppCompatActivity {
         grm.setText(grams);
         Glide.with(getApplicationContext()).load(image).into(img);
         textn.setText(foodN);
+
         cal.setText(foodCal+" سعرة حرارية");
         calculate=(Button)findViewById(R.id.button2);
         calculate.setOnClickListener(new View.OnClickListener() {
@@ -81,9 +82,9 @@ public class searchByName extends AppCompatActivity {
                 }else if(selected.equals("كوب")){
                     calor=((caldoub*250)/gramdoub)*q;
                 }else  if(selected.equals("جرام")){
-                    calor=((caldoub*gramdoub)/gramdoub)*q;
+                    calor=(caldoub*q)/gramdoub;
                 }else  if(selected.equals("بالحبات")){
-                    calor=((caldoub*gramdoub)/gramdoub)*q;
+                    calor=caldoub*q;
                 }
                 DecimalFormat precision = new DecimalFormat("0.00");
 // dblVariable is a number variable and not a String in this case

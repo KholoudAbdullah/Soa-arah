@@ -37,7 +37,8 @@
         <activity android:name=".Request_page" />
         <activity android:name=".account_Nutrition_admin" />
         <activity android:name=".home_page_Nutrition_admin" />
-        <activity android:name=".RequestByBarcode"></activity>
+        <activity android:name=".RequestByBarcode" />
+        <activity android:name=".barcodeInfo"></activity>
     </application>
 
 </manifest>

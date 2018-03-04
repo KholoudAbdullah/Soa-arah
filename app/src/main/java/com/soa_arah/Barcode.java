@@ -1,11 +1,23 @@
 package com.soa_arah;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
+
+import java.util.regex.Pattern;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -14,24 +26,69 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
  */
 
 public class Barcode extends AppCompatActivity implements ZXingScannerView.ResultHandler {
-
-
+    private DatabaseReference fData;
+    String f;
+    String id;
+    String bar;
+    String img;
+    String table;
+    String cal;
+    String q;
+    String name;
+    TextView textn;
+    TextView textC;
+    ImageView imageView;
+    ImageView imageTable;
     private ZXingScannerView mScannerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
+
     }
 
 
     @Override
     public void handleResult(Result rawResult) {
-        // Do something with the result here
-        Log.v("TAG", rawResult.getText()); // Prints scan results
-        // Prints the scan format (qrcode, pdf417 etc.)
-        Log.v("TAG", rawResult.getBarcodeFormat().toString());
-        Toast.makeText(Barcode.this, rawResult.getText(), Toast.LENGTH_SHORT).show();
+        bar=rawResult.getText();
+        Toast.makeText(Barcode.this, bar, Toast.LENGTH_SHORT).show();
+        final Intent intent = new Intent(this,barcodeInfo.class);
+        intent.putExtra("bar",bar);
+        setContentView(R.layout.barcode_activity);
+        fData = FirebaseDatabase.getInstance().getReference().child("BarcodeFood");
+        fData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    f=snapshot.child("barcode").getValue(String.class);
+                    id=snapshot.getKey();
+                    if(f.equals(bar)){
+                        name=snapshot.child("Name").getValue(String.class);
+                        cal=snapshot.child("cal").getValue(String.class);
+                        q=snapshot.child("quantity").getValue(String.class);
+                        img=snapshot.child("image").getValue(String.class);
+                        table=snapshot.child("table").getValue(String.class);
+                        intent.putExtra("Name",name);
+                        intent.putExtra("cal",cal);
+                        intent.putExtra("q",q);
+                        intent.putExtra("image",img);
+                        intent.putExtra("table",table);
+                        startActivity(intent);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        this.finish();
+        mScannerView.stopCamera();
+
 
 
 
@@ -52,5 +109,10 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
         super.onPause();
         // Stop camera on pause
         mScannerView.stopCamera();
+    }
+    public void newac(){
+
+
+
     }
 }
