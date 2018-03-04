@@ -24,6 +24,8 @@ public class Request_page extends AppCompatActivity {
         setContentView(R.layout.activity_request_page);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        barcode= (Button) findViewById(R.id.byBarcode);
+        name= (Button) findViewById(R.id.byName);
 
         name=(Button)findViewById(R.id.byName);
         barcode=(Button)findViewById(R.id.byBarcode);
