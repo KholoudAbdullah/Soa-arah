@@ -1,9 +1,11 @@
 package com.soa_arah;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
@@ -13,12 +15,31 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class Barcode_Request extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
     private ZXingScannerView mScannerView;
+    private EditText name;
+    private Uri fImageUri,tableUri;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode__request);
+
+        Intent intent1=getIntent();
+        Bundle extras = intent1.getExtras();
+        if(extras != null) {
+
+            if (extras.getString( "Name1" )!=null){
+                name.setText(extras.getString( "Name1" ));
+            }
+            if (extras.getString( "fImage1" )!=null){
+                fImageUri = Uri.parse(extras.getString( "fImage1" ));
+            }
+            if (extras.getString( "tImage1" )!=null){
+                tableUri = Uri.parse(extras.getString( "tImage1" ));
+            }
+
+        }
 
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
@@ -36,6 +57,13 @@ public class Barcode_Request extends AppCompatActivity implements ZXingScannerVi
 
         Intent intent = new Intent(Barcode_Request.this, RequestByBarcode.class);
         intent.putExtra("BarcodeNum", rawResult.getText());
+        if (name!=null)
+            intent.putExtra("Name", name.getText().toString().trim());
+        if (fImageUri!= null)
+            intent.putExtra("fImage", fImageUri.toString().trim());
+        if (tableUri!= null)
+            intent.putExtra("tImage", tableUri.toString().trim());
+
         startActivity(intent);
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);

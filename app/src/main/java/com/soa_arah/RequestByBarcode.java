@@ -64,8 +64,22 @@ public class RequestByBarcode extends AppCompatActivity {
         Intent intent=getIntent();
         Bundle extras = intent.getExtras();
         if(extras != null) {
-            barnum = extras.getString( "BarcodeNum" );
-            barcode.setText("تم مسح الباركود");
+            if (extras.getString( "BarcodeNum" )!=null){
+                barnum = extras.getString( "BarcodeNum" );
+                barcode.setText("تم مسح الباركود");
+            }
+            if (extras.getString( "Name" )!=null){
+                name.setText(extras.getString( "Name" ));
+            }
+            if (extras.getString( "fImage" )!=null){
+                fImageUri = Uri.parse(extras.getString( "fImage" ));
+                upload.setText("تم اختيار الصورة");
+            }
+            if (extras.getString( "tImage" )!=null){
+                tableUri = Uri.parse(extras.getString( "tImage" ));
+                table.setText("تم اختيار الصورة");
+            }
+
         }
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -96,7 +110,7 @@ public class RequestByBarcode extends AppCompatActivity {
 
 
         storageReference = FirebaseStorage.getInstance().getReference("Request");
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Requests");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByBarcode");
 
 
 
@@ -266,9 +280,10 @@ public class RequestByBarcode extends AppCompatActivity {
 
 
 
-                            Food RF = new Food();
-                            RF.setImage(taskSnapshot.getDownloadUrl().toString());
-                            RF.setName(name.getText().toString().trim());
+                            Food RF =  new Food(name.getText().toString().trim(),
+                                    taskSnapshot.getDownloadUrl().toString(),"لايوجد","لايوجد","لايوجد","لايوجد");
+
+
                             RF.setImageTable(douTable);
                             RF.setBarcodN(barnum);
 
@@ -300,11 +315,20 @@ public class RequestByBarcode extends AppCompatActivity {
         }
     }
 
-
+///for scanning barcode
     public void scanCode (View view){
+        Intent intent = new Intent(RequestByBarcode.this, Barcode_Request.class);
+        if (name!=null)
+            intent.putExtra("Name1", name.getText().toString().trim());
+        if (fImageUri!= null)
+            intent.putExtra("fImage1", fImageUri.toString().trim());
+        if (tableUri!= null)
+            intent.putExtra("tImage1", tableUri.toString().trim());
+
+        startActivity(intent);
 
 
-        startActivity(new Intent(getApplicationContext(),Barcode_Request.class));
+       // startActivity(new Intent(getApplicationContext(),Barcode_Request.class));
 
 
     }
