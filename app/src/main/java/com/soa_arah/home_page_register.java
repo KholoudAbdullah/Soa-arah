@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -46,7 +47,7 @@ public class home_page_register extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_register_activity);
-
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         firebaseAuth = FirebaseAuth.getInstance();
         scan=(Button)findViewById(R.id.scan);
 
@@ -65,12 +66,12 @@ public class home_page_register extends AppCompatActivity{
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             f=snapshot.child("Name").getValue(String.class);
-                            cal=snapshot.child("Calories").getValue(String.class);
-                            img=snapshot.child("Image").getValue(String.class);
-                            stand=snapshot.child("Standardm").getValue(String.class);
-                            grams=snapshot.child("Grams").getValue(String.class);
-                            id=snapshot.getKey();
                             if(f.equals(searchtext.getText().toString())){
+                                cal=snapshot.child("Calories").getValue(String.class);
+                                img=snapshot.child("Image").getValue(String.class);
+                                stand=snapshot.child("Standardm").getValue(String.class);
+                                grams=snapshot.child("Grams").getValue(String.class);
+                                id=snapshot.getKey();
                                 Intent intent = new Intent(getApplicationContext(), searchByName.class);
                                 intent.putExtra("name", f);
                                 intent.putExtra("id",id );
@@ -112,8 +113,8 @@ public class home_page_register extends AppCompatActivity{
                                 startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
                                 break;
-                            case R.id.request:
-                                startActivity(new Intent(getApplicationContext(), RequestByName.class));
+                            case R.id.upload:
+                                startActivity(new Intent(getApplicationContext(), Request_page.class));
 
                                 break;
                         }

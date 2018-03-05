@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -47,7 +48,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     private TextView textphoneempty;
     private Spinner gen;
     private TextView log;
-    String date;
+    String date="لم يتم إدخال بيانات";
     private ProgressDialog progressDialog;
     private Button button;
     private FirebaseDatabase database;
@@ -60,7 +61,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    String record="";
+    String record="لم يتم إدخال بيانات";
     String gender[]={"أنثى","ذكر"};
     ArrayAdapter<String> adapter;
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -68,6 +69,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         firebaseAuth = FirebaseAuth.getInstance();
 
         mDatabase= FirebaseDatabase.getInstance().getReference().child("RegisteredUser");
@@ -197,17 +199,28 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                 String email=name.getText().toString().toLowerCase()+"@soaarah.com";
                                 user1.setEmail(email);
                                 user1.setID(User_ID);
-                                user1.setPassword(password.getText().toString());
 
-                                user1.setWight( wedith.getText().toString());
+                                if (wedith.getText().toString().isEmpty()){
+                                    user1.setWight("لم يتم إدخال بيانات");
+                                }
+                                else{
+                                user1.setWight( wedith.getText().toString());}
 
-                                user1.setHight( hight.getText().toString());
+                                 if(hight.getText().toString().isEmpty()){
+                                     user1.setHight("لم يتم إدخال بيانات");
+                                 }else {
+                                user1.setHight( hight.getText().toString());}
 
+                                 if(Waist.getText().toString().isEmpty()){
+                                     user1.setWaist( "لم يتم إدخال بيانات");
+                                 }else {
+                                user1.setWaist( Waist.getText().toString());}
 
-                                user1.setWaist( Waist.getText().toString());
+                                   if(thigh.getText().toString().isEmpty()){
+                                       user1.setHip("لم يتم إدخال بيانات");
+                                   }else{
+                                user1.setHip( thigh.getText().toString());}
 
-
-                                user1.setHip( thigh.getText().toString());
 
                                 user1.setGender(record);
                                 user1.setDateOfBarth(date);

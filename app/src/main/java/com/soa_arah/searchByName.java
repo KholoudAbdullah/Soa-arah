@@ -1,10 +1,8 @@
 package com.soa_arah;
 
-import android.content.Context;
-//import android.support.v7.app.AlertController;
-import android.support.v7.app.AppCompatActivity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,20 +13,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.bumptech.glide.Glide;
 import com.bumptech.glide.Glide;
-//import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
+
+//import android.support.v7.app.AlertController;
+//import com.bumptech.glide.Glide;
+//import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 public class searchByName extends AppCompatActivity {
 
@@ -45,6 +37,7 @@ public class searchByName extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_name);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         String foodN = getIntent().getStringExtra("name");
         foodCal=getIntent().getStringExtra("cal");
         String image=getIntent().getStringExtra("img");
@@ -61,6 +54,7 @@ public class searchByName extends AppCompatActivity {
         grm.setText(grams);
         Glide.with(getApplicationContext()).load(image).into(img);
         textn.setText(foodN);
+
         cal.setText(foodCal+" سعرة حرارية");
         calculate=(Button)findViewById(R.id.button2);
         calculate.setOnClickListener(new View.OnClickListener() {
@@ -81,9 +75,9 @@ public class searchByName extends AppCompatActivity {
                 }else if(selected.equals("كوب")){
                     calor=((caldoub*250)/gramdoub)*q;
                 }else  if(selected.equals("جرام")){
-                    calor=((caldoub*gramdoub)/gramdoub)*q;
+                    calor=(caldoub*q)/gramdoub;
                 }else  if(selected.equals("بالحبات")){
-                    calor=((caldoub*gramdoub)/gramdoub)*q;
+                    calor=caldoub*q;
                 }
                 DecimalFormat precision = new DecimalFormat("0.00");
 // dblVariable is a number variable and not a String in this case

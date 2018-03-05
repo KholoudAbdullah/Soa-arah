@@ -5,6 +5,7 @@
     android:id="@+id/Rview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.soa_arah.searchByName">
     <ImageView
         android:id="@+id/imageView3"
@@ -13,25 +14,26 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="270dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintBottom_toBottomOf="@+id/image1"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/soaarah_icon" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar3"
-        android:layout_width="340dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:animationCache="false"
-        android:background="@drawable/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="370dp"
+        android:layout_height="74dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:adjustViewBounds="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="24dp" />
+        app:srcCompat="@drawable/account" />
 
     <TextView
         android:id="@+id/textView"
@@ -41,27 +43,25 @@
         android:text="TextView"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar3"
-        app:layout_constraintStart_toStartOf="@+id/toolbar3"
-        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:layout_constraintEnd_toEndOf="@+id/image1"
+        app:layout_constraintStart_toStartOf="@+id/image1"
+        app:layout_constraintTop_toTopOf="@+id/image1"
         app:layout_constraintVertical_bias="0.021"
         tools:ignore="MissingConstraints" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar4"
-        android:layout_width="340dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias=".122"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="275dp" />
+    <ImageView
+        android:id="@+id/image3"
+        android:layout_width="370dp"
+        android:layout_height="74dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="250dp"
+        android:adjustViewBounds="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/account" />
 
     <TextView
         android:id="@+id/textView4"
@@ -73,7 +73,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        app:layout_constraintTop_toTopOf="@+id/image3"
         app:layout_constraintVertical_bias="0.057"
         tools:ignore="MissingConstraints" />
 
@@ -86,7 +86,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        app:layout_constraintTop_toTopOf="@+id/image3"
         app:layout_constraintVertical_bias="0.056"
         tools:ignore="MissingConstraints" />
 
@@ -100,7 +100,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        app:layout_constraintTop_toTopOf="@+id/image3"
         app:layout_constraintVertical_bias="0.055"
         tools:ignore="MissingConstraints" />
 
@@ -115,7 +115,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        app:layout_constraintTop_toTopOf="@+id/image3"
         app:layout_constraintVertical_bias="0.057"
         tools:ignore="MissingConstraints" />
 
@@ -130,24 +130,22 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+        app:layout_constraintTop_toBottomOf="@+id/image3"
         tools:ignore="MissingConstraints" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar5"
-        android:layout_width="340dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:layout_constraintVertical_bias=".122"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="394dp" />
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="370dp"
+        android:layout_height="74dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="386dp"
+        android:adjustViewBounds="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/account" />
 
     <TextView
         android:id="@+id/textView6"
@@ -157,10 +155,10 @@
         android:text="السعرات الحرارية"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar5"
+        app:layout_constraintEnd_toEndOf="@+id/image2"
         app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="@+id/toolbar5"
-        app:layout_constraintTop_toTopOf="@+id/toolbar5"
+        app:layout_constraintStart_toStartOf="@+id/image2"
+        app:layout_constraintTop_toTopOf="@+id/image2"
         app:layout_constraintVertical_bias="0.089"
         tools:ignore="MissingConstraints" />
 
@@ -174,7 +172,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar5"
+        app:layout_constraintTop_toBottomOf="@+id/image2"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -203,31 +201,8 @@
         app:srcCompat="@drawable/spoon"
         tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="51dp"
-        android:layout_height="96dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.621"
-        app:srcCompat="@drawable/saerch4"
-        tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="51dp"
-        android:layout_height="96dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.621"
-        app:srcCompat="@drawable/saerch"
-        tools:ignore="MissingConstraints" />
+
 
 
 </android.support.constraint.ConstraintLayout>

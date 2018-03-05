@@ -11,9 +11,34 @@ public class Food {
     private String Calories;
     private String Garms;
     private String standard;
+    private String BarcodN;
+    private String ImageTable;
 
-    public Food(){
+    public Food(){}
 
+    public Food(String name, String image, String keyword, String calories, String standard,String garms) {
+        Name = name;
+        Image = image;
+        Keyword = keyword;
+        Calories = calories;
+        Garms = garms;
+        this.standard=standard;
+    }
+
+    public void setBarcodN(String barcodN) {
+        BarcodN = barcodN;
+    }
+
+    public void setImageTable(String imageTable) {
+        ImageTable = imageTable;
+    }
+
+    public String getBarcodN() {
+        return BarcodN;
+    }
+
+    public String getImageTable() {
+        return ImageTable;
     }
 
     public void setStandard(String standard) {
@@ -64,13 +89,6 @@ public class Food {
         Garms = garms;
     }
 
-    public Food(String name, String image, String keyword, String calories, String standard,String garms) {
-        Name = name;
-        Image = image;
-        Keyword = keyword;
-        Calories = calories;
-        Garms = garms;
-        this.standard=standard;
-    }
+
 
 }

@@ -3,6 +3,7 @@ package com.soa_arah;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -57,7 +58,7 @@ public class RequestByName extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_by_name);
-
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         storageReference = FirebaseStorage.getInstance().getReference("Request");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Requests");
 
@@ -65,7 +66,7 @@ public class RequestByName extends AppCompatActivity {
 
         cancle= (Button)findViewById(R.id.cancel);
         send=(Button) findViewById(R.id.send);
-        upload=(Button) findViewById(R.id.upload);
+        upload=(Button) findViewById(R.id.uploadimage);
         foodname=(EditText) findViewById(R.id.FName);
         foodImage=(ImageView) findViewById(R.id.Foodimage);
         calory=(EditText) findViewById(R.id.calbyg);
@@ -135,7 +136,7 @@ public class RequestByName extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
                                 break;
-                            case R.id.request:
+                            case R.id.upload:
                                 startActivity(new Intent(getApplicationContext(), Request_page.class));
 
                                 break;

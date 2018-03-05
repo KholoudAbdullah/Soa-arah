@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "604382886230-209s5tq5q5133iuosc5la97t904cfblq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.soa_arah",
+            "certificate_hash": "442e2911c87cdb0dc1c678e3fe9cef4b1c87357d"
+          }
+        },
+        {
+          "client_id": "604382886230-bhodhrqg22m1scmrglrd70dnvlm0l8d5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.soa_arah",
+            "certificate_hash": "e6f1706714c72025235fa281010285f044574071"
+          }
+        },
+        {
+          "client_id": "604382886230-83gbdna5abj0obr6bqp2vjq8vm3ee62s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.soa_arah",
+            "certificate_hash": "d63020da5f1ae8ed2d3fc5f7d84550ab2f4fb763"
+          }
+        },
+        {
           "client_id": "604382886230-3kbiboonlihi4r3s60fa1u7dg62cdi4t.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +53,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604382886230-3kbiboonlihi4r3s60fa1u7dg62cdi4t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

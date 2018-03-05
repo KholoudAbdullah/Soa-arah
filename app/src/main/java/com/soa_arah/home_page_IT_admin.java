@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -34,7 +35,7 @@ public class home_page_IT_admin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page__it_admin_activity);
-
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         searchtext=(EditText)findViewById(R.id.searchword);
         searchBtn=(Button)findViewById(R.id.searchButton);
         //progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
@@ -49,12 +50,12 @@ public class home_page_IT_admin extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             f=snapshot.child("Name").getValue(String.class);
-                            cal=snapshot.child("Calories").getValue(String.class);
-                            img=snapshot.child("Image").getValue(String.class);
-                            stand=snapshot.child("Standardm").getValue(String.class);
-                            grams=snapshot.child("Grams").getValue(String.class);
-                            id=snapshot.getKey();
                             if(f.equals(searchtext.getText().toString())){
+                                cal=snapshot.child("Calories").getValue(String.class);
+                                img=snapshot.child("Image").getValue(String.class);
+                                stand=snapshot.child("Standardm").getValue(String.class);
+                                grams=snapshot.child("Grams").getValue(String.class);
+                                id=snapshot.getKey();
                                 Intent intent = new Intent(getApplicationContext(), searchByName.class);
                                 intent.putExtra("name", f);
                                 intent.putExtra("id",id );
