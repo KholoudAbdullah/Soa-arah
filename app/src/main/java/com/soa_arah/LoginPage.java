@@ -143,7 +143,11 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         else if(v==registraion){
             startActivity(new Intent(LoginPage.this , Registration.class));
 
+        }else if(v==forgetpass){
+            startActivity(new Intent(this , ForgotPasswordActivity.class));
+
         }
+
         else {
             startActivity(new Intent(this , home_page_guest.class));
 
