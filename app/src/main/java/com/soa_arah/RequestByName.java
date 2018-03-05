@@ -66,7 +66,7 @@ public class RequestByName extends AppCompatActivity {
 
         cancle= (Button)findViewById(R.id.cancel);
         send=(Button) findViewById(R.id.send);
-        upload=(Button) findViewById(R.id.upload);
+        upload=(Button) findViewById(R.id.uploadimage);
         foodname=(EditText) findViewById(R.id.FName);
         foodImage=(ImageView) findViewById(R.id.Foodimage);
         calory=(EditText) findViewById(R.id.calbyg);
@@ -136,7 +136,7 @@ public class RequestByName extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
                                 break;
-                            case R.id.request:
+                            case R.id.upload:
                                 startActivity(new Intent(getApplicationContext(), Request_page.class));
 
                                 break;

@@ -28,8 +28,6 @@ public class Request_page extends AppCompatActivity {
         barcode= (Button) findViewById(R.id.byBarcode);
         name= (Button) findViewById(R.id.byName);
 
-        name=(Button)findViewById(R.id.byName);
-        barcode=(Button)findViewById(R.id.byBarcode);
 
 
         //menu bottom bar
@@ -67,7 +65,7 @@ public class Request_page extends AppCompatActivity {
         barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), RequestByName.class));
+                startActivity(new Intent(getApplicationContext(), RequestByBarcode.class));
             }
         });
 

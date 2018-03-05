@@ -7,7 +7,7 @@ package com.soa_arah;
 public class RegisteredUser {
     private String name;
     private String phoneNum;
-    private String password;
+
     private String gender;
     private String id;
     private String wight;
@@ -42,9 +42,7 @@ public class RegisteredUser {
         this.phoneNum = phoneNum;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
 
     public void setGender(String gender) {
         this.gender = gender;
@@ -78,9 +76,7 @@ public class RegisteredUser {
         return phoneNum;
     }
 
-    public String getPassword() {
-        return password;
-    }
+
 
     public String getGender() {
         return gender;

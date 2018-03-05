@@ -168,7 +168,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                             AlertDialog.Builder alert = new AlertDialog.Builder(
                                     ActivityPhoneAuth.this);
 
-                            alert.setTitle("يوجد خطأ في الرمز").setIcon(R.drawable.f1);
+                            alert.setTitle("يوجد حساب برقم الجوال أو يوجد خطأ في الرمز").setIcon(R.drawable.f1);
                             AlertDialog dialog = alert.create();
 
                             // Finally, display the alert dialog

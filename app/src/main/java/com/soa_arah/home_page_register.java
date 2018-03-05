@@ -113,8 +113,8 @@ public class home_page_register extends AppCompatActivity{
                                 startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
                                 break;
-                            case R.id.request:
-                                startActivity(new Intent(getApplicationContext(), RequestByName.class));
+                            case R.id.upload:
+                                startActivity(new Intent(getApplicationContext(), Request_page.class));
 
                                 break;
                         }

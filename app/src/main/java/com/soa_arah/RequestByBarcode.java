@@ -63,8 +63,10 @@ public class RequestByBarcode extends AppCompatActivity {
 
         Intent intent=getIntent();
         Bundle extras = intent.getExtras();
-        if(extras != null)
-            barnum = extras.getString("BarcodeNum");
+        if(extras != null) {
+            barnum = extras.getString( "BarcodeNum" );
+            barcode.setText("تم مسح الباركود");
+        }
 
         firebaseAuth = FirebaseAuth.getInstance();
         //menu bottom bar
@@ -81,7 +83,7 @@ public class RequestByBarcode extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
                                 break;
-                            case R.id.request:
+                            case R.id.upload:
                                 startActivity(new Intent(getApplicationContext(), Request_page.class));
 
                                 break;
@@ -301,35 +303,12 @@ public class RequestByBarcode extends AppCompatActivity {
 
     public void scanCode (View view){
 
-       // scannerView =new ZXingScannerView(this);
-        //scannerView.setResultHandler( new RequestByBarcode.ZXingScannerResultHandler());
 
-        //setContentView(scannerView);
-       // scannerView.startCamera();
         startActivity(new Intent(getApplicationContext(),Barcode_Request.class));
 
 
     }
-   /* @Override
-    public void onPause(){
-        super.onPause();
-        scannerView.startCamera();
-    }
 
-    class ZXingScannerResultHandler implements ZXingScannerView.ResultHandler
-    {
-
-        @Override
-        public void handleResult(com.google.zxing.Result result) {
-
-            String resultCode =result.getText();
-            Toast.makeText(RequestByBarcode.this, resultCode, Toast.LENGTH_SHORT).show();
-            setContentView(R.layout.home_page_guest_activity);
-            scannerView.stopCamera();
-            barnum=resultCode;
-
-        }
-    }*/
 
 
     // menu
