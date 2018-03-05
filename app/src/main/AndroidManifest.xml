@@ -33,6 +33,7 @@
         <activity android:name=".ActivityPhoneAuth" />
         <activity android:name=".searchByName" />
         <activity android:name=".Barcode" />
+        <activity android:name=".view_request" />
         <activity android:name=".home_page_Nutrition_admin" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".ResetPassword"></activity>

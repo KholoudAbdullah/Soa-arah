@@ -93,7 +93,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
                                 startActivity(new Intent(getApplicationContext(), home_page_Nutrition_admin.class));
                                 break;
                             case R.id.request:
-                                startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+                                startActivity(new Intent(getApplicationContext(), view_request.class));
 
                                 break;
                             case R.id.account:

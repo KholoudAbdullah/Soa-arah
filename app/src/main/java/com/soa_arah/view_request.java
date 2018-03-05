@@ -1,0 +1,108 @@
+package com.soa_arah;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+/**
+ * Created by Lama on 05/03/18.
+ */
+
+public class view_request extends AppCompatActivity {
+
+    private DatabaseReference mDatabaseReference;
+    private DatabaseReference mDatabaseReference1;
+    private ListView request_name;
+    private ListView request_barcode;
+    private ArrayList<Food> re_name;
+    private ArrayList<Food> re_barcode ;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_request);
+
+
+        request_name=(ListView)findViewById(R.id.request_name);
+        request_barcode=(ListView)findViewById(R.id.request_barcode);
+        re_name=new ArrayList<Food>();
+        re_barcode=new ArrayList<Food>();
+
+
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
+
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    Food req = postSnapshot.getValue(Food.class);
+
+                    re_name.add(req);
+
+
+                }
+                    String[] requestsByName = new String[re_name.size()];
+
+
+                    for (int i = 0; i < re_name.size(); i++) {
+
+                        requestsByName[i] = re_name.get(i).getName();
+
+                    }
+
+                    //disp laying it to list
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByName);
+                request_name.setAdapter(adapter);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //menu bottom bar
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.search:
+                                startActivity(new Intent(getApplicationContext(), home_page_Nutrition_admin.class));
+                                break;
+                            case R.id.request:
+                                startActivity(new Intent(getApplicationContext(), view_request.class));
+
+                                break;
+                            case R.id.account:
+                                startActivity(new Intent(getApplicationContext(), account_Nutrition_admin.class));
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
+
+
+    }
+
+}

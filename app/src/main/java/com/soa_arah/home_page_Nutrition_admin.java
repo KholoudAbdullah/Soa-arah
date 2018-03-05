@@ -4,7 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -84,6 +87,28 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
             }
         });
 
+        //menu bottom bar
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.search:
+                                startActivity(new Intent(getApplicationContext(), home_page_Nutrition_admin.class));
+                                break;
+                            case R.id.request:
+                                startActivity(new Intent(getApplicationContext(), view_request.class));
+
+                                break;
+                            case R.id.account:
+                                startActivity(new Intent(getApplicationContext(), account_Nutrition_admin.class));
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
 
 
 
