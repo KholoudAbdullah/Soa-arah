@@ -60,7 +60,7 @@ public class RequestByName extends AppCompatActivity {
         setContentView(R.layout.activity_request_by_name);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         storageReference = FirebaseStorage.getInstance().getReference("Request");
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Requests");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
 
 
 
@@ -236,6 +236,8 @@ public class RequestByName extends AppCompatActivity {
 
                             Food RF = new Food(foodname.getText().toString().trim(),
                                     taskSnapshot.getDownloadUrl().toString(),null,calory.getText().toString().trim(),stander,gram.getText().toString().trim());
+                            RF.setImageTable("لايوجد");
+                            RF.setBarcodN("لايوجد");
                             String uploadId = databaseReference.push().getKey();
                             databaseReference.child(uploadId).setValue(RF);
 
