@@ -87,6 +87,7 @@ public class RequestByBarcode extends AppCompatActivity {
                                 break;
                         }
                         return false;
+
                     }
                 });
 
