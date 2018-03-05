@@ -60,6 +60,12 @@ public class RequestByBarcode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_by_barcode);
 
+
+        Intent intent=getIntent();
+        Bundle extras = intent.getExtras();
+        if(extras != null)
+            barnum = extras.getString("BarcodeNum");
+
         firebaseAuth = FirebaseAuth.getInstance();
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
@@ -294,15 +300,16 @@ public class RequestByBarcode extends AppCompatActivity {
 
     public void scanCode (View view){
 
-        scannerView =new ZXingScannerView(this);
-        scannerView.setResultHandler( new RequestByBarcode.ZXingScannerResultHandler());
+       // scannerView =new ZXingScannerView(this);
+        //scannerView.setResultHandler( new RequestByBarcode.ZXingScannerResultHandler());
 
-        setContentView(scannerView);
-        scannerView.startCamera();
+        //setContentView(scannerView);
+       // scannerView.startCamera();
+        startActivity(new Intent(getApplicationContext(),Barcode_Request.class));
 
 
     }
-    @Override
+   /* @Override
     public void onPause(){
         super.onPause();
         scannerView.startCamera();
@@ -321,19 +328,7 @@ public class RequestByBarcode extends AppCompatActivity {
             barnum=resultCode;
 
         }
-    }
-
-
-
-
-    public void scanCode1 (View view){
-
-        Intent intent = new Intent(RequestByBarcode.this, Barcode.class);
-        intent.putExtra("keyName", "request");  // pass your values and retrieve them in the other Activity using keyName
-        startActivity(intent);
-       // startActivity(new Intent(getApplicationContext(), Barcode.class));
-
-    }
+    }*/
 
 
     // menu

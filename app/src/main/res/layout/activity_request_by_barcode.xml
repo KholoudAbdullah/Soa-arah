@@ -52,13 +52,13 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="36dp"
         android:text="اسم الصنف:"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/toolbar7"
-        app:layout_constraintTop_toTopOf="@+id/toolbar7"
+        app:layout_constraintTop_toBottomOf="@+id/BImageB"
         tools:ignore="MissingConstraints" />
 
 
@@ -68,7 +68,7 @@
         android:layout_height="26dp"
         android:layout_marginEnd="136dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
         android:background="@android:color/white"
         android:ems="10"
         android:gravity="right"
@@ -76,21 +76,24 @@
         android:inputType="textPersonName"
         android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="@+id/toolbar7"
-        app:layout_constraintTop_toTopOf="@+id/toolbar7"
+        app:layout_constraintTop_toBottomOf="@+id/BImageB"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
         android:text="*"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar7"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/BImageB"
         app:layout_constraintTop_toTopOf="@+id/toolbar7"
         tools:ignore="MissingConstraints" />
 
@@ -98,12 +101,16 @@
         android:id="@+id/FImageB"
         android:layout_width="99dp"
         android:layout_height="49dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
         android:background="#7ba452"
         android:text="رفع صوره المنتج"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:layout_editor_absoluteX="281dp" />
+        app:layout_constraintEnd_toEndOf="@+id/toolbar7"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toStartOf="@+id/toolbar7"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
         android:id="@+id/FImageV"
@@ -111,50 +118,55 @@
         android:layout_height="67dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/FImageB"
-        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintHorizontal_bias="0.154"
         app:layout_constraintStart_toStartOf="@+id/toolbar7"
-        app:layout_constraintTop_toBottomOf="@+id/FName" />
+        app:layout_constraintTop_toBottomOf="@+id/Fname" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="60dp"
         android:text="*"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/FImageB"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView00"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="386dp" />
 
     <Button
         android:id="@+id/BImageB"
         android:layout_width="104dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         android:background="#7ba452"
-        android:text="مسح صوره الباركود"
         android:onClick="scanCode"
+        android:text="مسح صوره الباركود"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/toolbar7"
-        app:layout_constraintHorizontal_bias="0.996"
+        app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="@+id/toolbar7"
-        app:layout_constraintTop_toBottomOf="@+id/FImageB" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar7" />
 
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
         android:text="*"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/BImageB"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar7"
+        app:layout_constraintStart_toEndOf="@+id/FImageB"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints" />
 
@@ -162,13 +174,16 @@
         android:id="@+id/TImageB"
         android:layout_width="177dp"
         android:layout_height="46dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
         android:background="#7ba452"
         android:text="رفع صوره جدول العناصر الغذائية"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/toolbar7"
-        app:layout_constraintTop_toBottomOf="@+id/BImageB" />
+        app:layout_constraintHorizontal_bias="0.919"
+        app:layout_constraintStart_toStartOf="@+id/toolbar7"
+        app:layout_constraintTop_toBottomOf="@+id/FImageB" />
 
     <ImageView
         android:id="@+id/TImageV"
@@ -176,11 +191,11 @@
         android:layout_height="67dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/TImageB"
-        app:layout_constraintHorizontal_bias="0.244"
+        app:layout_constraintHorizontal_bias="0.243"
         app:layout_constraintStart_toStartOf="@+id/toolbar7"
-        app:layout_constraintTop_toBottomOf="@+id/BImageB" />
+        app:layout_constraintTop_toBottomOf="@+id/FImageV" />
 
     <TextView
         android:id="@+id/textView7"
@@ -217,11 +232,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:background="#7ba452"
         android:text="الغاء"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/toolbar7"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintStart_toStartOf="@+id/toolbar7"
         app:layout_constraintTop_toBottomOf="@+id/textView0" />
 
     <Button
