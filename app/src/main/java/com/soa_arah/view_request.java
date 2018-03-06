@@ -6,8 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -16,7 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Lama on 05/03/18.
@@ -29,6 +34,7 @@ public class view_request extends AppCompatActivity {
     private ListView request_name;
     private ListView request_barcode;
     private ArrayList<Food> re_name;
+    private ArrayList<String> key;
     private ArrayList<Food> re_barcode ;
 
     @Override
@@ -41,6 +47,31 @@ public class view_request extends AppCompatActivity {
         request_barcode=(ListView)findViewById(R.id.request_barcode);
         re_name=new ArrayList<Food>();
         re_barcode=new ArrayList<Food>();
+        key=new ArrayList<String>();
+
+        request_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+
+                String calorie =re_name.get(i).getCalories();
+                String gram =re_name.get(i).getGarms();
+                String image =re_name.get(i).getImage();
+                String namef =re_name.get(i).getName();
+                String standard =re_name.get(i).getStandard();
+               String keys=key.get(i);
+
+                Intent intent = new Intent(view_request.this, view_info_request.class);
+                intent.putExtra("calorie",calorie);
+                intent.putExtra("gram",gram);
+                intent.putExtra("image",image);
+                intent.putExtra("namef",namef);
+                intent.putExtra("standard",standard);
+                intent.putExtra("keys",keys);
+
+                startActivity(intent);
+
+            }
+        });
 
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
@@ -51,11 +82,10 @@ public class view_request extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
                     Food req = postSnapshot.getValue(Food.class);
-
                     re_name.add(req);
-
-
+                    key.add(postSnapshot.getKey().toString());
                 }
+
                     String[] requestsByName = new String[re_name.size()];
 
 
