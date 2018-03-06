@@ -18,6 +18,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,7 +44,8 @@ public class RequestByBarcode extends AppCompatActivity {
 
     private Uri fImageUri,tableUri;
     private ImageView foodImage,tableI;
-    private Button cancle,send,upload,barcode,table;
+    private TextView TXbarnum;
+    private Button cancle,send,upload,table;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     private StorageTask mUploadTask,tablem;
@@ -95,13 +97,14 @@ public class RequestByBarcode extends AppCompatActivity {
 
 
         upload=(Button) findViewById(R.id.FImageB);
-        barcode=(Button) findViewById(R.id.BImageB);
         table=(Button) findViewById(R.id.TImageB);
         foodImage=(ImageView) findViewById(R.id.FImageV);
         tableI=(ImageView) findViewById(R.id.TImageV);
         name=(EditText) findViewById(R.id.Fname);
         send=(Button) findViewById(R.id.sendw);
         cancle=(Button) findViewById(R.id.cancel);
+        TXbarnum=(TextView)findViewById(R.id.barcodeNumber);
+
         progressDialog = new ProgressDialog(RequestByBarcode.this);
 
 
@@ -140,7 +143,8 @@ public class RequestByBarcode extends AppCompatActivity {
 //                name.setText(intent.getExtras().getString( "Name" ));
 
                 barnum = intent.getExtras().getString( "BarcodeNum","" );
-                barcode.setText("تم مسح الباركود");
+                TXbarnum.setText(TXbarnum.getText().toString()+"  "+barnum);
+
                 if(name==null){
                     Toast.makeText(RequestByBarcode.this, "الرجاء ادخال االاسم", Toast.LENGTH_LONG).show();
 
@@ -223,10 +227,7 @@ public class RequestByBarcode extends AppCompatActivity {
 
             try {
 
-//                Intent intent=getIntent();
-//                if(intent.getExtras().getString( "tImage" )!=null){
-//                    tableUri = Uri.parse(intent.getExtras().getString( "tImage" ,""));
-//                    table.setText("تم اختيار الصورة");}
+
                 tablem = fileReference1.putFile(tableUri)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -234,6 +235,7 @@ public class RequestByBarcode extends AppCompatActivity {
 
 
                                 Toast.makeText(RequestByBarcode.this, "تم تحميل الصوره بنجاح", Toast.LENGTH_LONG).show();
+
 
 
                                 douTable= taskSnapshot.getDownloadUrl().toString();
@@ -255,10 +257,7 @@ public class RequestByBarcode extends AppCompatActivity {
                 Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
-//            Intent intent=getIntent();
-//                        if(intent.getExtras().getString( "fImage","" )!=null)
-//            fImageUri = Uri.parse(intent.getExtras().getString( "fImage","" ));
-//            upload.setText("تم اختيار الصورة");
+
             mUploadTask = fileReference.putFile(fImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -296,26 +295,7 @@ public class RequestByBarcode extends AppCompatActivity {
         }
     }
 
-///for scanning barcode
-    public void scanCode (View view){
-//        Intent intent = new Intent(RequestByBarcode.this, Barcode_Request.class);
-//        if(name.getText().toString().isEmpty())
-//            intent.putExtra("Name1", "null");
-//        else
-//            intent.putExtra("Name1", name.getText().toString().trim().toString());
-//        if(fImageUri.toString().isEmpty())
-//            intent.putExtra("fImage1", "null");
-//        else
-//            intent.putExtra("fImage1", fImageUri.toString().trim().toString());
-//        if( tableUri.toString().isEmpty())
-//            intent.putExtra("tImage1", "null");
-//        else
-//            intent.putExtra("tImage1", tableUri.toString().trim().toString());
-//        startActivity(intent);
-        startActivity(new Intent(getApplicationContext(),Barcode_Request.class));
 
-
-    }
 
 
 

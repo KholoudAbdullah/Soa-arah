@@ -56,14 +56,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:text="اسم الصنف:"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/toolbar7"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/Fname"
-        app:layout_constraintTop_toBottomOf="@+id/BImageB"
+        app:layout_constraintTop_toBottomOf="@+id/barcodeNumber"
         tools:ignore="MissingConstraints" />
 
 
@@ -80,22 +80,6 @@
         android:inputType="textPersonName"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/toolbar7"
-        app:layout_constraintTop_toTopOf="@+id/toolbar7"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar7"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/BImageB"
         app:layout_constraintTop_toTopOf="@+id/toolbar7"
         tools:ignore="MissingConstraints" />
 
@@ -132,31 +116,15 @@
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:text="*"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.017"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView00"
+        app:layout_constraintTop_toBottomOf="@+id/barcodeNumber"
         tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/BImageB"
-        android:layout_width="100dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:background="#7ba452"
-        android:onClick="scanCode"
-        android:text="مسح صوره الباركود"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar7"
-        app:layout_constraintHorizontal_bias="0.899"
-        app:layout_constraintStart_toStartOf="@+id/toolbar7"
-        app:layout_constraintTop_toTopOf="@+id/toolbar7" />
 
 
     <TextView
@@ -263,6 +231,18 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/toolbar7"
         app:layout_constraintTop_toBottomOf="@+id/textView0" />
+
+    <TextView
+        android:id="@+id/barcodeNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="right"
+        android:text="رقم الباركود: "
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="@+id/toolbar7"
+        tools:layout_editor_absoluteX="244dp" />
 
 
 </android.support.constraint.ConstraintLayout>

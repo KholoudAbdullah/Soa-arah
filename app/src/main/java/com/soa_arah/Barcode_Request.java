@@ -14,8 +14,6 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class Barcode_Request extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
     private ZXingScannerView mScannerView;
-    private String name;
-    private Uri fImageUri,tableUri;
 
 
 
@@ -24,13 +22,6 @@ public class Barcode_Request extends AppCompatActivity implements ZXingScannerVi
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
-//        Intent intent1=getIntent();
-//        if(intent1.getExtras().getString( "Name1")!="null")
-//            name=intent1.getExtras().getString( "Name1");
-//        if(intent1.getExtras().getString( "fImage1")!="null")
-//            fImageUri = Uri.parse(intent1.getExtras().getString( "fImage1"));
-//        if (intent1.getExtras().getString( "tImage1")!="null")
-//            tableUri = Uri.parse(intent1.getExtras().getString( "tImage1"));
     }
 
     @Override
@@ -44,12 +35,7 @@ public class Barcode_Request extends AppCompatActivity implements ZXingScannerVi
 
       Intent intent = new Intent(Barcode_Request.this, RequestByBarcode.class);
             intent.putExtra("BarcodeNum", rawResult.getText());
-//
-//            intent.putExtra("Name", name);
-//
-//            intent.putExtra("fImage", fImageUri.toString().trim());
-//
-//            intent.putExtra("tImage", tableUri.toString().trim());
+
 //
         startActivity(intent);
         // If you would like to resume scanning, call this method below:
