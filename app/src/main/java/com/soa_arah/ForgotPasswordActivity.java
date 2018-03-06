@@ -142,9 +142,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                   // Toast.makeText(getApplicationContext(),"in for b",Toast.LENGTH_LONG).show();
                     n=snapshot.getKey();
+
 //                    n=snapshot.child("email").getValue(String.class);
 //                   Toast.makeText(getApplicationContext(),"in for a",Toast.LENGTH_LONG).show();
-                    if(n.equals(name.getText().toString())){
+                    String na=stringToHex(name.getText().toString().trim());
+                    if(n.equals(na)){
 //                        Toast.makeText(getApplicationContext(),"in if b",Toast.LENGTH_LONG).show();
                         phoneNumber=snapshot.child("phoneNum").getValue(String.class);
                         Log.d("111111","222"+phoneNumber);
@@ -183,6 +185,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 //                        Toast.makeText(getApplicationContext(),"in if a",Toast.LENGTH_LONG).show();
                         break;
                     }else flag=false;
+                   // Toast.makeText( ForgotPasswordActivity.this, "تأكد من اسم المستخدم", Toast.LENGTH_SHORT ).show();
                 }
 
             }
@@ -331,5 +334,28 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 //        startActivity(new Intent(this , ResetPassword.class));
     }
 
-
+    public static String stringToHex(String base)
+    {
+        StringBuffer buffer = new StringBuffer();
+        int intValue;
+        for(int x = 0; x < base.length(); x++)
+        {
+            int cursor = 0;
+            intValue = base.charAt(x);
+            String binaryChar = new String(Integer.toBinaryString(base.charAt(x)));
+            for(int i = 0; i < binaryChar.length(); i++)
+            {
+                if(binaryChar.charAt(i) == '1')
+                {
+                    cursor += 1;
+                }
+            }
+            if((cursor % 2) > 0)
+            {
+                intValue += 128;
+            }
+            buffer.append(Integer.toHexString(intValue));
+        }
+        return buffer.toString();
+    }
 }

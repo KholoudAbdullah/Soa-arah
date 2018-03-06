@@ -37,14 +37,15 @@
         <activity android:name=".view_info_request" />
         <activity android:name=".home_page_Nutrition_admin" />
         <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".ResetPassword"></activity>
+        <activity android:name=".ResetPassword" />
         <activity android:name=".barcodeInfo" />
         <activity android:name=".RequestByName" />
         <activity android:name=".Request_page" />
         <activity android:name=".account_Nutrition_admin" />
         <activity android:name=".RequestByBarcode" />
         <activity android:name=".Baecode_Request" />
-        <activity android:name=".Barcode_Request"></activity>
+        <activity android:name=".Barcode_Request" />
+        <activity android:name=".diteplan"></activity>
     </application>
 
 </manifest>

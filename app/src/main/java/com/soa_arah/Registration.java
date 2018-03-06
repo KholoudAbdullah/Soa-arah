@@ -24,6 +24,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -164,15 +165,54 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         final String Thigh =thigh.getText().toString().trim();
 
         String Password  = password.getText().toString().trim();
-        String email =Name +"@soaarah.com" ;
+        final String email = stringToHex(Name) +"@soaarah.com" ;
 
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (email.matches(emailPattern))
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(
+                    Registration.this);
 
-        //checking if email and passwords are empty
+            alert.setTitle(" اسم المستخدم لا يجب أن يحتوي على مسافة").setIcon(R.drawable.f1);
 
+            AlertDialog dialog = alert.create();
 
+            // Finally, display the alert dialog
+            dialog.show();
 
+            // Get screen width and height in pixels
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            // The absolute width of the available display size in pixels.
+            int displayWidth = displayMetrics.widthPixels;
+            // The absolute height of the available display size in pixels.
+            int displayHeight = displayMetrics.heightPixels;
 
-        if(!(name.getText().toString().trim().isEmpty()&&password.getText().toString().trim().isEmpty())) {
+            // Initialize a new window manager layout parameters
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+            // Copy the alert dialog window attributes to new layout parameter instance
+            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+            // Set the alert dialog window width and height
+            // Set alert dialog width equal to screen width 90%
+            // int dialogWindowWidth = (int) (displayWidth * 0.9f);
+            // Set alert dialog height equal to screen height 90%
+            // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+
+            // Set alert dialog width equal to screen width 70%
+            int dialogWindowWidth = (int) (displayWidth * 0.9f);
+            // Set alert dialog height equal to screen height 70%
+            int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+            // Set the width and height for the layout parameters
+            // This will bet the width and height of alert dialog
+            layoutParams.width = dialogWindowWidth;
+            layoutParams.height = dialogWindowHeight;
+
+            // Apply the newly created layout parameters to the alert dialog window
+            dialog.getWindow().setAttributes(layoutParams);
+        }else if(!(name.getText().toString().trim().isEmpty()&&password.getText().toString().trim().isEmpty())) {
             //if the email and password and Location are not empty
             //displaying a progress dialog
             progressDialog.setMessage(" الرجاء الانتظار حتى يتم التسجيل");
@@ -196,7 +236,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
                                 user1.setName(name.getText().toString().toLowerCase());
                                 user1.setPhoneNum(phone.getText().toString());
-                                String email=name.getText().toString().toLowerCase()+"@soaarah.com";
+                                String email=stringToHex(name.getText().toString().toLowerCase()) +"@soaarah.com";
                                 user1.setEmail(email);
                                 user1.setID(User_ID);
 
@@ -224,7 +264,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
                                 user1.setGender(record);
                                 user1.setDateOfBarth(date);
-                                mDatabase.child(name.getText().toString().toLowerCase()).setValue(user1);
+                                mDatabase.child(stringToHex(name.getText().toString().toLowerCase())).setValue(user1);
                                 // Intent intent=new Intent(RegisterOrgActivity.this, ProfileActivity.class);
                                 // intent.putExtra("org", (Serializable) org1);
                                 //display message to the user here
@@ -339,10 +379,37 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             //calling register method on click
             registerUser();}
         if(view == log ) {
-            startActivity(new Intent(this, LoginPage.class) ); //profile=login
+            String m=name.getText().toString();
+
+            Toast.makeText(Registration.this,  stringToHex(m) , Toast.LENGTH_SHORT).show();
+            //startActivity(new Intent(this, LoginPage.class) ); //profile=login
 
         }
 
+    }
+    public static String stringToHex(String base)
+    {
+        StringBuffer buffer = new StringBuffer();
+        int intValue;
+        for(int x = 0; x < base.length(); x++)
+        {
+            int cursor = 0;
+            intValue = base.charAt(x);
+            String binaryChar = new String(Integer.toBinaryString(base.charAt(x)));
+            for(int i = 0; i < binaryChar.length(); i++)
+            {
+                if(binaryChar.charAt(i) == '1')
+                {
+                    cursor += 1;
+                }
+            }
+            if((cursor % 2) > 0)
+            {
+                intValue += 128;
+            }
+            buffer.append(Integer.toHexString(intValue));
+        }
+        return buffer.toString();
     }
 
 }

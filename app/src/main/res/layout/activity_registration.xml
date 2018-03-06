@@ -65,7 +65,7 @@
         android:layout_marginLeft="72dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="اسم المستخدم(باللغة الانجليزية)"
+        android:hint="اسم المستخدم"
         android:inputType="textPersonName"
         android:textColor="#494949"
         app:layout_constraintBottom_toBottomOf="@+id/log"
