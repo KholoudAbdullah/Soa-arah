@@ -2,10 +2,10 @@ package com.soa_arah;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -19,11 +19,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -140,16 +140,47 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                   Toast.makeText(getApplicationContext(),"in for b",Toast.LENGTH_LONG).show();
+                  // Toast.makeText(getApplicationContext(),"in for b",Toast.LENGTH_LONG).show();
                     n=snapshot.getKey();
 //                    n=snapshot.child("email").getValue(String.class);
-                   Toast.makeText(getApplicationContext(),"in for a",Toast.LENGTH_LONG).show();
+//                   Toast.makeText(getApplicationContext(),"in for a",Toast.LENGTH_LONG).show();
                     if(n.equals(name.getText().toString())){
-                        Toast.makeText(getApplicationContext(),"in if b",Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(),"in if b",Toast.LENGTH_LONG).show();
                         phoneNumber=snapshot.child("phoneNum").getValue(String.class);
                         Log.d("111111","222"+phoneNumber);
                         flag=true;
-                        Toast.makeText(getApplicationContext(),"in if a",Toast.LENGTH_LONG).show();
+                        Toast.makeText( ForgotPasswordActivity.this, "الرجاء الانتظار حتى يتم الارسال", Toast.LENGTH_SHORT ).show();
+                        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                                phoneNumber, 30, TimeUnit.SECONDS, ForgotPasswordActivity.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                                    @Override
+                                    public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                                        //Called if it is not needed to enter verification code
+                                        signInWithCredential( phoneAuthCredential );
+                                    }
+
+                                    @Override
+                                    public void onVerificationFailed(FirebaseException e) {
+                                        //incorrect phone number, verification code, emulator, etc.
+                                        Toast.makeText( ForgotPasswordActivity.this, "onVerificationFailed " + e.getMessage(), Toast.LENGTH_SHORT ).show();
+                                    }
+
+                                    @Override
+                                    public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                        //now the code has been sent, save the verificationId we may need it
+                                        super.onCodeSent( verificationId, forceResendingToken );
+
+                                        mVerificationId = verificationId;
+                                    }
+
+                                    @Override
+                                    public void onCodeAutoRetrievalTimeOut(String verificationId) {
+                                        //called after timeout if onVerificationCompleted has not been called
+                                        super.onCodeAutoRetrievalTimeOut( verificationId );
+                                        Toast.makeText( ForgotPasswordActivity.this, "onCodeAutoRetrievalTimeOut :" + verificationId, Toast.LENGTH_SHORT ).show();
+                                    }
+                                }
+                        );
+//                        Toast.makeText(getApplicationContext(),"in if a",Toast.LENGTH_LONG).show();
                         break;
                     }else flag=false;
                 }
@@ -170,41 +201,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         // Log.d("phonenumber","phonenumber"+phoneNumber.toString());
             return;
         }
-        Toast.makeText(ForgotPasswordActivity.this, "الرجاء الانتظار حتى يتم الارسال" , Toast.LENGTH_SHORT).show();
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber, 60, TimeUnit.SECONDS, ForgotPasswordActivity.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    @Override
-                    public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                        //Called if it is not needed to enter verification code
-                        signInWithCredential(phoneAuthCredential);
-                    }
-
-                    @Override
-                    public void onVerificationFailed(FirebaseException e) {
-                        //incorrect phone number, verification code, emulator, etc.
-                        Toast.makeText(ForgotPasswordActivity.this, "onVerificationFailed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                        //now the code has been sent, save the verificationId we may need it
-                        super.onCodeSent(verificationId, forceResendingToken);
-
-                        mVerificationId = verificationId;
-                    }
-
-                    @Override
-                    public void onCodeAutoRetrievalTimeOut(String verificationId) {
-                        //called after timeout if onVerificationCompleted has not been called
-                        super.onCodeAutoRetrievalTimeOut(verificationId);
-                        Toast.makeText(ForgotPasswordActivity.this, "onCodeAutoRetrievalTimeOut :" + verificationId, Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
 
 
 
-    }
+        }
+
+
 
     private void signInWithCredential(PhoneAuthCredential phoneAuthCredential) {
 

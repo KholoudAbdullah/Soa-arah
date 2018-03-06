@@ -3,6 +3,8 @@ package com.soa_arah;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,9 +78,30 @@ public class view_account_register  extends AppCompatActivity {
             }
 
         });
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.search:
+                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                break;
+                            case R.id.diet_plan:
+                                startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
+                                break;
+                            case R.id.upload:
+                                startActivity(new Intent(getApplicationContext(), Request_page.class));
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

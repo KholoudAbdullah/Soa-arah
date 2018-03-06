@@ -1,26 +1,19 @@
 package com.soa_arah;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.text.DecimalFormat;
 
 
 public class view_info_request extends AppCompatActivity implements View.OnClickListener {
@@ -94,6 +87,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
             mDatabaseReference1= FirebaseDatabase.getInstance().getReference().child("Requests");
             mDatabaseReference1.child("ByName").child(key).removeValue();
             Toast.makeText(view_info_request.this, "تمت إضافة الصنف", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(view_info_request.this, view_request.class));
 
         }
         if (view== reject) {
@@ -102,6 +96,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
             mDatabaseReference1.child("ByName").child(key).removeValue();Toast.makeText(view_info_request.this, key, Toast.LENGTH_LONG).show();
 
             Toast.makeText(view_info_request.this, "تم رفض الطلب", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(view_info_request.this, view_request.class));
 
         }
 

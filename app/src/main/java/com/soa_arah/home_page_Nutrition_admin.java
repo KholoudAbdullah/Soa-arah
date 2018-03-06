@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,12 +35,16 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     String grams;
     private Button scan;
     private ZXingScannerView scannerView;
+    private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_nutrition_admin_activity);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         scan=(Button)findViewById(R.id.scan);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         searchtext=(EditText)findViewById(R.id.searchword);
         searchBtn=(Button)findViewById(R.id.searchButton);
@@ -53,13 +59,13 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            f=snapshot.child("Name").getValue(String.class);
+                            f=snapshot.child("name").getValue(String.class);
+                            cal=snapshot.child("calories").getValue(String.class);
+                            img=snapshot.child("image").getValue(String.class);
+                            stand=snapshot.child("standard").getValue(String.class);
+                            grams=snapshot.child("garms").getValue(String.class);
+                            id=snapshot.getKey();
                             if(f.equals(searchtext.getText().toString())){
-                                cal=snapshot.child("Calories").getValue(String.class);
-                                img=snapshot.child("Image").getValue(String.class);
-                                stand=snapshot.child("Standardm").getValue(String.class);
-                                grams=snapshot.child("Grams").getValue(String.class);
-                                id=snapshot.getKey();
                                 Intent intent = new Intent(getApplicationContext(), searchByName.class);
                                 intent.putExtra("name", f);
                                 intent.putExtra("id",id );
@@ -116,5 +122,26 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     }
     public void scanCode (View view) {
         startActivity(new Intent(getApplicationContext(), Barcode.class));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.adminloguot,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+         if (item.getItemId() == R.id.Logout){
+            firebaseAuth.signOut();
+            //closing activity
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginPage.class));
+
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }
