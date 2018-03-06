@@ -84,7 +84,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
         if(view == accept){
 
-             Food newFood = new Food(namef,image,keyword1,calorie,standard,gram);
+             Food newFood = new Food(namef,image,keyword.getText().toString(),calorie,standard,gram);
             newFood.setBarcodN("لم يتم إدخال بيانات");
             newFood.setImageTable("لم يتم إدخال بيانات");
 
