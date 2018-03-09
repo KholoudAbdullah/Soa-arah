@@ -163,57 +163,11 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         final String Hight = hight.getText().toString().trim();
         final String waist = Waist.getText().toString().trim();
         final String Thigh = thigh.getText().toString().trim();
-        String email = null;
+        String email =stringToHex(Name)+"@soaarah.com";;
         String Password = password.getText().toString().trim();
 
-        String nemail = Name + "@soaarah.com";
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]";
-        if (nemail.matches( emailPattern )==false) {
-            AlertDialog.Builder alert = new AlertDialog.Builder(
-                    Registration.this );
+        if (!(name.getText().toString().trim().isEmpty() && password.getText().toString().trim().isEmpty())) {
 
-            alert.setTitle( " اسم المستخدم لا يجب أن يحتوي على مسافة" ).setIcon( R.drawable.f1 );
-
-            AlertDialog dialog = alert.create();
-
-            // Finally, display the alert dialog
-            dialog.show();
-
-            // Get screen width and height in pixels
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
-            // The absolute width of the available display size in pixels.
-            int displayWidth = displayMetrics.widthPixels;
-            // The absolute height of the available display size in pixels.
-            int displayHeight = displayMetrics.heightPixels;
-
-            // Initialize a new window manager layout parameters
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-
-            // Copy the alert dialog window attributes to new layout parameter instance
-            layoutParams.copyFrom( dialog.getWindow().getAttributes() );
-
-            // Set the alert dialog window width and height
-            // Set alert dialog width equal to screen width 90%
-            // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-            // Set alert dialog height equal to screen height 90%
-            // int dialogWindowHeight = (int) (displayHeight * 0.9f);
-
-            // Set alert dialog width equal to screen width 70%
-            int dialogWindowWidth = (int) (displayWidth * 0.9f);
-            // Set alert dialog height equal to screen height 70%
-            int dialogWindowHeight = (int) (displayHeight * 0.15f);
-
-            // Set the width and height for the layout parameters
-            // This will bet the width and height of alert dialog
-            layoutParams.width = dialogWindowWidth;
-            layoutParams.height = dialogWindowHeight;
-
-            // Apply the newly created layout parameters to the alert dialog window
-            dialog.getWindow().setAttributes( layoutParams );
-        }
-           else if (!(name.getText().toString().trim().isEmpty() && password.getText().toString().trim().isEmpty())) {
-                email = stringToHex( Name ) + "@soaarah.com";
                 //if the email and password and Location are not empty
                 //displaying a progress dialog
                 progressDialog.setMessage( " الرجاء الانتظار حتى يتم التسجيل" );
