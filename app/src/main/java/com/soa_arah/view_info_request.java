@@ -21,7 +21,6 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     private TextView namefood ;
     private TextView calories;
     private TextView gr;
-    private TextView stan;
     private ImageView imageView3;
     private ImageButton reject;
     private ImageButton accept;
@@ -49,7 +48,6 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         namefood=(TextView)findViewById(R.id.namefood);
         calories=(TextView)findViewById(R.id.calories);
         gr=(TextView)findViewById(R.id.gr);
-        stan=(TextView)findViewById(R.id.stan);
         imageView3=(ImageView)findViewById(R.id.imageView3);
         reject=(ImageButton)findViewById(R.id.reject);
         accept=(ImageButton)findViewById(R.id.accept);
@@ -60,7 +58,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         gr.setText(" الوزن  :" + gram);
         namefood.setText(namef);
         calories.setText( " السعرات الحراريه  :" +calorie);
-        stan.setText(" المقاييس  :" +standard);
+
         Glide.with(getApplicationContext()).load(image).into(imageView3);
 
 

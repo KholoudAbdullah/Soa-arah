@@ -34,7 +34,7 @@ public class view_request extends AppCompatActivity {
     private ListView request_name;
     private ListView request_barcode;
     private ArrayList<Food> re_name;
-    private ArrayList<String> key;
+    private ArrayList<String> key,key1;
     private ArrayList<Food> re_barcode ;
 
     @Override
@@ -48,6 +48,7 @@ public class view_request extends AppCompatActivity {
         re_name=new ArrayList<Food>();
         re_barcode=new ArrayList<Food>();
         key=new ArrayList<String>();
+        key1=new ArrayList<String>();
 
         request_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -108,6 +109,69 @@ public class view_request extends AppCompatActivity {
 
             }
         });
+
+
+
+        request_barcode.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+
+
+                String barcodeN=re_barcode.get(i).getBarcodN();
+                String image1 =re_barcode.get(i).getImage();
+                String namef1 =re_barcode.get(i).getName();
+                String imageTable =re_barcode.get(i).getImageTable();
+                String keys1=key1.get(i);
+
+                Intent intent1 = new Intent(view_request.this, view_info_request_Barcode.class);
+                intent1.putExtra("barcodeN",barcodeN);
+                intent1.putExtra("image",image1);
+                intent1.putExtra("namef",namef1);
+                intent1.putExtra("imageTable",imageTable);
+                intent1.putExtra("keys",keys1);
+
+                startActivity(intent1);
+
+            }
+        });
+
+        mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByBarcode");
+
+        mDatabaseReference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    Food req = postSnapshot.getValue(Food.class);
+                    re_barcode.add(req);
+                    key1.add(postSnapshot.getKey().toString());
+                }
+
+                String[] requestsByBarcode = new String[re_barcode.size()];
+
+
+                for (int i = 0; i < re_barcode.size(); i++) {
+
+                    requestsByBarcode[i] = re_barcode.get(i).getName();
+
+                }
+
+                //disp laying it to list
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByBarcode);
+                request_barcode.setAdapter(adapter);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);

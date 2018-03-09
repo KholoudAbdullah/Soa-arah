@@ -165,43 +165,6 @@
             </RelativeLayout>
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="376dp"
-                android:layout_height="79dp"
-                android:layout_gravity="center">
-
-                <ImageView
-                    android:id="@+id/image5"
-                    android:layout_width="370dp"
-                    android:layout_height="74dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="false"
-                    app:layout_constraintHorizontal_bias="0.48"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
-
-                <TextView
-                    android:id="@+id/stan"
-                    android:layout_width="313dp"
-                    android:layout_height="41dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:gravity="center"
-                    android:textSize="19sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/image5"
-                    app:layout_constraintHorizontal_bias="0.518"
-                    app:layout_constraintStart_toStartOf="@+id/image5"
-                    app:layout_constraintTop_toTopOf="@+id/image5"
-                    app:layout_constraintVertical_bias="0.089"
-                    tools:ignore="MissingConstraints" />
-
-            </RelativeLayout>
-
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
