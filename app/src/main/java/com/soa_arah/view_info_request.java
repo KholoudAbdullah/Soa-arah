@@ -26,7 +26,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     private ImageButton accept;
     private EditText keyword;
     private String key;
-    private String namef,calorie,image,gram,standard,keyword1;
+    private String namef,calorie,image,quantity,standard,keyword1;
 
     private DatabaseReference mDatabaseReference;
     private DatabaseReference mDatabaseReference1;
@@ -41,7 +41,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         namef = getIntent().getStringExtra("namef");
          calorie=getIntent().getStringExtra("calorie");
          image=getIntent().getStringExtra("image");
-         gram=getIntent().getStringExtra("gram");
+        quantity=getIntent().getStringExtra("quantity");
          standard=getIntent().getStringExtra("standard");
         key=getIntent().getStringExtra("keys");
 
@@ -55,7 +55,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
         keyword1=keyword.getText().toString();
 
-        gr.setText(" الوزن  :" + gram);
+        gr.setText(" الكميه  :" + quantity);
         namefood.setText(namef);
         calories.setText( " السعرات الحراريه  :" +calorie);
 
@@ -75,7 +75,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
         if(view == accept){
 
-             Food newFood = new Food(namef,image,keyword.getText().toString(),calorie,standard,gram);
+             Food newFood = new Food(namef,image,keyword.getText().toString(),calorie,standard,quantity);
             newFood.setBarcodN("لم يتم إدخال بيانات");
             newFood.setImageTable("لم يتم إدخال بيانات");
 

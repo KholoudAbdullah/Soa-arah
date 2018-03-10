@@ -55,7 +55,7 @@ public class view_request extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
 
                 String calorie =re_name.get(i).getCalories();
-                String gram =re_name.get(i).getGarms();
+                String quantity =re_name.get(i).getQuantity();
                 String image =re_name.get(i).getImage();
                 String namef =re_name.get(i).getName();
                 String standard =re_name.get(i).getStandard();
@@ -63,7 +63,7 @@ public class view_request extends AppCompatActivity {
 
                 Intent intent = new Intent(view_request.this, view_info_request.class);
                 intent.putExtra("calorie",calorie);
-                intent.putExtra("gram",gram);
+                intent.putExtra("quantity",quantity);
                 intent.putExtra("image",image);
                 intent.putExtra("namef",namef);
                 intent.putExtra("standard",standard);

@@ -9,19 +9,19 @@ public class Food {
     private String Image;
     private String Keyword;
     private String Calories;
-    private String Garms;
+    private String Quantity;
     private String standard;
     private String BarcodN;
     private String ImageTable;
 
     public Food(){}
 
-    public Food(String name, String image, String keyword, String calories, String standard,String garms) {
+    public Food(String name, String image, String keyword, String calories, String standard,String quantity) {
         Name = name;
         Image = image;
         Keyword = keyword;
         Calories = calories;
-        Garms = garms;
+        Quantity = quantity;
         this.standard=standard;
     }
 
@@ -81,12 +81,12 @@ public class Food {
         Calories = calories;
     }
 
-    public String getGarms() {
-        return Garms;
+    public String getQuantity() {
+        return Quantity;
     }
 
-    public void setGarms(String garms) {
-        Garms = garms;
+    public void setQuantity(String quantity) {
+        Quantity = quantity;
     }
 
 
