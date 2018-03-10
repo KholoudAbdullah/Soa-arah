@@ -263,7 +263,6 @@ public class RequestByBarcode extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Food RF =  new Food(name.getText().toString().trim(),taskSnapshot.getDownloadUrl().toString(),"لايوجد","لايوجد","لايوجد","لايوجد");
-
                             RF.setImageTable(douTable);
                             RF.setBarcodN(barnum);
 

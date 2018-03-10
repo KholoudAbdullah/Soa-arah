@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 public class barcodeInfo extends AppCompatActivity {
 String cal,img,table,q,name,bar,f,id;
     private DatabaseReference fData;
@@ -32,6 +34,9 @@ String cal,img,table,q,name,bar,f,id;
         Glide.with(getApplicationContext()).load(img).into(imageView);
         Glide.with(getApplicationContext()).load(table).into(imageTable);
         textn.setText(name);
+        PhotoViewAttacher photoViewAttacher=new PhotoViewAttacher(imageTable);
+        photoViewAttacher.canZoom();
+        photoViewAttacher.update();
         if(cal.equals("لا يوجد")){
             textC.setText("خالي من السعرات الحرارية");
         }else
