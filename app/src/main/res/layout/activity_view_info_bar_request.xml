@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="530dp"
@@ -16,21 +15,22 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027">
+        app:layout_constraintVertical_bias="0.06">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/image1"
-                    android:layout_width="370dp"
+                    android:layout_width="350dp"
                     android:layout_height="74dp"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
@@ -40,53 +40,40 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/account" />
 
+
                 <TextView
-                    android:id="@+id/namefood"
-                    android:layout_width="272dp"
-                    android:layout_height="43dp"
+                    android:id="@+id/name"
+                    android:layout_width="231dp"
+                    android:layout_height="45dp"
                     android:layout_alignBottom="@+id/image1"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="9dp"
+                    android:layout_marginTop="24dp"
                     android:gravity="center"
+                    android:text="TextView"
                     android:textSize="19sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/image1"
+                    app:layout_constraintHorizontal_bias="0.503"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/image1"
                     app:layout_constraintTop_toTopOf="@+id/image1"
-                    app:layout_constraintVertical_bias="0.021"
                     tools:ignore="MissingConstraints" />
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="149dp"
-                    android:layout_height="118dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    app:srcCompat="@drawable/search2"
-                    tools:ignore="MissingConstraints" />
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="155dp"
-                    android:layout_height="116dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginEnd="8dp"
-                    app:srcCompat="@drawable/spoon" />
 
 
             </RelativeLayout>
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="259dp"
-                android:layout_height="157dp"
-                android:layout_below="@+id/reject"
+                android:id="@+id/image"
+                android:layout_width="258dp"
+                android:layout_height="133dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="70dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="imagefood"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="@+id/image1"
-                app:layout_constraintHorizontal_bias="0.502"
                 app:srcCompat="@drawable/soaarah_icon" />
 
 
@@ -96,72 +83,62 @@
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/image3"
-                    android:layout_width="370dp"
-                    android:layout_height="74dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignTop="@+id/textView5"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:adjustViewBounds="false"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
-
-
-                <TextView
-                    android:id="@+id/calories"
-                    android:layout_width="313dp"
-                    android:layout_height="41dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:gravity="center"
-                    android:textSize="19sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/image3"
-                    app:layout_constraintHorizontal_bias="0.491"
-                    app:layout_constraintStart_toStartOf="@+id/image3"
-                    app:layout_constraintTop_toTopOf="@+id/image3"
-                    app:layout_constraintVertical_bias="0.057"
-                    tools:ignore="MissingConstraints" />
-            </RelativeLayout>
-
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="376dp"
-                android:layout_height="79dp"
-                android:layout_gravity="center">
-
-                <ImageView
                     android:id="@+id/image2"
-                    android:layout_width="370dp"
+                    android:layout_width="350dp"
                     android:layout_height="74dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
                     android:layout_gravity="center"
-                    android:adjustViewBounds="false"
-                    app:layout_constraintHorizontal_bias="0.48"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    app:srcCompat="@drawable/account"
+                    tools:ignore="MissingConstraints" />
 
                 <TextView
-                    android:id="@+id/gr"
-                    android:layout_width="313dp"
+                    android:id="@+id/textView11"
+                    android:layout_width="246dp"
                     android:layout_height="41dp"
-                    android:layout_alignTop="@+id/image2"
+                    android:layout_alignBottom="@+id/image2"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="9dp"
+                    android:layout_marginTop="232dp"
                     android:gravity="center"
+                    android:text="جدول العناصر الغذائية"
                     android:textSize="19sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/image2"
-                    app:layout_constraintHorizontal_bias="0.518"
+                    app:layout_constraintHorizontal_bias="0.503"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/image2"
                     app:layout_constraintTop_toTopOf="@+id/image2"
-                    app:layout_constraintVertical_bias="0.089"
                     tools:ignore="MissingConstraints" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageTable"
+                    android:layout_width="300dp"
+                    android:layout_height="149dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="imageTable"
+                    app:layout_constraintHorizontal_bias="0.503"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/soaarah_icon"
+                    tools:ignore="MissingConstraints" />
+
+
             </RelativeLayout>
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -170,53 +147,82 @@
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/image8"
-                    android:layout_width="370dp"
+                    android:id="@+id/image3"
+                    android:layout_width="350dp"
                     android:layout_height="74dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="20dp"
                     android:adjustViewBounds="false"
-                    app:layout_constraintHorizontal_bias="0.48"
+                    app:layout_constraintHorizontal_bias="0.488"
+                    app:srcCompat="@drawable/account"
+                    tools:ignore="MissingConstraints" />
+
+
+                <EditText
+                    android:id="@+id/keyword"
+                    android:layout_width="212dp"
+                    android:layout_height="43dp"
+                    android:layout_alignBottom="@+id/image3"
+                    android:layout_alignEnd="@+id/image3"
+                    android:layout_marginBottom="13dp"
+                    android:layout_marginEnd="59dp"
+                    android:gravity="center"
+                    android:hint="الكلمات المفتاحية"
+                    android:textSize="19sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/image3"
+                    app:layout_constraintHorizontal_bias="0.702"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/image3"
+                    app:layout_constraintTop_toTopOf="@+id/image3"
+                    app:layout_constraintVertical_bias="0.978"
+                    tools:ignore="MissingConstraints" />
+            </RelativeLayout>
+
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/image4"
+                    android:layout_width="350dp"
+                    android:layout_height="74dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="20dp"
+                    android:adjustViewBounds="false"
+                    android:contentDescription="lable"
+                    app:layout_constraintHorizontal_bias="0.488"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="140dp"
-                    android:layout_height="32dp"
-                    android:layout_alignEnd="@+id/image8"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="19dp"
-                    android:gravity="right"
-                    android:text="الكلمات المفتاحيه"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/image8"
-                    app:layout_constraintVertical_bias="0.057"
+                    app:srcCompat="@drawable/account"
                     tools:ignore="MissingConstraints" />
+
 
                 <EditText
-                    android:id="@+id/stt"
-                    android:layout_width="150dp"
-                    android:layout_height="42dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="45dp"
-                    android:ems="10"
-                    android:text=""
-                    android:textAlignment="textEnd"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/image8"
-                    app:layout_constraintVertical_bias="0.057"
+                    android:id="@+id/calories1"
+                    android:layout_width="212dp"
+                    android:layout_height="43dp"
+                    android:layout_alignBottom="@+id/image4"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:hint="السعرات الحرارية"
+                    android:textSize="19sp"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingConstraints" />
-
             </RelativeLayout>
+
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
@@ -269,4 +275,6 @@
 
     </android.support.design.widget.BottomNavigationView>
 
+
 </android.support.constraint.ConstraintLayout>
+
