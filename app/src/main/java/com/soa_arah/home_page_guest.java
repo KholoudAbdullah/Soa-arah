@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,11 +49,29 @@ public class home_page_guest extends AppCompatActivity {
     String []searchR;
     int size;
     ArrayList<String>list=new ArrayList<>();
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_guest_activity);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user != null){
+            //ID موب صح
+            //IT admin
+            if(user.getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
+            }
+            // Nutrition addmin
+            else if(user.getUid().equals("7yO6vzOcv6VtXMjG3pjipXLpZin1")){
+                startActivity(new Intent(getApplicationContext(),home_page_Nutrition_admin.class));
+            }
+            else {
+                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+
+            }
+        }
 
         scan = (Button) findViewById(R.id.scan);
         button = (Button) findViewById(R.id.login);

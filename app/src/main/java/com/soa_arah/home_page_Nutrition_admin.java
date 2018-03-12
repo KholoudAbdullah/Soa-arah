@@ -1,6 +1,8 @@
 package com.soa_arah;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -20,8 +22,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class home_page_Nutrition_admin extends AppCompatActivity {
+    private FirebaseAuth firebaseAuth;
+    private Button button;
+    private Button reg;
+    AlertDialog.Builder alert;
+    String key;
+    String []keyword;
+    String []searchR;
+    int size;
+    ArrayList<String> list=new ArrayList<>();
     private EditText searchtext;
     private DatabaseReference fData;
     private Button searchBtn;
@@ -35,8 +48,6 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     String grams;
     private Button scan;
     private ZXingScannerView scannerView;
-    private FirebaseAuth firebaseAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,47 +59,11 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
 
         searchtext=(EditText)findViewById(R.id.searchword);
         searchBtn=(Button)findViewById(R.id.searchButton);
-        //progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
-        // progressDialog.show();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //progressDialog.dismiss();
-                String foodN = getIntent().getStringExtra("FoodN");
-                fData = FirebaseDatabase.getInstance().getReference().child("Food");
-                fData.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            f=snapshot.child("name").getValue(String.class);
-                            cal=snapshot.child("calories").getValue(String.class);
-                            img=snapshot.child("image").getValue(String.class);
-                            stand=snapshot.child("standard").getValue(String.class);
-                            grams=snapshot.child("garms").getValue(String.class);
-                            id=snapshot.getKey();
-                            if(f.equals(searchtext.getText().toString())){
-                                Intent intent = new Intent(getApplicationContext(), searchByName.class);
-                                intent.putExtra("name", f);
-                                intent.putExtra("id",id );
-                                intent.putExtra("cal",cal );
-                                intent.putExtra("img",img );
-                                intent.putExtra("stand",stand);
-                                intent.putExtra("garms",grams);
-                                startActivity(intent);
-                                flag=true;
-                                break;
-                            }else flag=false;
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-
-
+                searchKeyword();
 
             }
         });
@@ -143,5 +118,59 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+    public void searchKeyword() {
+        list.clear();
+        progressDialog.show();
+        fData = FirebaseDatabase.getInstance().getReference().child("Food");
+        fData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    key = snapshot.child("keyword").getValue(String.class);
+                    f = snapshot.child("name").getValue(String.class);
+                    id = snapshot.getKey();
+                    keyword = key.split(",");
+                    int j = 0;
+                    for (int i = 0; i < keyword.length; i++) {
+                        if (keyword[i].equals(searchtext.getText().toString().trim())) {
+                            list.add(f);
+
+                        }
+
+                    }
+                }
+                progressDialog.dismiss();
+                if (list.isEmpty()) {
+                    alert = new AlertDialog.Builder(home_page_Nutrition_admin.this);
+                    alert.setMessage("عذراً لايوجد هاذا العنصر ");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "الغاء",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+
+
+                    AlertDialog alert11 = alert.create();
+                    alert11.show();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), searchByKeyword.class);
+                    intent.putExtra("list", list);
+                    progressDialog.dismiss();
+                    startActivity(intent);
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +43,8 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
     private ZXingScannerView mScannerView;
     ProgressDialog progressDialog;
     AlertDialog.Builder alert;
+     FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,7 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
         setContentView(mScannerView);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
+        firebaseAuth=FirebaseAuth.getInstance();
 
     }
 
@@ -89,6 +94,7 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
 
                     }
                 if(!flag){
+                        if(firebaseAuth.getCurrentUser()==null){
                     alert=new AlertDialog.Builder(Barcode.this);
                     alert.setMessage("عذراً لايوجد هاذا العنصر سجل دخولك لإضافته");
                     alert.setCancelable(true);
@@ -116,11 +122,88 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                                 }
                             }
 
-                    );
+                    );}
+                    else {
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            String id= user.getUid();
+                            if(id.equals("7yO6vzOcv6VtXMjG3pjipXLpZin1")){
+                                alert=new AlertDialog.Builder(Barcode.this);
+                                alert.setMessage("عذراً لايوجد هاذا العنصر ");
+                                alert.setCancelable(true);
+                                alert.setPositiveButton(
+                                        "الغاء",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                                startActivity(new Intent(getApplicationContext(),home_page_Nutrition_admin.class));
+                                                mScannerView.stopCamera();
+
+                                            }
+                                        }
+
+                                );
+                            }
+                            else{
+                                if(id.equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                                    alert=new AlertDialog.Builder(Barcode.this);
+                                    alert.setMessage("عذراً لايوجد هاذا العنصر ");
+                                    alert.setCancelable(true);
+                                    alert.setPositiveButton(
+                                            "الغاء",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.cancel();
+                                                    startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
+                                                    mScannerView.stopCamera();
+
+                                                }
+                                            }
+
+                                    );
+                                }
+                                else
+                                {if(firebaseAuth.getCurrentUser()!=null){
+                                    alert=new AlertDialog.Builder(Barcode.this);
+                                    alert.setMessage("عذراً لايوجد هاذا العنصر هل تريد اضافتة");
+                                    alert.setCancelable(true);
+                                    alert.setPositiveButton(
+                                            "اضافة",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                    startActivity(new Intent(getApplicationContext(), Request_page.class));
+                                                    mScannerView.stopCamera();
+
+                                                }
+                                            });
+
+                                    alert.setNegativeButton(
+                                            "الغاء",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.cancel();
+                                                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                                    mScannerView.stopCamera();
+
+                                                }
+                                            }
+
+                                    );
+                                }}
+
+                            }
+
+
+
+
+                        }
                     AlertDialog alert11 = alert.create();
                     alert11.show();
-                    //Toast.makeText(getApplicationContext(),"لا يوجد", Toast.LENGTH_LONG).show();
-                    //mScannerView.stopCamera();
+
 
                 }
             }

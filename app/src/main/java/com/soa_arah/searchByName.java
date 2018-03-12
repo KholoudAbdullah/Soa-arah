@@ -74,8 +74,8 @@ public class searchByName extends AppCompatActivity {
                     return;
                 }
                 String selected = span.getSelectedItem().toString();
-                double caldoub = Double.parseDouble(foodCal);
-                double gramdoub = Double.parseDouble(quantity);
+                double caldoub = Double.parseDouble(getIntent().getStringExtra("cal"));
+                double gramdoub = Double.parseDouble(getIntent().getStringExtra("quantity"));
                 double q = Double.parseDouble(grm.getText().toString());
                 if (selected.equals("ملعقة شاي")){
                      calor=((caldoub*5)/gramdoub)*q;
