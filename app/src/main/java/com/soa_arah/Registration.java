@@ -24,7 +24,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -157,7 +156,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     private void registerUser() {
         //getting email and password from edit texts
 
-        final String Name = name.getText().toString().toLowerCase();
+        final String Name = name.getText().toString().trim().toLowerCase();
         final String Phone = phone.getText().toString().trim();
         final String Wedith = wedith.getText().toString().trim();
         final String Hight = hight.getText().toString().trim();
@@ -332,10 +331,8 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             //calling register method on click
             registerUser();}
         if(view == log ) {
-            String m=name.getText().toString();
 
-            Toast.makeText(Registration.this,  stringToHex(m) , Toast.LENGTH_SHORT).show();
-            //startActivity(new Intent(this, LoginPage.class) ); //profile=login
+            startActivity(new Intent(this, LoginPage.class) ); //profile=login
 
         }
 

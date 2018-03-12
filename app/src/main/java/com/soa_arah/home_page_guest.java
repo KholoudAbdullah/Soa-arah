@@ -10,8 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -133,7 +130,7 @@ public class home_page_guest extends AppCompatActivity {
                 progressDialog.dismiss();
                 if (list.isEmpty()) {
                     alert = new AlertDialog.Builder(home_page_guest.this);
-                    alert.setMessage("عذراً لايوجد هاذا العنصر سجل دخولك لإضافته");
+                    alert.setMessage("عذراً لايوجد هذا العنصر سجل دخولك لإضافته");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
                             "سجل الدخول",

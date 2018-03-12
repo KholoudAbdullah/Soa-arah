@@ -25,6 +25,7 @@ public class Food {
         this.standard=standard;
     }
 
+
     public void setBarcodN(String barcodN) {
         BarcodN = barcodN;
     }

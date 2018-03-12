@@ -133,7 +133,7 @@ public class RequestByName extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
                                 break;
                             case R.id.diet_plan:
-                                startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+                               // startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
                                 break;
                             case R.id.upload:
@@ -167,7 +167,7 @@ public class RequestByName extends AppCompatActivity {
             firebaseAuth.signOut();
             //closing activity
             finish();
-            startActivity(new Intent(getApplicationContext(), LoginPage.class));
+            startActivity(new Intent(getApplicationContext(), home_page_guest.class));
 
         } else {
             return super.onOptionsItemSelected(item);

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,6 +28,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     private ImageButton reject;
     private ImageButton accept;
     private EditText keyword;
+    private FirebaseAuth firebaseAuth;
     private String key;
     private String namef,calorie,image,quantity,standard,keyword1;
 
@@ -37,7 +41,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_view_info_request);
 
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
-
+        firebaseAuth = FirebaseAuth.getInstance();
         namef = getIntent().getStringExtra("namef");
          calorie=getIntent().getStringExtra("calorie");
          image=getIntent().getStringExtra("image");
@@ -99,6 +103,25 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         }
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.adminloguot,menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.Logout){
+            firebaseAuth.signOut();
+            //closing activity
+            finish();
+            startActivity(new Intent(getApplicationContext(), home_page_guest.class));
+
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 
 }

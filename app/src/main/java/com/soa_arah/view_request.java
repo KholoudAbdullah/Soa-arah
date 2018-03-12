@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -19,9 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.List;
+
+
 
 /**
  * Created by Lama on 05/03/18.
@@ -36,13 +36,13 @@ public class view_request extends AppCompatActivity {
     private ArrayList<Food> re_name;
     private ArrayList<String> key,key1;
     private ArrayList<Food> re_barcode ;
-
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_request);
 
-
+        firebaseAuth = FirebaseAuth.getInstance();
         request_name=(ListView)findViewById(R.id.request_name);
         request_barcode=(ListView)findViewById(R.id.request_barcode);
         re_name=new ArrayList<Food>();
@@ -198,5 +198,24 @@ public class view_request extends AppCompatActivity {
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.adminloguot,menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.Logout){
+            firebaseAuth.signOut();
+            //closing activity
+            finish();
+            startActivity(new Intent(getApplicationContext(), home_page_guest.class));
+
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 }

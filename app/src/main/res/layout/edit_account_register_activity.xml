@@ -293,9 +293,10 @@
                     android:id="@+id/waist"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textAlignment="textStart"
-                    />
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/edit_waist"
+                    android:textAlignment="textStart" />
 
                 <ImageButton
                     android:id="@+id/edit_waist"
@@ -338,10 +339,11 @@
                     android:id="@+id/hip"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="18dp"
+                    android:layout_toEndOf="@+id/edit_hip"
                     android:text=" "
-                    android:textAlignment="textStart"
-                    />
+                    android:textAlignment="textStart" />
 
                 <ImageButton
                     android:id="@+id/edit_hip"

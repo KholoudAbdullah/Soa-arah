@@ -46,8 +46,9 @@
         <activity android:name=".RequestByBarcode" />
         <activity android:name=".Baecode_Request" />
         <activity android:name=".Barcode_Request" />
-        <activity android:name=".diteplan" />
         <activity android:name=".searchByKeyword"></activity>
+        <activity android:name=".diteplan" />
+        <activity android:name=".diet_plan"></activity>
     </application>
 
 </manifest>
