@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -38,7 +39,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
     private ImageButton edit_pass;
     private FirebaseAuth mAuth;
     private RelativeLayout conformpass;
-
+    private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabase1;
     private ProgressDialog progressDialog;
@@ -62,7 +63,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
 
         mAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
-
+        firebaseAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("admin_N").child("name");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -154,5 +155,25 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
             }
 
             }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.adminloguot,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.Logout){
+            firebaseAuth.signOut();
+            //closing activity
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginPage.class));
+
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }

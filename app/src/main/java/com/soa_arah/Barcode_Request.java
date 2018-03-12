@@ -1,11 +1,9 @@
 package com.soa_arah;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.zxing.Result;
 
@@ -30,7 +28,7 @@ public class Barcode_Request extends AppCompatActivity implements ZXingScannerVi
         Log.v("TAG", rawResult.getText()); // Prints scan results
         // Prints the scan format (qrcode, pdf417 etc.)
         Log.v("TAG", rawResult.getBarcodeFormat().toString());
-        Toast.makeText(Barcode_Request.this, rawResult.getText(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(Barcode_Request.this, rawResult.getText(), Toast.LENGTH_SHORT).show();
 
 
       Intent intent = new Intent(Barcode_Request.this, RequestByBarcode.class);

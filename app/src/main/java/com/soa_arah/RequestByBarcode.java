@@ -75,7 +75,7 @@ public class RequestByBarcode extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
                                 break;
                             case R.id.diet_plan:
-                                startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+                                //startActivity(new Intent(getApplicationContext(), edit_account_register.class));
 
                                 break;
                             case R.id.upload:
@@ -107,7 +107,12 @@ public class RequestByBarcode extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(RequestByBarcode.this);
 
+        Intent intent=getIntent();
+//               if(intent.getExtras().getString( "Name" )!=null)
+//                name.setText(intent.getExtras().getString( "Name" ));
 
+        barnum = intent.getExtras().getString( "BarcodeNum","" );
+        TXbarnum.setText(TXbarnum.getText().toString()+"  "+barnum);
         //food image
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,13 +143,6 @@ public class RequestByBarcode extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-  Intent intent=getIntent();
-//               if(intent.getExtras().getString( "Name" )!=null)
-//                name.setText(intent.getExtras().getString( "Name" ));
-
-                barnum = intent.getExtras().getString( "BarcodeNum","" );
-                TXbarnum.setText(TXbarnum.getText().toString()+"  "+barnum);
-
                 if(name==null){
                     Toast.makeText(RequestByBarcode.this, "الرجاء ادخال االاسم", Toast.LENGTH_LONG).show();
 
@@ -197,6 +195,32 @@ public class RequestByBarcode extends AppCompatActivity {
 
                 // After selecting image change choose button above text.
                 table.setText("تم اختيار الصورة");
+                StorageReference fileReference1 = storageReference.child(System.currentTimeMillis()
+                        + "." + getFileExtension(tableUri));
+                // Setting progressDialog Title.
+
+
+                tablem = fileReference1.putFile(tableUri)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                //Toast.makeText(RequestByBarcode.this, "تم تحميل الصوره بنجاح", Toast.LENGTH_LONG).show();
+                                douTable= taskSnapshot.getDownloadUrl().toString();
+
+                                // Hiding the progressDialog after done uploading.
+                                //  progressDialog.dismiss();
+
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Hiding the progressDialog after done uploading.
+                                //progressDialog.dismiss();
+                                Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -214,58 +238,18 @@ public class RequestByBarcode extends AppCompatActivity {
     private void uploadFile() {
 
         if (fImageUri != null && tableUri!= null) {
+            progressDialog.setMessage( "الرجاء الانتظار حتى يتم رفع الطلب" );
+            progressDialog.show();
 
             StorageReference fileReference = storageReference.child(System.currentTimeMillis()
                     + "." + getFileExtension(fImageUri));
-            StorageReference fileReference1 = storageReference.child(System.currentTimeMillis()
-                    + "." + getFileExtension(tableUri));
-            // Setting progressDialog Title.
-            progressDialog.setTitle("يتم ارسال الطلب ...");
-            progressDialog.show();
-
-
-
-            try {
-
-
-                tablem = fileReference1.putFile(tableUri)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-
-                                Toast.makeText(RequestByBarcode.this, "تم تحميل الصوره بنجاح", Toast.LENGTH_LONG).show();
-
-
-
-                                douTable= taskSnapshot.getDownloadUrl().toString();
-
-                                // Hiding the progressDialog after done uploading.
-                                //  progressDialog.dismiss();
-
-
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Hiding the progressDialog after done uploading.
-                                //progressDialog.dismiss();
-                                Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });}catch (Exception e){
-                Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-
             mUploadTask = fileReference.putFile(fImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Food RF =  new Food(name.getText().toString().trim(),taskSnapshot.getDownloadUrl().toString(),"لايوجد","لايوجد","لايوجد","لايوجد");
-                            RF.setImageTable(douTable);
                             RF.setBarcodN(barnum);
-
+                            RF.setImageTable(douTable);
                             String uploadId = databaseReference.push().getKey();
                             databaseReference.child(uploadId).setValue(RF);
 
@@ -275,7 +259,7 @@ public class RequestByBarcode extends AppCompatActivity {
                             AlertDialog.Builder alert = new AlertDialog.Builder(
                                     RequestByBarcode.this);
                             alert.setTitle("تم ارسال الطلب بنجاح").setIcon(R.drawable.t1);
-
+                            alert.show();
                             startActivity(new Intent(RequestByBarcode.this, home_page_register.class));
 
 
@@ -315,7 +299,7 @@ public class RequestByBarcode extends AppCompatActivity {
             firebaseAuth.signOut();
             //closing activity
             finish();
-            startActivity(new Intent(getApplicationContext(), LoginPage.class));
+            startActivity(new Intent(getApplicationContext(), home_page_guest.class));
 
         } else {
             return super.onOptionsItemSelected(item);

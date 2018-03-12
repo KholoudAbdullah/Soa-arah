@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,8 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 
 public class view_info_request_Barcode extends AppCompatActivity implements View.OnClickListener {
@@ -24,6 +29,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
     private ImageButton reject;
     private ImageButton accept;
     private EditText keyword;
+    private FirebaseAuth firebaseAuth;
     private EditText calories1;
 
     private String key;
@@ -45,7 +51,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         barcodeN=getIntent().getStringExtra("barcodeN");
         imageTable=getIntent().getStringExtra("imageTable");
         key=getIntent().getStringExtra("keys");
-
+        firebaseAuth = FirebaseAuth.getInstance();
         namefood=(TextView)findViewById(R.id.name);
         reject=(ImageButton)findViewById(R.id.reject);
         accept=(ImageButton)findViewById(R.id.accept);
@@ -60,6 +66,9 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
         Glide.with(getApplicationContext()).load(image1).into(image);
         Glide.with(getApplicationContext()).load(imageTable).into(imageTable1);
+        PhotoViewAttacher photoViewAttacher=new PhotoViewAttacher(imageTable1);
+        photoViewAttacher.canZoom();
+        photoViewAttacher.update();
 
         reject.setOnClickListener(this);
         accept.setOnClickListener(this);
@@ -98,6 +107,25 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         }
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.adminloguot,menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.Logout){
+            firebaseAuth.signOut();
+            //closing activity
+            finish();
+            startActivity(new Intent(getApplicationContext(), home_page_guest.class));
+
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 
 }

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -90,7 +89,7 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                     }
                 if(!flag){
                     alert=new AlertDialog.Builder(Barcode.this);
-                    alert.setMessage("عذراً لايوجد هاذا العنصر سجل دخولك لإضافته");
+                    alert.setMessage("عذراً لايوجد هذا العنصر سجل دخولك لإضافته");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
                             "سجل الدخول",

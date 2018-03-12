@@ -236,13 +236,14 @@
         android:id="@+id/barcodeNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginTop="24dp"
         android:gravity="right"
         android:text="رقم الباركود: "
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="@+id/toolbar7"
-        tools:layout_editor_absoluteX="244dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar7" />
 
 
 </android.support.constraint.ConstraintLayout>

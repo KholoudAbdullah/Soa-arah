@@ -67,7 +67,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     //method for user login
     private void userLogin(){
-        String name1 =username.getText().toString().trim();
+        String name1 =username.getText().toString().trim().toLowerCase();
         email = stringToHex(name1)+"@soaarah.com";
         pass  = password.getText().toString().trim();
 
