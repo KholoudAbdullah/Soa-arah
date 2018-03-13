@@ -266,7 +266,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             AlertDialog.Builder alert = new AlertDialog.Builder(
                                     ForgotPasswordActivity.this);
 
-                            alert.setTitle("تمت عملية التسجيل بنجاح").setIcon(R.drawable.t1);
+                            alert.setTitle("تمت عملية التأكيد بنجاح").setIcon(R.drawable.t1);
                             Log.d("111","111");
                             AlertDialog dialog = alert.create();
 
