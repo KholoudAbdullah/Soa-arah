@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +38,7 @@ public class view_request extends AppCompatActivity {
     private ArrayList<Food> re_name;
     private ArrayList<String> key,key1;
     private ArrayList<Food> re_barcode ;
+    private TextView no_requestname,no_request_barcode;
     private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class view_request extends AppCompatActivity {
         re_barcode=new ArrayList<Food>();
         key=new ArrayList<String>();
         key1=new ArrayList<String>();
+        no_requestname=(TextView)findViewById(R.id.no_requestname);
+        no_request_barcode=(TextView)findViewById(R.id.no_request_barcode);
 
         request_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,7 +101,13 @@ public class view_request extends AppCompatActivity {
 
                     }
 
-                    //disp laying it to list
+                    if(re_name.size()==0)
+                        no_requestname.setText("لا توجد طلبات");
+                    else
+                        no_requestname.setText("");
+
+
+                //disp laying it to list
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByName);
                 request_name.setAdapter(adapter);
 
@@ -155,6 +166,11 @@ public class view_request extends AppCompatActivity {
                     requestsByBarcode[i] = re_barcode.get(i).getName();
 
                 }
+
+                if(re_barcode.size()==0)
+                    no_request_barcode.setText("لا توجد طلبات");
+                else
+                    no_request_barcode.setText("");
 
                 //disp laying it to list
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByBarcode);

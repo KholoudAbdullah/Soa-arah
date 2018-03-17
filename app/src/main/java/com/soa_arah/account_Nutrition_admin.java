@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class account_Nutrition_admin extends AppCompatActivity implements View.OnClickListener{
 
-    private TextView name;
+    private TextView name,passlenght;
     private EditText password;
     private EditText password1;
     private ImageButton edit_pass1;
@@ -55,6 +57,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
         edit_pass = (ImageButton)findViewById(R.id.edit_pass);
         edit_pass1 = (ImageButton)findViewById(R.id.edit_pass1);
         conformpass=(RelativeLayout)findViewById(R.id.conformpass);
+        passlenght=(TextView)findViewById(R.id.passlenght);
 
         conformpass.setVisibility(View.GONE);
         edit_pass.setVisibility(View.VISIBLE);
@@ -82,6 +85,28 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
         });
 
 
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                String text=password.getText().toString();
+                int count =text.length();
+                if(count>=6) {
+
+                        passlenght.setText("");
+                }
+            }
+        });
 
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
@@ -114,14 +139,27 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
     @Override
     public void onClick(View view) {
         if(view == edit_pass){
-            edit_pass.setVisibility(View.INVISIBLE);
-           conformpass.setVisibility(View.VISIBLE);
 
+            String text=password.getText().toString();
+            int count =text.length();
+            if(count<6) {
+                passlenght.setText("             الرقم السري يجب أن يحتوي على 6 أرقام أو أكثر ");
+
+            }
+            else {
+                passlenght.setText("");
+                edit_pass.setVisibility(View.INVISIBLE);
+                conformpass.setVisibility(View.VISIBLE);
+            }
 
         }
 
         if (view == edit_pass1) {
-            if (password.getText().toString().equals(password1.getText().toString())) {
+            if(password.getText().toString().equals("")||password1.getText().toString().equals("")){
+                Toast.makeText(account_Nutrition_admin.this, "الرجاء إدخال الرقم السري", Toast.LENGTH_LONG).show();
+
+            }
+            else if (password.getText().toString().equals(password1.getText().toString())) {
                 progressDialog.setMessage("يتم حفظ التعديلات الرجاء الانتظار..");
                 progressDialog.show();
                 FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
