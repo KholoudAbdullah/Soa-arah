@@ -40,7 +40,6 @@ public class RequestByBarcode extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
-    private ZXingScannerView scannerView;
 
     private Uri fImageUri,tableUri;
     private ImageView foodImage,tableI;
@@ -49,7 +48,6 @@ public class RequestByBarcode extends AppCompatActivity {
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     private StorageTask mUploadTask,tablem;
-    private static final int PICK_IMAGE_REQUEST = 1;
     private String douTable, barnum;
     private EditText name;
     private ProgressDialog progressDialog;
@@ -94,8 +92,6 @@ public class RequestByBarcode extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByBarcode");
 
 
-
-
         upload=(Button) findViewById(R.id.FImageB);
         table=(Button) findViewById(R.id.TImageB);
         foodImage=(ImageView) findViewById(R.id.FImageV);
@@ -108,11 +104,10 @@ public class RequestByBarcode extends AppCompatActivity {
         progressDialog = new ProgressDialog(RequestByBarcode.this);
 
         Intent intent=getIntent();
-//               if(intent.getExtras().getString( "Name" )!=null)
-//                name.setText(intent.getExtras().getString( "Name" ));
 
         barnum = intent.getExtras().getString( "BarcodeNum","" );
         TXbarnum.setText(TXbarnum.getText().toString()+"  "+barnum);
+
         //food image
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,8 +120,6 @@ public class RequestByBarcode extends AppCompatActivity {
 
             }
         });
-
-
 
         table.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +151,37 @@ public class RequestByBarcode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                try {
+
+
+                    // Create a storage reference from our app
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+
+                    // Create a reference to the file to delete
+                    Toast.makeText(RequestByBarcode.this, douTable.toString(), Toast.LENGTH_SHORT).show();
+
+                    // StorageReference desertRef = storageRef.child("images/Request/"+tableUri.toString()+".jpg");
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(douTable);
+
+                    // Delete the file
+                    storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // File deleted successfully
+                            Toast.makeText(RequestByBarcode.this, "تم الحذف", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Uh-oh, an error occurred!
+                            Toast.makeText(RequestByBarcode.this, "error occurred", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });}catch (Exception e){
+                    Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
 
             }
         });
@@ -243,13 +266,17 @@ public class RequestByBarcode extends AppCompatActivity {
 
             StorageReference fileReference = storageReference.child(System.currentTimeMillis()
                     + "." + getFileExtension(fImageUri));
+
+            StorageReference fileReference1 = storageReference.child(System.currentTimeMillis()
+                    + "." + getFileExtension(tableUri));
+
             mUploadTask = fileReference.putFile(fImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Food RF =  new Food(name.getText().toString().trim(),taskSnapshot.getDownloadUrl().toString(),"لايوجد","لايوجد","لايوجد","لايوجد");
-                            RF.setBarcodN(barnum);
                             RF.setImageTable(douTable);
+                            RF.setBarcodN(barnum);
                             String uploadId = databaseReference.push().getKey();
                             databaseReference.child(uploadId).setValue(RF);
 

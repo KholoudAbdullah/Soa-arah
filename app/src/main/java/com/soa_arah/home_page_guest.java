@@ -77,6 +77,7 @@ public class home_page_guest extends AppCompatActivity {
         searchBtn = (Button) findViewById(R.id.searchButton);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
+
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                  searchKeyword();

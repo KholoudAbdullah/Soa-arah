@@ -72,7 +72,7 @@ public class RequestByName extends AppCompatActivity {
         calory=(EditText) findViewById(R.id.calbyg);
         progressDialog = new ProgressDialog(RequestByName.this);
         Rfood= (RadioButton) findViewById(R.id.food);
-        Rdrink=(RadioButton) findViewById(R.id.dark);
+        Rdrink=(RadioButton) findViewById(R.id.drinkS);
         gram=(EditText) findViewById(R.id.gramL);
 
         firebaseAuth = FirebaseAuth.getInstance();
