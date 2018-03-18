@@ -124,7 +124,6 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
                                 break;
                             case R.id.account:
                                 startActivity(new Intent(getApplicationContext(), account_Nutrition_admin.class));
-
                                 break;
                         }
                         return false;

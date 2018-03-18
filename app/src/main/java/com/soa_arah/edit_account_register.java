@@ -93,10 +93,27 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
 
                 RegisteredUser user = dataSnapshot.getValue(RegisteredUser.class);
 
-                wight.setText(user.getWight());
-                hight.setText(user.getHight());
-                hip.setText(user.gethip());
-                waist.setText(user.getWaist());
+                if(user.getWight().equals("لم يتم إدخال بيانات"))
+                    wight.setHint("لم يتم الإدخال");
+                else
+                    wight.setText(user.getWight());
+
+                if(user.getHight().equals("لم يتم إدخال بيانات"))
+                    hight.setHint("لم يتم الإدخال");
+                else
+                    hight.setText(user.getHight());
+
+                if(user.gethip().equals("لم يتم إدخال بيانات"))
+                    hip.setHint("لم يتم الإدخال");
+                else
+                    hip.setText(user.gethip());
+
+                if(user.getWaist().equals("لم يتم إدخال بيانات"))
+                    waist.setHint("لم يتم الإدخال");
+                else
+                    waist.setText(user.getWaist());
+
+
                 mDisplayDate.setText(user.getDateOfBarth());
 
 
@@ -166,18 +183,47 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
             }
         };
 
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.search:
+                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                break;
+                            case R.id.diet_plan:
+                                //startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+
+                                break;
+                            case R.id.upload:
+                                startActivity(new Intent(getApplicationContext(), Request_page.class));
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
+
     }
 
     @Override
     public void onClick(View view) {
 
             if (view == edit_wight) {
+                if(wight.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(),"لم يتم إدخال الوزن",Toast.LENGTH_LONG).show();
+                else{
                 mDatabase.child("wight").setValue(wight.getText().toString());
-                Toast.makeText(getApplicationContext(),"تم تغيير الوزن بنجاح",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"تم تغيير الوزن بنجاح",Toast.LENGTH_LONG).show();}
             }
             if (view == edit_hight) {
+                if(hight.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(),"لم يتم إدخال الطول",Toast.LENGTH_LONG).show();
+                else{
                 mDatabase.child("hight").setValue(hight.getText().toString());
-                Toast.makeText(getApplicationContext(),"تم تغيير الطول بنجاح",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"تم تغيير الطول بنجاح",Toast.LENGTH_LONG).show();}
             }
             if (view == edit_date) {
                 mDatabase.child("dateOfBarth").setValue(mDisplayDate.getText().toString());
@@ -189,12 +235,18 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
 
             }
             if (view == edit_waist) {
+                if(waist.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(),"لم يتم إدخال محيط الخصر",Toast.LENGTH_LONG).show();
+                else{
                 mDatabase.child("waist").setValue(waist.getText().toString());
-                Toast.makeText(getApplicationContext(),"تم تغيير محيط الخصر بنجاح",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"تم تغيير محيط الخصر بنجاح",Toast.LENGTH_LONG).show();}
             }
             if (view == edit_hip) {
+                if(hip.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(),"لم يتم إدخال محيط الفخذ",Toast.LENGTH_LONG).show();
+                else{
                 mDatabase.child("hip").setValue(hip.getText().toString());
-                Toast.makeText(getApplicationContext(),"تم تغيير محيط الفخذ بنجاح",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"تم تغيير محيط الفخذ بنجاح",Toast.LENGTH_LONG).show();}
             }
 
 
