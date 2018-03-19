@@ -131,7 +131,7 @@ public class home_page_guest extends AppCompatActivity {
                 progressDialog.dismiss();
                 if (list.isEmpty()) {
                     alert = new AlertDialog.Builder(home_page_guest.this);
-                    alert.setMessage("عذراً لايوجد هذا العنصر سجل دخولك لإضافته");
+                    alert.setMessage("عذراً لايوجد هذا سجل دخولك لإضافته");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
                             "سجل الدخول",

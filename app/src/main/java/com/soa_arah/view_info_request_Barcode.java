@@ -69,7 +69,6 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         Glide.with(getApplicationContext()).load(image1).into(image);
         Glide.with(getApplicationContext()).load(imageTable).into(imageTable1);
         PhotoViewAttacher photoViewAttacher=new PhotoViewAttacher(imageTable1);
-        photoViewAttacher.canZoom();
         photoViewAttacher.update();
 
         reject.setOnClickListener(this);

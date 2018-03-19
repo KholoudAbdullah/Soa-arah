@@ -80,13 +80,13 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
         edit_hip.setOnClickListener(this);
 
         //getting firebase auth object
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         String User_ID = firebaseAuth.getCurrentUser().getEmail();
         String username =User_ID.substring(0,User_ID.lastIndexOf("@"));
 
         mDatabase= FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(username);
-
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

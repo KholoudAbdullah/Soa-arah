@@ -13,7 +13,7 @@ public class DietPlan {
         Rname = rname;
     }
 
-    String Rname;
+    private String Rname;
 
     public String getCalGoal() {
         return calGoal;
@@ -23,7 +23,7 @@ public class DietPlan {
         this.calGoal = calGoal;
     }
 
-    String calGoal;
+    private String calGoal;
 
     public String getMin() {
         return min;
@@ -33,7 +33,7 @@ public class DietPlan {
         this.min = min;
     }
 
-    String min;
+    private String min;
 
     public String getMax() {
         return max;
@@ -43,17 +43,17 @@ public class DietPlan {
         this.max = max;
     }
 
-    String max;
+    private String max;
 
-    public String getNewcalFood() {
-        return NewcalFood;
+    public String getBMI() {
+        return BMI;
     }
 
-    public void setNewcalFood(String newcalFood) {
-        NewcalFood = newcalFood;
+    public void setBMI(String BMI) {
+        this.BMI = BMI;
     }
 
-    String NewcalFood;
+    private String BMI;
 
     public String getDailyCal() {
         return dailyCal;
@@ -63,7 +63,7 @@ public class DietPlan {
         this.dailyCal = dailyCal;
     }
 
-    String dailyCal;
+    private String dailyCal;
 
     public String getWater() {
         return water;
@@ -73,5 +73,5 @@ public class DietPlan {
         this.water = water;
     }
 
-    String water;
+   private String water;
 }

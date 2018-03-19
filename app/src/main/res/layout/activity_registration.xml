@@ -74,20 +74,6 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.092" />
 
-    <TextView
-        android:id="@+id/textnameempty"
-        android:layout_width="209dp"
-        android:layout_height="15dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="-5dp"
-        android:text=""
-        android:textAlignment="textStart"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="101dp"
-        android:layout_marginTop="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <TextView
         android:id="@+id/textView1"
@@ -163,20 +149,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
         app:layout_constraintVertical_bias="0.015" />
-    <TextView
-        android:id="@+id/textphoneempty"
-        android:layout_width="0dp"
-        android:layout_height="5dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="-5dp"
-        android:text=""
-        android:textAlignment="textStart"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="733dp" />
-
 
     <EditText
         android:id="@+id/wedith"

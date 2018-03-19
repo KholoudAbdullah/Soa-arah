@@ -31,7 +31,7 @@
     </android.support.design.widget.BottomNavigationView>
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/caln"
         android:layout_width="153dp"
         android:layout_height="157dp"
         android:layout_marginEnd="16dp"
@@ -41,19 +41,16 @@
         app:srcCompat="@drawable/picture1" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/calgo"
         android:layout_width="153dp"
-        android:layout_height="157dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="153dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
-        app:layout_constraintEnd_toStartOf="@+id/imageView1"
-        app:layout_constraintHorizontal_bias="0.631"
+        app:layout_constraintEnd_toStartOf="@+id/caln"
+        app:layout_constraintHorizontal_bias="0.608"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/picture1" />
 
     <ImageView
@@ -68,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.692"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView1"
+        app:layout_constraintTop_toBottomOf="@+id/caln"
         app:layout_constraintVertical_bias="0.144"
         app:srcCompat="@drawable/picture1" />
 
@@ -77,10 +74,14 @@
         android:layout_width="153dp"
         android:layout_height="157dp"
         android:layout_marginBottom="156dp"
-        android:layout_marginStart="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textwater"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/picture1" />
+        app:layout_constraintTop_toBottomOf="@+id/calgo"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/picture1"
+        tools:ignore="UnknownId" />
 
 
 
@@ -108,11 +109,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="52dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView1"
-        app:layout_constraintEnd_toEndOf="@+id/imageView1"
+        app:layout_constraintBottom_toBottomOf="@+id/caln"
+        app:layout_constraintEnd_toEndOf="@+id/caln"
         app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="@+id/imageView1"
-        app:layout_constraintTop_toTopOf="@+id/imageView1"
+        app:layout_constraintStart_toStartOf="@+id/caln"
+        app:layout_constraintTop_toTopOf="@+id/caln"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
@@ -122,13 +123,16 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="عدد السعرات المكتسبة"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/caln"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -136,15 +140,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="عدد السعرات المستهدفة"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/calgo"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView15"
@@ -177,7 +181,7 @@
         app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.017" />
 
     <TextView
         android:id="@+id/textView18"
@@ -198,7 +202,7 @@
         app:layout_constraintVertical_bias="0.938" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/delete"
         android:layout_width="142dp"
         android:layout_height="46dp"
         android:layout_marginBottom="8dp"
@@ -210,11 +214,13 @@
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.295" />
+
+
 
     <TextView
         android:id="@+id/NewCalFood"
@@ -229,11 +235,12 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView13"
-        app:layout_constraintEnd_toEndOf="@+id/imageView1"
+        app:layout_constraintEnd_toEndOf="@+id/caln"
         app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toStartOf="@+id/imageView1"
-        app:layout_constraintTop_toTopOf="@+id/imageView1"
+        app:layout_constraintStart_toStartOf="@+id/caln"
+        app:layout_constraintTop_toTopOf="@+id/caln"
         app:layout_constraintVertical_bias="1.0" />
+
 
     <TextView
         android:id="@+id/CalGoal"
@@ -247,10 +254,10 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintBottom_toBottomOf="@+id/calgo"
+        app:layout_constraintEnd_toEndOf="@+id/calgo"
+        app:layout_constraintStart_toStartOf="@+id/calgo"
+        app:layout_constraintTop_toTopOf="@+id/calgo" />
 
     <TextView
         android:id="@+id/Water"
@@ -289,5 +296,21 @@
         app:layout_constraintTop_toTopOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.728" />
 
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/delete"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.388"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.561" />
 
 </android.support.constraint.ConstraintLayout>

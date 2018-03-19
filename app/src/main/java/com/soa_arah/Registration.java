@@ -83,8 +83,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         Waist=(EditText)findViewById(R.id.Waist);
         thigh=(EditText)findViewById(R.id.thigh);
         //textpasswordempty =(TextView)findViewById(R.id.textpasswordempty);
-        textphoneempty = (TextView)findViewById(R.id.textphoneempty);
-        textnameempty = (TextView)findViewById(R.id.textnameempty);
         button=(Button)findViewById(R.id.button);
         log=(TextView)findViewById(R.id.log);
         gen=(Spinner)findViewById(R.id.gen);
