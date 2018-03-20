@@ -1,345 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.soa_arah.Registration"
-    android:background="@color/white"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    android:background="@drawable/lo">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="242dp"
-        android:layout_height="56dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintHorizontal_bias="0.631"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/imageView8"
+        android:layout_width="170dp"
+        android:layout_height="104dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/soaarah_icon" />
+        app:srcCompat="@drawable/lo1" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="307dp"
-        android:layout_height="449dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+
+    <ImageView
+        android:layout_width="284dp"
+        android:layout_height="258dp"
+        android:layout_marginBottom="224dp"
         android:layout_marginTop="8dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:background="@drawable/rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="152dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="تسجيل"
-        android:textAlignment="center"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
-
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="226dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="اسم المستخدم"
-        android:inputType="textPersonName"
-        android:textColor="#494949"
-        app:layout_constraintBottom_toBottomOf="@+id/log"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.092" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/textnameempty"
-        android:layout_width="209dp"
-        android:layout_height="15dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="-5dp"
-        android:text=""
-        android:textAlignment="textStart"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="101dp"
-        android:layout_marginTop="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="33dp"
-        android:layout_height="20dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="124dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/name"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="227dp"
-        android:layout_height="39dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:gravity="right"
-        android:hint="الرقم السري"
-        android:inputType="textPassword"
-        android:selectAllOnFocus="false"
-        android:singleLine="false"
-        android:textColor="#494949"
-        android:textColorHighlight="#494949"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
-
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="33dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="36dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/username_text_input_layout1"
+        android:layout_width="277dp"
+        android:layout_height="69dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColorHint="#acd680"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8">
 
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="اسم المستخدم"
+            android:textAlignment="textEnd"
+            android:textColor="#acd680"
+            android:textColorHint="#373737"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="211dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginLeft="8dp"
-        android:ems="10"
-        android:gravity="right"
-        android:hint="رقم الجوال ******966+"
-        android:inputType="phone"
-        android:textAllCaps="false"
-        android:textColor="#494949"
-        android:textSize="18sp"
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/username_text_input_layout"
+        android:layout_width="277dp"
+        android:layout_height="69dp"
+        android:layout_marginBottom="244dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColorHint="#acd680"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout1"
+        app:layout_constraintVertical_bias="0.023"
+        app:passwordToggleEnabled="true">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="33dp"
-        android:layout_height="20dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="16dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/log"
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="الرقم السري"
+            android:inputType="textPassword"
+            android:textAlignment="textEnd"
+            android:textColor="#acd680"
+            android:textColorHint="#acd680"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/username_text_input_layout2"
+        android:layout_width="277dp"
+        android:layout_height="69dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="184dp"
+        android:textColorHint="#acd680"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:layout_constraintVertical_bias="0.015" />
-    <TextView
-        android:id="@+id/textphoneempty"
-        android:layout_width="0dp"
-        android:layout_height="5dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="-5dp"
-        android:text=""
-        android:textAlignment="textStart"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="733dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8">
 
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="رقم الجوال ******966+"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textColor="#acd680"
+            android:textColorHint="#373737"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/wedith"
-        android:layout_width="225dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="الوزن بالكجم"
-        android:inputType="textPersonName"
-        android:textColor="#494949"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
-
-
-    <EditText
-        android:id="@+id/hight"
-        android:layout_width="218dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="الطول بالسم"
-        android:inputType="textPersonName"
-        android:textColor="#494949"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wedith" />
-
-    <EditText
-        android:id="@+id/Waist"
-        android:layout_width="220dp"
-        android:layout_height="41dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="محيط الخصر بالسم "
-        android:inputType="textPersonName"
-        android:textColor="#494949"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hight" />
-
-    <EditText
-        android:id="@+id/thigh"
-        android:layout_width="223dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="محيط الفخذ بالسم "
-        android:inputType="textPersonName"
-        android:textColor="#494949"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Waist" />
-
-    <TextView
-        android:id="@+id/textgender"
-        android:layout_width="48dp"
-        android:layout_height="24dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="412dp"
-        android:layout_weight="0.26"
-        android:text="الجنس"
-        android:textAlignment="textStart"
-        android:textColor="#494949"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.771"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/gen"
-        android:layout_width="81dp"
-        android:layout_height="23dp"
-        android:layout_below="@+id/textgender"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="412dp"
-        android:layout_weight="0.58"
-        android:hint="الجنس"
-        app:layout_constraintHorizontal_bias="0.54"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textdate"
-        android:layout_width="95dp"
-        android:layout_height="22dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="444dp"
-        android:layout_weight="0.26"
-        android:text="تاريخ الميلاد"
-        android:textAlignment="textStart"
-        android:textColor="#494949"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.758"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="105dp"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="76dp"
-        android:layout_marginTop="444dp"
-        android:gravity="right"
-        android:hint="اختر التاريخ"
-        android:textColor="#494949"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/textdate"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    </android.support.design.widget.TextInputLayout>
     <Button
         android:id="@+id/button"
-        android:layout_width="112dp"
-        android:layout_height="31dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="476dp"
-        android:background="#7ba452"
-        android:text="تسجيل"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="261dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/button_login"
+        android:text="التسجيل"
+        app:layout_constraintBottom_toTopOf="@+id/log"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <Button
         android:id="@+id/log"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:text="هل لديك حساب؟ اضغط هنا لتسجيل الدخول"
+        android:layout_width="261dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/button"
+        android:text=" دخــــول"
+        android:textColor="#8BAF3A"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/t1"
-        android:layout_width="42dp"
-        android:layout_height="38dp"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/t1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+
 
 
 </android.support.constraint.ConstraintLayout>

@@ -23,8 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
     private EditText username,password;
-    private Button login;
-    private TextView registraion,forgetpass;
+    private Button login ,toRegtext;
+    private TextView forgetpass;
     private String pass,email;
 
 
@@ -50,14 +50,14 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         username = (EditText) findViewById(R.id.Usernane);
         password = (EditText) findViewById(R.id.Password);
         login = (Button) findViewById(R.id.LoginButton);
-        registraion = (TextView) findViewById(R.id.toRegtext);
+        toRegtext = (Button) findViewById(R.id.toRegtext);
         forgetpass= (TextView) findViewById(R.id.toForgettext);
         progressDialog = new ProgressDialog(this);
 
 
 
         login.setOnClickListener(this);
-        registraion.setOnClickListener(this);
+        toRegtext.setOnClickListener(this);
         forgetpass.setOnClickListener(this);
 
 
@@ -140,7 +140,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         if(v == login) {
             userLogin();}
-        else if(v==registraion){
+        else if(v==toRegtext){
             startActivity(new Intent(LoginPage.this , Registration.class));
 
         }else if(v==forgetpass){
