@@ -20,6 +20,13 @@ public class Barcode_Request extends AppCompatActivity implements ZXingScannerVi
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     @Override

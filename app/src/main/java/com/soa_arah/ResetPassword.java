@@ -69,6 +69,13 @@ Log.d("razan1","razan1"+p);
         userID = p;//username
 
         confirm.setOnClickListener(this);
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     //password

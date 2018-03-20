@@ -95,6 +95,13 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
                     }
                 });
 
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     @Override

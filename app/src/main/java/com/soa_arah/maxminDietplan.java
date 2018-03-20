@@ -202,5 +202,12 @@ public class maxminDietplan extends AppCompatActivity {
 
 
 
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 }

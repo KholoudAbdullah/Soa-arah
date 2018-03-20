@@ -53,8 +53,14 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
         firebaseAuth=FirebaseAuth.getInstance();
 
+        onBackPressed();
     }
+    @Override
+    public void onBackPressed()
+    {
 
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
+    }
 
     @Override
     public void handleResult(Result rawResult) {

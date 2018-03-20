@@ -132,7 +132,13 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
 
 
 
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
 
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     @Override

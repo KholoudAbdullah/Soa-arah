@@ -206,6 +206,13 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
                     }
                 });
 
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     @Override

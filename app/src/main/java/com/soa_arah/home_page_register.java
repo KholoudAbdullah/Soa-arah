@@ -96,6 +96,13 @@ public class home_page_register extends AppCompatActivity{
                     }
                 });
 
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
     public void scanCode (View view) {
         startActivity(new Intent(getApplicationContext(), Barcode.class));
