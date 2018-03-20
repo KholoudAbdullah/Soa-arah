@@ -99,6 +99,13 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                 });
 
 
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     @Override

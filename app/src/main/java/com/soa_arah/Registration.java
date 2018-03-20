@@ -83,6 +83,13 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
 
 
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
 

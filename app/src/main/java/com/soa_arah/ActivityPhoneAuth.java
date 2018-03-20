@@ -70,6 +70,13 @@ public class ActivityPhoneAuth extends AppCompatActivity {
         String username =User_ID.substring(0,User_ID.lastIndexOf("@"));
 
         mDatabase= FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(username);
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     public void requestCode(View view) {
