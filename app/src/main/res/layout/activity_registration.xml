@@ -163,6 +163,8 @@
         android:layout_marginStart="8dp"
         android:background="@drawable/button_login"
         android:text="التسجيل"
+        android:textStyle="bold"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/log"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -176,6 +178,7 @@
         android:layout_marginStart="8dp"
         android:background="@drawable/button"
         android:text=" دخــــول"
+        android:textSize="20sp"
         android:textColor="#8BAF3A"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
