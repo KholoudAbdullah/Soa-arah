@@ -5,12 +5,12 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,8 +33,6 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class RequestByBarcode extends AppCompatActivity {
 
@@ -73,7 +71,7 @@ public class RequestByBarcode extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
                                 break;
                             case R.id.diet_plan:
-                                //startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+                                startActivity(new Intent(getApplicationContext(), diet_plan.class));
 
                                 break;
                             case R.id.upload:
@@ -142,7 +140,7 @@ public class RequestByBarcode extends AppCompatActivity {
                 }else if (barnum==null){
                     Toast.makeText(RequestByBarcode.this, "الرجاء مسح الباركود", Toast.LENGTH_LONG).show();
                 } else {
-                uploadFile();}
+                    uploadFile();}
 
             }
         });
@@ -334,3 +332,4 @@ public class RequestByBarcode extends AppCompatActivity {
         return true;
     }
 }
+

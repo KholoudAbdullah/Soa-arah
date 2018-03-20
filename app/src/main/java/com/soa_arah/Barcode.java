@@ -95,7 +95,7 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                 if(!flag){
                         if(firebaseAuth.getCurrentUser()==null){
                     alert=new AlertDialog.Builder(Barcode.this);
-                    alert.setMessage("عذراً لايوجد هذا العنصر سجل دخولك لإضافته");
+                    alert.setMessage("عذراً لايوجد هذا المنتج سجل دخولك لإضافته");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
                             "سجل الدخول",
@@ -127,7 +127,7 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                             String id= user.getUid();
                             if(id.equals("7yO6vzOcv6VtXMjG3pjipXLpZin1")){
                                 alert=new AlertDialog.Builder(Barcode.this);
-                                alert.setMessage("عذراً لايوجد هاذا العنصر ");
+                                alert.setMessage("عذراً لايوجد هاذا المنتج ");
                                 alert.setCancelable(true);
                                 alert.setPositiveButton(
                                         "الغاء",
@@ -146,7 +146,7 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                             else{
                                 if(id.equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
                                     alert=new AlertDialog.Builder(Barcode.this);
-                                    alert.setMessage("عذراً لايوجد هاذا العنصر ");
+                                    alert.setMessage("عذراً لايوجد هاذا المنتج ");
                                     alert.setCancelable(true);
                                     alert.setPositiveButton(
                                             "الغاء",
@@ -165,7 +165,7 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                                 else
                                 {if(firebaseAuth.getCurrentUser()!=null){
                                     alert=new AlertDialog.Builder(Barcode.this);
-                                    alert.setMessage("عذراً لايوجد هاذا العنصر هل تريد اضافتة");
+                                    alert.setMessage("عذراً لايوجد هاذا المنتج هل تريد اضافتة");
                                     alert.setCancelable(true);
                                     alert.setPositiveButton(
                                             "اضافة",

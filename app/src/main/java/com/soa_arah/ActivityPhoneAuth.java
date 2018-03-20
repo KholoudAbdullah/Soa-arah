@@ -100,12 +100,6 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                         mVerificationId = verificationId;
                     }
 
-                    @Override
-                    public void onCodeAutoRetrievalTimeOut(String verificationId) {
-                        //called after timeout if onVerificationCompleted has not been called
-                        super.onCodeAutoRetrievalTimeOut(verificationId);
-                        Toast.makeText(ActivityPhoneAuth.this, "onCodeAutoRetrievalTimeOut :" + verificationId, Toast.LENGTH_SHORT).show();
-                    }
                 }
         );
     }

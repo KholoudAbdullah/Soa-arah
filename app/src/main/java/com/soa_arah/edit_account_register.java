@@ -80,13 +80,13 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
         edit_hip.setOnClickListener(this);
 
         //getting firebase auth object
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         String User_ID = firebaseAuth.getCurrentUser().getEmail();
         String username =User_ID.substring(0,User_ID.lastIndexOf("@"));
 
         mDatabase= FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(username);
-
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -194,7 +194,7 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
                                 break;
                             case R.id.diet_plan:
-                                //startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+                                startActivity(new Intent(getApplicationContext(), diet_plan.class));
 
                                 break;
                             case R.id.upload:

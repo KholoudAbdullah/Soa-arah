@@ -143,7 +143,7 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                 progressDialog.dismiss();
                 if (list.isEmpty()) {
                     alert = new AlertDialog.Builder(home_page_Nutrition_admin.this);
-                    alert.setMessage("عذراً لايوجد هاذا العنصر ");
+                    alert.setMessage("عذراً لايوجد هاذا الصنف ");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
                             "الغاء",

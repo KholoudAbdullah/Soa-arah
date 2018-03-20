@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -71,7 +72,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         name = (EditText) findViewById(R.id.name);
         code = (EditText) findViewById(R.id.code);
 
@@ -174,12 +175,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                         mVerificationId = verificationId;
                                     }
 
-                                    @Override
-                                    public void onCodeAutoRetrievalTimeOut(String verificationId) {
-                                        //called after timeout if onVerificationCompleted has not been called
-                                        super.onCodeAutoRetrievalTimeOut( verificationId );
-                                        Toast.makeText( ForgotPasswordActivity.this, "onCodeAutoRetrievalTimeOut :" + verificationId, Toast.LENGTH_SHORT ).show();
-                                    }
+
                                 }
                         );
 //                        Toast.makeText(getApplicationContext(),"in if a",Toast.LENGTH_LONG).show();

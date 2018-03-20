@@ -133,7 +133,7 @@ public class RequestByName extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
                                 break;
                             case R.id.diet_plan:
-                               // startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+                                startActivity(new Intent(getApplicationContext(), diet_plan.class));
 
                                 break;
                             case R.id.upload:
@@ -232,10 +232,8 @@ public class RequestByName extends AppCompatActivity {
                             if (Rfood.isChecked())
                                 stander="جرام,ملعقة شاي,ملعقة اكل,كوب";
                             else if (Rdrink.isChecked())
-                                stander="ملي لتر,كوب";
-
-                            Food RF = new Food(foodname.getText().toString().trim(),
-                                    taskSnapshot.getDownloadUrl().toString(),null,calory.getText().toString().trim(),stander,gram.getText().toString().trim());
+                                stander="مليلتر,كوب";
+                            Food RF = new Food(foodname.getText().toString().trim(),taskSnapshot.getDownloadUrl().toString(), "لا يوجد",calory.getText().toString().trim(),stander,gram.getText().toString().trim());
                             RF.setImageTable("لايوجد");
                             RF.setBarcodN("لايوجد");
                             String uploadId = databaseReference.push().getKey();

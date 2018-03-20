@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.soa_arah.home_page_register">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:text="إنشاء خطة غذائية"
+        android:textAlignment="center"
+        android:textColor="#558b2f"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/min"
+        android:layout_width="300dp"
+        android:layout_height="74dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="40dp"
+        android:adjustViewBounds="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/account" />
+
+    <ImageView
+        android:id="@+id/max"
+        android:layout_width="300dp"
+        android:layout_height="74dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="28dp"
+        android:adjustViewBounds="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal"
+        app:srcCompat="@drawable/account" />
+
+
+    <ImageView
+        android:id="@+id/goal"
+        android:layout_width="300dp"
+        android:layout_height="74dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="28dp"
+        android:adjustViewBounds="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/min"
+        app:srcCompat="@drawable/account" />
+
+
+    <TextView
+        android:id="@+id/mintext"
+        android:layout_width="108dp"
+        android:layout_height="38dp"
+        android:layout_alignEnd="@+id/image3"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
+        android:text="الحد الأدنى للسعرات الحرارية"
+        android:textAlignment="center"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/min"
+        app:layout_constraintEnd_toEndOf="@+id/min"
+        app:layout_constraintTop_toTopOf="@+id/min"
+        app:layout_constraintVertical_bias="0.166" />
+
+
+    <TextView
+        android:id="@+id/maxnumber"
+        android:layout_width="143dp"
+        android:layout_height="35dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/textView23"
+        android:inputType="numberDecimal"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/max"
+        app:layout_constraintEnd_toStartOf="@+id/maxtext"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/max"
+        app:layout_constraintTop_toTopOf="@+id/max"
+        app:layout_constraintVertical_bias="0.478" />
+
+
+    <TextView
+        android:id="@+id/goaltext"
+        android:layout_width="119dp"
+        android:layout_height="35dp"
+        android:layout_alignEnd="@+id/image4"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        android:textSize="15dp"
+        android:text="عدد السعرات الحرارية المستهدفة"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/goal"
+        app:layout_constraintEnd_toEndOf="@+id/goal"
+        app:layout_constraintTop_toTopOf="@+id/goal" />
+
+    <TextView
+        android:id="@+id/minnumber"
+        android:layout_width="85dp"
+        android:layout_height="34dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@+id/min"
+        app:layout_constraintEnd_toStartOf="@+id/mintext"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="@+id/min"
+        app:layout_constraintTop_toTopOf="@+id/min"
+        app:layout_constraintVertical_bias="0.125" />
+
+
+    <TextView
+        android:id="@+id/maxtext"
+        android:layout_width="111dp"
+        android:layout_height="41dp"
+        android:layout_alignStart="@+id/image7"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:text="الحد الأقصى للسعرات الحرارية"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/max"
+        app:layout_constraintEnd_toEndOf="@+id/max"
+        app:layout_constraintTop_toTopOf="@+id/max"
+        app:layout_constraintVertical_bias="0.631" />
+
+    <EditText
+        android:id="@+id/goalnumber"
+        android:layout_width="139dp"
+        android:layout_height="43dp"
+        android:layout_alignStart="@+id/textView19"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="السعرات بالكالوري"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/goal"
+        app:layout_constraintEnd_toStartOf="@+id/goaltext"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/goal"
+        app:layout_constraintTop_toTopOf="@+id/goal"
+        app:layout_constraintVertical_bias="0.533" />
+
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:background="#7ba452"
+        android:text="إلغاء"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/creat"
+        app:layout_constraintHorizontal_bias="0.843"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/max"
+        app:layout_constraintVertical_bias="0.393" />
+
+    <Button
+        android:id="@+id/creat"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginTop="8dp"
+        android:background="#7ba452"
+        android:text="إنشاء"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/max"
+        app:layout_constraintVertical_bias="0.393" />
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

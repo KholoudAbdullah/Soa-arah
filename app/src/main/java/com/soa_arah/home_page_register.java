@@ -84,7 +84,7 @@ public class home_page_register extends AppCompatActivity{
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
                                 break;
                             case R.id.diet_plan:
-                               // startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+                               startActivity(new Intent(getApplicationContext(), diet_plan.class));
 
                                 break;
                             case R.id.upload:
@@ -148,10 +148,10 @@ public class home_page_register extends AppCompatActivity{
                 progressDialog.dismiss();
                 if (list.isEmpty()) {
                     alert = new AlertDialog.Builder(home_page_register.this);
-                    alert.setMessage("عذراً لايوجد هاذا العنصر هل تريد اضافتة");
+                    alert.setMessage("عذراً لايوجد هاذا الصنف هل تريد اضافتة");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
-                            "اضافة العنصر",
+                            "اضافة الصنف",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
