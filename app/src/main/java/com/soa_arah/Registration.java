@@ -37,7 +37,7 @@ import java.util.Calendar;
 public class Registration extends AppCompatActivity implements View.OnClickListener{
 
     private EditText name;
-    private EditText password;
+    private EditText password,PasswordCom;
     private TextView phone;
 
     private Button log;
@@ -67,7 +67,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         name=(EditText)findViewById(R.id.name);
         password=(EditText)findViewById(R.id.Password);
         phone=(TextView)findViewById(R.id.phone);
-
+        PasswordCom=(EditText)findViewById(R.id.PasswordCom);
 
 
         button=(Button)findViewById(R.id.button);
