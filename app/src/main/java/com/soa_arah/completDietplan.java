@@ -205,6 +205,12 @@ private String age;
                   bmi=(Double.parseDouble(Wight)/pow)*10000;
                  intent.putExtra( "BMR", Double.toString(BMR) );
                  intent.putExtra( "BMI",Double.toString(bmi) );
+                 intent.putExtra( "Wight",Wight );
+                  intent.putExtra( "Hight",Hight );
+                  intent.putExtra( "Hip",Hip );
+                  intent.putExtra( "Waist",Waist );
+                  intent.putExtra( "date",date );
+                  intent.putExtra( "gen",gen );
                   startActivity( intent );
 
 

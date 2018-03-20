@@ -20,7 +20,7 @@ public class maxminDietplan extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
-    //private DatabaseReference Database;
+    private DatabaseReference Database;
     private String User_ID;
     private DietPlan plan;
     private String bmi,max;
@@ -28,6 +28,7 @@ public class maxminDietplan extends AppCompatActivity {
     private TextView mintext,maxtext;
     private final String min="1200";
     private Button creat;
+    private String  Wight,Hight,Hip,Waist,date,gen;
     private Button cancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,12 @@ public class maxminDietplan extends AppCompatActivity {
         maxtext=(TextView)findViewById(R.id.maxnumber);
         goal=(EditText) findViewById(R.id.goalnumber);
         Intent intent = getIntent();
+        Waist=intent.getExtras().getString( "Waist","" );
+        Wight=intent.getExtras().getString( "Wight","" );
+        Hight=intent.getExtras().getString( "Hight","" );
+        Hip=intent.getExtras().getString( "Hip","" );
+        date=intent.getExtras().getString( "date","" );
+        gen=intent.getExtras().getString( "gen","" );
         bmi = intent.getExtras().getString("BMI", "");
         max = intent.getExtras().getString("BMR", "");
         maxtext.setText(max);
@@ -153,7 +160,7 @@ public class maxminDietplan extends AppCompatActivity {
                 else {
 
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("DietPlan");
-                   //Database= FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child("h");
+                   Database= FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(username);
 
                     plan = new DietPlan();
 
@@ -165,6 +172,12 @@ public class maxminDietplan extends AppCompatActivity {
                     plan.setRname(username);
                     plan.setWater("0");
                     mDatabase.child(username).setValue(plan);
+                    Database.child("wight").setValue(Wight);
+                    Database.child("hight").setValue(Hight);
+                    Database.child("dateOfBarth").setValue(date);
+                    Database.child("gender").setValue(gen);
+                    Database.child("waist").setValue(Waist);
+                    Database.child("hip").setValue(Hip);
                     android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(
                             maxminDietplan.this);
                     alert.setTitle("تم إنشاء الخطة بنجاح").setIcon(R.drawable.t1);

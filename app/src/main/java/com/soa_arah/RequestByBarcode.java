@@ -71,7 +71,7 @@ public class RequestByBarcode extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
                                 break;
                             case R.id.diet_plan:
-                                //startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+                                startActivity(new Intent(getApplicationContext(), diet_plan.class));
 
                                 break;
                             case R.id.upload:
