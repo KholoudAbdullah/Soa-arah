@@ -78,7 +78,7 @@
             android:layout_centerVertical="true"
             android:ems="10"
             android:hint="التحقق من رقم الجوال"
-            android:inputType="number"
+            android:inputType="phone"
             android:textAlignment="textEnd"
             android:textColor="#acd680"
             android:textColorHint="#373737"
