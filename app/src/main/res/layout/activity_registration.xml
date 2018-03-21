@@ -11,11 +11,15 @@
         android:id="@+id/imageView8"
         android:layout_width="168dp"
         android:layout_height="72dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.03"
         app:srcCompat="@drawable/lo1" />
 
 
@@ -103,7 +107,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout1"
-        app:layout_constraintVertical_bias="0.606"
+        app:layout_constraintVertical_bias="0.774"
         app:passwordToggleEnabled="true">
 
         <EditText
