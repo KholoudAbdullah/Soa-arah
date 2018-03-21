@@ -9,12 +9,12 @@
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="168dp"
-        android:layout_height="72dp"
+        android:layout_width="131dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,12 +25,13 @@
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="301dp"
-        android:layout_height="318dp"
-        android:layout_marginBottom="188dp"
+        android:layout_width="299dp"
+        android:layout_height="313dp"
+        android:layout_marginBottom="180dp"
         android:background="@drawable/rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.design.widget.TextInputLayout
@@ -72,9 +73,10 @@
         android:textColorHint="#acd680"
         app:layout_constraintBottom_toTopOf="@+id/username_text_input_layout5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout1"
-        app:layout_constraintVertical_bias="0.023"
+        app:layout_constraintVertical_bias="0.515"
         app:passwordToggleEnabled="true">
 
         <EditText
@@ -105,9 +107,10 @@
         android:textColorHint="#acd680"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout1"
-        app:layout_constraintVertical_bias="0.774"
+        app:layout_constraintVertical_bias="0.83"
         app:passwordToggleEnabled="true">
 
         <EditText
@@ -131,16 +134,16 @@
         android:id="@+id/username_text_input_layout2"
         android:layout_width="277dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="188dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:textColorHint="#acd680"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout5"
-        app:layout_constraintVertical_bias="0.048">
+        app:layout_constraintVertical_bias="1.0">
 
         <EditText
             android:id="@+id/phone"

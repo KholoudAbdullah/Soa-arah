@@ -25,8 +25,8 @@
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="301dp"
-        android:layout_height="318dp"
+        android:layout_width="302dp"
+        android:layout_height="261dp"
         android:layout_marginBottom="188dp"
         android:background="@drawable/rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -109,18 +109,17 @@
         android:id="@+id/scan"
         android:layout_width="158dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="224dp"
+        android:layout_marginBottom="192dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/button_login"
         android:onClick="scanCode"
         android:text="التقط الصورة"
-        android:textSize="20sp"
         android:textColor="@android:color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent" />
 
 
