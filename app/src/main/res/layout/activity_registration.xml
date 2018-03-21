@@ -146,7 +146,7 @@
             android:layout_centerVertical="true"
             android:ems="10"
             android:hint="رقم الجوال ******966+"
-            android:inputType="number"
+            android:inputType="textPersonName"
             android:textAlignment="textEnd"
             android:textColor="#acd680"
             android:textColorHint="#373737"
