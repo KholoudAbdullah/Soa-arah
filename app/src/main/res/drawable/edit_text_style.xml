@@ -7,7 +7,7 @@
     android:shape="rectangle">
     <stroke android:width="3dp"
 
-        android:color="#acd680"/>
+        android:color="#8BAF3A"/>
     <corners android:radius="5dp" />
     <gradient
 

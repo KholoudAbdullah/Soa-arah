@@ -5,7 +5,7 @@
     xmlns:design="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/background1"
     tools:context="com.soa_arah.home_page_register"
     >
 
@@ -68,29 +68,35 @@
                 <ImageView
                     android:id="@+id/image1"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:paddingLeft="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="170dp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:text="أسم المستخدم" />
 
                 <TextView
                     android:id="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingRight="20dp"
+                    android:textSize="20sp"
                     android:layout_centerInParent="true"
                      />
             </RelativeLayout>
@@ -103,23 +109,26 @@
                 <ImageView
                     android:id="@+id/image2"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="200dp"
+                    android:paddingLeft="170dp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:text="رقم الجوال" />
 
                 <TextView
@@ -127,6 +136,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:textSize="20sp"
+                    android:paddingRight="70dp"
                     />
             </RelativeLayout>
 
@@ -138,23 +149,26 @@
                 <ImageView
                     android:id="@+id/image3"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="200dp"
+                    android:paddingLeft="170dp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:text="الوزن" />
 
                 <TextView
@@ -162,6 +176,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:paddingRight="20dp"
+                    android:textSize="20sp"
                     />
             </RelativeLayout>
 
@@ -173,23 +189,26 @@
                 <ImageView
                     android:id="@+id/image4"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="200dp"
+                    android:paddingLeft="170dp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:text="الطول" />
 
                 <TextView
@@ -197,6 +216,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:paddingRight="20dp"
+                    android:textSize="20sp"
                     />
             </RelativeLayout>
 
@@ -208,23 +229,26 @@
                 <ImageView
                     android:id="@+id/image5"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="200dp"
+                    android:paddingLeft="170dp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:text="تاريخ الميلاد" />
 
                 <TextView
@@ -232,6 +256,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:paddingRight="50dp"
+                    android:textSize="20sp"
                     />
             </RelativeLayout>
 
@@ -243,23 +269,26 @@
                 <ImageView
                     android:id="@+id/image6"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="200dp"
+                    android:paddingLeft="170dp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:text="الجنس" />
 
                 <TextView
@@ -267,6 +296,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:paddingRight="20dp"
+                    android:textSize="20sp"
                     />
             </RelativeLayout>
 
@@ -278,23 +309,26 @@
                 <ImageView
                     android:id="@+id/image7"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="200dp"
+                    android:paddingLeft="170dp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:text="محيط الخصر" />
 
                 <TextView
@@ -302,6 +336,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:paddingRight="20dp"
+                    android:textSize="20sp"
                     />
             </RelativeLayout>
 
@@ -313,23 +349,26 @@
                 <ImageView
                     android:id="@+id/image8"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="200dp"
+                    android:paddingLeft="170dp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:text="محيط الفخذ" />
 
                 <TextView
@@ -338,6 +377,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text=" "
+                    android:paddingRight="80dp"
+                    android:textSize="20sp"
                     />
 
             </RelativeLayout>

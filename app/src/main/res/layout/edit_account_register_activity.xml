@@ -5,7 +5,7 @@
     xmlns:design="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/background1"
     tools:context="com.soa_arah.home_page_register"
     >
 
@@ -69,33 +69,38 @@
                 <ImageView
                     android:id="@+id/image3"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="210dp"
+                    android:paddingLeft="200dp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:text="الوزن بالكجم" />
 
                 <EditText
                     android:id="@+id/wight"
                     android:layout_width="100dp"
-                    android:layout_marginStart="35dp"
-                    android:inputType="numberDecimal"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textAlignment="textEnd"/>
+                    android:layout_alignTop="@+id/image3"
+                    android:layout_marginStart="22dp"
+                    android:layout_toEndOf="@+id/edit_wight"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="textEnd"
+                    />
 
                 <ImageButton
                     android:id="@+id/edit_wight"
@@ -104,7 +109,7 @@
                     android:background="#00FF"
                     android:paddingLeft="25dp"
                     android:paddingTop="25dp"
-                    app:srcCompat="@drawable/edit" />
+                    app:srcCompat="@drawable/edit_icon" />
             </RelativeLayout>
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -115,43 +120,47 @@
                 <ImageView
                     android:id="@+id/image4"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
+                    android:layout_alignTop="@+id/textView16"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
                     android:adjustViewBounds="false"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/round_corner1"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="210dp"
-                    android:text="الطول بالسم" />
+                    android:paddingLeft="200dp"
+                    android:text="الطول بالسم"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:id="@+id/textView16" />
 
                 <EditText
                     android:id="@+id/hight"
                     android:layout_width="100dp"
-                    android:inputType="numberDecimal"
-                    android:layout_marginStart="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textAlignment="textEnd"
-                    />
+                    android:layout_alignBottom="@+id/edit_hight"
+                    android:layout_marginStart="17dp"
+                    android:layout_toEndOf="@+id/edit_hight"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="textEnd" />
 
                 <ImageButton
                     android:id="@+id/edit_hight"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="#00FF"
-                    android:paddingLeft="25dp"
-                    android:paddingTop="25dp"
-                    app:srcCompat="@drawable/edit" />
+                    android:paddingLeft="20dp"
+                    android:paddingTop="30dp"
+                    app:srcCompat="@drawable/edit_icon" />
             </RelativeLayout>
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -162,17 +171,17 @@
                 <ImageView
                     android:id="@+id/image5"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -181,19 +190,22 @@
                     android:layout_alignStart="@+id/image5"
                     android:paddingLeft="200dp"
                     android:text="تاريخ الميلاد"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:id="@+id/textView2" />
 
                 <TextView
                     android:id="@+id/tvDate"
                     android:layout_width="105dp"
                     android:layout_height="24dp"
-                    android:layout_alignBottom="@+id/edit_date"
-                    android:layout_marginStart="41dp"
+                    android:layout_alignBottom="@+id/textView2"
+                    android:layout_marginStart="14dp"
                     android:layout_toEndOf="@+id/edit_date"
                     android:gravity="right"
                     android:hint="اختر التاريخ"
-                    android:textColor="#494949"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
                 <ImageButton
@@ -203,7 +215,7 @@
                     android:background="#00FF"
                     android:paddingLeft="25dp"
                     android:paddingTop="25dp"
-                    app:srcCompat="@drawable/edit" />
+                    app:srcCompat="@drawable/edit_icon" />
             </RelativeLayout>
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -216,17 +228,17 @@
                 <ImageView
                     android:id="@+id/image6"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -234,6 +246,9 @@
                     android:layout_centerInParent="true"
                     android:paddingLeft="200dp"
                     android:text="الجنس"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:id="@+id/textView3" />
 
                 <TextView
@@ -251,6 +266,9 @@
                     android:layout_centerVertical="true"
                     android:layout_weight="0.58"
                     android:hint="الجنس"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     app:layout_constraintHorizontal_bias="0.577"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -262,7 +280,7 @@
                     android:background="#00FF"
                     android:paddingLeft="25dp"
                     android:paddingTop="25dp"
-                    app:srcCompat="@drawable/edit" />
+                    app:srcCompat="@drawable/edit_icon" />
             </RelativeLayout>
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -273,34 +291,35 @@
                 <ImageView
                     android:id="@+id/image7"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="180dp"
-                    android:textSize="15sp"
+                    android:paddingLeft="165dp"
+                    android:textSize="18sp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
                     android:text="محيط الخصر بالسم" />
 
                 <EditText
                     android:id="@+id/waist"
-                    android:inputType="numberDecimal"
                     android:layout_width="100dp"
-                    android:layout_marginStart="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_alignTop="@+id/image7"
                     android:layout_toEndOf="@+id/edit_waist"
+                    android:inputType="numberDecimal"
                     android:textAlignment="textEnd" />
 
                 <ImageButton
@@ -310,7 +329,7 @@
                     android:background="#00FF"
                     android:paddingLeft="25dp"
                     android:paddingTop="25dp"
-                    app:srcCompat="@drawable/edit" />
+                    app:srcCompat="@drawable/edit_icon" />
             </RelativeLayout>
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -321,23 +340,26 @@
                 <ImageView
                     android:id="@+id/image8"
                     android:layout_width="300dp"
-                    android:layout_height="74dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="15dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:paddingLeft="180dp"
+                    android:paddingLeft="165dp"
+                    android:textColor="#8BAF3A"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
                     android:text=" محيط الفخذ بالسم"
                     android:id="@+id/textView22" />
 
@@ -345,8 +367,7 @@
                     android:id="@+id/hip"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="35dp"
+                    android:layout_alignTop="@+id/image8"
                     android:layout_toEndOf="@+id/edit_hip"
                     android:inputType="numberDecimal"
                     android:textAlignment="textEnd" />
@@ -358,22 +379,8 @@
                     android:background="#00FF"
                     android:paddingLeft="25dp"
                     android:paddingTop="25dp"
-                    app:srcCompat="@drawable/edit" />
+                    app:srcCompat="@drawable/edit_icon" />
             </RelativeLayout>
-            <ImageView
-                android:id="@+id/ima4ge8"
-                android:layout_width="300dp"
-                android:layout_height="74dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="2dp"
-                android:adjustViewBounds="false"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/account" />
 
         </LinearLayout>
 
