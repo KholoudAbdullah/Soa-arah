@@ -111,6 +111,26 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
                 }
             }
         });
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (!password.getText().toString().trim().equals(password1.getText().toString().trim()) || password1.getText().toString().trim().length()<6){
+
+                    password1.setError("كلمة المرور ليست متطابقة");
+                }
+            }
+        });
 
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
@@ -152,7 +172,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
             String text=password.getText().toString();
             int count =text.length();
             if(count<6) {
-                passlenght.setText("             الرقم السري يجب أن يحتوي على 6 أرقام أو أكثر ");
+                passlenght.setText("الرقم السري يجب أن يحتوي على 6 أرقام أو أكثر ");
 
             }
             else {
@@ -182,6 +202,23 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
                 alert11.show();
 
 
+            }
+            else if (!password.getText().toString().trim().equals(password1.getText().toString().trim())){
+                alert= new android.app.AlertDialog.Builder(account_Nutrition_admin.this);
+                alert.setMessage("كلمة المرور ليست متطابقة");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "موافق",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+
+                            }
+                        });
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
             }
             else if (password.getText().toString().equals(password1.getText().toString())) {
                 progressDialog.setMessage("يتم حفظ التعديلات الرجاء الانتظار..");
@@ -243,6 +280,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
 
                                     // Apply the newly created layout parameters to the alert dialog window
                                     dialog.getWindow().setAttributes( layoutParams );
+                                    startActivity(new Intent(getApplicationContext(), home_page_Nutrition_admin.class));
 
 
                                 } else {
@@ -261,34 +299,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
                                     // Finally, display the alert dialog
                                     dialog.show();
 
-                                    // Get screen width and height in pixels
-                                    DisplayMetrics displayMetrics = new DisplayMetrics();
-                                    getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
-                                    // The absolute width of the available display size in pixels.
-                                    int displayWidth = displayMetrics.widthPixels;
-                                    // The absolute height of the available display size in pixels.
-                                    int displayHeight = displayMetrics.heightPixels;
 
-                                    // Initialize a new window manager layout parameters
-                                    WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-
-                                    // Copy the alert dialog window attributes to new layout parameter instance
-                                    layoutParams.copyFrom( dialog.getWindow().getAttributes() );
-
-
-
-                                    // Set alert dialog width equal to screen width 70%
-                                    int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                                    // Set alert dialog height equal to screen height 70%
-                                    int dialogWindowHeight = (int) (displayHeight * 0.15f);
-
-                                    // Set the width and height for the layout parameters
-                                    // This will bet the width and height of alert dialog
-                                    layoutParams.width = dialogWindowWidth;
-                                    layoutParams.height = dialogWindowHeight;
-
-                                    // Apply the newly created layout parameters to the alert dialog window
-                                    dialog.getWindow().setAttributes( layoutParams );
 
                                 }
                                 progressDialog.dismiss();
