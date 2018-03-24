@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:design="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
-    tools:context="com.soa_arah.RequestByName">
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:background="@drawable/background1">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/Navigation"
@@ -31,221 +31,120 @@
 
     </android.support.design.widget.BottomNavigationView>
 
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="341dp"
-        android:layout_height="399dp"
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="299dp"
+        android:layout_height="383dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/username_text_input_layout1"
+        android:layout_width="277dp"
+        android:layout_height="69dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="عدد السُعرات الحرارية:"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.896"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginTop="72dp"
+        android:textColorHint="#acd680"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/FName"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="اسم الصنف"
+            android:inputType="textPersonName"
+            android:textAlignment="textEnd"
+            android:textColor="#acd680"
+            android:textColorHint="#373737"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/username_text_input_layout2"
+        android:layout_width="277dp"
+        android:layout_height="69dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/uploadimage"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="10dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:text="اسم الصنف:"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.995"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        tools:ignore="MissingConstraints" />
-
-
-    <EditText
-        android:id="@+id/FName"
-        android:layout_width="120dp"
-        android:layout_height="26dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/white"
-        android:ems="10"
-        android:gravity="right"
-        android:hint="الإسم"
-        android:inputType="textPersonName"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        tools:ignore="MissingConstraints" />
-
-
-    <EditText
-        android:id="@+id/calbyg"
-        android:layout_width="120dp"
-        android:layout_height="26dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:background="@android:color/white"
-        android:ems="10"
-        android:hint="  عدد السعرات"
-        android:inputType="numberDecimal"
-        android:textSize="13sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.631"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/FName"
-        tools:ignore="MissingConstraints,RtlCompat" />
-
-
-    <Button
-        android:id="@+id/uploadimage"
-        android:layout_width="79dp"
-        android:layout_height="43dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="#7ba452"
-        android:text="ارفاق صوره"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.898"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        tools:ignore="MissingConstraints,RtlCompat" />
-
-    <ImageView
-        android:id="@+id/Foodimage"
-        android:layout_width="72dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/send"
-        app:layout_constraintEnd_toStartOf="@+id/uploadimage"
-        app:layout_constraintHorizontal_bias="0.358"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView0"
-        android:layout_width="157dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:text="خانات مطلوبة*"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.922"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/uploadimage"
-        tools:ignore="MissingConstraints,RtlCompat" />
-
-    <Button
-        android:id="@+id/send"
-        android:layout_width="79dp"
-        android:layout_height="43dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="212dp"
         android:layout_marginTop="8dp"
-        android:background="#7ba452"
-        android:text="ارسال الطلب"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/textView0"
-        tools:ignore="MissingConstraints,RtlCompat" />
+        android:textColorHint="#acd680"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout1">
 
-    <Button
-        android:id="@+id/cancel"
-        android:layout_width="79dp"
-        android:layout_height="43dp"
+        <EditText
+            android:id="@+id/calbyg"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="  عدد السعرات"
+            android:inputType="numberDecimal"
+            android:textAlignment="textEnd"
+            android:textColor="#acd680"
+            android:textColorHint="#373737"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/username_text_input_layout3"
+        android:layout_width="277dp"
+        android:layout_height="69dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:textColorHint="#acd680"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout2">
+
+        <EditText
+            android:id="@+id/gramL"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="عددالجرامات/الملي لتر"
+            android:inputType="numberDecimal"
+            android:textAlignment="textEnd"
+            android:textColor="#acd680"
+            android:textColorHint="#373737"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="76dp"
         android:layout_marginTop="8dp"
-        android:background="#7ba452"
-        android:text="الغاء"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toStartOf="@+id/send"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/textView0"
-        tools:ignore="MissingConstraints,RtlCompat" />
+        android:text="نوع الصنف:"
+        android:textColor="#acd680"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/uploadimage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout3" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -253,112 +152,108 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:orientation='horizontal'
         app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/gramL"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout3">
 
         <RadioButton
             android:id="@+id/drinkS"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:buttonTint="@android:color/white"
+            android:buttonTint="#acd680"
             android:layoutDirection="rtl"
             android:text="شراب"
-            android:textColor="@android:color/white"
-            android:textSize="17sp" />
+            android:textColor="#acd680"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RadioButton
             android:id="@+id/food"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:buttonTint="@android:color/white"
+            android:buttonTint="#acd680"
             android:layoutDirection="rtl"
             android:text="طعام"
-            android:textColor="@android:color/white"
-            android:textSize="17sp" />
+            android:textColor="#acd680"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </RadioGroup>
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/uploadimage"
+        android:layout_width="158dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="نوع الصنف:"
+        android:layout_marginTop="368dp"
+        android:background="@drawable/button_login"
+        android:text="ارفاق صوره"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.913"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        tools:ignore="MissingConstraints" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.751"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/Foodimage"
+        android:layout_width="72dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.669" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="14dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="عددالجرامات/الملي لتر:"
+    <Button
+        android:id="@+id/send"
+        android:layout_width="106dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_login"
+        android:text="ارسال الطلب"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView6"
-        app:layout_constraintHorizontal_bias="0.939"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.84" />
 
-    <EditText
-        android:id="@+id/gramL"
-        android:layout_width="120dp"
-        android:layout_height="26dp"
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="106dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:background="@android:color/white"
-        android:ems="10"
-        android:hint=" عدد الجرام/الملل"
-        android:inputType="numberDecimal"
-        android:textSize="13sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView7"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/calbyg" />
-
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_login"
+        android:text="الغاء"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/send"
+        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.842" />
 
 </android.support.constraint.ConstraintLayout>
