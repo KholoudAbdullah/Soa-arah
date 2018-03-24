@@ -1,6 +1,7 @@
 package com.soa_arah;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class maxminDietplan extends AppCompatActivity {
 
+
+
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
     private DatabaseReference Database;
@@ -26,7 +29,7 @@ public class maxminDietplan extends AppCompatActivity {
     private String bmi,max;
     private EditText goal;
     private TextView mintext,maxtext;
-    private final String min="1200";
+    private  String min="1200";
     private Button creat;
     private String  Wight,Hight,Hip,Waist,date,gen;
     private Button cancel;
@@ -47,13 +50,50 @@ public class maxminDietplan extends AppCompatActivity {
         gen=intent.getExtras().getString( "gen","" );
         bmi = intent.getExtras().getString("BMI", "");
         max = intent.getExtras().getString("BMR", "");
-        maxtext.setText(max);
-        mintext.setText(min);
         creat=(Button)findViewById(R.id.creat);
         cancel=(Button) findViewById(R.id.cancel);
         firebaseAuth =FirebaseAuth.getInstance();
         User_ID = firebaseAuth.getCurrentUser().getEmail();
         final String username= User_ID.substring( 0, User_ID.lastIndexOf( "@" ) );
+
+        goal.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (goal.getText().toString().trim().length()<1){
+
+                    goal.setError("الرجاء إدخال عدد السعرات");
+                }
+            }
+        });
+
+
+        if (Double.parseDouble(max)< Double.parseDouble(min)){
+            maxtext.setText(min);
+            mintext.setText(max);
+            android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(maxminDietplan.this);
+
+            alert.setTitle( "السعرات التي تحتاجها اقل من ١٢٠٠ " ).setIcon( R.drawable.f1 );
+            alert.setMessage("لكن خبراء التغذية ينصحون يعدم تناول اقل من ١٢٠٠ سعرة لليوم");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+
+
+        }else {
+        maxtext.setText(max);
+        mintext.setText(min);}
+
 
 
 
@@ -65,95 +105,45 @@ public class maxminDietplan extends AppCompatActivity {
 
                 if(goal.getText().toString().trim().isEmpty()){
 
-                    AlertDialog.Builder alert = new AlertDialog.Builder(
-                            maxminDietplan.this );
+                    android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(maxminDietplan.this);
 
                     alert.setTitle( "عذراً يجب إدخال عدد السعرات المستهدفة" ).setIcon( R.drawable.f1 );
 
-                    AlertDialog dialog = alert.create();
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                    // Finally, display the alert dialog
-                    dialog.show();
+                                    dialogInterface.cancel();
 
-                    // Get screen width and height in pixels
-                    DisplayMetrics displayMetrics = new DisplayMetrics();
-                    getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
-                    // The absolute width of the available display size in pixels.
-                    int displayWidth = displayMetrics.widthPixels;
-                    // The absolute height of the available display size in pixels.
-                    int displayHeight = displayMetrics.heightPixels;
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
 
-                    // Initialize a new window manager layout parameters
-                    WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
 
-                    // Copy the alert dialog window attributes to new layout parameter instance
-                    layoutParams.copyFrom( dialog.getWindow().getAttributes() );
-
-                    // Set the alert dialog window width and height
-                    // Set alert dialog width equal to screen width 90%
-                    // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                    // Set alert dialog height equal to screen height 90%
-                    // int dialogWindowHeight = (int) (displayHeight * 0.9f);
-
-                    // Set alert dialog width equal to screen width 70%
-                    int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                    // Set alert dialog height equal to screen height 70%
-                    int dialogWindowHeight = (int) (displayHeight * 0.15f);
-
-                    // Set the width and height for the layout parameters
-                    // This will bet the width and height of alert dialog
-                    layoutParams.width = dialogWindowWidth;
-                    layoutParams.height = dialogWindowHeight;
-
-                    // Apply the newly created layout parameters to the alert dialog window
-                    dialog.getWindow().setAttributes( layoutParams );
                 }
-                else if((Double.parseDouble(goal.getText().toString().trim())>1200)||(Double.parseDouble(goal.getText().toString().trim())< Double.parseDouble(max))){
+                else if((Double.parseDouble(goal.getText().toString().trim())<Double.parseDouble(mintext.getText().toString()))||(Double.parseDouble(goal.getText().toString().trim())>Double.parseDouble(maxtext.getText().toString()))){
 
-
-                    AlertDialog.Builder alert = new AlertDialog.Builder(
-                            maxminDietplan.this );
+                    android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(maxminDietplan.this);
 
                     alert.setTitle( "عذراً يجب إدخال عدد السعرات المستهدفة ما بين الحد القصى والادنى" ).setIcon( R.drawable.f1 );
 
-                    AlertDialog dialog = alert.create();
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                    // Finally, display the alert dialog
-                    dialog.show();
+                                    dialogInterface.cancel();
 
-                    // Get screen width and height in pixels
-                    DisplayMetrics displayMetrics = new DisplayMetrics();
-                    getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
-                    // The absolute width of the available display size in pixels.
-                    int displayWidth = displayMetrics.widthPixels;
-                    // The absolute height of the available display size in pixels.
-                    int displayHeight = displayMetrics.heightPixels;
-
-                    // Initialize a new window manager layout parameters
-                    WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-
-                    // Copy the alert dialog window attributes to new layout parameter instance
-                    layoutParams.copyFrom( dialog.getWindow().getAttributes() );
-
-                    // Set the alert dialog window width and height
-                    // Set alert dialog width equal to screen width 90%
-                    // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                    // Set alert dialog height equal to screen height 90%
-                    // int dialogWindowHeight = (int) (displayHeight * 0.9f);
-
-                    // Set alert dialog width equal to screen width 70%
-                    int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                    // Set alert dialog height equal to screen height 70%
-                    int dialogWindowHeight = (int) (displayHeight * 0.15f);
-
-                    // Set the width and height for the layout parameters
-                    // This will bet the width and height of alert dialog
-                    layoutParams.width = dialogWindowWidth;
-                    layoutParams.height = dialogWindowHeight;
-
-                    // Apply the newly created layout parameters to the alert dialog window
-                    dialog.getWindow().setAttributes( layoutParams );
-
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
 
                 }
 
@@ -181,7 +171,43 @@ public class maxminDietplan extends AppCompatActivity {
                     android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(
                             maxminDietplan.this);
                     alert.setTitle("تم إنشاء الخطة بنجاح").setIcon(R.drawable.t1);
-                    alert.show();
+                    android.support.v7.app.AlertDialog dialog = alert.create();
+
+                    // Finally, display the alert dialog
+                    dialog.show();
+
+                    // Get screen width and height in pixels
+                    DisplayMetrics displayMetrics = new DisplayMetrics();
+                    getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                    // The absolute width of the available display size in pixels.
+                    int displayWidth = displayMetrics.widthPixels;
+                    // The absolute height of the available display size in pixels.
+                    int displayHeight = displayMetrics.heightPixels;
+
+                    // Initialize a new window manager layout parameters
+                    WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+                    // Copy the alert dialog window attributes to new layout parameter instance
+                    layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+                    // Set the alert dialog window width and height
+                    // Set alert dialog width equal to screen width 90%
+                    // int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                    // Set alert dialog height equal to screen height 90%
+                    // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+
+                    // Set alert dialog width equal to screen width 70%
+                    int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                    // Set alert dialog height equal to screen height 70%
+                    int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+                    // Set the width and height for the layout parameters
+                    // This will bet the width and height of alert dialog
+                    layoutParams.width = dialogWindowWidth;
+                    layoutParams.height = dialogWindowHeight;
+
+                    // Apply the newly created layout parameters to the alert dialog window
+                    dialog.getWindow().setAttributes(layoutParams);
                     startActivity(new Intent(getApplicationContext(), diet_plan.class));
 
 
@@ -193,7 +219,34 @@ public class maxminDietplan extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(maxminDietplan.this);
+
+                alert= new android.app.AlertDialog.Builder(maxminDietplan.this);
+                alert.setMessage("هل انت متأكد من عدم الارسال؟");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "تعم",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+
+                            }
+                        });
+
+                alert.setNegativeButton(
+                        "لا",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+                            }
+                        });
+
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
             }
         });
 

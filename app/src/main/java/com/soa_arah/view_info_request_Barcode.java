@@ -1,14 +1,18 @@
 package com.soa_arah;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -40,6 +44,8 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
     private DatabaseReference mDatabaseReference;
     private DatabaseReference mDatabaseReference1;
+    android.app.AlertDialog.Builder alert;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,27 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         setContentView(R.layout.activity_view_info_bar_request);
 
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
+        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (keyword.getText().toString().trim().length()<1){
+
+                    keyword.setError("الرجاء إدخال الكلمات المفتاحية");
+                }
+            }
+        });
+        calories1.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (calories1.getText().toString().trim().length()<1){
+
+                    calories1.setError("الرجاء إدخال السعرات الحرارية");
+                }
+            }
+        });
 
         namef1 = getIntent().getStringExtra("namef");
         image1=getIntent().getStringExtra("image");
@@ -110,15 +137,41 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
     @Override
     public void onClick(View view) {
-if(keyword.getText().toString().equals("")&&calories1.getText().toString().equals("")){
-    Toast.makeText(view_info_request_Barcode.this, "لم يتم إدخال السعرات الحراريه و الكلمات المفتاحية", Toast.LENGTH_LONG).show();
-}
-else if(keyword.getText().toString().equals("")){
-    Toast.makeText(view_info_request_Barcode.this, "لم يتم إدخال الكلمات المفتاحية", Toast.LENGTH_LONG).show();
+if(keyword.getText().toString().equals("")){
+
+    alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
+    alert.setMessage("لم يتم إدخال الكلمات المفتاحية");
+    alert.setCancelable(true);
+    alert.setPositiveButton(
+            "موافق",
+            new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    dialogInterface.cancel();
+
+                }
+            });
+    android.app.AlertDialog alert11 = alert.create();
+    alert11.show();
 
 }
 else if(calories1.getText().toString().equals("")){
-    Toast.makeText(view_info_request_Barcode.this, "لم يتم إدخال السعرات الحراريه", Toast.LENGTH_LONG).show();
+    alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
+    alert.setMessage("لم يتم إدخال السعرات الحرارية");
+    alert.setCancelable(true);
+    alert.setPositiveButton(
+            "موافق",
+            new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    dialogInterface.cancel();
+
+                }
+            });
+    android.app.AlertDialog alert11 = alert.create();
+    alert11.show();
 
 }
 else {
@@ -133,7 +186,44 @@ else {
 
         mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests");
         mDatabaseReference1.child("ByBarcode").child(key).removeValue();
-        Toast.makeText(view_info_request_Barcode.this, "تمت إضافة الصنف", Toast.LENGTH_LONG).show();
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(
+                view_info_request_Barcode.this );
+
+        alert.setTitle("تمت إضافة الصنف").setIcon( R.drawable.t1 );
+        AlertDialog dialog = alert.create();
+        // Finally, display the alert dialog
+        dialog.show();
+
+        // Get screen width and height in pixels
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
+        // The absolute width of the available display size in pixels.
+        int displayWidth = displayMetrics.widthPixels;
+        // The absolute height of the available display size in pixels.
+        int displayHeight = displayMetrics.heightPixels;
+
+        // Initialize a new window manager layout parameters
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+        // Copy the alert dialog window attributes to new layout parameter instance
+        layoutParams.copyFrom( dialog.getWindow().getAttributes() );
+
+
+
+        // Set alert dialog width equal to screen width 70%
+        int dialogWindowWidth = (int) (displayWidth * 0.9f);
+        // Set alert dialog height equal to screen height 70%
+        int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+        // Set the width and height for the layout parameters
+        // This will bet the width and height of alert dialog
+        layoutParams.width = dialogWindowWidth;
+        layoutParams.height = dialogWindowHeight;
+
+        // Apply the newly created layout parameters to the alert dialog window
+        dialog.getWindow().setAttributes( layoutParams );
         startActivity(new Intent(view_info_request_Barcode.this, view_request.class));
 
     }
@@ -141,11 +231,32 @@ else {
         // mDatabaseReference1.child("Requests").child("ByName").child(key).removeValue();
         mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests");
         mDatabaseReference1.child("ByBarcode").child(key).removeValue();
-        Toast.makeText(view_info_request_Barcode.this, key, Toast.LENGTH_LONG).show();
+        alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
+        alert.setMessage("هل انت متأكد من رفض الطلب؟");
+        alert.setCancelable(true);
+        alert.setPositiveButton(
+                "تعم",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
-        Toast.makeText(view_info_request_Barcode.this, "تم رفض الطلب", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(view_info_request_Barcode.this, view_request.class));
+                        startActivity(new Intent(view_info_request_Barcode.this, view_request.class));
 
+                    }
+                });
+
+        alert.setNegativeButton(
+                "لا",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        dialogInterface.cancel();
+                    }
+                });
+
+        android.app.AlertDialog alert11 = alert.create();
+        alert11.show();
     }
 }
 

@@ -92,10 +92,10 @@ public class home_page_IT_admin extends AppCompatActivity {
                 progressDialog.dismiss();
                 if (list.isEmpty()) {
                     alert = new AlertDialog.Builder(home_page_IT_admin.this);
-                    alert.setMessage("عذراً لايوجد هاذا الصنف ");
+                    alert.setMessage("عذراً لايوجد هذا الصنف");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
-                            "الغاء",
+                            "إلغاء",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {

@@ -2,18 +2,21 @@ package com.soa_arah;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +37,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
 public class RequestByBarcode extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
@@ -49,6 +54,8 @@ public class RequestByBarcode extends AppCompatActivity {
     private String douTable, barnum;
     private EditText name;
     private ProgressDialog progressDialog;
+    android.app.AlertDialog.Builder alert;
+
 
 
 
@@ -57,6 +64,17 @@ public class RequestByBarcode extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_by_barcode);
+
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (name.getText().toString().trim().length()<1){
+
+                    name.setError("االرجاء إدخال إسم المستخدم");
+                }
+            }
+        });
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -134,13 +152,25 @@ public class RequestByBarcode extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(name==null){
-                    Toast.makeText(RequestByBarcode.this, "الرجاء ادخال االاسم", Toast.LENGTH_LONG).show();
+                if(name.getText().toString().trim().length()<1){
+                    alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                    alert.setMessage("الرجاء ادخال إسم الصنف");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                }else if (barnum==null){
-                    Toast.makeText(RequestByBarcode.this, "الرجاء مسح الباركود", Toast.LENGTH_LONG).show();
-                } else {
-                    uploadFile();}
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+
+                }else {
+                uploadFile();}
 
             }
         });
@@ -149,37 +179,64 @@ public class RequestByBarcode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                try {
+                alert = new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                alert.setMessage("هل انت متاكد من إلغاء الإرسال");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "نعم",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                try {
 
 
-                    // Create a storage reference from our app
-                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                                    // Create a storage reference from our app
+                                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
-                    // Create a reference to the file to delete
-                    Toast.makeText(RequestByBarcode.this, douTable.toString(), Toast.LENGTH_SHORT).show();
+                                    // Create a reference to the file to delete
+                                    Toast.makeText(RequestByBarcode.this, douTable.toString(), Toast.LENGTH_SHORT).show();
 
-                    // StorageReference desertRef = storageRef.child("images/Request/"+tableUri.toString()+".jpg");
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(douTable);
+                                    // StorageReference desertRef = storageRef.child("images/Request/"+tableUri.toString()+".jpg");
+                                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(douTable);
 
-                    // Delete the file
-                    storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // File deleted successfully
-                            Toast.makeText(RequestByBarcode.this, "تم الحذف", Toast.LENGTH_SHORT).show();
+                                    // Delete the file
+                                    storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            // File deleted successfully
+                                            //Toast.makeText(RequestByBarcode.this, "تم الحذف", Toast.LENGTH_SHORT).show();
 
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Uh-oh, an error occurred!
-                            Toast.makeText(RequestByBarcode.this, "error occurred", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception exception) {
+                                            // Uh-oh, an error occurred!
+                                            //Toast.makeText(RequestByBarcode.this, "error occurred", Toast.LENGTH_SHORT).show();
 
-                        }
-                    });}catch (Exception e){
-                    Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });}catch (Exception e){
+                                    Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                }
+                                }
+
+                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+
+                            }
+                        });
+
+                alert.setNegativeButton(
+                        "إلغاء",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+                            }
+                        });
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
+
+
 
             }
         });
@@ -291,7 +348,43 @@ public class RequestByBarcode extends AppCompatActivity {
                             AlertDialog.Builder alert = new AlertDialog.Builder(
                                     RequestByBarcode.this);
                             alert.setTitle("تم ارسال الطلب بنجاح").setIcon(R.drawable.t1);
-                            alert.show();
+                            AlertDialog dialog = alert.create();
+
+                            // Finally, display the alert dialog
+                            dialog.show();
+
+                            // Get screen width and height in pixels
+                            DisplayMetrics displayMetrics = new DisplayMetrics();
+                            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                            // The absolute width of the available display size in pixels.
+                            int displayWidth = displayMetrics.widthPixels;
+                            // The absolute height of the available display size in pixels.
+                            int displayHeight = displayMetrics.heightPixels;
+
+                            // Initialize a new window manager layout parameters
+                            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+                            // Copy the alert dialog window attributes to new layout parameter instance
+                            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+                            // Set the alert dialog window width and height
+                            // Set alert dialog width equal to screen width 90%
+                            // int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                            // Set alert dialog height equal to screen height 90%
+                            // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+
+                            // Set alert dialog width equal to screen width 70%
+                            int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                            // Set alert dialog height equal to screen height 70%
+                            int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+                            // Set the width and height for the layout parameters
+                            // This will bet the width and height of alert dialog
+                            layoutParams.width = dialogWindowWidth;
+                            layoutParams.height = dialogWindowHeight;
+
+                            // Apply the newly created layout parameters to the alert dialog window
+                            dialog.getWindow().setAttributes(layoutParams);
                             startActivity(new Intent(RequestByBarcode.this, home_page_register.class));
 
 
@@ -339,4 +432,3 @@ public class RequestByBarcode extends AppCompatActivity {
         return true;
     }
 }
-

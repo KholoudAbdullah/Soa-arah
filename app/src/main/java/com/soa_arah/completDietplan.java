@@ -34,6 +34,8 @@ import java.util.Calendar;
 
 public class completDietplan  extends AppCompatActivity  {
 
+
+
     private EditText hight,waist,hip,wight;
     private  ProgressDialog progressDialog;
     private Spinner gen;
@@ -46,12 +48,14 @@ public class completDietplan  extends AppCompatActivity  {
     //firebase auth object
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
-private Button cont;
-private Button cancel;
-private double bmi,BMR;
-private String age;
+    private Button cont;
+    private Button cancel;
+    private double bmi,BMR;
+    private String age;
     Intent intent;
     private static final String TAG = "MainActivity";
+    android.app.AlertDialog.Builder alert;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +84,49 @@ private String age;
         mDisplayDate = (TextView) findViewById(R.id.tvDate);
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,gender);
         gen.setAdapter(adapter);
-        gen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+        hight.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hight.getText().toString().trim().length()<2){
+
+                    hight.setError("الرجاء إدخال الطول");
+                }
+            }
+        });
+        wight.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (wight.getText().toString().trim().length()<2){
+
+                    wight.setError("الرجاء إدخال الوزن");
+                }
+            }
+        });
+        waist.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (waist.getText().toString().trim().length()<2){
+
+                    waist.setError("الرجاء إدخال محيط الخصر");
+                }
+            }
+        });
+        hip.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hip.getText().toString().trim().length()<2){
+
+                    hip.setError("الرجاء إدخال محيط الفخذ");
+                }
+            }
+        });
+
+        gen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -130,6 +175,25 @@ private String age;
                 month = month + 1;
                 Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
+                Calendar today = Calendar.getInstance();
+                if (year<(today.get(Calendar.YEAR)-3)){
+                    alert= new android.app.AlertDialog.Builder(completDietplan.this);
+                    alert.setMessage("الرجاء إدخال تاريخ صحيح");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
+
                 date = day + "/" + month + "/" + year;
                 mDisplayDate.setText(date);
 //calculate age
@@ -141,54 +205,79 @@ private String age;
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-              if((wight.getText().toString().trim().isEmpty())||(hight.getText().toString().trim().isEmpty())||(hip.getText().toString().trim().isEmpty())||(waist.getText().toString().trim().isEmpty())||(mDisplayDate.getText().toString().trim().isEmpty())){
-                  AlertDialog.Builder alert = new AlertDialog.Builder(
-                          completDietplan.this );
+                if(hight.getText().toString().trim().length()<1){
+                    alert= new android.app.AlertDialog.Builder(completDietplan.this);
+                    alert.setMessage("الرجاء إدخال الطول");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                  alert.setTitle( "عذراً أحد الحقول فارغ" ).setIcon( R.drawable.f1 );
+                                    dialogInterface.cancel();
 
-                  AlertDialog dialog = alert.create();
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
 
-                  // Finally, display the alert dialog
-                  dialog.show();
+                }
+                else if (wight.getText().toString().trim().length()<1){
+                    alert= new android.app.AlertDialog.Builder(completDietplan.this);
+                    alert.setMessage("الرجاء إدخال الوزن");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                  // Get screen width and height in pixels
-                  DisplayMetrics displayMetrics = new DisplayMetrics();
-                  getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
-                  // The absolute width of the available display size in pixels.
-                  int displayWidth = displayMetrics.widthPixels;
-                  // The absolute height of the available display size in pixels.
-                  int displayHeight = displayMetrics.heightPixels;
+                                    dialogInterface.cancel();
 
-                  // Initialize a new window manager layout parameters
-                  WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
+                else if (waist.getText().toString().trim().length()<1){
+                    alert= new android.app.AlertDialog.Builder(completDietplan.this);
+                    alert.setMessage("الرجاء إدخال محيط الخصر");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                  // Copy the alert dialog window attributes to new layout parameter instance
-                  layoutParams.copyFrom( dialog.getWindow().getAttributes() );
+                                    dialogInterface.cancel();
 
-                  // Set the alert dialog window width and height
-                  // Set alert dialog width equal to screen width 90%
-                  // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                  // Set alert dialog height equal to screen height 90%
-                  // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
+                else if (hip.getText().toString().trim().length()<1){
+                    alert= new android.app.AlertDialog.Builder(completDietplan.this);
+                    alert.setMessage("الرجاء إدخال محيط الفخذ");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                  // Set alert dialog width equal to screen width 70%
-                  int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                  // Set alert dialog height equal to screen height 70%
-                  int dialogWindowHeight = (int) (displayHeight * 0.15f);
+                                    dialogInterface.cancel();
 
-                  // Set the width and height for the layout parameters
-                  // This will bet the width and height of alert dialog
-                  layoutParams.width = dialogWindowWidth;
-                  layoutParams.height = dialogWindowHeight;
-
-                  // Apply the newly created layout parameters to the alert dialog window
-                  dialog.getWindow().setAttributes( layoutParams );
-              }
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
               else {
                   String Wight=wight.getText().toString().trim();
                  String Hight=hight.getText().toString().trim();
-                  String Hip=hip.getText().toString().trim();
+                 String Hip=hip.getText().toString().trim();
                 String Waist = waist.getText().toString().trim();
                 String date=mDisplayDate.getText().toString();
                 String gen=record;

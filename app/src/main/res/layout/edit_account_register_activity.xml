@@ -92,7 +92,7 @@
                     android:id="@+id/wight"
                     android:layout_width="100dp"
                     android:layout_marginStart="35dp"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:textAlignment="textEnd"/>
@@ -137,7 +137,7 @@
                 <EditText
                     android:id="@+id/hight"
                     android:layout_width="100dp"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:layout_marginStart="35dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -295,7 +295,7 @@
 
                 <EditText
                     android:id="@+id/waist"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:layout_width="100dp"
                     android:layout_marginStart="35dp"
                     android:layout_height="wrap_content"
@@ -348,7 +348,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="35dp"
                     android:layout_toEndOf="@+id/edit_hip"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="textEnd" />
 
                 <ImageButton
@@ -381,6 +381,21 @@
     </ScrollView>
 
 
-
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/delete"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.388"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.561" />
 
 </android.support.constraint.ConstraintLayout>

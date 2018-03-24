@@ -139,7 +139,7 @@
         android:background="@android:color/white"
         android:ems="10"
         android:gravity="right"
-        android:hint="  الإسم"
+        android:hint="الإسم"
         android:inputType="textPersonName"
         android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/textView2"

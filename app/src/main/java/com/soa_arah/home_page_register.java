@@ -155,10 +155,10 @@ public class home_page_register extends AppCompatActivity{
                 progressDialog.dismiss();
                 if (list.isEmpty()) {
                     alert = new AlertDialog.Builder(home_page_register.this);
-                    alert.setMessage("عذراً لايوجد هاذا الصنف هل تريد اضافتة");
+                    alert.setMessage("عذراً لايوجد هذا الصنف هل تريد إضافة");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
-                            "اضافة الصنف",
+                            "إضافة الصنف",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -169,7 +169,7 @@ public class home_page_register extends AppCompatActivity{
                             });
 
                     alert.setNegativeButton(
-                            "الغاء",
+                            "إلغاء",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {

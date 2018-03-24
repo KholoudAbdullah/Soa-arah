@@ -1,12 +1,16 @@
 package com.soa_arah;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +40,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     //progress dialog
     private ProgressDialog progressDialog;
+    AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,30 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
 
 
+        username.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (username.getText().toString().trim().length()<1){
+
+                    username.setError("الرجاء إدخال إسم المستخدم");
+                }
+            }
+        });
+
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (password.getText().toString().trim().length()<6){
+
+                    password.setError("يجب ان تتكون كلمة المرور من ٦ خانات");
+                }
+            }
+        });
+
+
+
         onBackPressed();
     }
     @Override
@@ -80,13 +109,42 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
 
         //checking if email and passwords are empty
-        if(TextUtils.isEmpty(email)){
-            Toast.makeText(LoginPage.this, "الرجاء ادخال اسم المستخذم", Toast.LENGTH_LONG).show();
+        if(username.getText().toString().trim().length()<1){
+            alert= new android.app.AlertDialog.Builder(LoginPage.this);
+            alert.setMessage("الرجاء إدخال إسم المستخدم");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
             return;
         }
 
         else if(TextUtils.isEmpty(pass)){
-            Toast.makeText(LoginPage.this, "الرجاء ادخال من كلمة المرور", Toast.LENGTH_LONG).show();
+
+            alert= new android.app.AlertDialog.Builder(LoginPage.this);
+            alert.setMessage("الرجاء إدخال كلمة المرور");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
             return;
         }
 
@@ -111,7 +169,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                             String id= user.getUid();
 
 
-                            //ID موب صح
+
                             //IT admin
                             if(id.equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
                                 startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
@@ -129,9 +187,20 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                             Toast.makeText(getApplicationContext(),"الرجاء التأكد من  كلمة المرور",Toast.LENGTH_LONG).show();
                         }*/
                         else {
-                            //display some message here
 
-                            Toast.makeText(getApplicationContext(),"الرجاء التأكد من اسم المستخدم او كلمة المرور", Toast.LENGTH_LONG).show();
+                            AlertDialog.Builder alert= new AlertDialog.Builder(LoginPage.this);
+                            alert.setMessage("الرجاء التأكد من اسم المستخدم او كلمة المرور");
+                            alert.setCancelable(true);
+                            alert.setPositiveButton(
+                                    "موافق",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            dialogInterface.cancel();
+
+                                        }
+                                    });
                         }
 
                         progressDialog.dismiss();

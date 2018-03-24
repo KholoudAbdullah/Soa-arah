@@ -19,6 +19,40 @@
             app:srcCompat="@drawable/lo1" />
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/username_text_input_layout1"
+            android:layout_width="277dp"
+            android:layout_height="69dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_corner"
+            android:textColorHint="#acd680"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView8"
+            app:layout_constraintVertical_bias="0.0">
+
+                <EditText
+                    android:id="@+id/Usernane"
+                    android:layout_width="267dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:ems="10"
+                    android:hint="اسم المستخدم"
+                    android:inputType="textPersonName"
+                    android:textAlignment="textEnd"
+                    android:textColor="#acd680"
+                    android:textColorHint="#373737"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/username_text_input_layout"
             android:layout_width="277dp"
             android:layout_height="69dp"
@@ -53,37 +87,6 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/username_text_input_layout1"
-            android:layout_width="277dp"
-            android:layout_height="69dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_corner"
-            android:textColorHint="#acd680"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView8"
-            app:layout_constraintVertical_bias="0.0">
-
-                <EditText
-                    android:id="@+id/Usernane"
-                    android:layout_width="267dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:ems="10"
-                    android:hint="اسم المستخدم"
-                    android:textAlignment="textEnd"
-                    android:textColor="#acd680"
-                    android:textColorHint="#373737"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/LoginButton"

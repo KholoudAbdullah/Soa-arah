@@ -150,10 +150,20 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                 progressDialog.dismiss();
                 if (list.isEmpty()) {
                     alert = new AlertDialog.Builder(home_page_Nutrition_admin.this);
-                    alert.setMessage("عذراً لايوجد هاذا الصنف ");
+                    alert.setMessage("عذراً لايوجد هذا الصنف تحقق من طلبات الإضافة");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
-                            "الغاء",
+                            "طلبات الإضافة",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    startActivity(new Intent(getApplicationContext(), view_request.class));
+
+                                }
+                            });
+                    alert.setPositiveButton(
+                            "إلغاء",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {

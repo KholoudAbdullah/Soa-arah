@@ -1,9 +1,11 @@
 package com.soa_arah;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -36,6 +38,8 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
     private FirebaseDatabase firebaseDatabase;
 
     private  String userID;
+    android.app.AlertDialog.Builder alert;
+
 
     private ProgressDialog progressDialog;
     //private FirebaseAuth firebaseAuth;
@@ -97,13 +101,36 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
                                     mDatabase.child("RegisteredUser").child(userID).child("password").setValue(pass.getText().toString());
 
                                     //display message to the user here
-                                    Toast.makeText(ResetPassword.this, "تمت العملية بنجاح..", Toast.LENGTH_LONG).show();
+
+                                    AlertDialog.Builder alert = new AlertDialog.Builder(
+                                            ResetPassword.this);
+                                    alert.setTitle("تمت العملية بنجاح..").setIcon(R.drawable.t1);
+                                    AlertDialog dialog = alert.create();
+
+                                    // Finally, display the alert dialog
+                                    dialog.show();
+
                                     Intent i = new Intent(ResetPassword.this, LoginPage.class);
                                     startActivity(i);
 
                                 } else {
                                     //display some message here
-                                    Toast.makeText(ResetPassword.this, "هناك خلل..", Toast.LENGTH_LONG).show();
+
+                                    alert = new android.app.AlertDialog.Builder(ResetPassword.this);
+                                    alert.setMessage("هناك خلل..");
+                                    alert.setCancelable(true);
+                                    alert.setPositiveButton(
+                                            "موافق",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                    startActivity(new Intent(getApplicationContext(), LoginPage.class));
+
+                                                }
+                                            });
+                                    android.app.AlertDialog alert11 = alert.create();
+                                    alert11.show();
 
                                 }
                                 progressDialog.dismiss();

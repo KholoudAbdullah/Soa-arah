@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.concurrent.TimeUnit;
 
 public class ActivityPhoneAuth extends AppCompatActivity {
+
 
     private EditText etxtPhone;
     private FirebaseAuth mAuth;
@@ -85,6 +87,24 @@ public class ActivityPhoneAuth extends AppCompatActivity {
         if (TextUtils.isEmpty(phoneNumber))
             return;
         Toast.makeText(ActivityPhoneAuth.this, "الرجاء الانتظار حتى يتم الارسال" , Toast.LENGTH_SHORT).show();
+       /* android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(ActivityPhoneAuth.this);
+
+        alert.setTitle( "الرجاء الانتظار حتى يتم الارسال" ).setIcon( R.drawable.f1 );
+
+        alert.setCancelable(true);
+        alert.setPositiveButton(
+                "موافق",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        dialogInterface.cancel();
+
+                    }
+                });
+        android.app.AlertDialog alert11 = alert.create();
+        alert11.show();*/
+
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber, 60, TimeUnit.SECONDS, ActivityPhoneAuth.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
@@ -121,47 +141,23 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                         if (task.isSuccessful()) {
                                    registerUser();}
                         else {
-                            AlertDialog.Builder alert = new AlertDialog.Builder(
-                                    ActivityPhoneAuth.this);
+                            android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(ActivityPhoneAuth.this);
+
 
                             alert.setTitle("يوجد حساب برقم الجوال أو يوجد خطأ في الرمز").setIcon(R.drawable.f1);
-                            AlertDialog dialog = alert.create();
+                            alert.setCancelable(true);
+                            alert.setPositiveButton(
+                                    "موافق",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                            // Finally, display the alert dialog
-                            dialog.show();
+                                            dialogInterface.cancel();
 
-                            // Get screen width and height in pixels
-                            DisplayMetrics displayMetrics = new DisplayMetrics();
-                            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-                            // The absolute width of the available display size in pixels.
-                            int displayWidth = displayMetrics.widthPixels;
-                            // The absolute height of the available display size in pixels.
-                            int displayHeight = displayMetrics.heightPixels;
-
-                            // Initialize a new window manager layout parameters
-                            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-
-                            // Copy the alert dialog window attributes to new layout parameter instance
-                            layoutParams.copyFrom(dialog.getWindow().getAttributes());
-
-                            // Set the alert dialog window width and height
-                            // Set alert dialog width equal to screen width 90%
-                            // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                            // Set alert dialog height equal to screen height 90%
-                            // int dialogWindowHeight = (int) (displayHeight * 0.9f);
-
-                            // Set alert dialog width equal to screen width 70%
-                            int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                            // Set alert dialog height equal to screen height 70%
-                            int dialogWindowHeight = (int) (displayHeight * 0.15f);
-
-                            // Set the width and height for the layout parameters
-                            // This will bet the width and height of alert dialog
-                            layoutParams.width = dialogWindowWidth;
-                            layoutParams.height = dialogWindowHeight;
-
-                            // Apply the newly created layout parameters to the alert dialog window
-                            dialog.getWindow().setAttributes(layoutParams);
+                                        }
+                                    });
+                            android.app.AlertDialog alert11 = alert.create();
+                            alert11.show();
 
                         }
 

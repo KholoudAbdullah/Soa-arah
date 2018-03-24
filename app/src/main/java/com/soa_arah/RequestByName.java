@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -37,6 +38,7 @@ import java.io.IOException;
 
 public class RequestByName extends AppCompatActivity {
 
+
     private static final int PICK_IMAGE_REQUEST = 1;
     private EditText foodname;
     private EditText calory,gram;
@@ -51,6 +53,7 @@ public class RequestByName extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String stander;
     private FirebaseAuth firebaseAuth;
+    android.app.AlertDialog.Builder alert;
 
 
 
@@ -79,6 +82,37 @@ public class RequestByName extends AppCompatActivity {
 
 
 
+        foodname.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (foodname.getText().toString().trim().length()<1){
+
+                    foodname.setError("الرجاء إدخال إسم الصنف");
+                }
+            }
+        });
+        calory.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (calory.getText().toString().trim().length()<1){
+
+                    calory.setError("الرجاء إدخال عدد السعرات");
+                }
+            }
+        });
+        gram.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (gram.getText().toString().trim().length()<1){
+
+                    gram.setError("الرجاء إدخال عدد القرام/ملم");
+                }
+            }
+        });
+
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,18 +127,93 @@ public class RequestByName extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(foodname==null)
-                    Toast.makeText(RequestByName.this, "الرجاء ادخال إسم الصنف", Toast.LENGTH_SHORT).show();
-                else if (calory==null)
-                    Toast.makeText(RequestByName.this, "الرجاء إدخال السُعرة الحرارية", Toast.LENGTH_SHORT).show();
-                else if (gram==null)
-                    Toast.makeText(RequestByName.this, "الرجاء إدخال القرامات / الملي لتر", Toast.LENGTH_SHORT).show();
-                else if (!Rfood.isChecked()&& !Rdrink.isChecked())
-                    Toast.makeText(RequestByName.this, " الرجاء اختيار الصنف", Toast.LENGTH_SHORT).show();
+                if(foodname.getText().toString().trim().length()<1){
+                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                    alert.setMessage("الرجاء ادخال إسم الصنف");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+
+                }
+                else if (calory.getText().toString().trim().length()<1){
+                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                    alert.setMessage("الرجاء إدخال عدد السعرات");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
+                else if (gram.getText().toString().trim().length()<1){
+                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                    alert.setMessage("الرجاء إدخال عدد القرام/ملم");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
+                else if (!Rfood.isChecked()&& !Rdrink.isChecked()){
+                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                    alert.setMessage("الرجاء اختيار الصنف");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
                 else {
 
                     if (mUploadTask != null && mUploadTask.isInProgress()) {
-                        Toast.makeText(RequestByName.this, "يتم التحميل", Toast.LENGTH_SHORT).show();
+                        android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                        alert.setMessage("الرجاء الإنتظار يتم تحميل الصورة");
+                        alert.setCancelable(true);
+                        alert.setPositiveButton(
+                                "موافق",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        dialogInterface.cancel();
+
+                                    }
+                                });
+                        android.app.AlertDialog alert11 = alert.create();
+                        alert11.show();
                     } else {
                         uploadFile();
                     }
@@ -115,7 +224,32 @@ public class RequestByName extends AppCompatActivity {
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                alert.setMessage("هل انت متأكد من عدم الارسال؟");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "تعم",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+
+                            }
+                        });
+
+                alert.setNegativeButton(
+                        "لا",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+                            }
+                        });
+               
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
             }
         });
 
@@ -249,9 +383,12 @@ public class RequestByName extends AppCompatActivity {
                             // Hiding the progressDialog after done uploading.
                             progressDialog.dismiss();
 
-                            AlertDialog.Builder alert = new AlertDialog.Builder(
+                            AlertDialog.Builder alert1 = new AlertDialog.Builder(
                                     RequestByName.this);
-                            alert.setTitle("تم ارسال الطلب بنجاح").setIcon(R.drawable.t1);
+                            alert1.setTitle("تم ارسال الطلب بنجاح").setIcon(R.drawable.t1);
+                            alert1.setCancelable(true);
+                            android.app.AlertDialog alert11 = alert.create();
+                            alert11.show();
 
                             startActivity(new Intent(RequestByName.this, home_page_register.class));
 
@@ -267,7 +404,21 @@ public class RequestByName extends AppCompatActivity {
                         }
                     });
         } else {
-            Toast.makeText(this, "لم يتم اختيار الملف", Toast.LENGTH_SHORT).show();
+            alert= new android.app.AlertDialog.Builder(RequestByName.this);
+            alert.setMessage("عذراً يجب اختيار صورة");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+
+                        }
+                    });
+        android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
         }
     }
 }

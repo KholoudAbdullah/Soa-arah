@@ -1,22 +1,29 @@
 package com.soa_arah;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Registration extends AppCompatActivity implements View.OnClickListener{
 
@@ -34,10 +41,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     RegisteredUser user1;
     private static final String TAG = "MainActivity";
 
-
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-
-
+    android.app.AlertDialog.Builder alert;
+    boolean flag=true;
+    String hexName;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -55,6 +62,51 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
         button=(Button)findViewById(R.id.button);
         log=(Button) findViewById(R.id.log);
+
+
+
+        //valedation
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (name.getText().toString().trim().length()<1){
+
+                    name.setError("االرجاء إدخال إسم المستخدم");
+                }
+            }
+        });
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (password.getText().toString().trim().length()<6){
+
+                    password.setError("يجب ان تتكون كلمة المرور من ٦ خانات او اكثر");
+                }
+            }
+        });
+        PasswordCom.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!password.getText().toString().trim().equals(PasswordCom.getText().toString().trim()) || PasswordCom.getText().toString().trim().length()<6){
+
+                    PasswordCom.setError("كلمة المرور ليست متطابقة");
+                }
+            }
+        });
+        phone.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (phone.getText().toString().trim().length()!=13){
+
+                    phone.setError("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
+                }
+            }
+        });
+
 
 
         button.setOnClickListener(this);
@@ -76,16 +128,164 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if(view == button ){
+            if (name.getText().toString().trim().length()<1){
+                alert= new android.app.AlertDialog.Builder(Registration.this);
+                alert.setMessage("الرجاء إدخال إسم المستخدم");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "موافق",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+
+                            }
+                        });
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
+                return;
+            }
+            else if (password.getText().toString().trim().length()<6){
+                alert= new android.app.AlertDialog.Builder(Registration.this);
+                alert.setMessage("يجب ان تتكون كلمة المرور من ٦ خانات او اكثر");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "موافق",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+
+                            }
+                        });
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
+                return;
+            }
+            else if (!password.getText().toString().trim().equals(PasswordCom.getText().toString().trim()) || PasswordCom.getText().toString().trim().length()<6){
+                alert= new android.app.AlertDialog.Builder(Registration.this);
+                alert.setMessage("كلمة المرور ليست متطابقة");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "موافق",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+
+                            }
+                        });
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
+                return;
+            }
+            else if(phone.getText().toString().trim().toString().length()!=13 ){
+                //&& phone.getText().toString().trim().toString().substring(0,1)=="+"
+                alert= new android.app.AlertDialog.Builder(Registration.this);
+                alert.setMessage("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "موافق",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+
+                            }
+                        });
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
+                return;
+            }
+            else{
             progressDialog.setMessage(" الرجاء الانتظار حتى يتم التسجيل");
             progressDialog.show();
+
+
+
+            //not working
+            hexName= stringToHex(name.toString().trim().toString());
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("RegisteredUser");
+                mDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            if (hexName.equals(snapshot.getKey())){
+                                progressDialog.dismiss();
+
+                                alert.setTitle("عذراً يوجد مستخدم بهذا الاسم").setIcon(R.drawable.f1);
+                                alert.setNegativeButton("موافق", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                AlertDialog dialog = alert.create();
+                                // Finally, display the alert dialog
+                                dialog.show();
+
+                                // Get screen width and height in pixels
+                                DisplayMetrics displayMetrics = new DisplayMetrics();
+                                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                                // The absolute width of the available display size in pixels.
+                                int displayWidth = displayMetrics.widthPixels;
+                                // The absolute height of the available display size in pixels.
+                                int displayHeight = displayMetrics.heightPixels;
+
+                                // Initialize a new window manager layout parameters
+                                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+                                // Copy the alert dialog window attributes to new layout parameter instance
+                                layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+
+                                // Set alert dialog width equal to screen width 70%
+                                int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                                // Set alert dialog height equal to screen height 70%
+                                int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+                                // Set the width and height for the layout parameters
+                                // This will bet the width and height of alert dialog
+                                layoutParams.width = dialogWindowWidth;
+                                layoutParams.height = dialogWindowHeight;
+
+                                // Apply the newly created layout parameters to the alert dialog window
+                                dialog.getWindow().setAttributes(layoutParams);
+                                //Toast.makeText(Registration.this, "هناك خلل..", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        }
+
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+            if (!flag) {
+
+
+            }else {
+
+
             //calling register method on click
             intent = new Intent( Registration.this, ActivityPhoneAuth.class );
             intent.putExtra( "username", name.getText().toString().trim().toString() );
             intent.putExtra( "password", password.getText().toString().trim().toString() );
             intent.putExtra( "Phone", phone.getText().toString().trim().toString() );
-            startActivity( intent );
+            startActivity( intent );}
 
 
+        }
         }
         if(view == log ) {
 
@@ -93,6 +293,31 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
         }
 
+    }
+
+    public static String stringToHex(String base)
+    {
+        StringBuffer buffer = new StringBuffer();
+        int intValue;
+        for(int x = 0; x < base.length(); x++)
+        {
+            int cursor = 0;
+            intValue = base.charAt(x);
+            String binaryChar = new String(Integer.toBinaryString(base.charAt(x)));
+            for(int i = 0; i < binaryChar.length(); i++)
+            {
+                if(binaryChar.charAt(i) == '1')
+                {
+                    cursor += 1;
+                }
+            }
+            if((cursor % 2) > 0)
+            {
+                intValue += 128;
+            }
+            buffer.append(Integer.toHexString(intValue));
+        }
+        return buffer.toString();
     }
 }
 

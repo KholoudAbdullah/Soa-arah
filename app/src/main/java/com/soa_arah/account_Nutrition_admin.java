@@ -1,17 +1,21 @@
 package com.soa_arah;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -45,6 +49,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabase1;
     private ProgressDialog progressDialog;
+    android.app.AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,11 +104,10 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
             @Override
             public void afterTextChanged(Editable editable) {
 
-                String text=password.getText().toString();
-                int count =text.length();
-                if(count>=6) {
+                if (password.getText().toString().trim().length()<6){
 
-                        passlenght.setText("");
+                    password.setError("يجب ان تتكون كلمة المرور من ٦ خانات او اكثر");
+
                 }
             }
         });
@@ -161,7 +165,22 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
 
         if (view == edit_pass1) {
             if(password.getText().toString().equals("")||password1.getText().toString().equals("")){
-                Toast.makeText(account_Nutrition_admin.this, "الرجاء إدخال الرقم السري", Toast.LENGTH_LONG).show();
+                alert= new android.app.AlertDialog.Builder(account_Nutrition_admin.this);
+                alert.setMessage("الرجاء إدخال الرقم السري");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "موافق",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+
+                            }
+                        });
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
+
 
             }
             else if (password.getText().toString().equals(password1.getText().toString())) {
@@ -182,18 +201,115 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
                                     mDatabase1.child("admin_N").child("password").setValue(password.getText().toString());
 
                                     //display message to the user here
-                                    Toast.makeText(account_Nutrition_admin.this, "تمت العملية بنجاح..", Toast.LENGTH_LONG).show();
+                                    AlertDialog.Builder alert = new AlertDialog.Builder(
+                                            account_Nutrition_admin.this );
+
+                                    alert.setTitle( "تمت العملية بنجاح.." ).setIcon( R.drawable.t1 );
+                                    alert.setNegativeButton("موافق", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    AlertDialog dialog = alert.create();
+                                    // Finally, display the alert dialog
+                                    dialog.show();
+
+                                    // Get screen width and height in pixels
+                                    DisplayMetrics displayMetrics = new DisplayMetrics();
+                                    getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
+                                    // The absolute width of the available display size in pixels.
+                                    int displayWidth = displayMetrics.widthPixels;
+                                    // The absolute height of the available display size in pixels.
+                                    int displayHeight = displayMetrics.heightPixels;
+
+                                    // Initialize a new window manager layout parameters
+                                    WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+                                    // Copy the alert dialog window attributes to new layout parameter instance
+                                    layoutParams.copyFrom( dialog.getWindow().getAttributes() );
+
+
+
+                                    // Set alert dialog width equal to screen width 70%
+                                    int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                                    // Set alert dialog height equal to screen height 70%
+                                    int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+                                    // Set the width and height for the layout parameters
+                                    // This will bet the width and height of alert dialog
+                                    layoutParams.width = dialogWindowWidth;
+                                    layoutParams.height = dialogWindowHeight;
+
+                                    // Apply the newly created layout parameters to the alert dialog window
+                                    dialog.getWindow().setAttributes( layoutParams );
+
 
                                 } else {
-                                    //display some message here
-                                    Toast.makeText(account_Nutrition_admin.this, "هناك خلل..", Toast.LENGTH_LONG).show();
+                                    //display message to the user here
+                                    AlertDialog.Builder alert = new AlertDialog.Builder(
+                                            account_Nutrition_admin.this );
+
+                                    alert.setTitle( "هناك خلل.." ).setIcon( R.drawable.f1 );
+                                    alert.setNegativeButton("موافق", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    AlertDialog dialog = alert.create();
+                                    // Finally, display the alert dialog
+                                    dialog.show();
+
+                                    // Get screen width and height in pixels
+                                    DisplayMetrics displayMetrics = new DisplayMetrics();
+                                    getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
+                                    // The absolute width of the available display size in pixels.
+                                    int displayWidth = displayMetrics.widthPixels;
+                                    // The absolute height of the available display size in pixels.
+                                    int displayHeight = displayMetrics.heightPixels;
+
+                                    // Initialize a new window manager layout parameters
+                                    WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+                                    // Copy the alert dialog window attributes to new layout parameter instance
+                                    layoutParams.copyFrom( dialog.getWindow().getAttributes() );
+
+
+
+                                    // Set alert dialog width equal to screen width 70%
+                                    int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                                    // Set alert dialog height equal to screen height 70%
+                                    int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+                                    // Set the width and height for the layout parameters
+                                    // This will bet the width and height of alert dialog
+                                    layoutParams.width = dialogWindowWidth;
+                                    layoutParams.height = dialogWindowHeight;
+
+                                    // Apply the newly created layout parameters to the alert dialog window
+                                    dialog.getWindow().setAttributes( layoutParams );
 
                                 }
                                 progressDialog.dismiss();
                             }
                         });
             } else {
-                Toast.makeText(account_Nutrition_admin.this, " الرقم السري لا يتطابق", Toast.LENGTH_LONG).show();
+                //display message to the user here
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        account_Nutrition_admin.this );
+
+                alert.setTitle( "الرقم السري لا يتطابق" ).setIcon( R.drawable.f1 );
+                alert.setNegativeButton("موافق", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = alert.create();
+                // Finally, display the alert dialog
+                dialog.show();
+
 
             }
 
