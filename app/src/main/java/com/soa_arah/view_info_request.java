@@ -47,26 +47,14 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_info_request);
+
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
-
-        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (keyword.getText().toString().trim().length()<1){
-
-                    keyword.setError("الرجاء إدخال الكلمات المفتاحية");
-                }
-            }
-        });
-
-
         firebaseAuth = FirebaseAuth.getInstance();
         namef = getIntent().getStringExtra("namef");
-         calorie=getIntent().getStringExtra("calorie");
-         image=getIntent().getStringExtra("image");
+        calorie=getIntent().getStringExtra("calorie");
+        image=getIntent().getStringExtra("image");
         quantity=getIntent().getStringExtra("quantity");
-         standard=getIntent().getStringExtra("standard");
+        standard=getIntent().getStringExtra("standard");
         key=getIntent().getStringExtra("keys");
 
         namefood=(TextView)findViewById(R.id.namefood);
@@ -88,6 +76,17 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
         reject.setOnClickListener(this);
         accept.setOnClickListener(this);
+
+        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (keyword.getText().toString().trim().length()<1){
+
+                    keyword.setError("لم يتم إدخال الكلمات المفتاحية");
+                }
+            }
+        });
 
 
         //menu bottom bar
@@ -124,109 +123,115 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-if(keyword.getText().toString().equals("")){
 
-    alert= new android.app.AlertDialog.Builder(view_info_request.this);
-    alert.setMessage("لم يتم إدخال الكلمات المفتاحية");
-    alert.setCancelable(true);
-    alert.setPositiveButton(
-            "موافق",
-            new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+            if (view == accept) {
 
-                    dialogInterface.cancel();
+                if (keyword.getText().toString().trim().length()<1){
+                    alert= new android.app.AlertDialog.Builder(view_info_request.this);
+                    alert.setMessage("لم يتم إدخال الكلمات المفتاحية");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                    return;
                 }
-            });
-    android.app.AlertDialog alert11 = alert.create();
-    alert11.show();
-}else {
-    if (view == accept) {
 
+                Food newFood = new Food(namef, image, keyword.getText().toString(), calorie, standard, quantity);
+                newFood.setBarcodN("لم يتم إدخال بيانات");
+                newFood.setImageTable("لم يتم إدخال بيانات");
 
-        Food newFood = new Food(namef, image, keyword.getText().toString(), calorie, standard, quantity);
-        newFood.setBarcodN("لم يتم إدخال بيانات");
-        newFood.setImageTable("لم يتم إدخال بيانات");
+                mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Food");
+                mDatabaseReference.child(namef).setValue(newFood);
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Food");
-        mDatabaseReference.child(namef).setValue(newFood);
+                mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests");
+                mDatabaseReference1.child("ByName").child(key).removeValue();
+                //display message to the user here
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        view_info_request.this );
 
-        mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests");
-        mDatabaseReference1.child("ByName").child(key).removeValue();
+                alert.setTitle( "تمت إضافة الصنف" ).setIcon( R.drawable.t1 );
+                AlertDialog dialog = alert.create();
+                // Finally, display the alert dialog
+                dialog.show();
 
-        //display message to the user here
-        AlertDialog.Builder alert = new AlertDialog.Builder(
-                view_info_request.this );
+                // Get screen width and height in pixels
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
+                // The absolute width of the available display size in pixels.
+                int displayWidth = displayMetrics.widthPixels;
+                // The absolute height of the available display size in pixels.
+                int displayHeight = displayMetrics.heightPixels;
 
-        alert.setTitle("تمت إضافة الصنف").setIcon( R.drawable.t1 );
-        AlertDialog dialog = alert.create();
-        // Finally, display the alert dialog
-        dialog.show();
+                // Initialize a new window manager layout parameters
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
 
-        // Get screen width and height in pixels
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
-        // The absolute width of the available display size in pixels.
-        int displayWidth = displayMetrics.widthPixels;
-        // The absolute height of the available display size in pixels.
-        int displayHeight = displayMetrics.heightPixels;
-
-        // Initialize a new window manager layout parameters
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-
-        // Copy the alert dialog window attributes to new layout parameter instance
-        layoutParams.copyFrom( dialog.getWindow().getAttributes() );
+                // Copy the alert dialog window attributes to new layout parameter instance
+                layoutParams.copyFrom( dialog.getWindow().getAttributes() );
 
 
 
-        // Set alert dialog width equal to screen width 70%
-        int dialogWindowWidth = (int) (displayWidth * 0.9f);
-        // Set alert dialog height equal to screen height 70%
-        int dialogWindowHeight = (int) (displayHeight * 0.15f);
+                // Set alert dialog width equal to screen width 70%
+                int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                // Set alert dialog height equal to screen height 70%
+                int dialogWindowHeight = (int) (displayHeight * 0.15f);
 
-        // Set the width and height for the layout parameters
-        // This will bet the width and height of alert dialog
-        layoutParams.width = dialogWindowWidth;
-        layoutParams.height = dialogWindowHeight;
+                // Set the width and height for the layout parameters
+                // This will bet the width and height of alert dialog
+                layoutParams.width = dialogWindowWidth;
+                layoutParams.height = dialogWindowHeight;
 
-        // Apply the newly created layout parameters to the alert dialog window
-        dialog.getWindow().setAttributes( layoutParams );
-        startActivity(new Intent(view_info_request.this, view_request.class));
+                // Apply the newly created layout parameters to the alert dialog window
+                dialog.getWindow().setAttributes( layoutParams );
 
-    }
-    if (view == reject) {
-        // mDatabaseReference1.child("Requests").child("ByName").child(key).removeValue();
-        mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests");
-        mDatabaseReference1.child("ByName").child(key).removeValue();
-        alert= new android.app.AlertDialog.Builder(view_info_request.this);
-        alert.setMessage("هل انت متأكد من رفض الطلب؟");
-        alert.setCancelable(true);
-        alert.setPositiveButton(
-                "تعم",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                        startActivity(new Intent(view_info_request.this, view_request.class));
+                startActivity(new Intent(view_info_request.this, view_request.class));
 
-                    }
-                });
+            }
+            if (view == reject) {
+                // mDatabaseReference1.child("Requests").child("ByName").child(key).removeValue();
+                mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests");
+                mDatabaseReference1.child("ByName").child(key).removeValue();
 
-        alert.setNegativeButton(
-                "لا",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                        dialogInterface.cancel();
-                    }
-                });
+                alert= new android.app.AlertDialog.Builder(view_info_request.this);
+                alert.setMessage("هل انت متأكد من رفض الطلب؟");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "تعم",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
-        android.app.AlertDialog alert11 = alert.create();
-        alert11.show();
-    }
-}
+                                startActivity(new Intent(view_info_request.this, view_request.class));
+
+                            }
+                        });
+
+                alert.setNegativeButton(
+                        "لا",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+                            }
+                        });
+
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
+
+
+            }
+
 
     }
     @Override

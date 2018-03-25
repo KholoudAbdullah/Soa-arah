@@ -1,5 +1,6 @@
 package com.soa_arah;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,6 +39,9 @@ public class view_request extends AppCompatActivity {
     private ArrayList<Food> re_barcode ;
     private TextView no_requestname,no_request_barcode;
     private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,8 @@ public class view_request extends AppCompatActivity {
         key1=new ArrayList<String>();
         no_requestname=(TextView)findViewById(R.id.no_requestname);
         no_request_barcode=(TextView)findViewById(R.id.no_request_barcode);
+
+        progressDialog = new ProgressDialog(this);
 
         request_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,6 +83,9 @@ public class view_request extends AppCompatActivity {
             }
         });
 
+        progressDialog.setMessage(" الرجاء الانتظار حتى يتم تحميل الطلبات");
+        progressDialog.show();
+
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
 
@@ -99,10 +108,15 @@ public class view_request extends AppCompatActivity {
 
                     }
 
-                    if(re_name.size()==0)
+                    if(re_name.size()==0) {
                         no_requestname.setText("لا توجد طلبات");
-                    else
+                        progressDialog.dismiss();
+                    }
+
+                    else {
                         no_requestname.setText("");
+                        progressDialog.dismiss();
+                    }
 
 
                 //disp laying it to list
@@ -165,11 +179,14 @@ public class view_request extends AppCompatActivity {
 
                 }
 
-                if(re_barcode.size()==0)
+                if(re_barcode.size()==0) {
                     no_request_barcode.setText("لا توجد طلبات");
-                else
+                    progressDialog.dismiss();
+                }
+                else {
                     no_request_barcode.setText("");
-
+                    progressDialog.dismiss();
+                }
                 //disp laying it to list
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByBarcode);
                 request_barcode.setAdapter(adapter);
