@@ -33,11 +33,11 @@
         android:id="@+id/caln"
         android:layout_width="153dp"
         android:layout_height="157dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/picture1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/calgo"
@@ -45,12 +45,12 @@
         android:layout_height="153dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintEnd_toStartOf="@+id/caln"
-        app:layout_constraintHorizontal_bias="0.608"
+        app:layout_constraintHorizontal_bias="0.273"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/picture1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -60,34 +60,33 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintHorizontal_bias="0.672"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/caln"
-        app:layout_constraintVertical_bias="0.144"
-        app:srcCompat="@drawable/picture1" />
+        app:layout_constraintVertical_bias="0.188" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="153dp"
         android:layout_height="157dp"
         android:layout_marginBottom="156dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintBottom_toBottomOf="@+id/textwater"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calgo"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/picture1"
         tools:ignore="UnknownId" />
-
 
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="42dp"
-        android:layout_height="39dp"
+        android:layout_width="54dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -98,23 +97,23 @@
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
         app:layout_constraintVertical_bias="0.927"
-        app:srcCompat="@drawable/ic_local_drink_white_24dp" />
+        design:srcCompat="@drawable/water_glass" />
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="68dp"
-        android:layout_height="54dp"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="52dp"
         app:layout_constraintBottom_toBottomOf="@+id/caln"
         app:layout_constraintEnd_toEndOf="@+id/caln"
-        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="@+id/caln"
         app:layout_constraintTop_toTopOf="@+id/caln"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:layout_constraintVertical_bias="0.661"
+        app:srcCompat="@drawable/add_icon2" />
 
     <TextView
         android:id="@+id/textView13"
@@ -133,7 +132,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/caln"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView14"
@@ -173,7 +172,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="عدد"
+        android:text="عدد أكواب المياه المكتسبة"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -192,14 +191,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="BMI"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.938" />
+        app:layout_constraintVertical_bias="0.803" />
 
     <Button
         android:id="@+id/delete"
@@ -209,17 +208,17 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="396dp"
+        android:background="@drawable/button_login"
+        android:text="حذف الخطة الغذائية"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="حذف الخطة الغذائية"
-        android:background="@drawable/button_login"
-        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295" />
+        app:layout_constraintVertical_bias="0.449" />
 
 
 
@@ -257,8 +256,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/calgo"
         app:layout_constraintEnd_toEndOf="@+id/calgo"
+        app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="@+id/calgo"
-        app:layout_constraintTop_toTopOf="@+id/calgo" />
+        app:layout_constraintTop_toTopOf="@+id/calgo"
+        app:layout_constraintVertical_bias="0.346" />
 
     <TextView
         android:id="@+id/Water"
@@ -292,10 +293,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintHorizontal_bias="0.176"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.728" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ProgressBar
         android:id="@+id/progressbar"

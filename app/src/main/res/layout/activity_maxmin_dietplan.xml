@@ -199,10 +199,9 @@
 
     <Button
         android:id="@+id/cancel"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/button_login"
@@ -212,14 +211,13 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.843"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/max"
         app:layout_constraintVertical_bias="0.393" />
 
     <Button
         android:id="@+id/creat"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="72dp"
