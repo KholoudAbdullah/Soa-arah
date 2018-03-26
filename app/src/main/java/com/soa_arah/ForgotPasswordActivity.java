@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private Button send;
     private Button resend;
     private Button confirm;
+    private ProgressBar progressBar;
 
 
     android.app.AlertDialog.Builder alert;
@@ -79,13 +81,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         name = (EditText) findViewById(R.id.name);
         code = (EditText) findViewById(R.id.code);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
 
-
-
-
-//        FirebaseDatabase database= FirebaseDatabase.getInstance();
-//        DatabaseReference dbRef= database.getReference();
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -97,42 +95,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         };
 
 
-//        dbRef.child("RegisteredUser").child(Name).child("phoneNum").
-//        dbRef.child("RegisteredUser").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-//                    Toast.makeText(getApplicationContext(),"in for b",Toast.LENGTH_LONG).show();
-////                    n=snapshot.getKey();
-//                    n=snapshot.child("email").getValue(String.class);
-//                    Toast.makeText(getApplicationContext(),"in for a",Toast.LENGTH_LONG).show();
-//                   if(n.equals(name.getText().toString()+"@soaarah.com")){
-//                       Toast.makeText(getApplicationContext(),"in if b",Toast.LENGTH_LONG).show();
-//                       phoneNumber=snapshot.child("phoneNum").getValue(String.class);
-//                       flag=true;
-//                       Toast.makeText(getApplicationContext(),"in if a",Toast.LENGTH_LONG).show();
-//                       break;
-//                   }else flag=false;
-//                    }
-//
-//                }
-//
-////                User user = dataSnapshot.getValue(User.class);
-////                phoneNumber=user.getPhoneNum();
-//
-//
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
 
     }
     public void requestCode(View view){
 
 
+
+        progressBar.setVisibility(View.VISIBLE);
 
         alert= new android.app.AlertDialog.Builder(ForgotPasswordActivity.this);
         alert.setMessage("الرجاء الانتظار حتى يتم الارسال");
@@ -157,14 +126,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                  // Toast.makeText(getApplicationContext(),"in for b",Toast.LENGTH_LONG).show();
                     n=snapshot.getKey();
 
-//                    n=snapshot.child("email").getValue(String.class);
-//                   Toast.makeText(getApplicationContext(),"in for a",Toast.LENGTH_LONG).show();
                     String na=stringToHex(name.getText().toString().trim());
                     if(n.equals(na)){
-//                        Toast.makeText(getApplicationContext(),"in if b",Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.INVISIBLE);
+
                         phoneNumber=snapshot.child("phoneNum").getValue(String.class);
                         Log.d("111111","222"+phoneNumber);
                         flag=true;
@@ -173,7 +140,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
 
                         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                                phoneNumber, 30, TimeUnit.SECONDS, ForgotPasswordActivity.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                                phoneNumber, 10, TimeUnit.SECONDS, ForgotPasswordActivity.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                                     @Override
                                     public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                                         //Called if it is not needed to enter verification code
@@ -218,6 +185,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                 }
                 if(flag==false){
+                    progressBar.setVisibility(View.INVISIBLE);
 
                     AlertDialog.Builder alert = new AlertDialog.Builder(
                             ForgotPasswordActivity.this );
@@ -318,11 +286,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             // Copy the alert dialog window attributes to new layout parameter instance
                             layoutParams.copyFrom(dialog.getWindow().getAttributes());
 
-                            // Set the alert dialog window width and height
-                            // Set alert dialog width equal to screen width 90%
-                            // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                            // Set alert dialog height equal to screen height 90%
-                            // int dialogWindowHeight = (int) (displayHeight * 0.9f);
 
                             // Set alert dialog width equal to screen width 70%
                             int dialogWindowWidth = (int) (displayWidth * 0.9f);
@@ -345,7 +308,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             AlertDialog.Builder alert = new AlertDialog.Builder(
                                     ForgotPasswordActivity.this);
 
-                            alert.setTitle("يوجد خطأ في الرمز").setIcon(R.drawable.f1);
+                            alert.setTitle("الرجاء التأكد من رمز التحقق").setIcon(R.drawable.f1);
                             AlertDialog dialog = alert.create();
 
                             // Finally, display the alert dialog
@@ -365,11 +328,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             // Copy the alert dialog window attributes to new layout parameter instance
                             layoutParams.copyFrom(dialog.getWindow().getAttributes());
 
-                            // Set the alert dialog window width and height
-                            // Set alert dialog width equal to screen width 90%
-                            // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                            // Set alert dialog height equal to screen height 90%
-                            // int dialogWindowHeight = (int) (displayHeight * 0.9f);
 
                             // Set alert dialog width equal to screen width 70%
                             int dialogWindowWidth = (int) (displayWidth * 0.9f);

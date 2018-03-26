@@ -54,6 +54,20 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textname" />
 
+    <ProgressBar
+        android:id="@+id/progressbar1"
+        android:layout_width="90dp"
+        android:layout_height="57dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/image4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textname" />
+
     <ImageView
         android:id="@+id/image4"
         android:layout_width="300dp"
@@ -147,6 +161,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6"
         tools:ignore="MissingConstraints" />
+
+    <ProgressBar
+        android:id="@+id/progressbar2"
+        android:layout_width="90dp"
+        android:layout_height="57dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/Navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/request_barcode"
+        tools:layout_editor_absoluteX="205dp" />
 
 
 </android.support.constraint.ConstraintLayout>

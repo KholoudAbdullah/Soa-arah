@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,7 +40,8 @@ public class view_request extends AppCompatActivity {
     private ArrayList<Food> re_barcode ;
     private TextView no_requestname,no_request_barcode;
     private FirebaseAuth firebaseAuth;
-    private ProgressDialog progressDialog;
+    private ProgressBar progressBarName,progressBarBarcode;
+
 
 
     @Override
@@ -57,7 +59,12 @@ public class view_request extends AppCompatActivity {
         no_requestname=(TextView)findViewById(R.id.no_requestname);
         no_request_barcode=(TextView)findViewById(R.id.no_request_barcode);
 
-        progressDialog = new ProgressDialog(this);
+        progressBarName = (ProgressBar) findViewById(R.id.progressbar1);
+        progressBarBarcode = (ProgressBar) findViewById(R.id.progressbar2);
+
+        progressBarName.setVisibility(View.VISIBLE);
+        progressBarBarcode.setVisibility(View.VISIBLE);
+
 
         request_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,8 +90,6 @@ public class view_request extends AppCompatActivity {
             }
         });
 
-        progressDialog.setMessage(" الرجاء الانتظار حتى يتم تحميل الطلبات");
-        progressDialog.show();
 
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
@@ -110,12 +115,12 @@ public class view_request extends AppCompatActivity {
 
                     if(re_name.size()==0) {
                         no_requestname.setText("لا توجد طلبات");
-                        progressDialog.dismiss();
+                        progressBarName.setVisibility(View.INVISIBLE);
                     }
 
                     else {
                         no_requestname.setText("");
-                        progressDialog.dismiss();
+                        progressBarName.setVisibility(View.INVISIBLE);
                     }
 
 
@@ -181,11 +186,11 @@ public class view_request extends AppCompatActivity {
 
                 if(re_barcode.size()==0) {
                     no_request_barcode.setText("لا توجد طلبات");
-                    progressDialog.dismiss();
+                    progressBarBarcode.setVisibility(View.INVISIBLE);
                 }
                 else {
                     no_request_barcode.setText("");
-                    progressDialog.dismiss();
+                    progressBarBarcode.setVisibility(View.INVISIBLE);
                 }
                 //disp laying it to list
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByBarcode);
