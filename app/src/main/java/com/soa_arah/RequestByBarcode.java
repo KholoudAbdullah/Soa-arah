@@ -71,10 +71,11 @@ public class RequestByBarcode extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (name.getText().toString().trim().length()<1){
 
-                    name.setError("االرجاء إدخال إسم المستخدم");
+                    name.setError("االرجاء إدخال إسم الصنف");
                 }
             }
         });
+
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -170,7 +171,8 @@ public class RequestByBarcode extends AppCompatActivity {
                     alert11.show();
 
                 }else {
-                uploadFile();}
+                uploadFile();
+                }
 
             }
         });
@@ -254,38 +256,38 @@ public class RequestByBarcode extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 2 && resultCode == RESULT_OK
-                && data != null && data.getData() != null) {
-            fImageUri = data.getData();
-
-            Picasso.with(this).load(fImageUri).into(foodImage);
-            try {
-                // Getting selected image into Bitmap.
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), fImageUri);
-
-                // After selecting image change choose button above text.
-                upload.setText("تم اختيار الصورة");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else if (requestCode == 3 && resultCode == RESULT_OK
+        if (requestCode == 3 && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             tableUri = data.getData();
 
             Picasso.with(this).load(tableUri).into(tableI);
             try {
                 // Getting selected image into Bitmap.
-                Bitmap bitmap1 = MediaStore.Images.Media.getBitmap(getContentResolver(), tableUri);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), tableUri);
 
                 // After selecting image change choose button above text.
                 table.setText("تم اختيار الصورة");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (requestCode == 2 && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            fImageUri = data.getData();
+
+            Picasso.with(this).load(fImageUri).into(foodImage);
+            try {
+                // Getting selected image into Bitmap.
+                Bitmap bitmap1 = MediaStore.Images.Media.getBitmap(getContentResolver(), fImageUri);
+
+                // After selecting image change choose button above text.
+                upload.setText("تم اختيار الصورة");
                 StorageReference fileReference1 = storageReference.child(System.currentTimeMillis()
-                        + "." + getFileExtension(tableUri));
+                        + "." + getFileExtension(fImageUri));
                 // Setting progressDialog Title.
 
 
-                tablem = fileReference1.putFile(tableUri)
+                mUploadTask= fileReference1.putFile(fImageUri)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -327,17 +329,17 @@ public class RequestByBarcode extends AppCompatActivity {
             progressDialog.show();
 
             StorageReference fileReference = storageReference.child(System.currentTimeMillis()
-                    + "." + getFileExtension(fImageUri));
-
-            StorageReference fileReference1 = storageReference.child(System.currentTimeMillis()
                     + "." + getFileExtension(tableUri));
 
-            mUploadTask = fileReference.putFile(fImageUri)
+            StorageReference fileReference1 = storageReference.child(System.currentTimeMillis()
+                    + "." + getFileExtension(fImageUri));
+
+            tablem = fileReference.putFile(tableUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Food RF =  new Food(name.getText().toString().trim(),taskSnapshot.getDownloadUrl().toString(),"لايوجد","لايوجد","لايوجد","لايوجد");
-                            RF.setImageTable(douTable);
+                            Food RF =  new Food(name.getText().toString().trim(),douTable,"لايوجد","لايوجد","لايوجد","لايوجد");
+                            RF.setImageTable( taskSnapshot.getDownloadUrl().toString());
                             RF.setBarcodN(barnum);
                             String uploadId = databaseReference.push().getKey();
                             databaseReference.child(uploadId).setValue(RF);
@@ -345,47 +347,7 @@ public class RequestByBarcode extends AppCompatActivity {
                             // Hiding the progressDialog after done uploading.
                             progressDialog.dismiss();
 
-                            AlertDialog.Builder alert = new AlertDialog.Builder(
-                                    RequestByBarcode.this);
-                            alert.setTitle("تم ارسال الطلب بنجاح").setIcon(R.drawable.t1);
-                            AlertDialog dialog = alert.create();
 
-                            // Finally, display the alert dialog
-                            dialog.show();
-
-                            // Get screen width and height in pixels
-                            DisplayMetrics displayMetrics = new DisplayMetrics();
-                            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-                            // The absolute width of the available display size in pixels.
-                            int displayWidth = displayMetrics.widthPixels;
-                            // The absolute height of the available display size in pixels.
-                            int displayHeight = displayMetrics.heightPixels;
-
-                            // Initialize a new window manager layout parameters
-                            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-
-                            // Copy the alert dialog window attributes to new layout parameter instance
-                            layoutParams.copyFrom(dialog.getWindow().getAttributes());
-
-                            // Set the alert dialog window width and height
-                            // Set alert dialog width equal to screen width 90%
-                            // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                            // Set alert dialog height equal to screen height 90%
-                            // int dialogWindowHeight = (int) (displayHeight * 0.9f);
-
-                            // Set alert dialog width equal to screen width 70%
-                            int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                            // Set alert dialog height equal to screen height 70%
-                            int dialogWindowHeight = (int) (displayHeight * 0.15f);
-
-                            // Set the width and height for the layout parameters
-                            // This will bet the width and height of alert dialog
-                            layoutParams.width = dialogWindowWidth;
-                            layoutParams.height = dialogWindowHeight;
-
-                            // Apply the newly created layout parameters to the alert dialog window
-                            dialog.getWindow().setAttributes(layoutParams);
-                            startActivity(new Intent(RequestByBarcode.this, home_page_register.class));
 
 
                         }
@@ -398,6 +360,43 @@ public class RequestByBarcode extends AppCompatActivity {
                             Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+            AlertDialog.Builder alert = new AlertDialog.Builder(
+                    RequestByBarcode.this);
+            alert.setTitle("تم ارسال الطلب بنجاح").setIcon(R.drawable.t1);
+            AlertDialog dialog = alert.create();
+
+            // Finally, display the alert dialog
+            dialog.show();
+
+            // Get screen width and height in pixels
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            // The absolute width of the available display size in pixels.
+            int displayWidth = displayMetrics.widthPixels;
+            // The absolute height of the available display size in pixels.
+            int displayHeight = displayMetrics.heightPixels;
+
+            // Initialize a new window manager layout parameters
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+            // Copy the alert dialog window attributes to new layout parameter instance
+            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+
+            // Set alert dialog width equal to screen width 70%
+            int dialogWindowWidth = (int) (displayWidth * 0.9f);
+            // Set alert dialog height equal to screen height 70%
+            int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+            // Set the width and height for the layout parameters
+            // This will bet the width and height of alert dialog
+            layoutParams.width = dialogWindowWidth;
+            layoutParams.height = dialogWindowHeight;
+
+            // Apply the newly created layout parameters to the alert dialog window
+            dialog.getWindow().setAttributes(layoutParams);
+            startActivity(new Intent(RequestByBarcode.this, home_page_register.class));
+
         } else {
             Toast.makeText(this, "لم يتم اختيار الملف", Toast.LENGTH_SHORT).show();
         }

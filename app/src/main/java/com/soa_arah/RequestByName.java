@@ -13,9 +13,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -332,8 +334,7 @@ public class RequestByName extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mImageUri = data.getData();
 
             Picasso.with(this).load(mImageUri).into(foodImage);
@@ -383,15 +384,6 @@ public class RequestByName extends AppCompatActivity {
                             // Hiding the progressDialog after done uploading.
                             progressDialog.dismiss();
 
-                            AlertDialog.Builder alert1 = new AlertDialog.Builder(
-                                    RequestByName.this);
-                            alert1.setTitle("تم ارسال الطلب بنجاح").setIcon(R.drawable.t1);
-                            alert1.setCancelable(true);
-                            android.app.AlertDialog alert11 = alert.create();
-                            alert11.show();
-
-                            startActivity(new Intent(RequestByName.this, home_page_register.class));
-
 
                         }
                     })
@@ -403,6 +395,47 @@ public class RequestByName extends AppCompatActivity {
                             Toast.makeText(RequestByName.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+            AlertDialog.Builder alert = new AlertDialog.Builder(
+                    RequestByName.this);
+            alert.setTitle("تمت عملية التسجيل بنجاح").setIcon(R.drawable.t1);
+            AlertDialog dialog = alert.create();
+
+            // Finally, display the alert dialog
+            dialog.show();
+
+            // Get screen width and height in pixels
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            // The absolute width of the available display size in pixels.
+            int displayWidth = displayMetrics.widthPixels;
+            // The absolute height of the available display size in pixels.
+            int displayHeight = displayMetrics.heightPixels;
+
+            // Initialize a new window manager layout parameters
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+            // Copy the alert dialog window attributes to new layout parameter instance
+            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+
+
+            // Set alert dialog width equal to screen width 70%
+            int dialogWindowWidth = (int) (displayWidth * 0.9f);
+            // Set alert dialog height equal to screen height 70%
+            int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+            // Set the width and height for the layout parameters
+            // This will bet the width and height of alert dialog
+            layoutParams.width = dialogWindowWidth;
+            layoutParams.height = dialogWindowHeight;
+
+            // Apply the newly created layout parameters to the alert dialog window
+            dialog.getWindow().setAttributes(layoutParams);
+            startActivity(new Intent(getApplicationContext(), home_page_register.class));
+            //close this activity
+            finish();
+            startActivity(new Intent(RequestByName.this, home_page_register.class));
+
         } else {
             alert= new android.app.AlertDialog.Builder(RequestByName.this);
             alert.setMessage("عذراً يجب اختيار صورة");
