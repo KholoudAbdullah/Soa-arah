@@ -83,6 +83,27 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         code = (EditText) findViewById(R.id.code);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (name.getText().toString().trim().length()<1){
+
+                    name.setError("الرجاء إدخال إسم المستخدم");
+                }
+            }
+        });
+        code.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (code.getText().toString().trim().length()<1){
+
+                    code.setError("الرجاء إدخال رمز التحقق");
+                }
+            }
+        });
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -99,25 +120,26 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
     public void requestCode(View view){
 
+        if(name.getText().toString().trim().length()<1){
+            alert= new android.app.AlertDialog.Builder(ForgotPasswordActivity.this);
+            alert.setMessage("الرجاء إدخال إسم المستخدم");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
+                            dialogInterface.cancel();
+
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+            return;
+        }
 
         progressBar.setVisibility(View.VISIBLE);
-
-        alert= new android.app.AlertDialog.Builder(ForgotPasswordActivity.this);
-        alert.setMessage("الرجاء الانتظار حتى يتم الارسال");
-        alert.setCancelable(true);
-        alert.setPositiveButton(
-                "موافق",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        dialogInterface.cancel();
-
-                    }
-                });
-        android.app.AlertDialog alert11 = alert.create();
-        alert11.show();
 
 
         dbRef=FirebaseDatabase.getInstance().getReference().child("RegisteredUser");
