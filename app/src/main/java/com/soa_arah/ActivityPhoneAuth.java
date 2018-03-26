@@ -43,6 +43,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
     private ProgressDialog progressDialog;
    private Intent intent;
     RegisteredUser user1;
+    android.app.AlertDialog.Builder alert;
 
     private static final String TAG = "ActivityPhoneAuth";
 
@@ -57,6 +58,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_auth);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
         //Note that this will not work on emulator, this requires a real device
         etxtPhone = (EditText) findViewById(R.id.etxtPhone);
         intent = getIntent();
@@ -72,6 +74,28 @@ public class ActivityPhoneAuth extends AppCompatActivity {
             }
         };
 
+        etxtPhone.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (etxtPhone.getText().toString().trim().length()!=13){
+
+                    etxtPhone.setError("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
+                }
+            }
+        });
+
+        etxtPhoneCode.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (etxtPhoneCode.getText().toString().trim().length()<6){
+
+                    etxtPhoneCode.setError("الرجاء إدخال رمز التحقق");
+                }
+            }
+        });
+
         onBackPressed();
     }
     @Override
@@ -84,10 +108,27 @@ public class ActivityPhoneAuth extends AppCompatActivity {
     public void requestCode(View view) {
         String phoneNumber = etxtPhone.getText().toString();
 
-        if (TextUtils.isEmpty(phoneNumber))
+        if(etxtPhone.getText().toString().trim().toString().length()!=13 ){
+            //&& phone.getText().toString().trim().toString().substring(0,1)=="+"
+            alert= new android.app.AlertDialog.Builder(ActivityPhoneAuth.this);
+            alert.setMessage("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
             return;
-        Toast.makeText(ActivityPhoneAuth.this, "الرجاء الانتظار حتى يتم الارسال" , Toast.LENGTH_SHORT).show();
-       /* android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(ActivityPhoneAuth.this);
+        }
+
+        alert= new android.app.AlertDialog.Builder(ActivityPhoneAuth.this);
 
         alert.setTitle( "الرجاء الانتظار حتى يتم الارسال" ).setIcon( R.drawable.f1 );
 
@@ -103,10 +144,10 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                     }
                 });
         android.app.AlertDialog alert11 = alert.create();
-        alert11.show();*/
+        alert11.show();
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber, 60, TimeUnit.SECONDS, ActivityPhoneAuth.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                phoneNumber, 10, TimeUnit.SECONDS, ActivityPhoneAuth.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                         //Called if it is not needed to enter verification code
@@ -116,8 +157,21 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                     @Override
                     public void onVerificationFailed(FirebaseException e) {
                         //incorrect phone number, verification code, emulator, etc.
-                        Toast.makeText(ActivityPhoneAuth.this, "onVerificationFailed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                        alert = new android.app.AlertDialog.Builder(ActivityPhoneAuth.this);
+                        alert.setMessage("هناك خلل..");
+                        alert.setCancelable(true);
+                        alert.setPositiveButton(
+                                "موافق",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        startActivity(new Intent(getApplicationContext(), LoginPage.class));
+
+                                    }
+                                });
+                        android.app.AlertDialog alert11 = alert.create();
+                        alert11.show();                    }
 
                     @Override
                     public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
@@ -169,8 +223,25 @@ public class ActivityPhoneAuth extends AppCompatActivity {
 
     public void signIn(View view) {
         String code = etxtPhoneCode.getText().toString();
-        if (TextUtils.isEmpty(code))
+
+        if (etxtPhoneCode.getText().toString().trim().length()<6){
+            alert= new android.app.AlertDialog.Builder(ActivityPhoneAuth.this);
+            alert.setMessage("الرجاء إدخال رمز التحقق");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
             return;
+        }
 
         signInWithCredential(PhoneAuthProvider.getCredential(mVerificationId, code));
 

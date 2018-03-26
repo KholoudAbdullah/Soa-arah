@@ -54,10 +54,31 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
         Intent intent = getIntent();
         String p = intent.getExtras().getString("name", "");
         Log.d("razan1", "razan1" + p);
-        pass = (EditText) findViewById(R.id.pass);
-
+        pass = (EditText) findViewById(R.id.pass1);
+        cpass=(EditText) findViewById(R.id.cpass1);
 
         confirm = (Button) findViewById(R.id.confirm);
+
+        pass.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (pass.getText().toString().trim().length()<6){
+
+                    pass.setError("يجب ان تتكون كلمة المرور من ٦ خانات او اكثر");
+                }
+            }
+        });
+        cpass.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!pass.getText().toString().trim().equals(cpass.getText().toString().trim()) || cpass.getText().toString().trim().length()<6){
+
+                    cpass.setError("كلمة المرور ليست متطابقة");
+                }
+            }
+        });
 
 
         progressDialog = new ProgressDialog(this);
@@ -79,9 +100,43 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
+        if (pass.getText().toString().trim().length()<6){
+            alert= new android.app.AlertDialog.Builder(ResetPassword.this);
+            alert.setMessage("يجب ان تتكون كلمة المرور من ٦ خانات او اكثر");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
+                            dialogInterface.cancel();
 
-        if(!(TextUtils.isEmpty(pass.getText().toString().trim()))){
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+            return;
+        }
+        else if (!pass.getText().toString().trim().equals(cpass.getText().toString().trim()) || cpass.getText().toString().trim().length()<6){
+            alert= new android.app.AlertDialog.Builder(ResetPassword.this);
+            alert.setMessage("كلمة المرور ليست متطابقة");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+            return;
+
+        }if(!(TextUtils.isEmpty(pass.getText().toString().trim()))){
             FirebaseUser user1 =FirebaseAuth.getInstance().getCurrentUser();
             if(user1!=null)
             {
