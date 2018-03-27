@@ -65,16 +65,7 @@ public class RequestByBarcode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_by_barcode);
 
-        name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (name.getText().toString().trim().length()<1){
-
-                    name.setError("االرجاء إدخال إسم الصنف");
-                }
-            }
-        });
 
 
 
@@ -119,6 +110,17 @@ public class RequestByBarcode extends AppCompatActivity {
         TXbarnum=(TextView)findViewById(R.id.barcodeNumber);
 
         progressDialog = new ProgressDialog(RequestByBarcode.this);
+
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (name.getText().toString().trim().length()<1){
+
+                    name.setError("االرجاء إدخال إسم الصنف");
+                }
+            }
+        });
 
         Intent intent=getIntent();
 
@@ -189,6 +191,7 @@ public class RequestByBarcode extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                if (fImageUri != null){
                                 try {
 
 
@@ -219,7 +222,7 @@ public class RequestByBarcode extends AppCompatActivity {
                                     });}catch (Exception e){
                                     Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                                }
+                                }}
 
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
 
@@ -345,7 +348,7 @@ public class RequestByBarcode extends AppCompatActivity {
                             databaseReference.child(uploadId).setValue(RF);
 
                             // Hiding the progressDialog after done uploading.
-                            progressDialog.dismiss();
+                            //progressDialog.dismiss();
 
 
 
