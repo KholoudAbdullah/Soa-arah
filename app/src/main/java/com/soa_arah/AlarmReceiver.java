@@ -16,9 +16,6 @@ public class AlarmReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
-
-
         Intent notificationIntent = new Intent(context, view_request.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(view_request.class);
