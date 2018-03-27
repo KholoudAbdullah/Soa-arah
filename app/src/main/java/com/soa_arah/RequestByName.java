@@ -104,6 +104,7 @@ public class RequestByName extends AppCompatActivity {
                 }
             }
         });
+
         gram.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
             @Override

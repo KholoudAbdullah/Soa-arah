@@ -360,9 +360,10 @@ public class RequestByBarcode extends AppCompatActivity {
                             Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
             AlertDialog.Builder alert = new AlertDialog.Builder(
                     RequestByBarcode.this);
-            alert.setTitle("تم ارسال الطلب بنجاح").setIcon(R.drawable.t1);
+            alert.setTitle("تمت عملية التسجيل بنجاح").setIcon(R.drawable.t1);
             AlertDialog dialog = alert.create();
 
             // Finally, display the alert dialog
@@ -382,7 +383,6 @@ public class RequestByBarcode extends AppCompatActivity {
             // Copy the alert dialog window attributes to new layout parameter instance
             layoutParams.copyFrom(dialog.getWindow().getAttributes());
 
-
             // Set alert dialog width equal to screen width 70%
             int dialogWindowWidth = (int) (displayWidth * 0.9f);
             // Set alert dialog height equal to screen height 70%
@@ -395,10 +395,27 @@ public class RequestByBarcode extends AppCompatActivity {
 
             // Apply the newly created layout parameters to the alert dialog window
             dialog.getWindow().setAttributes(layoutParams);
+            startActivity(new Intent(getApplicationContext(), home_page_register.class));
+            //close this activity
+            finish();
             startActivity(new Intent(RequestByBarcode.this, home_page_register.class));
 
         } else {
-            Toast.makeText(this, "لم يتم اختيار الملف", Toast.LENGTH_SHORT).show();
+            alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
+            alert.setMessage("عذراً يجب اختيار صورة");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
         }
     }
 
