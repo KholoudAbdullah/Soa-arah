@@ -150,6 +150,7 @@ public class home_page_guest extends AppCompatActivity {
                                 }
                             });
 
+
                     alert.setNegativeButton(
                             "إلغاء",
                             new DialogInterface.OnClickListener() {

@@ -120,6 +120,7 @@ public class RequestByName extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
                 openFileChooser();
 
             }
@@ -230,7 +231,7 @@ public class RequestByName extends AppCompatActivity {
                 alert.setMessage("هل انت متأكد من عدم الارسال؟");
                 alert.setCancelable(true);
                 alert.setPositiveButton(
-                        "تعم",
+                        "نعم",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -323,6 +324,11 @@ public class RequestByName extends AppCompatActivity {
 
 
     private void openFileChooser() {
+
+
+        android.app.AlertDialog alert11 = alert.create();
+        alert11.show();
+
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
