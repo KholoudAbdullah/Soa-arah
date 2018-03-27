@@ -118,6 +118,17 @@ public class RequestByBarcode extends AppCompatActivity {
         });
         progressDialog = new ProgressDialog(RequestByBarcode.this);
 
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (name.getText().toString().trim().length()<1){
+
+                    name.setError("االرجاء إدخال إسم الصنف");
+                }
+            }
+        });
+
         Intent intent=getIntent();
 
         barnum = intent.getExtras().getString( "BarcodeNum","" );
@@ -187,6 +198,7 @@ public class RequestByBarcode extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                if (fImageUri != null){
                                 try {
 
 
@@ -217,7 +229,7 @@ public class RequestByBarcode extends AppCompatActivity {
                                     });}catch (Exception e){
                                     Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                                }
+                                }}
 
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
 
@@ -343,7 +355,7 @@ public class RequestByBarcode extends AppCompatActivity {
                             databaseReference.child(uploadId).setValue(RF);
 
                             // Hiding the progressDialog after done uploading.
-                            progressDialog.dismiss();
+                            //progressDialog.dismiss();
 
 
 
