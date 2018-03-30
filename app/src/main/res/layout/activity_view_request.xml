@@ -5,25 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:background="@color/white"
+    android:background="@drawable/background1"
     tools:context="com.soa_arah.home_page_IT_admin">
 
 
     <ImageView
         android:id="@+id/image3"
-        android:layout_width="300dp"
-        android:layout_height="74dp"
+        android:layout_width="287dp"
+        android:layout_height="264dp"
         android:layout_gravity="center"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="16dp"
         android:adjustViewBounds="false"
-        app:layout_constraintHorizontal_bias="0.502"
+        android:background="@drawable/round_corner1"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/account1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textname"
@@ -34,6 +33,8 @@
         android:layout_marginTop="28dp"
         android:text="طلبات الإضافة بالاسم"
         android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -70,18 +71,17 @@
 
     <ImageView
         android:id="@+id/image4"
-        android:layout_width="300dp"
-        android:layout_height="74dp"
+        android:layout_width="286dp"
+        android:layout_height="267dp"
         android:layout_gravity="center"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="264dp"
+        android:layout_marginTop="288dp"
         android:adjustViewBounds="false"
-        app:layout_constraintHorizontal_bias="0.494"
+        android:background="@drawable/round_corner1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/account1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textbarcode"
@@ -89,7 +89,9 @@
         android:layout_height="30dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="24dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:text="طلبات الاضافه بالباركود"
         android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -117,7 +119,7 @@
         android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="-10dp"
-        android:background="#acd680"
+        android:background="#8BAF3A"
         android:paddingLeft="150dp"
         android:paddingRight="5dp"
         app:itemIconTint="@color/white"
