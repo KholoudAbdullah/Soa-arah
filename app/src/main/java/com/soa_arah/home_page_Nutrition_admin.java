@@ -1,12 +1,18 @@
 package com.soa_arah;
 
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -23,8 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class home_page_Nutrition_admin extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private Button button;
@@ -33,7 +39,10 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     String key;
     String []keyword;
     String []searchR;
+    private ArrayList<Food> re_name;
+    private ArrayList<String> key1;
     int size;
+
     ArrayList<String> list=new ArrayList<>();
     private EditText searchtext;
     private DatabaseReference fData;
@@ -47,7 +56,10 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     String stand;
     String grams;
     private Button scan;
-    private ZXingScannerView scannerView;
+    private Integer sumreq=0;
+    private DatabaseReference mDatabaseReference;
+    @SuppressLint("WrongConstant")
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +67,69 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         scan=(Button)findViewById(R.id.scan);
 
+
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
+
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    sumreq=sumreq+1;
+                }
+
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
+
+                Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
+                notificationIntent.putExtra( "SumRequest",sumreq );
+                notificationIntent.addCategory("android.intent.category.DEFAULT");
+
+
+                PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.HOUR_OF_DAY,9);
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
+            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByBarcode");
+
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    sumreq=sumreq+1;
+                }
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
+
+                Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
+                notificationIntent.putExtra( "SumRequest",sumreq );
+                notificationIntent.addCategory("android.intent.category.DEFAULT");
+
+
+                PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.HOUR_OF_DAY, 9);
+   alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+//
         firebaseAuth = FirebaseAuth.getInstance();
 
         searchtext=(EditText)findViewById(R.id.searchword);

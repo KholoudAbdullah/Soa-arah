@@ -4,16 +4,14 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -53,32 +51,12 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Intent intent = getIntent();
         String p = intent.getExtras().getString("name", "");
-        Log.d("razan1", "razan1" + p);
+
         pass = (EditText) findViewById(R.id.pass1);
         cpass=(EditText) findViewById(R.id.cpass1);
 
+
         confirm = (Button) findViewById(R.id.confirm);
-
-        pass.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (pass.getText().toString().trim().length()<6){
-
-                    pass.setError("يجب ان تتكون كلمة المرور من ٦ خانات او اكثر");
-                }
-            }
-        });
-        cpass.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!pass.getText().toString().trim().equals(cpass.getText().toString().trim()) || cpass.getText().toString().trim().length()<6){
-
-                    cpass.setError("كلمة المرور ليست متطابقة");
-                }
-            }
-        });
 
 
         progressDialog = new ProgressDialog(this);
@@ -91,7 +69,7 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
         myRef = mFirebaseDatabase.getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = mAuth.getCurrentUser();
-        userID = p;//username
+        userID = stringToHex(p);//username
 
         confirm.setOnClickListener(this);
     }
@@ -110,33 +88,8 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
-                            dialogInterface.cancel();
 
-                        }
-                    });
-            android.app.AlertDialog alert11 = alert.create();
-            alert11.show();
-            return;
-        }
-        else if (!pass.getText().toString().trim().equals(cpass.getText().toString().trim()) || cpass.getText().toString().trim().length()<6){
-            alert= new android.app.AlertDialog.Builder(ResetPassword.this);
-            alert.setMessage("كلمة المرور ليست متطابقة");
-            alert.setCancelable(true);
-            alert.setPositiveButton(
-                    "موافق",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                            dialogInterface.cancel();
-
-                        }
-                    });
-            android.app.AlertDialog alert11 = alert.create();
-            alert11.show();
-            return;
-
-        }if(!(TextUtils.isEmpty(pass.getText().toString().trim()))){
+        if(!(TextUtils.isEmpty(pass.getText().toString().trim()))){
             FirebaseUser user1 =FirebaseAuth.getInstance().getCurrentUser();
             if(user1!=null)
             {
@@ -145,7 +98,7 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
                 mDatabase= FirebaseDatabase.getInstance().getReference();
                 String password=pass.getText().toString();
 
-                Log.d("RAZAN","RAZAN:"+password+" yyy "+user1.getDisplayName());
+
                 user1.updatePassword(password)
 
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -153,8 +106,7 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
 
-                                    mDatabase.child("RegisteredUser").child(userID).child("password").setValue(pass.getText().toString());
-
+                                    mDatabase.child("RegisteredUser").child(userID);
                                     //display message to the user here
 
                                     AlertDialog.Builder alert = new AlertDialog.Builder(
@@ -195,5 +147,33 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
             }
         }
 
+    }
+
+});
+        }
+    }
+    public static String stringToHex(String base)
+    {
+        StringBuffer buffer = new StringBuffer();
+        int intValue;
+        for(int x = 0; x < base.length(); x++)
+        {
+            int cursor = 0;
+            intValue = base.charAt(x);
+            String binaryChar = new String(Integer.toBinaryString(base.charAt(x)));
+            for(int i = 0; i < binaryChar.length(); i++)
+            {
+                if(binaryChar.charAt(i) == '1')
+                {
+                    cursor += 1;
+                }
+            }
+            if((cursor % 2) > 0)
+            {
+                intValue += 128;
+            }
+            buffer.append(Integer.toHexString(intValue));
+        }
+        return buffer.toString();
     }
 }

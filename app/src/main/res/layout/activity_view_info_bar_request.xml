@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:design="http://schemas.android.com/apk/res-auto"
-
-    android:background="@color/white"
+    android:background="@drawable/background1"
     tools:context="com.soa_arah.home_page_IT_admin">
 
     <ScrollView
@@ -33,14 +32,18 @@
                 <ImageView
                     android:id="@+id/image1"
                     android:layout_width="350dp"
-                    android:layout_height="74dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_height="65dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/round_corner1"
+                    android:layout_marginTop="16dp"
                     android:adjustViewBounds="false"
+                    app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    />
 
 
                 <TextView
@@ -53,7 +56,8 @@
                     android:layout_marginTop="24dp"
                     android:gravity="center"
                     android:text="TextView"
-                    android:textSize="19sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/image1"
                     app:layout_constraintHorizontal_bias="0.503"
@@ -87,16 +91,17 @@
                 <ImageView
                     android:id="@+id/image2"
                     android:layout_width="350dp"
-                    android:layout_height="74dp"
+                    android:layout_height="65dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
                     android:layout_marginTop="20dp"
+                    android:background="@drawable/round_corner1"
+                    app:layout_constraintHorizontal_bias="0.488"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account"
-                    tools:ignore="MissingConstraints" />
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <TextView
                     android:id="@+id/textView11"
@@ -108,7 +113,8 @@
                     android:layout_marginTop="232dp"
                     android:gravity="center"
                     android:text="جدول العناصر الغذائية"
-                    android:textSize="19sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/image2"
                     app:layout_constraintHorizontal_bias="0.503"
@@ -130,8 +136,9 @@
                     android:id="@+id/imageTable"
                     android:layout_width="300dp"
                     android:layout_height="149dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="14dp"
                     android:contentDescription="imageTable"
                     app:layout_constraintHorizontal_bias="0.503"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -150,28 +157,31 @@
 
                 <ImageView
                     android:id="@+id/image8"
-                    android:layout_width="370dp"
-                    android:layout_height="74dp"
+                    android:layout_width="350dp"
+                    android:layout_height="65dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:adjustViewBounds="false"
+                    android:layout_marginTop="23dp"
                     app:layout_constraintHorizontal_bias="0.48"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="140dp"
                     android:layout_height="32dp"
-                    android:layout_alignEnd="@+id/image8"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="19dp"
+
+                    android:layout_alignTop="@+id/image8"
+                    android:layout_marginTop="12dp"
+                    android:layout_toEndOf="@+id/keyword"
                     android:gravity="right"
                     android:text="الكلمات المفتاحيه : "
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/image8"
@@ -183,11 +193,12 @@
                     android:layout_width="150dp"
                     android:layout_height="42dp"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="45dp"
+                    android:layout_alignTop="@+id/textView8"
+                    android:layout_marginStart="36dp"
                     android:ems="10"
                     android:hint="كلمات مفتاحيه"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/image8"
@@ -205,17 +216,18 @@
 
                 <ImageView
                     android:id="@+id/image9"
-                    android:layout_width="370dp"
-                    android:layout_height="74dp"
+                    android:layout_width="350dp"
+                    android:layout_height="65dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
                     android:adjustViewBounds="false"
                     app:layout_constraintHorizontal_bias="0.48"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/account" />
+                    android:background="@drawable/round_corner1" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -227,6 +239,8 @@
                     android:gravity="right"
                     android:text="السعرات الحرارية : "
                     android:textSize="20sp"
+
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/image9"
@@ -243,6 +257,7 @@
                     android:ems="10"
                     android:inputType="number"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     android:hint="السعرات الحرارية"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -268,7 +283,7 @@
                     android:layout_alignTop="@+id/accept"
                     android:layout_marginStart="24dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/cancel" />
+                    android:src="@drawable/delete" />
 
                 <ImageButton
                     android:id="@+id/accept"
@@ -278,7 +293,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_toEndOf="@+id/reject"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/accept" />
+                    android:src="@drawable/check" />
 
             </RelativeLayout>
 
@@ -292,7 +307,7 @@
         android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="-10dp"
-        android:background="#acd680"
+        android:background="#8BAF3A"
         android:paddingLeft="150dp"
         android:paddingRight="5dp"
         app:itemIconTint="@color/white"

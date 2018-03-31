@@ -6,12 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,8 +36,6 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class RequestByBarcode extends AppCompatActivity {
 
@@ -108,7 +106,16 @@ public class RequestByBarcode extends AppCompatActivity {
         send=(Button) findViewById(R.id.sendw);
         cancle=(Button) findViewById(R.id.cancel);
         TXbarnum=(TextView)findViewById(R.id.barcodeNumber);
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (name.getText().toString().trim().length()<1){
+
+                    name.setError("االرجاء إدخال إسم الصنف");
+                }
+            }
+        });
         progressDialog = new ProgressDialog(RequestByBarcode.this);
 
         name.setOnFocusChangeListener(new View.OnFocusChangeListener(){

@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:design="http://schemas.android.com/apk/res-auto"
-
-    android:background="@color/white"
+    android:background="@drawable/background1"
     tools:context="com.soa_arah.home_page_IT_admin">
+
+
+    <!-- soaarah icon -->
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="193dp"
         android:layout_height="116dp"
-        app:srcCompat="@drawable/soaarah_icon"
+        app:srcCompat="@drawable/lo1"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
@@ -24,112 +26,108 @@
 
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="334dp"
-        android:layout_height="232dp"
-        android:layout_marginBottom="140dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="302dp"
+        android:layout_height="261dp"
+        android:layout_marginBottom="184dp"
+        android:background="@drawable/rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.345"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/searchText"
         android:layout_width="270dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="164dp"
         android:text=" البحث باستخدام الكلمات المفتاحية"
-        android:textColor="@android:color/white"
+        android:textColor="#acd680"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.021"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="98dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
-        android:background="#7ba452"
-        android:text="بحث"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/searchword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/searchword"
         android:layout_width="239dp"
         android:layout_height="35dp"
-        android:background="@android:color/white"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edit_text_style"
+        android:drawableRight="@drawable/search"
         android:ems="11"
         android:gravity="right"
         android:hint="  بحث "
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="96dp"
-        tools:layout_editor_absoluteY="196dp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/searchText"/>
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchText"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="158dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_login"
+        android:text="بحث"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchword" />
+
 
     <TextView
         android:id="@+id/searchbarcode"
-        android:layout_width="270dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="212dp"
+        android:layout_height="37dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text=" البحث باستخدام الباركود"
+        android:textColor="#acd680"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/scan"
+        android:layout_width="158dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="204dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_login"
+        android:onClick="scanCode"
+        android:text="التقط الصورة"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.433"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="103dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#7ba452"
-        android:onClick="scanCode"
-        android:text="التقط الصورة"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.709" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/Navigation"
@@ -137,7 +135,7 @@
         android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="-10dp"
-        android:background="#acd680"
+        android:background="#8BAF3A"
         android:paddingLeft="150dp"
         android:paddingRight="5dp"
         app:itemIconTint="@color/white"
