@@ -46,7 +46,6 @@ public class RequestByName extends AppCompatActivity {
     private EditText calory,gram;
     private Button cancle,send,upload;
     private Uri mImageUri;
-    private ImageView foodImage;
     private RadioButton Rfood,Rdrink;
 
     private StorageReference storageReference;
@@ -73,7 +72,6 @@ public class RequestByName extends AppCompatActivity {
         send=(Button) findViewById(R.id.send);
         upload=(Button) findViewById(R.id.uploadimage);
         foodname=(EditText) findViewById(R.id.FName);
-        foodImage=(ImageView) findViewById(R.id.Foodimage);
         calory=(EditText) findViewById(R.id.calbyg);
         progressDialog = new ProgressDialog(RequestByName.this);
         Rfood= (RadioButton) findViewById(R.id.food);
@@ -340,7 +338,6 @@ public class RequestByName extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mImageUri = data.getData();
 
-            Picasso.with(this).load(mImageUri).into(foodImage);
             try {
                 // Getting selected image into Bitmap.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mImageUri);

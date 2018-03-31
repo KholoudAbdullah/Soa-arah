@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:design="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
     android:background="@drawable/background1">
 
@@ -15,7 +15,7 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="-10dp"
         android:layout_marginTop="8dp"
-        android:background="#acd680"
+        android:background="#8BAF3A"
         android:paddingLeft="150dp"
         android:paddingRight="5dp"
         app:itemIconTint="@color/white"
@@ -51,7 +51,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="72dp"
-        android:textColorHint="#acd680"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -66,8 +65,7 @@
             android:hint="اسم الصنف"
             android:inputType="textPersonName"
             android:textAlignment="textEnd"
-            android:textColor="#acd680"
-            android:textColorHint="#373737"
+            android:textColor="#8BAF3A"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -80,7 +78,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColorHint="#acd680"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout1">
@@ -95,8 +92,7 @@
             android:hint="  عدد السعرات"
             android:inputType="numberDecimal"
             android:textAlignment="textEnd"
-            android:textColor="#acd680"
-            android:textColorHint="#373737"
+            android:textColor="#8BAF3A"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -109,7 +105,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:textColorHint="#acd680"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout2">
@@ -124,8 +119,7 @@
             android:hint="عددالجرامات/الملي لتر"
             android:inputType="numberDecimal"
             android:textAlignment="textEnd"
-            android:textColor="#acd680"
-            android:textColorHint="#373737"
+            android:textColor="#8BAF3A"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -136,15 +130,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:layout_marginEnd="76dp"
+        android:layout_marginEnd="64dp"
         android:layout_marginTop="8dp"
         android:text="نوع الصنف:"
-        android:textColor="#acd680"
+        android:textColor="#8BAF3A"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/uploadimage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout3" />
+        app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout3"
+        app:layout_constraintVertical_bias="0.02" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -164,10 +159,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:buttonTint="#acd680"
+            android:buttonTint="#8BAF3A"
             android:layoutDirection="rtl"
             android:text="شراب"
-            android:textColor="#acd680"
+            android:textColor="#8BAF3A"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -176,10 +171,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:buttonTint="#acd680"
+            android:buttonTint="#8BAF3A"
             android:layoutDirection="rtl"
             android:text="طعام"
-            android:textColor="#acd680"
+            android:textColor="#8BAF3A"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RadioGroup>
@@ -202,29 +197,32 @@
         app:layout_constraintHorizontal_bias="0.751"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintVertical_bias="1.0" />
 
-    <ImageView
-        android:id="@+id/Foodimage"
-        android:layout_width="72dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="106dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="84dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/button_login"
+        android:text="الغاء"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.669" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView9"
+        app:layout_constraintVertical_bias="0.416" />
 
     <Button
         android:id="@+id/send"
         android:layout_width="106dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="92dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/button_login"
         android:text="ارسال الطلب"
@@ -233,27 +231,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.84" />
-
-    <Button
-        android:id="@+id/cancel"
-        android:layout_width="106dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/button_login"
-        android:text="الغاء"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/send"
-        app:layout_constraintHorizontal_bias="0.761"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.842" />
+        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintStart_toEndOf="@+id/cancel"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9"
+        app:layout_constraintVertical_bias="0.375" />
 
 </android.support.constraint.ConstraintLayout>

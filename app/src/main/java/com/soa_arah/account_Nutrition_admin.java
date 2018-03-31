@@ -56,6 +56,8 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_nutrition_admin);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
+
         name = (TextView)findViewById(R.id.name);
         password = (EditText)findViewById(R.id.password);
         password1 = (EditText)findViewById(R.id.password1);
@@ -72,6 +74,8 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
         mAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
+
+
         mDatabase= FirebaseDatabase.getInstance().getReference().child("admin_N").child("name");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -111,6 +115,8 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
                 }
             }
         });
+
+
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
