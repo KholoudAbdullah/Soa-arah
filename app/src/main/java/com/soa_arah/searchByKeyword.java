@@ -140,7 +140,7 @@ String[] array;
                     startActivity( new Intent( getApplicationContext(), home_page_IT_admin.class ) );
                 }
                 // Nutrition addmin
-                else if (user.getUid().equals( "7yO6vzOcv6VtXMjG3pjipXLpZin1" )) {
+                else if (user.getUid().equals( "Pf7emnnQTEbmukAIDwWgkuv8JbC2" )) {
                     startActivity( new Intent( getApplicationContext(), home_page_Nutrition_admin.class ) );
                 } else {
                     startActivity( new Intent( getApplicationContext(), home_page_register.class ) );

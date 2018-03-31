@@ -6,6 +6,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 import java.text.DecimalFormat;
@@ -149,6 +153,45 @@ public class searchByName extends AppCompatActivity {
         // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
+    //menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate( R.menu.home_1, menu );
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.Home) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+            if (user != null) {
+                String id = user.getUid();
+                //ID موب صح
+                //IT admin
+                if (user.getUid().equals( "aSK7RyMA8xfdaQNPF0xS6kAumam2" )) {
+                    startActivity( new Intent( getApplicationContext(), home_page_IT_admin.class ) );
+                }
+                // Nutrition addmin
+                else if (user.getUid().equals( "Pf7emnnQTEbmukAIDwWgkuv8JbC2" )) {
+                    startActivity( new Intent( getApplicationContext(), home_page_Nutrition_admin.class ) );
+                } else {
+                    startActivity( new Intent( getApplicationContext(), home_page_register.class ) );
+
+                }
+
+            } else {
+                startActivity( new Intent( getApplicationContext(), home_page_guest.class ) );
+
+            }
+        } else {
+            return super.onOptionsItemSelected( item );
+        }
+        return true;
+
+    }
 
 
 

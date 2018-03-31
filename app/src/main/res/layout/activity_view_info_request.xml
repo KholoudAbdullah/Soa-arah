@@ -31,8 +31,8 @@
 
                 <ImageView
                     android:id="@+id/image1"
-                    android:layout_width="350dp"
-                    android:layout_height="65dp"
+                    android:layout_width="300dp"
+                    android:layout_height="55dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
@@ -102,8 +102,8 @@
 
                 <ImageView
                     android:id="@+id/image3"
-                    android:layout_width="350dp"
-                    android:layout_height="65dp"
+                    android:layout_width="300dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
@@ -141,12 +141,11 @@
 
                 <ImageView
                     android:id="@+id/image2"
-                    android:layout_width="350dp"
-                    android:layout_height="65dp"
+                    android:layout_width="300dp"
+                    android:layout_height="55dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="20dp"
                     android:adjustViewBounds="false"
                     android:background="@drawable/round_corner1"
                     app:layout_constraintHorizontal_bias="0.494"
@@ -182,12 +181,11 @@
 
                 <ImageView
                     android:id="@+id/image8"
-                    android:layout_width="350dp"
-                    android:layout_height="65dp"
+                    android:layout_width="300dp"
+                    android:layout_height="55dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="20dp"
                     android:background="@drawable/round_corner1"
                     app:layout_constraintHorizontal_bias="0.488"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -216,7 +214,6 @@
                     android:layout_height="42dp"
                     android:layout_alignStart="@+id/image8"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="22dp"
                     android:ems="10"
                     android:hint="كلمات مفتاحيه"
                     android:textSize="18sp"
@@ -257,6 +254,26 @@
 
             </RelativeLayout>
 
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/image10"
+                    android:layout_width="350dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:adjustViewBounds="false"
+                    app:layout_constraintHorizontal_bias="0.48"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@drawable/round_corner1" />
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>

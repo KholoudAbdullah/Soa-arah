@@ -28,26 +28,32 @@
         android:layout_width="302dp"
         android:layout_height="261dp"
         android:layout_marginBottom="188dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.979" />
 
     <TextView
         android:id="@+id/searchText"
         android:layout_width="270dp"
         android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="160dp"
         android:text=" البحث باستخدام الكلمات المفتاحية"
-        android:textColor="#acd680"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/searchword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.942"
         tools:ignore="MissingConstraints" />
 
 
@@ -55,19 +61,19 @@
         android:id="@+id/searchword"
         android:layout_width="239dp"
         android:layout_height="35dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/edit_text_style"
-        android:ems="11"
-        android:textSize="20sp"
         android:drawableRight="@drawable/search"
+        android:ems="11"
         android:gravity="right"
         android:hint="  بحث "
         android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/searchButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchText"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -76,16 +82,15 @@
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/button_login"
         android:text="بحث"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/searchbarcode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchword" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/searchbarcode"
@@ -94,22 +99,20 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
         android:text=" البحث باستخدام الباركود"
-        android:textColor="#acd680"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scan"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/scan"
         android:layout_width="158dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="192dp"
+        android:layout_marginBottom="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/button_login"
@@ -120,6 +123,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -127,7 +131,7 @@
         android:id="@+id/register"
         android:layout_width="261dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -139,24 +143,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.794" />
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintVertical_bias="0.104" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="261dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="104dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button"
         android:text=" دخــــول"
         android:textColor="#8BAF3A"
-        android:textStyle="bold"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan"
+        app:layout_constraintVertical_bias="0.668" />
 
 
 </android.support.constraint.ConstraintLayout>

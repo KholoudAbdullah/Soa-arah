@@ -84,7 +84,7 @@
                     android:layout_centerVertical="true"
                     android:textSize="17sp"
 
-                    android:hint="ادخل الوزن بالكجم"
+                    android:hint="ادخل الوزن "
                     android:inputType="numberDecimal"
                     android:textAlignment="center" />
 
@@ -140,7 +140,7 @@
                     android:layout_centerInParent="true"
                     android:textSize="17sp"
 
-                    android:hint="ادخل الطول بالسنتميتر"
+                    android:hint="ادخل الطول "
                     android:inputType="numberDecimal"
                     android:textAlignment="center" />
                 <TextView
@@ -306,7 +306,7 @@
                     android:layout_marginStart="51dp"
                     android:textSize="17sp"
 
-                    android:hint="ادخل محيط الخصر بالسم"
+                    android:hint="ادخل محيط الخصر "
                     android:inputType="numberDecimal"
                     android:textAlignment="center" />
                 <TextView
@@ -364,7 +364,7 @@
                     android:layout_marginStart="17dp"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    android:hint="ادخل محيط الفخذ بالسم"
+                    android:hint="ادخل محيط الفخذ "
                     android:layout_toEndOf="@+id/textView234"
                     android:inputType="numberDecimal"
                     android:textAlignment="center" />

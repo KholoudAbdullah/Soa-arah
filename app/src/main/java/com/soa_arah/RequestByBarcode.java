@@ -43,7 +43,6 @@ public class RequestByBarcode extends AppCompatActivity {
 
 
     private Uri fImageUri,tableUri;
-    private ImageView foodImage,tableI;
     private TextView TXbarnum;
     private Button cancle,send,upload,table;
     private StorageReference storageReference;
@@ -100,8 +99,6 @@ public class RequestByBarcode extends AppCompatActivity {
 
         upload=(Button) findViewById(R.id.FImageB);
         table=(Button) findViewById(R.id.TImageB);
-        foodImage=(ImageView) findViewById(R.id.FImageV);
-        tableI=(ImageView) findViewById(R.id.TImageV);
         name=(EditText) findViewById(R.id.Fname);
         send=(Button) findViewById(R.id.sendw);
         cancle=(Button) findViewById(R.id.cancel);
@@ -270,7 +267,7 @@ public class RequestByBarcode extends AppCompatActivity {
                 && data != null && data.getData() != null) {
             tableUri = data.getData();
 
-            Picasso.with(this).load(tableUri).into(tableI);
+
             try {
                 // Getting selected image into Bitmap.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), tableUri);
@@ -285,7 +282,7 @@ public class RequestByBarcode extends AppCompatActivity {
                 && data != null && data.getData() != null) {
             fImageUri = data.getData();
 
-            Picasso.with(this).load(fImageUri).into(foodImage);
+
             try {
                 // Getting selected image into Bitmap.
                 Bitmap bitmap1 = MediaStore.Images.Media.getBitmap(getContentResolver(), fImageUri);

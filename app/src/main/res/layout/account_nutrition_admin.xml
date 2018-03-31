@@ -77,8 +77,10 @@
                     android:id="@+id/name"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textAlignment="textEnd" />
+                    android:layout_centerVertical="true"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
 
             </RelativeLayout>
@@ -141,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image4"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="60dp"
+                android:layout_marginLeft="30dp"
                 android:textColor="#FF0000" />
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -171,14 +173,16 @@
                     android:paddingLeft="200dp"
                     android:textColor="#8BAF3A"
                     android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:text=" تاكيد الرقم السري" />
+                    android:textSize="18sp"
+                    android:text="         تاكيد الرقم السري" />
 
                 <EditText
                     android:id="@+id/password1"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_toEndOf="@+id/edit_pass1"
                     android:hint="   **********     "
                     android:inputType="textPassword"
                     android:textAlignment="textEnd" />
@@ -187,9 +191,12 @@
                     android:id="@+id/edit_pass1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
                     android:background="#00FF"
                     android:paddingLeft="25dp"
-                    android:paddingTop="25dp"
+                    android:paddingTop="15dp"
                     app:srcCompat="@drawable/edit_icon" />
             </RelativeLayout>
 
@@ -205,7 +212,7 @@
         android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="-10dp"
-        android:background="#acd680"
+        android:background="#8BAF3A"
         android:paddingLeft="150dp"
         android:paddingRight="5dp"
         app:itemIconTint="@color/white"
