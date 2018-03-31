@@ -243,7 +243,9 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.Logout){
+        if (item.getItemId() == R.id.aboutUs) {
+            startActivity(new Intent(getApplicationContext(), aboutUs.class));
+        }else if (item.getItemId() == R.id.Logout){
             firebaseAuth.signOut();
             //closing activity
             finish();

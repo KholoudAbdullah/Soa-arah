@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -106,6 +108,25 @@ public class home_page_guest extends AppCompatActivity {
     {
 
         // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.guest_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+         if (item.getItemId() == R.id.aboutUs) {
+            startActivity(new Intent(getApplicationContext(), aboutUs.class));
+
+
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
     public void scanCode(View view) {

@@ -72,6 +72,7 @@
         <activity android:name=".searchByKeyword" />
         <activity android:name=".diet_plan" />
         <activity android:name=".completDietplan" />
+        <activity android:name=".aboutUs"/>
         <activity android:name=".maxminDietplan"></activity>
         <receiver android:name=".AlarmReceiver">
             <intent-filter>

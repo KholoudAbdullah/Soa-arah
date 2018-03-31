@@ -9,10 +9,7 @@
         android:icon="@drawable/about"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/Logout"
-        android:title=" "
-        android:icon="@drawable/logout"
-        app:showAsAction="always"/>
+
 
 
 
