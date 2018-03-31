@@ -327,9 +327,6 @@ public class RequestByName extends AppCompatActivity {
     private void openFileChooser() {
 
 
-        android.app.AlertDialog alert11 = alert.create();
-        alert11.show();
-
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
