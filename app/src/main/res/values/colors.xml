@@ -11,12 +11,12 @@
     <color name="Green">#81C784</color>
     <color name="Lime">#CDDC39</color>
     <color name="Grey">#9E9E9E</color>
-    <color name="a">#EFEBE9</color>
-    <color name="b">#BCAAA4</color>
-    <color name="c">#8D6E63</color>
-    <color name="d">#A1887F</color>
-    <color name="e">#8D6E63</color>
-    <color name="f">#795548</color>
-    <color name="g">#6D4C41</color>
+    <color name="a">#C8E6C9</color>
+    <color name="b">#A5D6A7</color>
+    <color name="c">#81C784</color>
+    <color name="d">#66BB6A</color>
+    <color name="e">#4CAF50</color>
+    <color name="f">#43A047</color>
+    <color name="g">#B9F6CA</color>
     <color name="lightGreen">#dfeab4</color>
 </resources>

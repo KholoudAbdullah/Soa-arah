@@ -31,6 +31,7 @@ public class home_page_IT_admin extends AppCompatActivity {
     String key;
     String []keyword;
     String []searchR;
+    private String addCal;
     int size;
     ArrayList<String> list=new ArrayList<>();
     private EditText searchtext;
@@ -116,6 +117,8 @@ public class home_page_IT_admin extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(getApplicationContext(), searchByKeyword.class);
                     intent.putExtra("list", list);
+                    addCal="false";
+                    intent.putExtra( "addCal" ,addCal );
                     progressDialog.dismiss();
                     startActivity(intent);
 

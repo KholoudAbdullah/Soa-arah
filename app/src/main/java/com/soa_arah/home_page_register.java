@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -43,6 +42,7 @@ public class home_page_register extends AppCompatActivity{
     AlertDialog.Builder alert;
     String key;
     String []keyword;
+    private String addCal;
     String []searchR;
     int size;
     ArrayList<String> list=new ArrayList<>();
@@ -190,6 +190,8 @@ public class home_page_register extends AppCompatActivity{
                 } else {
                     Intent intent = new Intent(getApplicationContext(), searchByKeyword.class);
                     intent.putExtra("list", list);
+                    addCal="false";
+                    intent.putExtra( "addCal" ,addCal );
                     progressDialog.dismiss();
                     startActivity(intent);
 

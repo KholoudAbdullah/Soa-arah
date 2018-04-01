@@ -39,6 +39,8 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     private Button button;
     private Button reg;
     AlertDialog.Builder alert;
+    private String addCal;
+
     String key;
     String []keyword;
     String []searchR;
@@ -119,9 +121,12 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
 
                 PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                Calendar cal = Calendar.getInstance();
-                cal.set(Calendar.HOUR_OF_DAY, 19);
-   alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY,21);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+   alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
 
             }
             @Override
@@ -259,6 +264,8 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(getApplicationContext(), searchByKeyword.class);
                     intent.putExtra("list", list);
+                    addCal="false";
+                    intent.putExtra( "addCal" ,addCal );
                     progressDialog.dismiss();
                     startActivity(intent);
 

@@ -42,6 +42,7 @@ public class home_page_guest extends AppCompatActivity {
     String cal;
     String img;
     boolean flag = false;
+    private String addCal;
     String stand;
     String quantity;
     private Button scan;
@@ -190,6 +191,8 @@ isConnected();
                 } else {
                     Intent intent = new Intent(getApplicationContext(), searchByKeyword.class);
                     intent.putExtra("list", list);
+                    addCal="false";
+                    intent.putExtra( "addCal" ,addCal );
                     progressDialog.dismiss();
                     startActivity(intent);
 
