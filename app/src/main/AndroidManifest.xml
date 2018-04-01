@@ -84,6 +84,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+        <activity android:name=".diteplan" />
+        <activity android:name=".AddReview" />
+        <activity android:name=".ViewReview" />
+        <activity android:name=".ViewReviewRegisterUser"/>
     </application>
 
 </manifest>
