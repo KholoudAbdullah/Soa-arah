@@ -21,6 +21,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,8 +51,10 @@ public class RequestByBarcode extends AppCompatActivity {
     private StorageTask mUploadTask,tablem;
     private String douTable, barnum;
     private EditText name;
+    private String stander;
     private ProgressDialog progressDialog;
     android.app.AlertDialog.Builder alert;
+    private RadioButton Rfood,Rdrink;
 
 
 
@@ -101,6 +104,8 @@ public class RequestByBarcode extends AppCompatActivity {
         table=(Button) findViewById(R.id.TImageB);
         name=(EditText) findViewById(R.id.Fname);
         send=(Button) findViewById(R.id.sendw);
+        Rfood= (RadioButton) findViewById(R.id.food);
+        Rdrink=(RadioButton) findViewById(R.id.drinkS);
         cancle=(Button) findViewById(R.id.cancel);
         TXbarnum=(TextView)findViewById(R.id.barcodeNumber);
         name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
@@ -176,6 +181,23 @@ public class RequestByBarcode extends AppCompatActivity {
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
 
+                }
+                else if (!Rfood.isChecked()&& !Rdrink.isChecked()){
+                    alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                    alert.setMessage("الرجاء اختيار الصنف");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
                 }else {
                 uploadFile();
                 }
@@ -345,7 +367,14 @@ public class RequestByBarcode extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Food RF =  new Food(name.getText().toString().trim(),douTable,"لايوجد","لايوجد","لايوجد","لايوجد");
+
+                            //for standard measurement
+                            if (Rfood.isChecked())
+                                stander="جرام,ملعقة شاي,ملعقة اكل,كوب";
+                            else if (Rdrink.isChecked())
+                                stander="مليلتر,كوب";
+
+                            Food RF =  new Food(name.getText().toString().trim(),douTable,"لايوجد","لايوجد",stander,"لايوجد");
                             RF.setImageTable( taskSnapshot.getDownloadUrl().toString());
                             RF.setBarcodN(barnum);
                             String uploadId = databaseReference.push().getKey();
