@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ import java.text.DecimalFormat;
 
 public class searchByName extends AppCompatActivity {
 
+    private Button viewReview;
    private DatabaseReference fData;
    private RecyclerView mfoodR;
    Button calculate;
@@ -194,7 +196,25 @@ public class searchByName extends AppCompatActivity {
     }
 
 
+public void toView(View view){
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    if(user!=null){
+    String id = user.getUid();
+if(!(id.equals( "aSK7RyMA8xfdaQNPF0xS6kAumam2" )) && !(id.equals( "7yO6vzOcv6VtXMjG3pjipXLpZin1" )) ) {
 
+    Intent intent = new Intent(searchByName.this, ViewReviewRegisterUser.class);
+    intent.putExtra("name", getIntent().getStringExtra("name"));
+    startActivity(intent);
+
+
+}
+}else {
+        Intent intent = new Intent(searchByName.this, ViewReview.class);
+        intent.putExtra("name", getIntent().getStringExtra("name"));
+        startActivity(intent);
+    }
+
+}
 
 
 
