@@ -120,8 +120,8 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                 PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                 Calendar cal = Calendar.getInstance();
-                cal.set(Calendar.HOUR_OF_DAY, 9);
-   alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
+                cal.set(Calendar.HOUR_OF_DAY, 19);
+   alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
 
             }
             @Override

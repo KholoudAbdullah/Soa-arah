@@ -12,12 +12,10 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,7 +25,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
@@ -37,9 +39,11 @@ public class completDietplan  extends AppCompatActivity  {
 
 
     private EditText hight,waist,hip,wight;
+    private String year1,day,month;
     private  ProgressDialog progressDialog;
     private Spinner gen;
     private TextView mDisplayDate;
+    String[] array;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     String date;
     String record="";
@@ -80,10 +84,60 @@ public class completDietplan  extends AppCompatActivity  {
 
         String User_ID = firebaseAuth.getCurrentUser().getEmail();
         String username =User_ID.substring(0,User_ID.lastIndexOf("@"));
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(username);
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                RegisteredUser user = dataSnapshot.getValue(RegisteredUser.class);
+
+                if(user.getWight().equals("لم يتم إدخال بيانات"))
+                    wight.setHint("ادخل الوزن");
+                else
+                    wight.setText(user.getWight());
+
+                if(user.getHight().equals("لم يتم إدخال بيانات"))
+                    hight.setHint("ادخل الطول");
+                else
+                    hight.setText(user.getHight());
+
+                if(user.gethip().equals("لم يتم إدخال بيانات"))
+                    hip.setHint("ادخل محيط الفخذ");
+                else
+                    hip.setText(user.gethip());
+
+                if(user.getWaist().equals("لم يتم إدخال بيانات"))
+                    waist.setHint("ادخل محيط الخصر");
+                else
+                    waist.setText(user.getWaist());
+
+
+             mDisplayDate.setText(user.getDateOfBarth());
+             String bdate=user.getDateOfBarth();
+
+                array=bdate.split("/");
+
+
+       day=array[0];
+       month=array[1];
+       year1=array[2];
+
+                age= getAge(Integer.parseInt(year1),Integer.parseInt( month ),Integer.parseInt(day));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
 
 
 
-    gen=(Spinner)findViewById(R.id.gen);
+
+
+        gen=(Spinner)findViewById(R.id.gen);
         mDisplayDate = (TextView) findViewById(R.id.tvDate);
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,gender);
         gen.setAdapter(adapter);
@@ -297,20 +351,23 @@ public class completDietplan  extends AppCompatActivity  {
                 }
 
               else {
+
                   String Wight=wight.getText().toString().trim();
                  String Hight=hight.getText().toString().trim();
                  String Hip=hip.getText().toString().trim();
                 String Waist = waist.getText().toString().trim();
                 String date=mDisplayDate.getText().toString();
+
                 String gen=record;
+
 
 
                   if(record.equals("أنثى")){
                       BMR = (10.0*Double.parseDouble(Wight)) + (6.25*Double.parseDouble(Hight))- (5.0* Double.parseDouble(age)) - (161.0);
-                  }
+                 }
                   else if(record.equals("ذكر")) {
                       BMR = (10.0*Double.parseDouble(Wight))+ (6.25*Double.parseDouble(Hight)) - (5.0*Double.parseDouble(age)) + (5.0);
-                  }
+                       }
                  intent = new Intent( completDietplan.this, maxminDietplan.class );
                   double pow=(Double.parseDouble(Hight))*(Double.parseDouble(Hight));
                   bmi=(Double.parseDouble(Wight)/pow)*10000;

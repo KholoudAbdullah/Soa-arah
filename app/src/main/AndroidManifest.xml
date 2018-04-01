@@ -75,6 +75,7 @@
         <activity android:name=".maxminDietplan"/>
         <activity android:name=".ProgressChart"/>
         <activity android:name=".addCalories"/>
+        <activity android:name=".aboutUs"/>
         <activity android:name=".searchByNameToAddCalories"/>
         <activity android:name=".barcodeInfoToAddCalories"/>
         <activity android:name=".BarcodeToAddCalories"/>
