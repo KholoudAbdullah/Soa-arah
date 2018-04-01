@@ -55,6 +55,9 @@ public class completDietplan  extends AppCompatActivity  {
     Intent intent;
     private static final String TAG = "MainActivity";
     android.app.AlertDialog.Builder alert;
+    int year;
+    Calendar today1 = Calendar.getInstance();
+    boolean datV= true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +158,7 @@ public class completDietplan  extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
+                year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
@@ -176,7 +179,7 @@ public class completDietplan  extends AppCompatActivity  {
                 Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
                 Calendar today = Calendar.getInstance();
-                if (year<(today.get(Calendar.YEAR)-3)){
+                if (year>(today.get(Calendar.YEAR)-3)){
                     alert= new android.app.AlertDialog.Builder(completDietplan.this);
                     alert.setMessage("الرجاء إدخال تاريخ صحيح");
                     alert.setCancelable(true);
@@ -192,7 +195,9 @@ public class completDietplan  extends AppCompatActivity  {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                }
+                    datV=false;
+                }else
+                    datV=true;
 
                 date = day + "/" + month + "/" + year;
                 mDisplayDate.setText(date);
@@ -273,7 +278,24 @@ public class completDietplan  extends AppCompatActivity  {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
+                }else if (!datV){
+                    alert= new android.app.AlertDialog.Builder(completDietplan.this);
+                    alert.setMessage("الرجاء إدخال تاريخ صحيح");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
                 }
+
               else {
                   String Wight=wight.getText().toString().trim();
                  String Hight=hight.getText().toString().trim();

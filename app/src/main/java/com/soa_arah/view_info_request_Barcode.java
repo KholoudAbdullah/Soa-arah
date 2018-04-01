@@ -229,17 +229,17 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
             }
             if (view == reject) {
                 // mDatabaseReference1.child("Requests").child("ByName").child(key).removeValue();
-                mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests");
-                mDatabaseReference1.child("ByBarcode").child(key).removeValue();
                 alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
                 alert.setMessage("هل انت متأكد من رفض الطلب؟");
                 alert.setCancelable(true);
                 alert.setPositiveButton(
-                        "تعم",
+                        "نعم",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
+                                mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests");
+                                mDatabaseReference1.child("ByBarcode").child(key).removeValue();
                                 startActivity(new Intent(view_info_request_Barcode.this, view_request.class));
 
                             }

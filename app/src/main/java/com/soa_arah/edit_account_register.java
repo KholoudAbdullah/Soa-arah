@@ -60,6 +60,8 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
     private DatabaseReference mDatabase;
     android.app.AlertDialog.Builder alert;
     private ProgressBar progressBar;
+    int year;
+    boolean datV= true;
 
 
     private static final String TAG = "MainActivity";
@@ -174,7 +176,7 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
+                year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
@@ -195,7 +197,7 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
                 Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
                 Calendar today = Calendar.getInstance();
-                if (year<(today.get(Calendar.YEAR)-3)){
+                if (year>(today.get(Calendar.YEAR)-3)){
                     alert= new android.app.AlertDialog.Builder(edit_account_register.this);
                     alert.setMessage("الرجاء إدخال تاريخ صحيح");
                     alert.setCancelable(true);
@@ -211,7 +213,10 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                }
+                    datV=false;
+                }else
+                    datV=true;
+
                 date = day + "/" + month + "/" + year;
                 mDisplayDate.setText(date);
             }
@@ -381,6 +386,25 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
                 }
             }
             if (view == edit_date) {
+                if (!datV){
+                    alert= new android.app.AlertDialog.Builder(edit_account_register.this);
+                    alert.setMessage("الرجاء إدخال تاريخ صحيح");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
+
+                else {
                 mDatabase.child("dateOfBarth").setValue(mDisplayDate.getText().toString());
                 alert= new android.app.AlertDialog.Builder(edit_account_register.this);
                 alert.setTitle("تم تغيير تاريخ الميلاد بنجاح").setIcon( R.drawable.t1 );
@@ -396,7 +420,7 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
                             }
                         });
                 android.app.AlertDialog alert11 = alert.create();
-                alert11.show();
+                alert11.show();}
             }
             if (view == edit_gender) {
                 mDatabase.child("gender").setValue(record);
