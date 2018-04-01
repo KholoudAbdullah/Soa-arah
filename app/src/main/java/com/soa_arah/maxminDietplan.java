@@ -17,12 +17,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class maxminDietplan extends AppCompatActivity {
 
 
 
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,databaseReference;
     private DatabaseReference Database;
     private String User_ID;
     private DietPlan plan;
@@ -33,6 +37,8 @@ public class maxminDietplan extends AppCompatActivity {
     private Button creat;
     private String  Wight,Hight,Hip,Waist,date,gen;
     private Button cancel;
+    private Date c;
+    private Progress progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -150,17 +156,14 @@ public class maxminDietplan extends AppCompatActivity {
                 else {
 
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("DietPlan");
-                   Database= FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(username);
-
-                    plan = new DietPlan();
-
-                    plan.setCalGoal(goal.getText().toString().trim().toString());
-                    plan.setMax(max.toString());
-                    plan.setMin(min.toString());
-                    plan.setDailyCal("0");
-                    plan.setBMI(bmi);
-                    plan.setRname(username);
-                    plan.setWater("0");
+                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Progress");
+                    Database= FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(username);
+                    c= Calendar.getInstance().getTime();
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                    String formattedDate = df.format(c);
+                    plan = new DietPlan(username,goal.getText().toString().trim(),min,max,bmi,"0","0");
+                    progress=new Progress("0","0","0","0","0","0","0",formattedDate);
+                    databaseReference.child(username).setValue(progress);
                     mDatabase.child(username).setValue(plan);
                     Database.child("wight").setValue(Wight);
                     Database.child("hight").setValue(Hight);
