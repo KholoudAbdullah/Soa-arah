@@ -13,7 +13,7 @@
     </array>
 
 
-        <item name="visible" type="id"/>
-        <item name="masked" type="id"/>
+    <item name="visible" type="id" />
+    <item name="masked" type="id" />
 
 </resources>

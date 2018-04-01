@@ -51,13 +51,14 @@ String[] array;
     private Button scan;
     private ZXingScannerView scannerView;
     AlertDialog.Builder alert;
-    String key;
+    String addCal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_keyword);
         list=getIntent().getStringArrayListExtra("list");
+        addCal=getIntent().getStringExtra("addCal");
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("الرجاء الانتظار ...");
 
@@ -93,16 +94,31 @@ String[] array;
                         img = snapshot.child("image").getValue(String.class);
                         stand = snapshot.child("standard").getValue(String.class);
                         quantity = snapshot.child("quantity").getValue(String.class);
-                        Intent intent = new Intent(getApplicationContext(), searchByName.class);
-                        intent.putExtra("name", f);
-                        intent.putExtra("id", id);
-                        intent.putExtra("cal", cal);
-                        intent.putExtra("img", img);
-                        intent.putExtra("stand", stand);
-                        intent.putExtra("quantity", quantity);
-                        progressDialog.dismiss();
-                        startActivity(intent);
-                        break;
+                        if(addCal.equals("true")) {
+                            Intent intent = new Intent(getApplicationContext(), searchByNameToAddCalories.class);
+                            intent.putExtra("name", f);
+                            intent.putExtra("id", id);
+                            intent.putExtra("cal", cal);
+                            intent.putExtra("img", img);
+                            intent.putExtra("stand", stand);
+                            intent.putExtra("quantity", quantity);
+                            progressDialog.dismiss();
+                            startActivity(intent);
+                            break;
+                        }
+                        else{
+                            Intent intent = new Intent(getApplicationContext(), searchByName.class);
+                            intent.putExtra("name", f);
+                            intent.putExtra("id", id);
+                            intent.putExtra("cal", cal);
+                            intent.putExtra("img", img);
+                            intent.putExtra("stand", stand);
+                            intent.putExtra("quantity", quantity);
+                            progressDialog.dismiss();
+                            startActivity(intent);
+                            break;
+
+                        }
                     }
 
                 }
