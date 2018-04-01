@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,8 +32,8 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     private TextView calories;
     private TextView gr;
     private ImageView imageView3;
-    private ImageButton reject;
-    private ImageButton accept;
+    private Button reject;
+    private Button accept;
     private EditText keyword;
     private FirebaseAuth firebaseAuth;
     private String key;
@@ -61,8 +62,8 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         calories=(TextView)findViewById(R.id.calories);
         gr=(TextView)findViewById(R.id.gr);
         imageView3=(ImageView)findViewById(R.id.imageView3);
-        reject=(ImageButton)findViewById(R.id.reject);
-        accept=(ImageButton)findViewById(R.id.accept);
+        reject=(Button)findViewById(R.id.reject);
+        accept=(Button)findViewById(R.id.accept);
         keyword=(EditText)findViewById(R.id.stt);
 
         keyword1=keyword.getText().toString();

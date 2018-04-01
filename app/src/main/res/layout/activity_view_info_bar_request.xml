@@ -275,25 +275,33 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
-                <ImageButton
+                <Button
                     android:id="@+id/reject"
-                    android:layout_width="145dp"
-                    android:layout_height="93dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignTop="@+id/accept"
-                    android:layout_marginStart="24dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/delete" />
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="110dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_login"
+                    android:text=" رفض"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/accept"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/reject"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/check" />
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="100dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_login"
+                    android:text="قبول"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent" />
 
             </RelativeLayout>
 
