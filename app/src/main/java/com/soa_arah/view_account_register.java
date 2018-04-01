@@ -122,6 +122,8 @@ public class view_account_register  extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), view_account_register.class));
         } else if (item.getItemId() == R.id.editaccount) {
             startActivity(new Intent(getApplicationContext(), edit_account_register.class));
+        } else if (item.getItemId() == R.id.aboutUs) {
+            startActivity(new Intent(getApplicationContext(), aboutUs.class));
         } else if (item.getItemId() == R.id.Logout){
             firebaseAuth.signOut();
             //closing activity

@@ -193,7 +193,9 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-         if (item.getItemId() == R.id.Logout){
+        if (item.getItemId() == R.id.aboutUs) {
+            startActivity(new Intent(getApplicationContext(), aboutUs.class));
+    }else if (item.getItemId() == R.id.Logout){
             firebaseAuth.signOut();
             //closing activity
             finish();

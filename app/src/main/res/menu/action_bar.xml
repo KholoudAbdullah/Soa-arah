@@ -15,6 +15,9 @@
        android:title="تسجيل خروج "
         app:showAsAction="never"/>
 
+   <item android:id="@+id/aboutUs"
+        android:title="عن سُعره "
+        app:showAsAction="never"/>
 </menu>
 
 
