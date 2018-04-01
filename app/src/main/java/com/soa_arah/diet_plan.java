@@ -24,9 +24,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class diet_plan extends AppCompatActivity {
-    private String username,hip,wight,hight,date,gender,waist;
+    private String username,hip,wight,hight,gender,waist,DailyCal,str;
     private TextView calGoal,NewCalFood,Water,BMI;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
@@ -36,15 +41,15 @@ public class diet_plan extends AppCompatActivity {
     private Button delete;
     private  DatabaseReference Database;
     private DatabaseReference mDatabase1;
-    private ImageView imcal,imWater;
+    private ImageView imcal,imWater,prgress;
    private int bmi;
     private String na;
     private boolean flag;
     private ProgressBar progressBar;
     private ProgressDialog progressDialog;
-   private String id;
-    // private DietPlan plan;
-
+    private String id;
+    private Date date1,date2,date3,date4,date5,date6,date7,date;
+    private String day1,day2,day3,day4,day5,day6,day7,calory,day;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -56,8 +61,8 @@ public class diet_plan extends AppCompatActivity {
         imWater=(ImageView)findViewById( R.id.imageView11 );
         NewCalFood=(TextView)findViewById( R.id.NewCalFood );
         Water=(TextView)findViewById( R.id.Water);
-        BMI=(TextView)findViewById( R.id.BMI);
         delete=(Button)findViewById(R.id.delete);
+        prgress=(ImageView)findViewById( R.id.imageView3);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         User_ID = firebaseAuth.getCurrentUser().getEmail();
          na = User_ID.substring( 0, User_ID.lastIndexOf( "@" ) );
@@ -118,14 +123,15 @@ public class diet_plan extends AppCompatActivity {
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+
             }
         });
 
         imcal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(getApplicationContext(), RequestByName.class));
+                startActivity(new Intent(getApplicationContext(), addCalories.class));
             }
         });
         imWater.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +140,13 @@ public class diet_plan extends AppCompatActivity {
                 //startActivity(new Intent(getApplicationContext(), RequestByName.class));
             }
         });
+        prgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ProgressChart.class));
 
+            }
+        });
         onBackPressed();
     }
     @Override
@@ -143,7 +155,7 @@ public class diet_plan extends AppCompatActivity {
 
         // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
-        public void dietplan(){
+        public void dietplan() {
 
             mDatabase1 = FirebaseDatabase.getInstance().getReference().child("DietPlan").child(na);
             mDatabase1.addValueEventListener(new ValueEventListener() {
@@ -152,7 +164,6 @@ public class diet_plan extends AppCompatActivity {
                     plan = dataSnapshot.getValue(DietPlan.class);
                     calGoal.setText(plan.getCalGoal());
                     Water.setText(plan.getWater());
-                    BMI.setText(plan.getBMI());
                     NewCalFood.setText(plan.getDailyCal());
                 }
 
@@ -161,7 +172,74 @@ public class diet_plan extends AppCompatActivity {
                 }
 
             });
+            Database = FirebaseDatabase.getInstance().getReference().child("Progress");
+            Database.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    DailyCal = dataSnapshot.child(na).child("startDate").getValue(String.class);
 
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                    Calendar c = Calendar.getInstance();
+                    try {
+                        date = Calendar.getInstance().getTime();
+                        day = df.format(date);
+                        c.setTime(date);
+                        c.setTime(df.parse(DailyCal));
+                        day1 = df.format(c.getTime());  // dt is now the new date
+
+                        c.setTime(df.parse(DailyCal));
+                        c.add(Calendar.DATE, 1);  // number of days to add
+                        day2 = df.format(c.getTime());
+
+                        c.setTime(df.parse(DailyCal));
+                        c.add(Calendar.DATE, 2);  // number of days to add
+                        day3 = df.format(c.getTime());
+
+                        c.setTime(df.parse(DailyCal));
+                        c.add(Calendar.DATE, 3);  // number of days to add
+                        day4 = df.format(c.getTime());
+
+                        c.setTime(df.parse(DailyCal));
+                        c.add(Calendar.DATE, 4);  // number of days to add
+                        day5 = df.format(c.getTime());
+
+                        c.setTime(df.parse(DailyCal));
+                        c.add(Calendar.DATE, 5);  // number of days to add
+                        day6 = df.format(c.getTime());
+
+                        c.setTime(df.parse(DailyCal));
+                        c.add(Calendar.DATE, 6);  // number of days to add
+                        day7 = df.format(c.getTime());
+                    } catch (Exception e) {
+                    }
+                    if (day.equals(day1)) {
+                        str = dataSnapshot.child(na).child("day1").getValue(String.class);
+                    } else if (day.equals(day2)) {
+                        str = dataSnapshot.child(na).child("day2").getValue(String.class);
+                    } else if (day.equals(day3)) {
+                        str = dataSnapshot.child(na).child("day3").getValue(String.class);
+                    } else if (day.equals(day4)) {
+                        str = dataSnapshot.child(na).child("day4").getValue(String.class);
+                    } else if (day.equals(day5)) {
+                        str = dataSnapshot.child(na).child("day5").getValue(String.class);
+                    } else if (day.equals(day6)) {
+                        str = dataSnapshot.child(na).child("day6").getValue(String.class);
+                    } else if (day.equals(day7)) {
+                        str = dataSnapshot.child(na).child("day7").getValue(String.class);
+                    } else {
+                        str = "0";
+                    }
+                    DecimalFormat precision = new DecimalFormat("0.00");
+                    double cal = Double.parseDouble(str);
+                    NewCalFood.setText(precision.format(cal));
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
         public void creatdietplan(){
             AlertDialog.Builder alert = new AlertDialog.Builder(

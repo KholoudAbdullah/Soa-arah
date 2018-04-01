@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.PieData;
@@ -38,6 +39,7 @@ public class ProgressChart extends AppCompatActivity {
     private ArrayList<PieEntry> yEntrys;
     private  ArrayList<LegendEntry> entries;
     private  ArrayList<Integer> colors;
+    private Description Des;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,9 @@ public class ProgressChart extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         User_ID = firebaseAuth.getCurrentUser().getEmail();
         username= User_ID.substring( 0, User_ID.lastIndexOf( "@" ) );
-        //pieChart.setDescription("");
+        Des=new Description();
+        Des.setText("السعرات الحراريه للأيام الاسبوع");
+        pieChart.setDescription(Des);
         pieChart.setRotationEnabled(true);
         pieChart.setHoleRadius(25f);
         pieChart.setTransparentCircleAlpha(0);
@@ -85,13 +89,13 @@ public class ProgressChart extends AppCompatActivity {
                 }
 
                 colors = new ArrayList<>();
-                colors.add(Color.BLUE);
-                colors.add(Color.GRAY);
-                colors.add(R.color.Brown);
-                colors.add(Color.GREEN);
-                colors.add(Color.CYAN);
-                colors.add(Color.YELLOW);
-                colors.add(Color.MAGENTA);
+                colors.add(getResources().getColor(R.color.a));
+                colors.add(getResources().getColor(R.color.b));
+                colors.add(getResources().getColor(R.color.c));
+                colors.add(getResources().getColor(R.color.d));
+                colors.add(getResources().getColor(R.color.e));
+                colors.add(getResources().getColor(R.color.f));
+                colors.add(getResources().getColor(R.color.g));
 
                 pieDataSet = new PieDataSet(yEntrys, "Employee Sales");
                 pieDataSet.setSliceSpace(2);

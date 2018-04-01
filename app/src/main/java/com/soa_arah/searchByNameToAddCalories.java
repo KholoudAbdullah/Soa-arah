@@ -145,6 +145,7 @@ public class searchByNameToAddCalories extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 addCal();
 
             }
