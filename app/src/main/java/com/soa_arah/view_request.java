@@ -132,7 +132,6 @@ public class view_request extends AppCompatActivity {
                 request_name.setAdapter(adapter);
 
 
-
             }
 
             @Override

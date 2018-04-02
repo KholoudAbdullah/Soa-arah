@@ -44,7 +44,7 @@
                     android:hint="اسم المستخدم"
                     android:inputType="textPersonName"
                     android:textAlignment="textStart"
-android:textColor="#8BAF3A"
+                    android:textColor="#8BAF3A"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
