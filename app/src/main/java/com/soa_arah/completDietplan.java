@@ -61,7 +61,7 @@ public class completDietplan  extends AppCompatActivity  {
     android.app.AlertDialog.Builder alert;
     int year;
     Calendar today1 = Calendar.getInstance();
-    boolean datV= true;
+    boolean datV= true,flag=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,24 +91,65 @@ public class completDietplan  extends AppCompatActivity  {
 
                 RegisteredUser user = dataSnapshot.getValue(RegisteredUser.class);
 
-                if(user.getWight().equals("لم يتم إدخال بيانات"))
+                if(user.getWight().equals("لم يتم إدخال بيانات")) {
                     wight.setHint("ادخل الوزن");
-                else
+                    wight.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if (wight.getText().toString().trim().length()<2){
+
+                                wight.setError("الرجاء إدخال الوزن");
+                            }
+                        }
+                    });
+                }else
                     wight.setText(user.getWight());
 
-                if(user.getHight().equals("لم يتم إدخال بيانات"))
+                if(user.getHight().equals("لم يتم إدخال بيانات")) {
                     hight.setHint("ادخل الطول");
+                    hight.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if (hight.getText().toString().trim().length()<2){
+
+                                hight.setError("الرجاء إدخال الطول");
+                            }
+                        }
+                    });
+                }
                 else
                     hight.setText(user.getHight());
 
-                if(user.gethip().equals("لم يتم إدخال بيانات"))
+                if(user.gethip().equals("لم يتم إدخال بيانات")) {
                     hip.setHint("ادخل محيط الفخذ");
-                else
+                    hip.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if (hip.getText().toString().trim().length()<2){
+
+                                hip.setError("الرجاء إدخال محيط الفخذ");
+                            }
+                        }
+                    });
+                }else
                     hip.setText(user.gethip());
 
-                if(user.getWaist().equals("لم يتم إدخال بيانات"))
+                if(user.getWaist().equals("لم يتم إدخال بيانات")) {
                     waist.setHint("ادخل محيط الخصر");
-                else
+                    waist.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if (waist.getText().toString().trim().length()<2){
+
+                                waist.setError("الرجاء إدخال محيط الخصر");
+                            }
+                        }
+                    });
+                }else
                     waist.setText(user.getWaist());
 
 
@@ -123,6 +164,7 @@ public class completDietplan  extends AppCompatActivity  {
        year1=array[2];
 
                 age= getAge(Integer.parseInt(year1),Integer.parseInt( month ),Integer.parseInt(day));
+                flag=false;
 
             }
 
@@ -142,6 +184,7 @@ public class completDietplan  extends AppCompatActivity  {
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,gender);
         gen.setAdapter(adapter);
 
+        if (flag){
         hight.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
             @Override
@@ -181,7 +224,7 @@ public class completDietplan  extends AppCompatActivity  {
                     hip.setError("الرجاء إدخال محيط الفخذ");
                 }
             }
-        });
+        });}
 
         gen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 

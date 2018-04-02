@@ -219,16 +219,15 @@ public class diet_plan extends AppCompatActivity {
         public void dietplan() {
 
             mDatabase1 = FirebaseDatabase.getInstance().getReference().child("DietPlan").child(na);
-            mDatabase22 = FirebaseDatabase.getInstance().getReference().child("DietPlan");
             mDatabase1.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     plan = dataSnapshot.getValue(DietPlan.class);
-                    if(plan!=null){
+                    //if(plan!=null){
                     calGoal.setText(plan.getCalGoal());
                     Water.setText(plan.getWater());
                     NewCalFood.setText(plan.getDailyCal());
-                    }
+                   // }
                 }
 
                 @Override
