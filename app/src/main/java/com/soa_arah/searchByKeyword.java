@@ -121,14 +121,9 @@ String[] array;
                             progressDialog.dismiss();
                             startActivity(intent);
                             break;
-
                         }
                     }
-
                 }
-
-
-
             }
 
             @Override
