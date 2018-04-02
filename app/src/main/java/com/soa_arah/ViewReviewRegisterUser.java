@@ -126,7 +126,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
 //                Log.d("error","error"+" 3");
 //                View view = LayoutInflater.from(parent.getContext())
 //                        .inflate(R.layout.review_row, parent, false);
-//
+
 
                 holder.deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
