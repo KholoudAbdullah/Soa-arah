@@ -227,7 +227,7 @@ public class RequestByBarcode extends AppCompatActivity {
                                     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
                                     // Create a reference to the file to delete
-                                    Toast.makeText(RequestByBarcode.this, douTable.toString(), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(RequestByBarcode.this, douTable.toString(), Toast.LENGTH_SHORT).show();
 
                                     // StorageReference desertRef = storageRef.child("images/Request/"+tableUri.toString()+".jpg");
                                     StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(douTable);

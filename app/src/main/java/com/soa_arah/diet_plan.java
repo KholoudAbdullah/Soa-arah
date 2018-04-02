@@ -46,11 +46,11 @@ public class diet_plan extends AppCompatActivity {
     private RegisteredUser user;
     private Button delete;
     private  DatabaseReference Database;
-    private DatabaseReference mDatabase1,mDatabase2,databaseReference,databaseReference1,mDatabase22;
+    private DatabaseReference mDatabase1,mDatabase2,ref1,ref2;
     private ImageView imcal,imWater,prgress;
    private int bmi;
     private String na;
-    private boolean flag,progressB=true, flag1=true;
+    private boolean flag,flag1=true;
     private ProgressBar progressBar;
     private ProgressDialog progressDialog;
     private String id;
@@ -58,6 +58,7 @@ public class diet_plan extends AppCompatActivity {
     android.app.AlertDialog.Builder alert;
     private Date date1,date2,date3,date4,date5,date6,date7,date;
     private String day1,day2,day3,day4,day5,day6,day7,calory,day;
+    int count=1;
 
 
     @Override
@@ -84,42 +85,36 @@ public class diet_plan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                alert= new android.app.AlertDialog.Builder(diet_plan.this);
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        diet_plan.this);
                 alert.setMessage("هل انت متأكد من حذف الخطة؟");
-                alert.setCancelable(true);
-                alert.setPositiveButton(
-                        "نعم",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                alert.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TOD O Auto-generated method stub
+                        ref1=FirebaseDatabase.getInstance().getReference().child("DietPlan");
+                        ref1.child(na).removeValue();
+                        ref2=FirebaseDatabase.getInstance().getReference().child("Progress");
+                        ref2.child(na).removeValue();
+                        startActivity(new Intent(getApplicationContext(), home_page_register.class));
 
-                                Toast.makeText(diet_plan.this,""+flag1, Toast.LENGTH_SHORT).show();
-                                flag1=false;
-                                FirebaseDatabase.getInstance().getReference().child("DietPlan").child(na).removeValue();
-                                FirebaseDatabase.getInstance().getReference().child("Progress").child(na).removeValue();
-                                Toast.makeText(diet_plan.this,""+flag1, Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(diet_plan.this, home_page_register.class));
+                    }
 
-                            }
-                        });
+                });
+                alert.setNegativeButton("لا", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        dialog.dismiss();
 
-                alert.setNegativeButton(
-                        "لا",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
 
-                                dialogInterface.cancel();
-                            }
-                        });
-
-                android.app.AlertDialog alert11 = alert.create();
-                alert11.show();
+                alert.show();
             }
         });
 
-            mDatabase = FirebaseDatabase.getInstance().getReference().child("DietPlan");
-
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("DietPlan");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -133,11 +128,10 @@ public class diet_plan extends AppCompatActivity {
                         flag=false;
                 }
                 if(flag&&flag1){
-
                     progressBar.setVisibility(View.INVISIBLE);
                     dietplan();
 
-                }else {
+                }else if (flag1){
                     progressBar.setVisibility(View.INVISIBLE);
                     creatdietplan();
                 }
@@ -186,6 +180,7 @@ public class diet_plan extends AppCompatActivity {
         imWater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 waterSum();
             }
         });
@@ -193,7 +188,6 @@ public class diet_plan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ProgressChart.class));
-
             }
         });
         onBackPressed();
@@ -207,92 +201,104 @@ public class diet_plan extends AppCompatActivity {
         public void dietplan() {
 
             mDatabase1 = FirebaseDatabase.getInstance().getReference().child("DietPlan").child(na);
-            mDatabase1.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    plan = dataSnapshot.getValue(DietPlan.class);
-                    if(flag1==true){
+            if (mDatabase1!=null) {
+                try {
+                    mDatabase1.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            plan = dataSnapshot.getValue(DietPlan.class);
+                            if (flag1){
+                            Water.setText(plan.getWater());
+                            NewCalFood.setText(plan.getDailyCal());
+                            calGoal.setText(plan.getCalGoal());
+                            flag1=false;
+                            }
 
-                    Water.setText(plan.getWater());
-                    NewCalFood.setText(plan.getDailyCal());
-                    calGoal.setText(plan.getCalGoal());
-                   }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+
+                    });
+                } catch (Exception e) {
+                    Toast.makeText(diet_plan.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
                 }
+                Database = FirebaseDatabase.getInstance().getReference().child("Progress");
+                Database.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        DailyCal = dataSnapshot.child(na).child("startDate").getValue(String.class);
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
+                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        Calendar c = Calendar.getInstance();
+                        try {
+                            date = Calendar.getInstance().getTime();
+                            day = df.format(date);
+                            c.setTime(date);
+                            c.setTime(df.parse(DailyCal));
+                            day1 = df.format(c.getTime());  // dt is now the new date
 
-            });
-            Database = FirebaseDatabase.getInstance().getReference().child("Progress");
-            Database.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    DailyCal = dataSnapshot.child(na).child("startDate").getValue(String.class);
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 1);  // number of days to add
+                            day2 = df.format(c.getTime());
 
-                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                    Calendar c = Calendar.getInstance();
-                    try {
-                        date = Calendar.getInstance().getTime();
-                        day = df.format(date);
-                        c.setTime(date);
-                        c.setTime(df.parse(DailyCal));
-                        day1 = df.format(c.getTime());  // dt is now the new date
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 2);  // number of days to add
+                            day3 = df.format(c.getTime());
 
-                        c.setTime(df.parse(DailyCal));
-                        c.add(Calendar.DATE, 1);  // number of days to add
-                        day2 = df.format(c.getTime());
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 3);  // number of days to add
+                            day4 = df.format(c.getTime());
 
-                        c.setTime(df.parse(DailyCal));
-                        c.add(Calendar.DATE, 2);  // number of days to add
-                        day3 = df.format(c.getTime());
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 4);  // number of days to add
+                            day5 = df.format(c.getTime());
 
-                        c.setTime(df.parse(DailyCal));
-                        c.add(Calendar.DATE, 3);  // number of days to add
-                        day4 = df.format(c.getTime());
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 5);  // number of days to add
+                            day6 = df.format(c.getTime());
 
-                        c.setTime(df.parse(DailyCal));
-                        c.add(Calendar.DATE, 4);  // number of days to add
-                        day5 = df.format(c.getTime());
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 6);  // number of days to add
+                            day7 = df.format(c.getTime());
+                        } catch (Exception e) {
+                        }
+                        if (day.equals(day1)) {
+                            str = dataSnapshot.child(na).child("day1").getValue(String.class);
+                        } else if (day.equals(day2)) {
+                            str = dataSnapshot.child(na).child("day2").getValue(String.class);
+                        } else if (day.equals(day3)) {
+                            str = dataSnapshot.child(na).child("day3").getValue(String.class);
+                        } else if (day.equals(day4)) {
+                            str = dataSnapshot.child(na).child("day4").getValue(String.class);
+                        } else if (day.equals(day5)) {
+                            str = dataSnapshot.child(na).child("day5").getValue(String.class);
+                        } else if (day.equals(day6)) {
+                            str = dataSnapshot.child(na).child("day6").getValue(String.class);
+                        } else if (day.equals(day7)) {
+                            str = dataSnapshot.child(na).child("day7").getValue(String.class);
+                        } else {
+                            str = "0";
+                        }
+                        DecimalFormat precision = new DecimalFormat("0.00");
+                        if (flag1){
+                        double cal = Double.parseDouble(str);
+                        NewCalFood.setText(precision.format(cal));}
 
-                        c.setTime(df.parse(DailyCal));
-                        c.add(Calendar.DATE, 5);  // number of days to add
-                        day6 = df.format(c.getTime());
-
-                        c.setTime(df.parse(DailyCal));
-                        c.add(Calendar.DATE, 6);  // number of days to add
-                        day7 = df.format(c.getTime());
-                    } catch (Exception e) {
                     }
-                    if (day.equals(day1)) {
-                        str = dataSnapshot.child(na).child("day1").getValue(String.class);
-                    } else if (day.equals(day2)) {
-                        str = dataSnapshot.child(na).child("day2").getValue(String.class);
-                    } else if (day.equals(day3)) {
-                        str = dataSnapshot.child(na).child("day3").getValue(String.class);
-                    } else if (day.equals(day4)) {
-                        str = dataSnapshot.child(na).child("day4").getValue(String.class);
-                    } else if (day.equals(day5)) {
-                        str = dataSnapshot.child(na).child("day5").getValue(String.class);
-                    } else if (day.equals(day6)) {
-                        str = dataSnapshot.child(na).child("day6").getValue(String.class);
-                    } else if (day.equals(day7)) {
-                        str = dataSnapshot.child(na).child("day7").getValue(String.class);
-                    } else {
-                        str = "0";
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
                     }
-                    DecimalFormat precision = new DecimalFormat("0.00");
-                    double cal = Double.parseDouble(str);
-                    NewCalFood.setText(precision.format(cal));
+                });
+            }else
+               startActivity(new Intent(getApplicationContext(), home_page_register.class));
 
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
         }
+
         public void creatdietplan(){
             AlertDialog.Builder alert = new AlertDialog.Builder(
                     diet_plan.this);
@@ -364,6 +370,7 @@ public class diet_plan extends AppCompatActivity {
 
             }
         });
+
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("عدد اللترات المكتسبة من الماء");
         // this is set the view from XML inside AlertDialog

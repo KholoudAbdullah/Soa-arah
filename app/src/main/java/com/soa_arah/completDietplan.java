@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -77,6 +79,88 @@ public class completDietplan  extends AppCompatActivity  {
         wight=(EditText)findViewById(R.id.wight);
 
 
+
+
+        hight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (hight.getText().toString().trim().length()<2){
+
+                    hight.setError("الرجاء إدخال الطول");
+                }
+            }
+        });
+        hip.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (hip.getText().toString().trim().length()<2){
+
+                    hip.setError("الرجاء إدخال محيط الفخذ");
+                }
+            }
+        });
+        wight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (wight.getText().toString().trim().length()<2){
+
+                    wight.setError("الرجاء إدخال الوزن");
+                }
+            }
+        });
+        waist.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (waist.getText().toString().trim().length()<2){
+
+                    waist.setError("الرجاء إدخال محيط الخصر");
+                }
+            }
+        });
 
         //getting firebase auth object
 
@@ -182,8 +266,6 @@ public class completDietplan  extends AppCompatActivity  {
         mDisplayDate = (TextView) findViewById(R.id.tvDate);
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,gender);
         gen.setAdapter(adapter);
-
-
 
         gen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 

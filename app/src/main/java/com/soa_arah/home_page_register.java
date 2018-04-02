@@ -58,6 +58,7 @@ public class home_page_register extends AppCompatActivity{
     String stand;
     String grams;
     private Button scan;
+    private DatabaseReference ref1,ref2;
     private ZXingScannerView scannerView;
 
     @Override
@@ -65,8 +66,10 @@ public class home_page_register extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_register_activity);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
-
         isConnected();
+
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         scan=(Button)findViewById(R.id.scan);
 
