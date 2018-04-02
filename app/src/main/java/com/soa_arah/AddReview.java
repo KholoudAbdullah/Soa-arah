@@ -1,5 +1,6 @@
 package com.soa_arah;
 
+import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class AddReview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_review);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
 
         comment= (EditText) findViewById(R.id.comment);
 

@@ -64,6 +64,7 @@ public class diet_plan extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_diet_plan );
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
         firebaseAuth =FirebaseAuth.getInstance();
         calGoal=(TextView)findViewById( R.id.CalGoal ) ;
         imcal=(ImageView)findViewById( R.id.imageView13 );

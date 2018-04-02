@@ -171,16 +171,16 @@ public class searchByName extends AppCompatActivity {
 
             if (user != null) {
                 String id = user.getUid();
-                //ID موب صح
                 //IT admin
-                if (user.getUid().equals( "aSK7RyMA8xfdaQNPF0xS6kAumam2" )) {
-                    startActivity( new Intent( getApplicationContext(), home_page_IT_admin.class ) );
+                if(id.equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")){
+                    startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
                 }
                 // Nutrition addmin
-                else if (user.getUid().equals( "Pf7emnnQTEbmukAIDwWgkuv8JbC2" )) {
-                    startActivity( new Intent( getApplicationContext(), home_page_Nutrition_admin.class ) );
-                } else {
-                    startActivity( new Intent( getApplicationContext(), home_page_register.class ) );
+                else if(id.equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
+                    startActivity(new Intent(getApplicationContext(),home_page_Nutrition_admin.class));
+                }
+                else {
+                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
 
                 }
 
@@ -200,7 +200,7 @@ public void toView(View view){
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     if(user!=null){
     String id = user.getUid();
-if(!(id.equals( "aSK7RyMA8xfdaQNPF0xS6kAumam2" )) && !(id.equals( "7yO6vzOcv6VtXMjG3pjipXLpZin1" )) ) {
+if(!(id.equals( "kstgUKiRA7T3p1NNl3GuGBHgvcf2" )) && !(id.equals( "Pf7emnnQTEbmukAIDwWgkuv8JbC2" )) ) {
 
     Intent intent = new Intent(searchByName.this, ViewReviewRegisterUser.class);
     intent.putExtra("name", getIntent().getStringExtra("name"));

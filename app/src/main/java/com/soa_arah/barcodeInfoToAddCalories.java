@@ -37,6 +37,7 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_info_to_add_calories);
         setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
+
         FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         firebaseAuth = FirebaseAuth.getInstance();
         User_ID = firebaseAuth.getCurrentUser().getEmail();
@@ -84,16 +85,16 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
 
             if (user != null) {
                 String id = user.getUid();
-                //ID موب صح
                 //IT admin
-                if (user.getUid().equals( "aSK7RyMA8xfdaQNPF0xS6kAumam2" )) {
-                    startActivity( new Intent( getApplicationContext(), home_page_IT_admin.class ) );
+                if(id.equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")){
+                    startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
                 }
                 // Nutrition addmin
-                else if (user.getUid().equals( "Pf7emnnQTEbmukAIDwWgkuv8JbC2" )) {
-                    startActivity( new Intent( getApplicationContext(), home_page_Nutrition_admin.class ) );
-                } else {
-                    startActivity( new Intent( getApplicationContext(), home_page_register.class ) );
+                else if(id.equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
+                    startActivity(new Intent(getApplicationContext(),home_page_Nutrition_admin.class));
+                }
+                else {
+                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
 
                 }
 

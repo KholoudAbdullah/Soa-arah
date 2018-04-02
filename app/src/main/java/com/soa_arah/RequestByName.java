@@ -63,6 +63,7 @@ public class RequestByName extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_by_name);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
         storageReference = FirebaseStorage.getInstance().getReference("Request");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
 

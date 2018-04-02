@@ -306,11 +306,6 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                                 // Copy the alert dialog window attributes to new layout parameter instance
                                 layoutParams.copyFrom(dialog.getWindow().getAttributes());
 
-                                // Set the alert dialog window width and height
-                                // Set alert dialog width equal to screen width 90%
-                                // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                                // Set alert dialog height equal to screen height 90%
-                                // int dialogWindowHeight = (int) (displayHeight * 0.9f);
 
                                 // Set alert dialog width equal to screen width 70%
                                 int dialogWindowWidth = (int) (displayWidth * 0.9f);
@@ -354,11 +349,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                                 // Copy the alert dialog window attributes to new layout parameter instance
                                 layoutParams.copyFrom( dialog.getWindow().getAttributes() );
 
-                                // Set the alert dialog window width and height
-                                // Set alert dialog width equal to screen width 90%
-                                // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                                // Set alert dialog height equal to screen height 90%
-                                // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+
 
                                 // Set alert dialog width equal to screen width 70%
                                 int dialogWindowWidth = (int) (displayWidth * 0.9f);

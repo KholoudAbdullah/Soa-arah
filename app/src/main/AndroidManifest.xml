@@ -4,8 +4,7 @@
     package="com.soa_arah">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -28,21 +27,22 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-
-        <service
-            android:name="zoftino.com.firebase.fcm.DealsMessagingService">
+        <service android:name="zoftino.com.firebase.fcm.DealsMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <uses-permission
             android:name="android.permission.SEND_SMS"
             tools:ignore="WrongManifestParent" />
@@ -72,23 +72,27 @@
         <activity android:name=".searchByKeyword" />
         <activity android:name=".diet_plan" />
         <activity android:name=".completDietplan" />
-        <activity android:name=".maxminDietplan"/>
-        <activity android:name=".ProgressChart"/>
-        <activity android:name=".addCalories"/>
-        <activity android:name=".aboutUs"/>
-        <activity android:name=".searchByNameToAddCalories"/>
-        <activity android:name=".barcodeInfoToAddCalories"/>
-        <activity android:name=".BarcodeToAddCalories"/>
+        <activity android:name=".maxminDietplan" />
+        <activity android:name=".ProgressChart" />
+        <activity android:name=".addCalories" />
+        <activity android:name=".aboutUs" />
+        <activity android:name=".searchByNameToAddCalories" />
+        <activity android:name=".barcodeInfoToAddCalories" />
+        <activity android:name=".BarcodeToAddCalories" />
+
         <receiver android:name=".AlarmReceiver">
             <intent-filter>
                 <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
         <activity android:name=".diteplan" />
         <activity android:name=".AddReview" />
         <activity android:name=".ViewReview" />
-        <activity android:name=".ViewReviewRegisterUser"/>
+        <activity android:name=".ViewReviewRegisterUser" />
+        <activity android:name=".account_IT_admin"></activity>
     </application>
 
 </manifest>

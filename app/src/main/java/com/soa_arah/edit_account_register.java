@@ -70,6 +70,7 @@ public class edit_account_register extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_account_register_activity);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
         edit_wight=(ImageButton)findViewById(R.id.edit_wight);
         edit_hight=(ImageButton)findViewById(R.id.edit_hight);
         edit_date=(ImageButton)findViewById(R.id.edit_date);

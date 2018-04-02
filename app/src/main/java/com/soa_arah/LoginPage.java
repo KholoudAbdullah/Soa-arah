@@ -32,6 +32,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private String pass,email;
 
 
+
     //firebase auth object
     private FirebaseAuth firebaseAuth;
 
@@ -166,7 +167,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
 
                             //IT admin
-                            if(id.equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                            if(id.equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")){
                                 startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
                             }
                             // Nutrition addmin
@@ -183,7 +184,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                         }*/
                         else {
 
-                            AlertDialog.Builder alert= new AlertDialog.Builder(LoginPage.this);
+                            progressDialog.dismiss();
+
+                            alert= new android.app.AlertDialog.Builder(LoginPage.this);
                             alert.setMessage("الرجاء التأكد من اسم المستخدم او كلمة المرور");
                             alert.setCancelable(true);
                             alert.setPositiveButton(
@@ -196,6 +199,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
                                         }
                                     });
+                            android.app.AlertDialog alert11 = alert.create();
+                            alert11.show();
+
                         }
 
                         progressDialog.dismiss();

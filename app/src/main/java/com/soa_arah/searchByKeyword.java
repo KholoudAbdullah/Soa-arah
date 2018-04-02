@@ -3,6 +3,7 @@ package com.soa_arah;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -57,6 +58,9 @@ String[] array;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_keyword);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
+
         list=getIntent().getStringArrayListExtra("list");
         addCal=getIntent().getStringExtra("addCal");
         progressDialog = new ProgressDialog(this);
@@ -150,16 +154,16 @@ String[] array;
 
             if (user != null) {
                 String id = user.getUid();
-                //ID موب صح
                 //IT admin
-                if (user.getUid().equals( "aSK7RyMA8xfdaQNPF0xS6kAumam2" )) {
-                    startActivity( new Intent( getApplicationContext(), home_page_IT_admin.class ) );
+                if(id.equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")){
+                    startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
                 }
                 // Nutrition addmin
-                else if (user.getUid().equals( "Pf7emnnQTEbmukAIDwWgkuv8JbC2" )) {
-                    startActivity( new Intent( getApplicationContext(), home_page_Nutrition_admin.class ) );
-                } else {
-                    startActivity( new Intent( getApplicationContext(), home_page_register.class ) );
+                else if(id.equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
+                    startActivity(new Intent(getApplicationContext(),home_page_Nutrition_admin.class));
+                }
+                else {
+                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
 
                 }
 

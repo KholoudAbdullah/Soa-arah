@@ -11,10 +11,14 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,14 +50,26 @@ public class home_page_IT_admin extends AppCompatActivity {
     String grams;
     private Button scan;
     private ZXingScannerView scannerView;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth firebaseAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page__it_admin_activity);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
         isConnected();
         searchtext=(EditText)findViewById(R.id.searchword);
         searchBtn=(Button)findViewById(R.id.searchButton);
+
+        mAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
+        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +156,33 @@ public class home_page_IT_admin extends AppCompatActivity {
             return false;
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.it_admin_bar,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.editaccount1) {
+            startActivity(new Intent(getApplicationContext(), account_IT_admin.class));
+        } else if (item.getItemId() == R.id.aboutUs1) {
+            startActivity(new Intent(getApplicationContext(), aboutUs.class));
+        } else if (item.getItemId() == R.id.search1) {
+            startActivity(new Intent(getApplicationContext(), home_page_register.class));
+        } else if (item.getItemId() == R.id.Logout1){
+            firebaseAuth.signOut();
+            //closing activity
+            finish();
+            startActivity(new Intent(getApplicationContext(), home_page_guest.class));
+
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
     private void showDialog()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

@@ -59,11 +59,13 @@ public class home_page_register extends AppCompatActivity{
     String grams;
     private Button scan;
     private ZXingScannerView scannerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_register_activity);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
         isConnected();
         firebaseAuth = FirebaseAuth.getInstance();
         scan=(Button)findViewById(R.id.scan);
@@ -139,6 +141,7 @@ public class home_page_register extends AppCompatActivity{
         }
         return true;
     }
+
     public void searchKeyword() {
         list.clear();
         progressDialog.show();

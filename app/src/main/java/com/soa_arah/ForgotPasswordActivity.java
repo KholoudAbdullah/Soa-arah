@@ -79,6 +79,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
         name = (EditText) findViewById(R.id.name);
         code = (EditText) findViewById(R.id.code);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);

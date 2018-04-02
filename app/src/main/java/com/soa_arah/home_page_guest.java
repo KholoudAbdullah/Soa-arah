@@ -58,12 +58,13 @@ public class home_page_guest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_guest_activity);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user != null){
-            //ID موب صح
+
             //IT admin
-            if(user.getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+            if(user.getUid().equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")){
                 startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
             }
             // Nutrition addmin

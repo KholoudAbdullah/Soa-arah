@@ -63,11 +63,13 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     @SuppressLint("WrongConstant")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_nutrition_admin_activity);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
         scan=(Button)findViewById(R.id.scan);
         isConnected();
 

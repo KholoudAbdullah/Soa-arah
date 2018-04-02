@@ -4,11 +4,11 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -21,7 +21,6 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,11 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-/**
- * Created by Lama on 02/03/18.
- */
-
-public class account_Nutrition_admin extends AppCompatActivity implements View.OnClickListener{
+public class account_IT_admin extends AppCompatActivity implements View.OnClickListener {
 
     private TextView name,passlenght;
     private EditText password;
@@ -50,13 +45,13 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabase1;
     private ProgressDialog progressDialog;
-    private ProgressBar progressBarName;
     android.app.AlertDialog.Builder alert;
+    private ProgressBar progressBarName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account_nutrition_admin);
+        setContentView(R.layout.account__it_admin);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
 
@@ -67,12 +62,14 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
         edit_pass1 = (ImageButton)findViewById(R.id.edit_pass1);
         conformpass=(RelativeLayout)findViewById(R.id.conformpass);
         passlenght=(TextView)findViewById(R.id.passlenght);
+        progressBarName = (ProgressBar) findViewById(R.id.progressbar1);
+
+
 
         conformpass.setVisibility(View.GONE);
         edit_pass.setVisibility(View.VISIBLE);
         edit_pass.setOnClickListener(this);
         edit_pass1.setOnClickListener(this);
-        progressBarName = (ProgressBar) findViewById(R.id.progressbar1);
         progressBarName.setVisibility(View.VISIBLE);
 
         mAuth = FirebaseAuth.getInstance();
@@ -80,7 +77,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-        mDatabase= FirebaseDatabase.getInstance().getReference().child("admin_N").child("name");
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("admin_IT").child("name");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -97,7 +94,6 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
 
             }
         });
-
 
 
         password.addTextChangedListener(new TextWatcher() {
@@ -144,27 +140,6 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
             }
         });
 
-        //menu bottom bar
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.search:
-                                startActivity(new Intent(getApplicationContext(), home_page_Nutrition_admin.class));
-                                break;
-                            case R.id.request:
-                                startActivity(new Intent(getApplicationContext(), view_request.class));
-
-                                break;
-                            case R.id.account:
-                                startActivity(new Intent(getApplicationContext(), account_Nutrition_admin.class));
-                                break;
-                        }
-                        return false;
-                    }
-                });
 
 
 
@@ -184,7 +159,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
             String text=password.getText().toString();
             int count =text.length();
             if(count<6) {
-                alert= new android.app.AlertDialog.Builder(account_Nutrition_admin.this);
+                alert= new android.app.AlertDialog.Builder(account_IT_admin.this);
                 alert.setMessage("الرجاء إدخال الرقم السري");
                 alert.setCancelable(true);
                 alert.setPositiveButton(
@@ -210,7 +185,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
 
         if (view == edit_pass1) {
             if(password.getText().toString().equals("")||password1.getText().toString().equals("")){
-                alert= new android.app.AlertDialog.Builder(account_Nutrition_admin.this);
+                alert= new android.app.AlertDialog.Builder(account_IT_admin.this);
                 alert.setMessage("الرجاء إدخال الرقم السري");
                 alert.setCancelable(true);
                 alert.setPositiveButton(
@@ -229,7 +204,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
 
             }
             else if (!password.getText().toString().trim().equals(password1.getText().toString().trim())){
-                alert= new android.app.AlertDialog.Builder(account_Nutrition_admin.this);
+                alert= new android.app.AlertDialog.Builder(account_IT_admin.this);
                 alert.setMessage("كلمة المرور ليست متطابقة");
                 alert.setCancelable(true);
                 alert.setPositiveButton(
@@ -260,11 +235,11 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
 
-                                    mDatabase1.child("admin_N").child("password").setValue(password.getText().toString());
+                                    mDatabase1.child("admin_IT").child("password").setValue(password.getText().toString());
 
                                     //display message to the user here
                                     AlertDialog.Builder alert = new AlertDialog.Builder(
-                                            account_Nutrition_admin.this );
+                                            account_IT_admin.this );
 
                                     alert.setTitle( "تمت العملية بنجاح.." ).setIcon( R.drawable.t1 );
                                     alert.setNegativeButton("موافق", new DialogInterface.OnClickListener() {
@@ -311,7 +286,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
                                 } else {
                                     //display message to the user here
                                     AlertDialog.Builder alert = new AlertDialog.Builder(
-                                            account_Nutrition_admin.this );
+                                            account_IT_admin.this );
 
                                     alert.setTitle( "هناك خلل.." ).setIcon( R.drawable.f1 );
                                     alert.setNegativeButton("موافق", new DialogInterface.OnClickListener() {
@@ -333,7 +308,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
             } else {
                 //display message to the user here
                 AlertDialog.Builder alert = new AlertDialog.Builder(
-                        account_Nutrition_admin.this );
+                        account_IT_admin.this );
 
                 alert.setTitle( "الرقم السري لا يتطابق" ).setIcon( R.drawable.f1 );
                 alert.setNegativeButton("موافق", new DialogInterface.OnClickListener() {
@@ -349,24 +324,28 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
 
             }
 
-            }
+        }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.adminloguot,menu);
+        getMenuInflater().inflate(R.menu.it_admin_bar,menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == R.id.aboutUs) {
+        if (item.getItemId() == R.id.editaccount1) {
+            startActivity(new Intent(getApplicationContext(), account_IT_admin.class));
+        } else if (item.getItemId() == R.id.aboutUs1) {
             startActivity(new Intent(getApplicationContext(), aboutUs.class));
-        }else if (item.getItemId() == R.id.Logout){
+        } else if (item.getItemId() == R.id.search1) {
+            startActivity(new Intent(getApplicationContext(), home_page_register.class));
+        } else if (item.getItemId() == R.id.Logout1) {
             firebaseAuth.signOut();
             //closing activity
             finish();
-            startActivity(new Intent(getApplicationContext(), LoginPage.class));
+            startActivity(new Intent(getApplicationContext(), home_page_guest.class));
 
         } else {
             return super.onOptionsItemSelected(item);

@@ -1,5 +1,6 @@
 package com.soa_arah;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,10 +41,13 @@ public class ProgressChart extends AppCompatActivity {
     private  ArrayList<LegendEntry> entries;
     private  ArrayList<Integer> colors;
     private Description Des;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         setContentView(R.layout.activity_progress_chart);
+
         pieChart=(PieChart)findViewById(R.id.chart);
         firebaseAuth = FirebaseAuth.getInstance();
         User_ID = firebaseAuth.getCurrentUser().getEmail();

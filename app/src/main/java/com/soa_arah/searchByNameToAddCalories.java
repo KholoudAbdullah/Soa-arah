@@ -49,10 +49,13 @@ public class searchByNameToAddCalories extends AppCompatActivity {
     private Date date1,date2,date3,date4,date5,date6,date7,date;
     private String day1,day2,day3,day4,day5,day6,day7,calory,day;
     Calendar calendar1,calendar2,calendar3,calendar4,calendar5,calendar6,calendar7,calendar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_name_to_add_calories);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+
         firebaseAuth = FirebaseAuth.getInstance();
         User_ID = firebaseAuth.getCurrentUser().getEmail();
         username= User_ID.substring( 0, User_ID.lastIndexOf( "@" ) );
