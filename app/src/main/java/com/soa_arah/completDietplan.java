@@ -61,7 +61,7 @@ public class completDietplan  extends AppCompatActivity  {
     android.app.AlertDialog.Builder alert;
     int year;
     Calendar today1 = Calendar.getInstance();
-    boolean datV= true,flag=true;
+    boolean datV= true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +164,6 @@ public class completDietplan  extends AppCompatActivity  {
        year1=array[2];
 
                 age= getAge(Integer.parseInt(year1),Integer.parseInt( month ),Integer.parseInt(day));
-                flag=false;
 
             }
 
@@ -184,47 +183,7 @@ public class completDietplan  extends AppCompatActivity  {
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,gender);
         gen.setAdapter(adapter);
 
-        if (flag){
-        hight.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hight.getText().toString().trim().length()<2){
-
-                    hight.setError("الرجاء إدخال الطول");
-                }
-            }
-        });
-        wight.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (wight.getText().toString().trim().length()<2){
-
-                    wight.setError("الرجاء إدخال الوزن");
-                }
-            }
-        });
-        waist.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (waist.getText().toString().trim().length()<2){
-
-                    waist.setError("الرجاء إدخال محيط الخصر");
-                }
-            }
-        });
-        hip.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hip.getText().toString().trim().length()<2){
-
-                    hip.setError("الرجاء إدخال محيط الفخذ");
-                }
-            }
-        });}
 
         gen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 

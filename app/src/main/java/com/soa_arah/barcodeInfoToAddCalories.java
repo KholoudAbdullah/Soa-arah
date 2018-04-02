@@ -243,6 +243,8 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
                     mDatabase.child(username).child("day1").setValue(str);
 
                 }
+                startActivity( new Intent( getApplicationContext(), diet_plan.class ) );
+
             }
 
             @Override

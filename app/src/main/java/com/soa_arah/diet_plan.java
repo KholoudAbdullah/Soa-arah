@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -49,7 +50,7 @@ public class diet_plan extends AppCompatActivity {
     private ImageView imcal,imWater,prgress;
    private int bmi;
     private String na;
-    private boolean flag,progressB=true;
+    private boolean flag,progressB=true, flag1=true;
     private ProgressBar progressBar;
     private ProgressDialog progressDialog;
     private String id;
@@ -77,6 +78,46 @@ public class diet_plan extends AppCompatActivity {
         User_ID = firebaseAuth.getCurrentUser().getEmail();
          na = User_ID.substring( 0, User_ID.lastIndexOf( "@" ) );
         progressBar.setVisibility(View.VISIBLE);
+
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alert= new android.app.AlertDialog.Builder(diet_plan.this);
+                alert.setMessage("هل انت متأكد من حذف الخطة؟");
+                alert.setCancelable(true);
+                alert.setPositiveButton(
+                        "نعم",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                Toast.makeText(diet_plan.this,""+flag1, Toast.LENGTH_SHORT).show();
+                                flag1=false;
+                                FirebaseDatabase.getInstance().getReference().child("DietPlan").child(na).removeValue();
+                                FirebaseDatabase.getInstance().getReference().child("Progress").child(na).removeValue();
+                                Toast.makeText(diet_plan.this,""+flag1, Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(diet_plan.this, home_page_register.class));
+
+                            }
+                        });
+
+                alert.setNegativeButton(
+                        "لا",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+                            }
+                        });
+
+                android.app.AlertDialog alert11 = alert.create();
+                alert11.show();
+            }
+        });
+
             mDatabase = FirebaseDatabase.getInstance().getReference().child("DietPlan");
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -87,10 +128,12 @@ public class diet_plan extends AppCompatActivity {
                     id=snapshot.getKey();
                     if(id.equals(na)){
                         flag=true;
+                            break;
                     }else
                         flag=false;
                 }
-                if(flag){
+                if(flag&&flag1){
+
                     progressBar.setVisibility(View.INVISIBLE);
                     dietplan();
 
@@ -131,62 +174,7 @@ public class diet_plan extends AppCompatActivity {
                     }
                 });
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                databaseReference=FirebaseDatabase.getInstance().getReference().child("Progress");
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                            String n=snapshot.getKey();
-
-                            if(n.equals(na)){
-                                progressB=false;
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-
-                });
-
-                alert= new android.app.AlertDialog.Builder(diet_plan.this);
-                alert.setMessage("هل انت متأكد من حذف الخطة؟");
-                alert.setCancelable(true);
-                alert.setPositiveButton(
-                        "نعم",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-
-                                FirebaseDatabase.getInstance().getReference().child("DietPlan").child(na).removeValue();
-                                if (progressB=false)
-                                    databaseReference.child(na).removeValue();
-
-                                startActivity(new Intent(diet_plan.this, home_page_register.class));
-
-                            }
-                        });
-
-                alert.setNegativeButton(
-                        "لا",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                                dialogInterface.cancel();
-                            }
-                        });
-
-                android.app.AlertDialog alert11 = alert.create();
-                alert11.show();
-            }
-        });
 
 
         imcal.setOnClickListener(new View.OnClickListener() {
@@ -223,11 +211,12 @@ public class diet_plan extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     plan = dataSnapshot.getValue(DietPlan.class);
-                    //if(plan!=null){
-                    calGoal.setText(plan.getCalGoal());
+                    if(flag1==true){
+
                     Water.setText(plan.getWater());
                     NewCalFood.setText(plan.getDailyCal());
-                   // }
+                    calGoal.setText(plan.getCalGoal());
+                   }
                 }
 
                 @Override

@@ -173,7 +173,7 @@ public class home_page_IT_admin extends AppCompatActivity {
         } else if (item.getItemId() == R.id.aboutUs1) {
             startActivity(new Intent(getApplicationContext(), aboutUs.class));
         } else if (item.getItemId() == R.id.search1) {
-            startActivity(new Intent(getApplicationContext(), home_page_register.class));
+            startActivity(new Intent(getApplicationContext(), home_page_IT_admin.class));
         } else if (item.getItemId() == R.id.Logout1){
             firebaseAuth.signOut();
             //closing activity

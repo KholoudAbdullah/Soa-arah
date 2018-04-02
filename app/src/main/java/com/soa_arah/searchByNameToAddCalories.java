@@ -1,6 +1,7 @@
 package com.soa_arah;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -289,6 +290,8 @@ public class searchByNameToAddCalories extends AppCompatActivity {
                     mDatabase.child(username).child("day1").setValue(str);
 
                 }
+
+                startActivity( new Intent( getApplicationContext(), diet_plan.class ) );
             }
 
 
