@@ -1,15 +1,19 @@
 package com.soa_arah;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +37,8 @@ public class AddReview extends AppCompatActivity {
     private RegisteredUser user;
 
     private String name;
+
+    android.app.AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +68,7 @@ public class AddReview extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-                if (mAuth.getCurrentUser() != null) {
+
                     R_key = mAuth.getCurrentUser().getEmail();
                     key =R_key.substring(0,R_key.lastIndexOf("@"));
 //                    dbRef1=FirebaseDatabase.getInstance().getReference().child("RegisteredUser");
@@ -72,6 +78,30 @@ public class AddReview extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             name =dataSnapshot.child("name").getValue().toString();
+                            dbRef= FirebaseDatabase.getInstance().getReference("Review").child(getIntent().getStringExtra("name")).push();
+                            dbRef.child("comment").setValue(comment.getText().toString());
+                            dbRef.child("RKey").setValue(key);
+                            dbRef.child("numLike").setValue("0");
+                            dbRef.child("numDisLike").setValue("0");
+                            dbRef.child("writer").setValue(name);
+
+                            alert= new android.app.AlertDialog.Builder(AddReview.this);
+                            alert.setMessage("تم إضافة التعليق");
+                            alert.setCancelable(true);
+                            alert.setPositiveButton(
+                                    "موافق",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            Intent intent = new Intent(AddReview.this, ViewReviewRegisterUser.class);
+                                            intent.putExtra("name", getIntent().getStringExtra("name"));
+                                            startActivity(intent);
+
+                                        }
+                                    });
+                            android.app.AlertDialog alert11 = alert.create();
+                            alert11.show();
 
 
                         }
@@ -82,40 +112,22 @@ public class AddReview extends AppCompatActivity {
 
                     });
 
-                    dbRef= FirebaseDatabase.getInstance().getReference("Review").child(getIntent().getStringExtra("name")).push();
-                    dbRef.child("comment").setValue(comment.getText().toString());
-                    dbRef.child("RKey").setValue(key);
-                    dbRef.child("numLike").setValue("0");
-                    dbRef.child("numDisLike").setValue("0");
-                    if(name!=null) {
-                        dbRef.child("writer").setValue(name);
-                    }
-                    else{
-                        R_key = mAuth.getCurrentUser().getEmail();
-                        key =R_key.substring(0,R_key.lastIndexOf("@"));
-//                    dbRef1=FirebaseDatabase.getInstance().getReference().child("RegisteredUser");
-//                    name=dbRef1.child(key).child("name").
-                        dbRef1 = FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(key);
-                        dbRef1.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                name =dataSnapshot.child("name").getValue().toString();
+//                    dbRef= FirebaseDatabase.getInstance().getReference("Review").child(getIntent().getStringExtra("name")).push();
+//                    dbRef.child("comment").setValue(comment.getText().toString());
+//                    dbRef.child("RKey").setValue(key);
+//                    dbRef.child("numLike").setValue("0");
+//                    dbRef.child("numDisLike").setValue("0");
+//                        dbRef.child("writer").setValue(name);
 
 
-                            }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                            }
 
-                        });
-                        dbRef.child("writer").setValue(name);
-                    }
-                }
 
 
 
 
 
     }
+
+
 }
