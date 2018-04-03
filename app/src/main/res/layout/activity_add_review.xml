@@ -4,33 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background1"
     tools:context="com.soa_arah.AddReview">
+
+    <ImageView
+        android:id="@+id/image3"
+        android:layout_width="298dp"
+        android:layout_height="210dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="false"
+        android:background="@drawable/round_corner1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.294" />
 
     <EditText
         android:id="@+id/comment"
-        android:layout_width="339dp"
-        android:layout_height="172dp"
+        android:layout_width="254dp"
+        android:layout_height="119dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/review"
         android:ems="10"
         android:hint="اكتب التعليق هنا..."
         android:inputType="textMultiLine"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/send"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/image3"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="@+id/image3"
+        app:layout_constraintTop_toTopOf="@+id/image3" />
 
     <Button
         android:id="@+id/send"
-        android:layout_width="307dp"
-        android:layout_height="44dp"
+        android:layout_width="223dp"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
         android:onClick="addReview"
         android:text="إرسال"
-        android:background="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.559"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comment"
-        app:layout_constraintVertical_bias="0.51" />
+        app:layout_constraintVertical_bias="0.055" />
 </android.support.constraint.ConstraintLayout>

@@ -9,12 +9,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -118,7 +121,13 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
 //            }
 //        });
 
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
 
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     @Override
@@ -554,4 +563,43 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
         intent.putExtra("name", getIntent().getStringExtra("name"));
         startActivity(intent);
     }
+    //menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate( R.menu.home_1, menu );
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.Home) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+            if (user != null) {
+                String id = user.getUid();
+                //IT admin
+                if(id.equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")){
+                    startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
+                }
+                // Nutrition addmin
+                else if(id.equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
+                    startActivity(new Intent(getApplicationContext(),home_page_Nutrition_admin.class));
+                }
+                else {
+                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
+
+                }
+
+            } else {
+                startActivity( new Intent( getApplicationContext(), home_page_guest.class ) );
+
+            }
+        } else {
+            return super.onOptionsItemSelected( item );
+        }
+        return true;
+
+    }
+
 }
