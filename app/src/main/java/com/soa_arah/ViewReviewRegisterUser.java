@@ -109,7 +109,6 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
 
             @Override
             public void populateViewHolder(final ViewReviewRegisterUser.ReviewViewHolderR holder, Review model, int position) {
-//                return null;
 
                 pos = position;
                 pos = holder.getLayoutPosition();
