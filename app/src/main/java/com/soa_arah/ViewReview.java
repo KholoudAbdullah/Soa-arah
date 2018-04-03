@@ -1,5 +1,7 @@
 package com.soa_arah;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
@@ -41,6 +43,10 @@ public class ViewReview extends AppCompatActivity {
 
 
     private Button deleteButton;
+    private ProgressDialog progressDialog;
+    android.app.AlertDialog.Builder alert;
+
+
 
 
     @Override
@@ -49,13 +55,41 @@ public class ViewReview extends AppCompatActivity {
         setContentView(R.layout.activity_view_review);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
+        progressDialog = new ProgressDialog(ViewReview.this);
+
+
         Fname=getIntent().getStringExtra("name");
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
+        deleteDatabase = FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
         mAuth = FirebaseAuth.getInstance();
         reviewsQuery = mDatabase.orderByKey();
+
+        if (reviewsQuery==null){
+
+            alert= new android.app.AlertDialog.Builder(ViewReview.this);
+            alert.setTitle("لاتوجد تعليقات");
+            alert.setMessage("العودة الى الصفحة السابقة");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "نعم",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            Intent intent = new Intent(ViewReview.this, AddReview.class);
+                            intent.putExtra("name", Fname);
+                            startActivity(intent);
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+
+
+        }
 //        reviewsQuery = mDatabase.orderByKey().equalTo(Fname);
 if(mAuth.getCurrentUser()!=null){
         key = mAuth.getCurrentUser().getEmail();
+
         user_key =key.substring(0,key.lastIndexOf("@"));}
         mReviewList = findViewById(R.id.review_list);
         LinearLayoutManager layoutManager=new LinearLayoutManager(ViewReview.this);
@@ -116,30 +150,51 @@ if(mAuth.getCurrentUser()!=null){
                 holder.deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        pos = holder.getLayoutPosition();
-                        R_key = getRef(pos).getKey();
-                        deleteDatabase=deleteDatabase.child(R_key);
-
-                        deleteDatabase.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if(mAuth.getCurrentUser()!=null){
-
-                                    if(mAuth.getCurrentUser().getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
-
-                                        deleteDatabase.removeValue();
 
 
-                                    }}
+                        alert= new android.app.AlertDialog.Builder(ViewReview.this);
+                        alert.setMessage("هل انت متأكد من خذف التعليق؟");
+                        alert.setCancelable(true);
+                        alert.setPositiveButton(
+                                "نعم",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        pos = holder.getLayoutPosition();
+                                        R_key = getRef(pos).getKey();
+                                        deleteDatabase=deleteDatabase.child(R_key);
 
 
-                            }
+                                        deleteDatabase.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                                                        deleteDatabase.removeValue();
 
-                            }
-                        });
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+                                    }
+                                });
+
+                        alert.setNegativeButton(
+                                "لا",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        dialogInterface.cancel();
+                                    }
+                                });
+
+                        android.app.AlertDialog alert11 = alert.create();
+                        alert11.show();
+
                     }
                 });
 
@@ -176,7 +231,7 @@ if(mAuth.getCurrentUser()!=null){
 
 
             if(mAuth.getCurrentUser()!=null) {
-                if (mAuth.getCurrentUser().getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")) {
+                if (mAuth.getCurrentUser().getUid().equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")) {
                     deleteButton.setVisibility(View.VISIBLE);
                 }
             }

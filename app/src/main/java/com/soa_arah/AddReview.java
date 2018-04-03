@@ -2,6 +2,7 @@ package com.soa_arah;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -37,8 +38,8 @@ public class AddReview extends AppCompatActivity {
     private RegisteredUser user;
 
     private String name;
-
     android.app.AlertDialog.Builder alert;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +63,40 @@ public class AddReview extends AppCompatActivity {
 //            }
 //        };
 
+
+        comment.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (comment.getText().toString().trim().length()<1){
+
+                    comment.setError("الرجاء كتابة التعليق");
+                }
+            }
+        });
+
     }
 
     public void addReview(View view){
+
+        if(comment.getText().toString().trim().length()<1){
+            alert= new android.app.AlertDialog.Builder(AddReview.this);
+            alert.setMessage("الرجاء كتابة التعليق");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+
+        }else {
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -133,4 +165,4 @@ public class AddReview extends AppCompatActivity {
     }
 
 
-}
+}}

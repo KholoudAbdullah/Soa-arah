@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -196,30 +197,25 @@ public class searchByName extends AppCompatActivity {
     }
 
 
-public void toView(View view){
+public void toView(View view) {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    if(user!=null){
-    String id = user.getUid();
-if(!(id.equals( "kstgUKiRA7T3p1NNl3GuGBHgvcf2" )) && !(id.equals( "Pf7emnnQTEbmukAIDwWgkuv8JbC2" )) ) {
+    if (user != null) {
+        String id = user.getUid();
+        Log.d("ff",id);
+        if (!(id.equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")) && !(id.equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2"))) {
 
-    Intent intent = new Intent(searchByName.this, ViewReviewRegisterUser.class);
-    intent.putExtra("name", getIntent().getStringExtra("name"));
-    startActivity(intent);
+            Intent intent = new Intent(searchByName.this, ViewReviewRegisterUser.class);
+            intent.putExtra("name", getIntent().getStringExtra("name"));
+            startActivity(intent);
 
+        } else {
+            Intent intent = new Intent(searchByName.this, ViewReview.class);
+            intent.putExtra("name", getIntent().getStringExtra("name"));
+            startActivity(intent);
+        }
 
-}
-}else {
-        Intent intent = new Intent(searchByName.this, ViewReview.class);
-        intent.putExtra("name", getIntent().getStringExtra("name"));
-        startActivity(intent);
     }
 
+
 }
-
-
-
-
-
-
-
 }

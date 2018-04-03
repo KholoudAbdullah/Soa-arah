@@ -1,5 +1,7 @@
 package com.soa_arah;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +41,9 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
     public String R_key;
     String user_key;
     public int pos;
+    android.app.AlertDialog.Builder alert;
+    private ProgressDialog progressDialog;
+
 
 
     private Button deleteButton;
@@ -48,10 +53,32 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_review_register_user);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        progressDialog = new ProgressDialog(ViewReviewRegisterUser.this);
+
         Fname = getIntent().getStringExtra("name");
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
         reviewsQueryR = mDatabase.orderByKey();
+        if (reviewsQueryR==null){
+
+            alert= new android.app.AlertDialog.Builder(ViewReviewRegisterUser.this);
+            alert.setTitle("لاتوجد تعليقات");
+            alert.setMessage("الانتقال لكتابة تعليق");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(ViewReviewRegisterUser.this, AddReview.class);
+                            intent.putExtra("name", Fname);
+                            startActivity(intent);
+                            //
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+        }
         LikeDatabase = FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
         disLikeDatabase = FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
         deleteDatabase = FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
@@ -130,9 +157,20 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                 holder.deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        pos = holder.getLayoutPosition();
-                        R_key = getRef(pos).getKey();
-                        deleteDatabase = deleteDatabase.child(R_key);
+
+                        alert= new android.app.AlertDialog.Builder(ViewReviewRegisterUser.this);
+                        alert.setMessage("هل انت متأكد من خذف التعليق؟");
+                        alert.setCancelable(true);
+                        alert.setPositiveButton(
+                                "نعم",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                        pos = holder.getLayoutPosition();
+                                        R_key = getRef(pos).getKey();
+                                        deleteDatabase = deleteDatabase.child(R_key);
 
                         deleteDatabase.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -142,20 +180,36 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                                     String RKey = user_email.substring(0, user_email.lastIndexOf("@"));
                                     if (dataSnapshot.child("RKey").getValue().equals(RKey)) {
 
-                                        deleteDatabase.removeValue();
+                                                        deleteDatabase.removeValue();
 
 
+                                                    }
+                                                }
+
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
                                     }
-                                }
+                                });
 
+                        alert.setNegativeButton(
+                                "لا",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                            }
+                                        dialogInterface.cancel();
+                                    }
+                                });
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                        android.app.AlertDialog alert11 = alert.create();
+                        alert11.show();
 
-                            }
-                        });
                     }
                 });
 
