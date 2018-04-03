@@ -214,6 +214,10 @@ public void toView(View view) {
             startActivity(intent);
         }
 
+    }else{
+        Intent intent = new Intent(searchByName.this, ViewReview.class);
+        intent.putExtra("name", getIntent().getStringExtra("name"));
+        startActivity(intent);
     }
 
 
