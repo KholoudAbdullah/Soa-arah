@@ -98,6 +98,9 @@ public class AddReview extends AppCompatActivity {
                                             intent.putExtra("name", getIntent().getStringExtra("name"));
                                             startActivity(intent);
 
+
+
+
                                         }
                                     });
                             android.app.AlertDialog alert11 = alert.create();

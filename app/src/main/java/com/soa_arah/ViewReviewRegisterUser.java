@@ -109,12 +109,12 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
 
             @Override
             public void populateViewHolder(final ViewReviewRegisterUser.ReviewViewHolderR holder, Review model, int position) {
+//                return null;
 
                 pos = position;
                 pos = holder.getLayoutPosition();
-                Log.d("pos", " " + pos);
                 R_key = getRef(pos).getKey();
-
+                Log.d("pos", " " + pos);
                 holder.setComment(model.getComment());
                 holder.setWriter(model.getWriter());
                 holder.setNumLike(model.getNumLike());
@@ -125,7 +125,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
 //                Log.d("error","error"+" 3");
 //                View view = LayoutInflater.from(parent.getContext())
 //                        .inflate(R.layout.review_row, parent, false);
-
+//
 
                 holder.deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -137,8 +137,6 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                         deleteDatabase.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-//                                pos = holder.getLayoutPosition();
-//                                R_key = getRef(pos).getKey();
                                 if (dataSnapshot.hasChild("RKey")) {
                                     String user_email = mAuth.getCurrentUser().getEmail();
                                     String RKey = user_email.substring(0, user_email.lastIndexOf("@"));
@@ -164,9 +162,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                 holder.likebtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        pos = holder.getLayoutPosition();
                         pos = holder.getLayoutPosition();
-                        R_key = getRef(pos).getKey();
                         Log.d("likebtn", " " + R_key);
 
 //                        LikeDatabase=LikeDatabase.child(R_key);
@@ -175,7 +171,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                         LikeDatabase.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                                R_key = getRef(pos).getKey();
                                 if (proLike) {
                                     if (dataSnapshot.child(R_key).hasChild("likes")) {
                                         if (dataSnapshot.child(R_key).child("likes").hasChild(user_key)) {
@@ -227,8 +223,6 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         pos = holder.getLayoutPosition();
-                        R_key = getRef(pos).getKey();
-//                        pos = holder.getLayoutPosition();
                         Log.d("dislikebtn", " " + R_key);
 
 //                        disLikeDatabase=disLikeDatabase.child(R_key);
@@ -237,8 +231,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                         disLikeDatabase.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-//                                pos = holder.getLayoutPosition();
-//                                R_key = getRef(pos).getKey();
+                                R_key = getRef(pos).getKey();
                                 if (prodisLike) {
                                     if (dataSnapshot.child(R_key).hasChild("likes")) {
                                         if (dataSnapshot.child(R_key).child("likes").hasChild(user_key)) {
@@ -343,17 +336,16 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                         if (dataSnapshot.child("likes").hasChild(user_key)) {
                             if (dataSnapshot.child("likes").child(user_key).getValue().equals("like")) {
                                 likebtn.setBackgroundResource(R.drawable.like_red);
-//                                dislikebtn.setBackgroundResource(R.drawable.thumb_down);
+                                dislikebtn.setBackgroundResource(R.drawable.thumb_down);
                             } else if (dataSnapshot.child("likes").child(user_key).getValue().equals("dislike")) {
                                 likebtn.setBackgroundResource(R.drawable.thumb_up);
-//                                dislikebtn.setBackgroundResource(R.drawable.dislike_red);
+                                dislikebtn.setBackgroundResource(R.drawable.dislike_red);
                             }
 
+                        } else if (!(dataSnapshot.child("likes").hasChild(user_key))) {
+                            dislikebtn.setBackgroundResource(R.drawable.thumb_down);
+                            likebtn.setBackgroundResource(R.drawable.thumb_up);
                         }
-// else if (!(dataSnapshot.child("likes").hasChild(user_key))) {
-//                            dislikebtn.setBackgroundResource(R.drawable.thumb_down);
-//                            likebtn.setBackgroundResource(R.drawable.thumb_up);
-//                        }
 
                     }
 //                        else if(!(dataSnapshot.hasChild("likes"))){
@@ -385,19 +377,18 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                             if (dataSnapshot.child("likes").child(user_key).getValue().equals("dislike")) {
 
                                 dislikebtn.setBackgroundResource(R.drawable.dislike_red);
-//                                likebtn.setBackgroundResource(R.drawable.thumb_up);
+                                likebtn.setBackgroundResource(R.drawable.thumb_up);
 
                             } else if (dataSnapshot.child("likes").child(user_key).getValue().equals("like")) {
                                 dislikebtn.setBackgroundResource(R.drawable.thumb_down);
-//                                likebtn.setBackgroundResource(R.drawable.like_red);
+                                likebtn.setBackgroundResource(R.drawable.like_red);
 
                             }
 
+                        } else if (!(dataSnapshot.child("likes").hasChild(user_key))) {
+                            dislikebtn.setBackgroundResource(R.drawable.thumb_down);
+                            likebtn.setBackgroundResource(R.drawable.thumb_up);
                         }
-//                        else if (!(dataSnapshot.child("likes").hasChild(user_key))) {
-//                            dislikebtn.setBackgroundResource(R.drawable.thumb_down);
-//                            likebtn.setBackgroundResource(R.drawable.thumb_up);
-//                        }
 
                     }
 //                    else if(!(dataSnapshot.hasChild("likes"))){
@@ -489,7 +480,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                         reviewArrayLists.add(snapshot.getValue(Review.class));
                     }
 
-                     itemPosition = getLayoutPosition();
+                    itemPosition = getLayoutPosition();
                     Log.d("pos new","  "+itemPosition);
 
                 }
