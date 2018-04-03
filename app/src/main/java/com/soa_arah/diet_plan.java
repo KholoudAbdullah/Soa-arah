@@ -84,6 +84,7 @@ public class diet_plan extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                flag1=false;
 
                 AlertDialog.Builder alert = new AlertDialog.Builder(
                         diet_plan.this);
@@ -211,7 +212,7 @@ public class diet_plan extends AppCompatActivity {
                             Water.setText(plan.getWater());
                             NewCalFood.setText(plan.getDailyCal());
                             calGoal.setText(plan.getCalGoal());
-                            flag1=false;
+
                             }
 
                         }
