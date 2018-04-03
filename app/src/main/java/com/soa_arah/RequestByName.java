@@ -21,7 +21,6 @@ import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -34,7 +33,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -385,7 +383,7 @@ public class RequestByName extends AppCompatActivity {
                             databaseReference.child(uploadId).setValue(RF);
 
                             // Hiding the progressDialog after done uploading.
-                            progressDialog.dismiss();
+                            //progressDialog.dismiss();
 
 
                         }
@@ -394,7 +392,7 @@ public class RequestByName extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             // Hiding the progressDialog after done uploading.
-                            progressDialog.dismiss();
+                            //progressDialog.dismiss();
                             Toast.makeText(RequestByName.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });

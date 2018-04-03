@@ -1,6 +1,5 @@
 package com.soa_arah;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,6 +67,11 @@ public class view_request extends AppCompatActivity {
 
         progressBarName.setVisibility(View.VISIBLE);
         progressBarBarcode.setVisibility(View.VISIBLE);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+       if (user == null){
+
+            startActivity(new Intent(getApplicationContext(),LoginPage.class));
+        }
 
 
         request_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {

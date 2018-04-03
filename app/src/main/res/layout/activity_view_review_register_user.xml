@@ -27,6 +27,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/review_list"
+                        android:background="@drawable/background1"
+                        app:cardBackgroundColor="#8BAF3A"
                         tools:listitem="@layout/review_row2">
 
                     </android.support.v7.widget.RecyclerView>

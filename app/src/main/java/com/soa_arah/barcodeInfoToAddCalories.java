@@ -2,10 +2,12 @@ package com.soa_arah;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import uk.co.senab.photoview.PhotoViewAttacher;
-
 public class barcodeInfoToAddCalories extends AppCompatActivity {
     String cal, img, table, q, name, bar, f, id,DailyCal,username,User_ID,str;
     private DatabaseReference mDatabase;
@@ -32,6 +32,7 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
     private Date date1,date2,date3,date4,date5,date6,date7,date;
     private String day1,day2,day3,day4,day5,day6,day7,calory,day;
     private Double cal2;
+    private Button add;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         User_ID = firebaseAuth.getCurrentUser().getEmail();
         username= User_ID.substring( 0, User_ID.lastIndexOf( "@" ) );
-
+        add=(Button)findViewById( R.id.add );
         bar = getIntent().getStringExtra( "bar" );
         name = getIntent().getStringExtra( "Name" );
         cal = getIntent().getStringExtra( "cal" );
@@ -60,6 +61,12 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
         } else
             textC.setText( cal.toString() + " سعرة حرارية" );
         onBackPressed();
+        add.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addCal();
+            }
+        } );
     }
     @Override
     public void onBackPressed()
@@ -160,7 +167,6 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
 
                 }
                 catch (Exception e){}
-                Toast.makeText(barcodeInfoToAddCalories.this,day, Toast.LENGTH_LONG).show();
                 if(day.equals(day1)){
                     str="j";
                     calory=dataSnapshot.child(username).child("day1").getValue(String.class);
@@ -243,8 +249,8 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
                     mDatabase.child(username).child("day1").setValue(str);
 
                 }
-                startActivity( new Intent( getApplicationContext(), diet_plan.class ) );
-
+                Toast.makeText(barcodeInfoToAddCalories.this, "تم أضافة السعرات الحراريه بنجاح", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), diet_plan.class));
             }
 
             @Override

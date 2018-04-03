@@ -291,8 +291,8 @@ public class searchByNameToAddCalories extends AppCompatActivity {
 
                 }
 
-                startActivity( new Intent( getApplicationContext(), diet_plan.class ) );
-            }
+                Toast.makeText(searchByNameToAddCalories.this, "تم أضافة السعرات الحراريه بنجاح", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), diet_plan.class));            }
 
 
             @Override

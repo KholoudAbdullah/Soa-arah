@@ -6,8 +6,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,12 +19,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class addCalories extends AppCompatActivity {
     EditText searchword;
@@ -64,7 +62,7 @@ public class addCalories extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_calories);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
-
+        scan=(Button)findViewById( R.id.scan );
         searchword=(EditText) findViewById(R.id.searchword);
         calories=(EditText)findViewById(R.id.add);
         searchBtn=(Button)findViewById(R.id.searchButton);
@@ -72,7 +70,14 @@ public class addCalories extends AppCompatActivity {
         add=(Button)findViewById(R.id.addB);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
+        scan.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               startActivity(new Intent(getApplicationContext(), BarcodeToAddCalories.class));
 
+
+
+            }
+        });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 searchKeyword();
@@ -232,6 +237,9 @@ public class addCalories extends AppCompatActivity {
                     mDatabase.child(username).child("day1").setValue(str);
 
                 }
+                Toast.makeText(addCalories.this, "تم أضافة السعرات الحراريه بنجاح", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), diet_plan.class));
+
             }
 
             @Override

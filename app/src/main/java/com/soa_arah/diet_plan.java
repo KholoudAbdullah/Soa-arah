@@ -40,7 +40,7 @@ public class diet_plan extends AppCompatActivity {
     private String username,hip,wight,hight,gender,waist,DailyCal,str;
     private TextView calGoal,NewCalFood,Water,BMI;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,fdata;
     private String User_ID;
     private DietPlan plan;
     private RegisteredUser user;
@@ -226,6 +226,7 @@ public class diet_plan extends AppCompatActivity {
                     Toast.makeText(diet_plan.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
+
                 Database = FirebaseDatabase.getInstance().getReference().child("Progress");
                 Database.addValueEventListener(new ValueEventListener() {
                     @Override

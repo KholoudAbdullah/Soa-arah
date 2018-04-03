@@ -236,7 +236,9 @@ public class completDietplan  extends AppCompatActivity  {
                 }else
                     waist.setText(user.getWaist());
 
-
+if(user.getDateOfBarth().equals( "لم يتم إدخال بيانات" ))
+    mDisplayDate.setText("اختر التاريخ");
+    else{
              mDisplayDate.setText(user.getDateOfBarth());
              String bdate=user.getDateOfBarth();
 
@@ -247,7 +249,8 @@ public class completDietplan  extends AppCompatActivity  {
        month=array[1];
        year1=array[2];
 
-                age= getAge(Integer.parseInt(year1),Integer.parseInt( month ),Integer.parseInt(day));
+                age= getAge(Integer.parseInt(year1),Integer.parseInt( month ),Integer.parseInt(day));}
+
 
             }
 

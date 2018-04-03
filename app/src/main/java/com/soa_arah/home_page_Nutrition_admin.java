@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -87,17 +88,44 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
 
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
-                notificationIntent.putExtra( "SumRequest",sumreq );
-                notificationIntent.addCategory("android.intent.category.DEFAULT");
+                if(user != null){
+                    //ID موب صح
+                    //IT admin
+                    if(user.getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                        startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
+                    }
+                    // Nutrition addmin
+                    else if(user.getUid().equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
+                        Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
+                        notificationIntent.putExtra( "SumRequest",sumreq );
+                        notificationIntent.addCategory("android.intent.category.DEFAULT");
+                        PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        Calendar cal = Calendar.getInstance();
+                        cal.add(Calendar.SECOND, 15);
+                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+//                        Calendar calendar = Calendar.getInstance();
+//                        Calendar calendarcurrent = Calendar.getInstance();
+//                        calendarcurrent.setTimeInMillis(System.currentTimeMillis());
+//                        calendar.set(Calendar.HOUR_OF_DAY,14);
+//                        calendar.set(Calendar.MINUTE,42);
+//                        calendar.set(Calendar.SECOND, 0);
+//                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
+//                        if(System.currentTimeMillis()>calendar.getTimeInMillis()) {
+//                            alarmManager.cancel( broadcast );
+//                        }
+                    }
+                    else {
+                        startActivity(new Intent(getApplicationContext(), home_page_register.class));
+
+                    }
+                }
 
 
-                PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                Calendar cal = Calendar.getInstance();
-                cal.set(Calendar.HOUR_OF_DAY,9);
-                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
+
+
             }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -116,19 +144,40 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
 
-                Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
-                notificationIntent.putExtra( "SumRequest",sumreq );
-                notificationIntent.addCategory("android.intent.category.DEFAULT");
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+                if(user != null){
+                    //ID موب صح
+                    //IT admin
+                    if(user.getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                        startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
+                    }
+                    // Nutrition addmin
+                    else if(user.getUid().equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
+                        Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
+                        notificationIntent.putExtra( "SumRequest",sumreq );
+                        notificationIntent.addCategory("android.intent.category.DEFAULT");
+                        PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        Calendar cal = Calendar.getInstance();
+                        cal.add(Calendar.SECOND, 15);
+                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+//                        Calendar calendar = Calendar.getInstance();
+//                        Calendar calendarcurrent = Calendar.getInstance();
+//                        calendarcurrent.setTimeInMillis(System.currentTimeMillis());
+//                        calendar.set(Calendar.HOUR_OF_DAY,14);
+//                        calendar.set(Calendar.MINUTE,42);
+//                        calendar.set(Calendar.SECOND, 0);
+//
+//                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
+//                        if(System.currentTimeMillis()>calendar.getTimeInMillis()) {
+//                            alarmManager.cancel( broadcast );
+//                        }
+                    }
+                    else {
+                        startActivity(new Intent(getApplicationContext(), home_page_register.class));
 
-                PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY,21);
-                calendar.set(Calendar.MINUTE, 0);
-                calendar.set(Calendar.SECOND, 0);
-   alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
+                    }
+                }
 
             }
             @Override

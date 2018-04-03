@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -88,8 +87,13 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
+                            dialogInterface.cancel();
 
-        if(!(TextUtils.isEmpty(pass.getText().toString().trim()))){
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();}
+            else {
             FirebaseUser user1 =FirebaseAuth.getInstance().getCurrentUser();
             if(user1!=null)
             {
@@ -149,9 +153,9 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
 
     }
 
-});
-        }
-    }
+
+
+
     public static String stringToHex(String base)
     {
         StringBuffer buffer = new StringBuffer();
