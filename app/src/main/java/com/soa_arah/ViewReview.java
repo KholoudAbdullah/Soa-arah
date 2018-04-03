@@ -174,6 +174,7 @@ if(mAuth.getCurrentUser()!=null){
         public void setDeleteButtonA(String Fname,String R_key, String user_key) {
 //            int R_key=getRef(itemPosition).getKey();
 
+
             if(mAuth.getCurrentUser()!=null) {
                 if (mAuth.getCurrentUser().getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")) {
                     deleteButton.setVisibility(View.VISIBLE);
