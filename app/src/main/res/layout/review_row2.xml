@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_margin="20dp"
+    card_view:cardBackgroundColor="#000000"
     app:cardCornerRadius="20dp"
     android:background="@drawable/round_corner1"
 
