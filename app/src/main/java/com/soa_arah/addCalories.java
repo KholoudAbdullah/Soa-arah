@@ -87,7 +87,25 @@ public class addCalories extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addCal();
+                if(addCalText.getText().toString().trim().length()<1){
+                    alert= new android.app.AlertDialog.Builder(addCalories.this);
+                    alert.setMessage("الرجاء ادخال عدد السعرات");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+
+                }else
+                    addCal();
             }
         });
     }
