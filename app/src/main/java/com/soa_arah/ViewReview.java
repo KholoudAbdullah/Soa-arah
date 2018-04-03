@@ -37,6 +37,7 @@ public class ViewReview extends AppCompatActivity {
     private String user_key;
     private String key;
     private String R_key;
+    public int pos;
 
 
     private Button deleteButton;
@@ -64,13 +65,9 @@ if(mAuth.getCurrentUser()!=null){
         mReviewList.setLayoutManager(layoutManager);
 
 
-        deleteButton =(Button)findViewById(R.id.deleteButton);
+//        deleteButton =(Button)findViewById(R.id.deleteButton);
                 //the delete button
-        if(mAuth.getCurrentUser()!=null) {
-            if (mAuth.getCurrentUser().getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")) {
-                deleteButton.setVisibility(View.VISIBLE);
-            }
-        }
+
 
         //for the delete
 //        deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -99,14 +96,17 @@ if(mAuth.getCurrentUser()!=null){
         ) {
 
             @Override
-            public void populateViewHolder(ReviewViewHolder holder,  Review model, int position) {
+            public void populateViewHolder(final ReviewViewHolder holder, Review model, int position) {
 //                return null;
-                R_key = getRef(position).getKey();
+                pos = position;
+                pos = holder.getLayoutPosition();
+                R_key = getRef(pos).getKey();
                 Log.d("error","error"+" 2");
                 holder.setComment(model.getComment());
                 holder.setWriter(model.getWriter());
                 holder.setNumLike(model.getNumLike());
                 holder.setNumDisLike(model.getNumDisLike());
+                holder.setDeleteButtonA(Fname,R_key, user_key);
                 Log.d("error","error"+" 3");
 //                View view = LayoutInflater.from(parent.getContext())
 //                        .inflate(R.layout.review_row, parent, false);
@@ -116,6 +116,8 @@ if(mAuth.getCurrentUser()!=null){
                 holder.deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        pos = holder.getLayoutPosition();
+                        R_key = getRef(pos).getKey();
                         deleteDatabase=deleteDatabase.child(R_key);
 
                         deleteDatabase.addValueEventListener(new ValueEventListener() {
@@ -154,12 +156,30 @@ if(mAuth.getCurrentUser()!=null){
     public static class ReviewViewHolder extends RecyclerView.ViewHolder{
 
         Button deleteButton;
+        DatabaseReference DeleteDatabase;
+        FirebaseAuth mAuth;
+
 
         public ReviewViewHolder(View itemView) {
             super(itemView);
             Log.d("error","error"+" 6");
             View mView=itemView;
+            deleteButton = (Button) mView.findViewById(R.id.deleteButton);
+            DeleteDatabase = FirebaseDatabase.getInstance().getReference().child("Review");
+            mAuth = FirebaseAuth.getInstance();
             Log.d("error","error"+" 7");
+
+        }
+
+        public void setDeleteButtonA(String Fname,String R_key, String user_key) {
+//            int R_key=getRef(itemPosition).getKey();
+
+
+            if(mAuth.getCurrentUser()!=null) {
+                if (mAuth.getCurrentUser().getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")) {
+                    deleteButton.setVisibility(View.VISIBLE);
+                }
+            }
 
         }
 
