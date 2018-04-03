@@ -71,7 +71,7 @@ public class AddReview extends AppCompatActivity {
                     dbRef1.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            name = (String) dataSnapshot.child("name").getValue();
+                            name =dataSnapshot.child("name").getValue().toString();
 
 
                         }
@@ -87,9 +87,32 @@ public class AddReview extends AppCompatActivity {
                     dbRef.child("RKey").setValue(key);
                     dbRef.child("numLike").setValue("0");
                     dbRef.child("numDisLike").setValue("0");
-                    dbRef.child("writer").setValue(name);
+                    if(name!=null) {
+                        dbRef.child("writer").setValue(name);
+                    }
+                    else{
+                        R_key = mAuth.getCurrentUser().getEmail();
+                        key =R_key.substring(0,R_key.lastIndexOf("@"));
+//                    dbRef1=FirebaseDatabase.getInstance().getReference().child("RegisteredUser");
+//                    name=dbRef1.child(key).child("name").
+                        dbRef1 = FirebaseDatabase.getInstance().getReference().child("RegisteredUser").child(key);
+                        dbRef1.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                name =dataSnapshot.child("name").getValue().toString();
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+
+                        });
+                        dbRef.child("writer").setValue(name);
+                    }
                 }
-                else{}
+
 
 
 
