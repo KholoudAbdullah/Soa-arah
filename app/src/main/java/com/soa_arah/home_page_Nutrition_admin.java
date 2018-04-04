@@ -91,9 +91,9 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                 if(user != null){
-                    //ID موب صح
+
                     //IT admin
-                    if(user.getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                    if(user.getUid().equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")){
                         startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
                     }
                     // Nutrition addmin
@@ -105,16 +105,7 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                         Calendar cal = Calendar.getInstance();
                         cal.add(Calendar.SECOND, 15);
                         alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
-//                        Calendar calendar = Calendar.getInstance();
-//                        Calendar calendarcurrent = Calendar.getInstance();
-//                        calendarcurrent.setTimeInMillis(System.currentTimeMillis());
-//                        calendar.set(Calendar.HOUR_OF_DAY,14);
-//                        calendar.set(Calendar.MINUTE,42);
-//                        calendar.set(Calendar.SECOND, 0);
-//                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
-//                        if(System.currentTimeMillis()>calendar.getTimeInMillis()) {
-//                            alarmManager.cancel( broadcast );
-//                        }
+
                     }
                     else {
                         startActivity(new Intent(getApplicationContext(), home_page_register.class));
@@ -161,17 +152,7 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                         Calendar cal = Calendar.getInstance();
                         cal.add(Calendar.SECOND, 15);
                         alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
-//                        Calendar calendar = Calendar.getInstance();
-//                        Calendar calendarcurrent = Calendar.getInstance();
-//                        calendarcurrent.setTimeInMillis(System.currentTimeMillis());
-//                        calendar.set(Calendar.HOUR_OF_DAY,14);
-//                        calendar.set(Calendar.MINUTE,42);
-//                        calendar.set(Calendar.SECOND, 0);
-//
-//                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, broadcast);
-//                        if(System.currentTimeMillis()>calendar.getTimeInMillis()) {
-//                            alarmManager.cancel( broadcast );
-//                        }
+
                     }
                     else {
                         startActivity(new Intent(getApplicationContext(), home_page_register.class));

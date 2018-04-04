@@ -1,9 +1,12 @@
 package com.soa_arah;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.zxing.Result;
@@ -13,6 +16,8 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class Barcode_Request extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
     private ZXingScannerView mScannerView;
+    AlertDialog.Builder alert;
+
 
 
 
@@ -40,14 +45,34 @@ public class Barcode_Request extends AppCompatActivity implements ZXingScannerVi
         Log.v("TAG", rawResult.getBarcodeFormat().toString());
        // Toast.makeText(Barcode_Request.this, rawResult.getText(), Toast.LENGTH_SHORT).show();
 
-
+        boolean digitsOnly = TextUtils.isDigitsOnly(rawResult.getText());
+        if (!digitsOnly){
       Intent intent = new Intent(Barcode_Request.this, RequestByBarcode.class);
             intent.putExtra("BarcodeNum", rawResult.getText());
-
-//
         startActivity(intent);
+        }else if(!digitsOnly) {
+            alert= new android.app.AlertDialog.Builder(Barcode_Request.this);
+            alert.setMessage("الرجاء مسح باركود الشراء");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
+        }
+        // If you would like to resume scanning, call this method below:
+        mScannerView.resumeCameraPreview(this);
+
     }
     @Override
     public void onResume() {

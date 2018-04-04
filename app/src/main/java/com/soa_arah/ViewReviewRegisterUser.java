@@ -61,27 +61,39 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
         Fname = getIntent().getStringExtra("name");
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
-        reviewsQueryR = mDatabase.orderByKey();
-        if (reviewsQueryR==null){
 
-            alert= new android.app.AlertDialog.Builder(ViewReviewRegisterUser.this);
-            alert.setTitle("لاتوجد تعليقات");
-            alert.setMessage("الانتقال لكتابة تعليق");
-            alert.setCancelable(true);
-            alert.setPositiveButton(
-                    "موافق",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent(ViewReviewRegisterUser.this, AddReview.class);
-                            intent.putExtra("name", Fname);
-                            startActivity(intent);
-                            //
-                        }
-                    });
-            android.app.AlertDialog alert11 = alert.create();
-            alert11.show();
-        }
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (mDatabase.hashCode()==0){
+                    alert= new android.app.AlertDialog.Builder(ViewReviewRegisterUser.this);
+                    alert.setTitle("لاتوجد تعليقات");
+                    alert.setMessage("الانتقال لكتابة تعليق");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent = new Intent(ViewReviewRegisterUser.this, AddReview.class);
+                                    intent.putExtra("name", Fname);
+                                    startActivity(intent);
+                                    //
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        reviewsQueryR = mDatabase.orderByKey();
+
         LikeDatabase = FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
         disLikeDatabase = FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
         deleteDatabase = FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);

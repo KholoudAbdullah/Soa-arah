@@ -53,12 +53,12 @@ public class ProgressChart extends AppCompatActivity {
         User_ID = firebaseAuth.getCurrentUser().getEmail();
         username= User_ID.substring( 0, User_ID.lastIndexOf( "@" ) );
         Des=new Description();
-        Des.setText("السعرات الحراريه للأيام الاسبوع");
+        Des.setText("السعرات الحرارية للأيام الاسبوع");
         pieChart.setDescription(Des);
         pieChart.setRotationEnabled(true);
         pieChart.setHoleRadius(25f);
         pieChart.setTransparentCircleAlpha(0);
-        pieChart.setCenterText("السعرات الحراريه للأيام الاسبوع");
+        pieChart.setCenterText("السعرات الحرارية للأيام الاسبوع");
         pieChart.setCenterTextSize(10);
 
 

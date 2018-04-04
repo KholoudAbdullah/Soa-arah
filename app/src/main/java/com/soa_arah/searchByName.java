@@ -1,5 +1,6 @@
 package com.soa_arah;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Intent;
@@ -44,6 +45,8 @@ public class searchByName extends AppCompatActivity {
     String foodCal;
     String quantity;
     android.app.AlertDialog.Builder alert;
+    private ProgressDialog progressDialog;
+
 
 
     @Override
@@ -63,6 +66,11 @@ public class searchByName extends AppCompatActivity {
             }
         });*/
 
+        progressDialog = new ProgressDialog(searchByName.this);
+        // Setting progressDialog Title.
+        progressDialog.setMessage("الرجاء الانتظار ...");
+        progressDialog.show();
+
         String foodN = getIntent().getStringExtra("name");
         foodCal=getIntent().getStringExtra("cal");
         String image=getIntent().getStringExtra("img");
@@ -79,6 +87,9 @@ public class searchByName extends AppCompatActivity {
         grm.setText(quantity);
         Glide.with(getApplicationContext()).load(image).into(img);
         textn.setText(foodN);
+        // Hiding the progressDialog after done uploading.
+        progressDialog.dismiss();
+
         if (foodCal.equals("لا يوجد")) {
             cal.setText("خالي من السعرات الحرارية");
         }else

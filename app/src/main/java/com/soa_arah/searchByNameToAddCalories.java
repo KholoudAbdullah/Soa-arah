@@ -1,11 +1,15 @@
 package com.soa_arah;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +54,8 @@ public class searchByNameToAddCalories extends AppCompatActivity {
     private Date date1,date2,date3,date4,date5,date6,date7,date;
     private String day1,day2,day3,day4,day5,day6,day7,calory,day;
     Calendar calendar1,calendar2,calendar3,calendar4,calendar5,calendar6,calendar7,calendar;
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,10 @@ public class searchByNameToAddCalories extends AppCompatActivity {
         setContentView(R.layout.activity_search_by_name_to_add_calories);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
+        progressDialog = new ProgressDialog(searchByNameToAddCalories.this);
+        // Setting progressDialog Title.
+        progressDialog.setMessage("الرجاء الانتظار ...");
+        progressDialog.show();
         firebaseAuth = FirebaseAuth.getInstance();
         User_ID = firebaseAuth.getCurrentUser().getEmail();
         username= User_ID.substring( 0, User_ID.lastIndexOf( "@" ) );
@@ -79,6 +89,8 @@ public class searchByNameToAddCalories extends AppCompatActivity {
         grm.setText(quantity);
         Glide.with(getApplicationContext()).load(image).into(img);
         textn.setText(foodN);
+        // Hiding the progressDialog after done uploading.
+        progressDialog.dismiss();
         if (calor==0) {
             cal.setText("خالي من السعرات الحرارية");
         } else
@@ -291,8 +303,46 @@ public class searchByNameToAddCalories extends AppCompatActivity {
 
                 }
 
-                Toast.makeText(searchByNameToAddCalories.this, "تم أضافة السعرات الحراريه بنجاح", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), diet_plan.class));            }
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        searchByNameToAddCalories.this);
+                alert.setTitle("تم أضافة السعرات الحرارية بنجاح").setIcon(R.drawable.t1);
+                AlertDialog dialog = alert.create();
+
+                // Finally, display the alert dialog
+                dialog.show();
+
+                // Get screen width and height in pixels
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                // The absolute width of the available display size in pixels.
+                int displayWidth = displayMetrics.widthPixels;
+                // The absolute height of the available display size in pixels.
+                int displayHeight = displayMetrics.heightPixels;
+
+                // Initialize a new window manager layout parameters
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+                // Copy the alert dialog window attributes to new layout parameter instance
+                layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+
+
+                // Set alert dialog width equal to screen width 70%
+                int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                // Set alert dialog height equal to screen height 70%
+                int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+                // Set the width and height for the layout parameters
+                // This will bet the width and height of alert dialog
+                layoutParams.width = dialogWindowWidth;
+                layoutParams.height = dialogWindowHeight;
+
+                // Apply the newly created layout parameters to the alert dialog window
+                dialog.getWindow().setAttributes(layoutParams);
+                startActivity(new Intent(getApplicationContext(), diet_plan.class));
+                //close this activity
+                finish();
+            }
 
 
             @Override

@@ -105,7 +105,7 @@ public class diet_plan extends AppCompatActivity {
                 alert.setNegativeButton("لا", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
+                        flag1=true;
                         dialog.dismiss();
 
                     }

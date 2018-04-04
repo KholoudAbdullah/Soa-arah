@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,78 +66,103 @@ public class BarcodeToAddCalories extends AppCompatActivity implements ZXingScan
 
         progressDialog.show();
         bar=rawResult.getText();
-        final Intent intent = new Intent(this,barcodeInfoToAddCalories.class);
-        intent.putExtra("bar",bar);
-        fData = FirebaseDatabase.getInstance().getReference().child("Food");
-        fData.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    f=snapshot.child("barcodN").getValue(String.class);
-                    id=snapshot.getKey();
-                    if(f.equals(bar)){
-                        name=snapshot.child("name").getValue(String.class);
-                        cal=snapshot.child("calories").getValue(String.class);
-                        q=snapshot.child("quantity").getValue(String.class);
-                        img=snapshot.child("image").getValue(String.class);
-                        table=snapshot.child("imageTable").getValue(String.class);
-                        addCal="true";
-                        intent.putExtra("addCal",addCal);
-                        intent.putExtra("Name",name);
-                        intent.putExtra("cal",cal);
-                        intent.putExtra("q",q);
-                        intent.putExtra("image",img);
-                        intent.putExtra("table",table);
-                        startActivity(intent);
-                        flag=true;
-                        mScannerView.stopCamera();
-                        break;
+        boolean digitsOnly = TextUtils.isDigitsOnly(bar);
+        if (digitsOnly){
+            final Intent intent = new Intent(this,barcodeInfo.class);
+            intent.putExtra("bar",bar);
+            fData = FirebaseDatabase.getInstance().getReference().child("Food");
+            fData.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        f = snapshot.child("barcodN").getValue(String.class);
+                        id = snapshot.getKey();
+                        if (f.equals(bar)) {
+                            name = snapshot.child("name").getValue(String.class);
+                            cal = snapshot.child("calories").getValue(String.class);
+                            q = snapshot.child("quantity").getValue(String.class);
+                            img = snapshot.child("image").getValue(String.class);
+                            table = snapshot.child("imageTable").getValue(String.class);
+                            intent.putExtra("Name", name);
+                            intent.putExtra("cal", cal);
+                            intent.putExtra("q", q);
+                            intent.putExtra("image", img);
+                            intent.putExtra("table", table);
+                            startActivity(intent);
+                            flag = true;
+                            mScannerView.stopCamera();
+                            break;
+
+
+                        } else
+                            flag = false;
 
 
                     }
-                    else
-                        flag=false;
 
+                    if (!flag) {
+                            alert = new AlertDialog.Builder(BarcodeToAddCalories.this);
+                            alert.setMessage("عذراً لايوجد هذا المنتج سجل دخولك لإضافته");
+                            alert.setCancelable(true);
+                            alert.setPositiveButton(
+                                    "سجل الدخول",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                }
-                if(!flag){
-                    alert=new AlertDialog.Builder(BarcodeToAddCalories.this);
-                    alert.setMessage("عذراً لايوجد هذا المنتج سجل دخولك لإضافته");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "الغاء",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                                            startActivity(new Intent(getApplicationContext(), LoginPage.class));
+                                            mScannerView.stopCamera();
 
-                                    startActivity(new Intent(getApplicationContext(), addCalories.class));
-                                    mScannerView.stopCamera();
+                                        }
+                                    });
 
-                                }
-                            });
+                            alert.setNegativeButton(
+                                    "الغاء",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                            startActivity(new Intent(getApplicationContext(), home_page_guest.class));
+                                            mScannerView.stopCamera();
 
-                    AlertDialog alert11 = alert.create();
-                    alert11.show();
+                                        }
+                                    }
 
+                            );
+                        AlertDialog alert11 = alert.create();
+                        alert11.show();
 
-                }
+                    }
+
             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
+                }
+            });}
+        else if (!digitsOnly){
+            alert= new android.app.AlertDialog.Builder(BarcodeToAddCalories.this);
+            alert.setMessage("الرجاء مسح باركود الشراء");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
+                            dialogInterface.cancel();
 
-
-
-
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+            // If you would like to resume scanning, call this method below:
+            mScannerView.resumeCameraPreview(this);
+        }
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
-
-
 
     }
 

@@ -1,5 +1,6 @@
 package com.soa_arah;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -20,12 +21,20 @@ public class barcodeInfo extends AppCompatActivity {
     String cal, img, table, q, name, bar, f, id;
     private DatabaseReference fData;
     private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_barcode_info );
         setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
+
+        progressDialog = new ProgressDialog(barcodeInfo.this);
+        // Setting progressDialog Title.
+        progressDialog.setMessage("الرجاء الانتظار ...");
+        progressDialog.show();
+
 
         FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -45,46 +54,13 @@ public class barcodeInfo extends AppCompatActivity {
         textn.setText( name );
         PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher( imageTable );
         photoViewAttacher.update();
+        // Hiding the progressDialog after done uploading.
+        progressDialog.dismiss();
+
         if (cal.equals( "لا يوجد" )) {
             textC.setText( "خالي من السعرات الحرارية" );
         } else
             textC.setText( cal.toString() + " سعرة حرارية" );
-        /*fData = FirebaseDatabase.getInstance().getReference().child("BarcodeFood");
-        fData.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    f=snapshot.child("barcode").getValue(String.class);
-                    id=snapshot.getKey();
-                    if(f.equals(bar)){
-                        name=snapshot.child("Name").getValue(String.class);
-                        TextView textn=(TextView)findViewById(R.id.textView9);
-                        textn.setText(name);
-                        cal=snapshot.child("cal").getValue(String.class);
-                        ml=snapshot.child("ml").getValue(String.class);
-                        img=snapshot.child("image").getValue(String.class);
-                        table=snapshot.child("table").getValue(String.class);
-
-
-                        TextView textC=(TextView)findViewById(R.id.textView12);
-                        ImageView imageView=(ImageView)findViewById(R.id.imageView7);
-                        ImageView imageTable=(ImageView)findViewById(R.id.imageView10);
-                        Glide.with(getApplicationContext()).load(img).into(imageView);
-                        Glide.with(getApplicationContext()).load(table).into(imageTable);
-                        textn.setText(name);
-                        if(cal.equals("لا يوجد")){
-                            textC.setText("خالي من السعرات الحرارية");
-                        }else
-                            textC.setText(cal.toString()+" لكل"+ml.toString()+" مل");
-                        break;
-                    }
-                }
-
-
-            }
-
-
-        });*/
 
 
         onBackPressed();

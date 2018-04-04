@@ -199,7 +199,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 return;
             }
             else{
-            progressDialog.setMessage(" الرجاء الانتظار حتى يتم التسجيل");
+            progressDialog.setMessage(" الرجاء الانتظار...");
             progressDialog.show();
 
                 mDatabase = FirebaseDatabase.getInstance().getReference().child("RegisteredUser");

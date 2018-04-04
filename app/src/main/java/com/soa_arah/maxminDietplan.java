@@ -171,6 +171,8 @@ public class maxminDietplan extends AppCompatActivity {
                     Database.child("gender").setValue(gen);
                     Database.child("waist").setValue(Waist);
                     Database.child("hip").setValue(Hip);
+
+
                     android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(
                             maxminDietplan.this);
                     alert.setTitle("تم إنشاء الخطة بنجاح").setIcon(R.drawable.t1);
@@ -192,12 +194,6 @@ public class maxminDietplan extends AppCompatActivity {
 
                     // Copy the alert dialog window attributes to new layout parameter instance
                     layoutParams.copyFrom(dialog.getWindow().getAttributes());
-
-                    // Set the alert dialog window width and height
-                    // Set alert dialog width equal to screen width 90%
-                    // int dialogWindowWidth = (int) (displayWidth * 0.9f);
-                    // Set alert dialog height equal to screen height 90%
-                    // int dialogWindowHeight = (int) (displayHeight * 0.9f);
 
                     // Set alert dialog width equal to screen width 70%
                     int dialogWindowWidth = (int) (displayWidth * 0.9f);
@@ -225,10 +221,10 @@ public class maxminDietplan extends AppCompatActivity {
                 android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(maxminDietplan.this);
 
                 alert= new android.app.AlertDialog.Builder(maxminDietplan.this);
-                alert.setMessage("هل انت متأكد من عدم الارسال؟");
+                alert.setMessage("هل انت متأكد من عدم الإستمرار؟");
                 alert.setCancelable(true);
                 alert.setPositiveButton(
-                        "تعم",
+                        "نعم",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

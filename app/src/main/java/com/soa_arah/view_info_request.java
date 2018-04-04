@@ -1,5 +1,6 @@
 package com.soa_arah;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -48,7 +49,6 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_info_request);
-
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         firebaseAuth = FirebaseAuth.getInstance();
         namef = getIntent().getStringExtra("namef");

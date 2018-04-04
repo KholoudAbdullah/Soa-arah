@@ -65,6 +65,7 @@ public class completDietplan  extends AppCompatActivity  {
     Calendar today1 = Calendar.getInstance();
     boolean datV= true;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +78,11 @@ public class completDietplan  extends AppCompatActivity  {
         waist=(EditText)findViewById(R.id.waist);
         hip=(EditText)findViewById(R.id.hip);
         wight=(EditText)findViewById(R.id.wight);
+        progressDialog = new ProgressDialog(completDietplan.this);
 
+        // Setting progressDialog Title.
+        progressDialog.setTitle("الرجاء الإنتظار ...");
+        progressDialog.show();
 
 
 
@@ -235,27 +240,28 @@ public class completDietplan  extends AppCompatActivity  {
                     });
                 }else
                     waist.setText(user.getWaist());
+                if(user.getDateOfBarth().equals( "لم يتم إدخال بيانات" ))
+                    mDisplayDate.setText("اختر التاريخ");
+                else{
+                    mDisplayDate.setText(user.getDateOfBarth());
+                    String bdate=user.getDateOfBarth();
+                    array=bdate.split("/");
+                    day=array[0];
+                    month=array[1];
+                    year1=array[2];
+                    age= getAge(Integer.parseInt(year1),Integer.parseInt( month ),Integer.parseInt(day));
+                }
 
-if(user.getDateOfBarth().equals( "لم يتم إدخال بيانات" ))
-    mDisplayDate.setText("اختر التاريخ");
-    else{
-             mDisplayDate.setText(user.getDateOfBarth());
-             String bdate=user.getDateOfBarth();
 
-                array=bdate.split("/");
-
-
-       day=array[0];
-       month=array[1];
-       year1=array[2];
-
-                age= getAge(Integer.parseInt(year1),Integer.parseInt( month ),Integer.parseInt(day));}
-
+                // Hiding the progressDialog after done uploading.
+                progressDialog.dismiss();
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                // Hiding the progressDialog after done uploading.
+                progressDialog.dismiss();
 
             }
 
@@ -294,7 +300,7 @@ if(user.getDateOfBarth().equals( "لم يتم إدخال بيانات" ))
         });
 
 
-        progressDialog = new ProgressDialog(this);
+
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

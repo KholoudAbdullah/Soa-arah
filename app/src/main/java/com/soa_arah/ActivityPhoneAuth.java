@@ -330,6 +330,16 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                                 AlertDialog.Builder alert = new AlertDialog.Builder(
                                         ActivityPhoneAuth.this );
                                 alert.setTitle( "عذراً يوجد مستخدم بهذا الاسم" ).setIcon( R.drawable.f1 );
+                                alert.setPositiveButton(
+                                        "موافق",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                dialogInterface.cancel();
+
+                                            }
+                                        });
                                 AlertDialog dialog = alert.create();
 
                                 // Finally, display the alert dialog

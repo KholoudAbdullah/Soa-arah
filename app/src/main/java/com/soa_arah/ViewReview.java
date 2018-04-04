@@ -59,30 +59,38 @@ public class ViewReview extends AppCompatActivity {
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
         deleteDatabase = FirebaseDatabase.getInstance().getReference().child("Review").child(Fname);
         mAuth = FirebaseAuth.getInstance();
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (mDatabase.hashCode()==0){
+                    alert= new android.app.AlertDialog.Builder(ViewReview.this);
+                    alert.setTitle("لاتوجد تعليقات");
+                    alert.setMessage("العودة الى الصفحة السابقة");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "نعم",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    Intent intent = new Intent(ViewReview.this, AddReview.class);
+                                    intent.putExtra("name", Fname);
+                                    startActivity(intent);
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         reviewsQuery = mDatabase.orderByKey();
 
-        if (reviewsQuery==null){
-
-            alert= new android.app.AlertDialog.Builder(ViewReview.this);
-            alert.setTitle("لاتوجد تعليقات");
-            alert.setMessage("العودة الى الصفحة السابقة");
-            alert.setCancelable(true);
-            alert.setPositiveButton(
-                    "نعم",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                            Intent intent = new Intent(ViewReview.this, AddReview.class);
-                            intent.putExtra("name", Fname);
-                            startActivity(intent);
-                        }
-                    });
-            android.app.AlertDialog alert11 = alert.create();
-            alert11.show();
-
-
-        }
 //        reviewsQuery = mDatabase.orderByKey().equalTo(Fname);
 if(mAuth.getCurrentUser()!=null){
         key = mAuth.getCurrentUser().getEmail();

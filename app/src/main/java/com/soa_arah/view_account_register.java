@@ -1,5 +1,6 @@
 package com.soa_arah;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ public class view_account_register  extends AppCompatActivity {
     //firebase auth object
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase1;
+    private ProgressDialog progressDialog;
+
 
 
     @Override
@@ -47,6 +50,11 @@ public class view_account_register  extends AppCompatActivity {
         gender = (TextView) findViewById(R.id.gender);
         waist = (TextView) findViewById(R.id.waist);
         hip = (TextView) findViewById(R.id.hip);
+        progressDialog = new ProgressDialog(view_account_register.this);
+        // Setting progressDialog Title.
+        progressDialog.setMessage("الرجاء الانتظار ...");
+        progressDialog.show();
+
         User_ID = firebaseAuth.getCurrentUser().getEmail();
         String na =User_ID.substring(0,User_ID.lastIndexOf("@"));
 
@@ -68,13 +76,16 @@ public class view_account_register  extends AppCompatActivity {
                 gender.setText(user.getGender());
                 hip.setText(user.gethip());
                 waist.setText(user.getWaist());
-
+                // Hiding the progressDialog after done uploading.
+                progressDialog.dismiss();
 
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                // Hiding the progressDialog after done uploading.
+                progressDialog.dismiss();
             }
 
         });

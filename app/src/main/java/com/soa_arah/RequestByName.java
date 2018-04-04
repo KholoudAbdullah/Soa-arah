@@ -398,7 +398,7 @@ public class RequestByName extends AppCompatActivity {
                     });
             AlertDialog.Builder alert = new AlertDialog.Builder(
                     RequestByName.this);
-            alert.setTitle("تمت عملية التسجيل بنجاح").setIcon(R.drawable.t1);
+            alert.setTitle("تم إرسال الطلب بنجاح").setIcon(R.drawable.t1);
             AlertDialog dialog = alert.create();
 
             // Finally, display the alert dialog

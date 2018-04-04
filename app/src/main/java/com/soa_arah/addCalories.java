@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -70,11 +72,11 @@ public class addCalories extends AppCompatActivity {
         add=(Button)findViewById(R.id.addB);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
+
         scan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                startActivity(new Intent(getApplicationContext(), BarcodeToAddCalories.class));
-
-
 
             }
         });
@@ -237,8 +239,46 @@ public class addCalories extends AppCompatActivity {
                     mDatabase.child(username).child("day1").setValue(str);
 
                 }
-                Toast.makeText(addCalories.this, "تم أضافة السعرات الحراريه بنجاح", Toast.LENGTH_SHORT).show();
+                android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(
+                        addCalories.this);
+                alert.setTitle("تم أضافة السعرات الحرارية بنجاح").setIcon(R.drawable.t1);
+                android.support.v7.app.AlertDialog dialog = alert.create();
+
+                // Finally, display the alert dialog
+                dialog.show();
+
+                // Get screen width and height in pixels
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                // The absolute width of the available display size in pixels.
+                int displayWidth = displayMetrics.widthPixels;
+                // The absolute height of the available display size in pixels.
+                int displayHeight = displayMetrics.heightPixels;
+
+                // Initialize a new window manager layout parameters
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+                // Copy the alert dialog window attributes to new layout parameter instance
+                layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+
+                // Set alert dialog width equal to screen width 70%
+                int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                // Set alert dialog height equal to screen height 70%
+                int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+                // Set the width and height for the layout parameters
+                // This will bet the width and height of alert dialog
+                layoutParams.width = dialogWindowWidth;
+                layoutParams.height = dialogWindowHeight;
+
+                // Apply the newly created layout parameters to the alert dialog window
+                dialog.getWindow().setAttributes(layoutParams);
                 startActivity(new Intent(getApplicationContext(), diet_plan.class));
+                //close this activity
+                finish();
+                //opening login activity
+                Toast.makeText(addCalories.this, "تم أضافة السعرات الحرارية بنجاح", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -277,15 +317,15 @@ public class addCalories extends AppCompatActivity {
                 progressDialog.dismiss();
                 if (list.isEmpty()) {
                     alert = new AlertDialog.Builder(addCalories.this);
-                    alert.setMessage("عذراً لايوجد هذا الصنف سجل دخولك لإضافة");
+                    alert.setMessage("عذراً لايوجد هذا الصنف الإنتقال لإرسال الطلب");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
-                            "سجل الدخول",
+                            "إرسال",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
 
-                                    startActivity(new Intent(getApplicationContext(), LoginPage.class));
+                                    startActivity(new Intent(getApplicationContext(), Request_page.class));
 
                                 }
                             });

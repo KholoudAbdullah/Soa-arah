@@ -85,7 +85,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             public void onFocusChange(View v, boolean hasFocus) {
                 if (password.getText().toString().trim().length()<6){
 
-                    password.setError("يجب ان تتكون كلمة المرور من ٦ خانات");
+                    password.setError("يجب ان تتكون كلمة المرور من ٦ خانات او اكثر");
                 }
             }
         });
@@ -124,10 +124,10 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             return;
         }
 
-        else if(TextUtils.isEmpty(pass)){
+        else if(password.getText().toString().trim().length()<6){
 
             alert= new android.app.AlertDialog.Builder(LoginPage.this);
-            alert.setMessage("الرجاء إدخال كلمة المرور");
+            alert.setMessage("يجب ان تتكون كلمة المرور من ٦ خانات او اكثر");
             alert.setCancelable(true);
             alert.setPositiveButton(
                     "موافق",
@@ -179,9 +179,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
                             }
                         }
-                       /* else if(password.length()<6){
-                            Toast.makeText(getApplicationContext(),"الرجاء التأكد من  كلمة المرور",Toast.LENGTH_LONG).show();
-                        }*/
+
                         else {
 
                             progressDialog.dismiss();

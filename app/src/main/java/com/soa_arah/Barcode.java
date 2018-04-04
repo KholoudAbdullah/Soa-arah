@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -69,6 +70,8 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
     public void handleResult(Result rawResult) {
         progressDialog.show();
         bar=rawResult.getText();
+        boolean digitsOnly = TextUtils.isDigitsOnly(bar);
+        if (digitsOnly){
         final Intent intent = new Intent(this,barcodeInfo.class);
         intent.putExtra("bar",bar);
         fData = FirebaseDatabase.getInstance().getReference().child("Food");
@@ -101,6 +104,7 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
 
 
                     }
+
                 if(!flag){
                         if(firebaseAuth.getCurrentUser()==null){
                     alert=new AlertDialog.Builder(Barcode.this);
@@ -134,13 +138,23 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                     else {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String id= user.getUid();
-                            if(id.equals("7yO6vzOcv6VtXMjG3pjipXLpZin1")){
+                            if(id.equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
                                 alert=new AlertDialog.Builder(Barcode.this);
-                                alert.setMessage("عذراً لايوجد هاذا المنتج ");
+                                alert.setTitle("عذراً لايوجد هذا المنتج ");
+                                alert.setMessage("التحقق من الطلبات المرسلة");
                                 alert.setCancelable(true);
-                                alert.setPositiveButton(
-                                        "الغاء",
-                                        new DialogInterface.OnClickListener() {
+                                alert.setPositiveButton("تحقق", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                                startActivity(new Intent(getApplicationContext(),view_request.class));
+                                                mScannerView.stopCamera();
+
+                                            }
+                                        }
+
+                                );
+                                alert.setPositiveButton("الغاء", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 dialogInterface.cancel();
@@ -153,9 +167,9 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                                 );
                             }
                             else{
-                                if(id.equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                                if(id.equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")){
                                     alert=new AlertDialog.Builder(Barcode.this);
-                                    alert.setMessage("عذراً لايوجد هاذا المنتج ");
+                                    alert.setMessage("عذراً لايوجد هذا المنتج ");
                                     alert.setCancelable(true);
                                     alert.setPositiveButton(
                                             "الغاء",
@@ -204,10 +218,6 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                                 }}
 
                             }
-
-
-
-
                         }
                     AlertDialog alert11 = alert.create();
                     alert11.show();
@@ -220,16 +230,31 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });}
+        else if (!digitsOnly){
+            alert= new android.app.AlertDialog.Builder(Barcode.this);
+            alert.setMessage("الرجاء مسح باركود الشراء");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "موافق",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
+                            dialogInterface.cancel();
 
-
-
-
-
+                        }
+                    });
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+            // If you would like to resume scanning, call this method below:
+            mScannerView.resumeCameraPreview(this);
+        }
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
+
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -246,8 +271,6 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
         mScannerView.stopCamera();
     }
     public void newac(){
-
-
 
     }
 }
