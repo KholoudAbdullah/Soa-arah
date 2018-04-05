@@ -9,11 +9,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,8 +40,8 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
     private EditText keyword;
     private FirebaseAuth firebaseAuth;
     private EditText calories1;
-
-    private String key;
+    private Button bkeyword;
+    private String key,cKeyword="";
     private String barcodeN,image1,namef1,imageTable;
 
 
@@ -68,6 +70,8 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         calories1=(EditText)findViewById(R.id.calories1);
         image=(ImageView)findViewById(R.id.image);
         imageTable1=(ImageView)findViewById(R.id.imageTable);
+        //bkeyword=(Button)findViewById(R.id.keywordN);
+
 
 
         namefood.setText(namef1);
@@ -82,16 +86,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         accept.setOnClickListener(this);
 
 
-        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (keyword.getText().toString().trim().length()<1){
-
-                    keyword.setError("لم يتم إدخال الكلمات المفتاحية");
-                }
-            }
-        });
         calories1.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
             @Override
@@ -102,6 +97,8 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                 }
             }
         });
+
+        cKeyword = cKeyword+keyword.getText().toString();
 
 
 
@@ -143,7 +140,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
             if (view == accept) {
 
-                if (keyword.getText().toString().trim().length()<1){
+                if (cKeyword==null){
                     alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
                     alert.setMessage("لم يتم إدخال الكلمات المفتاحية");
                     alert.setCancelable(true);
@@ -179,8 +176,13 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                     alert11.show();
                     return;
                 }
+                if (cKeyword.substring(cKeyword.length()-1).equals("-")){
+                    cKeyword= cKeyword.substring(0,cKeyword.length()-1);
+                    Toast.makeText(view_info_request_Barcode.this, cKeyword, Toast.LENGTH_SHORT).show();
 
-                Food newFood = new Food(namef1, image1, keyword.getText().toString(), calories1.getText().toString(), "لا يوجد", "لا يوجد");
+                }
+
+                Food newFood = new Food(namef1, image1, cKeyword, calories1.getText().toString(), "لا يوجد", "لا يوجد");
                 newFood.setBarcodN(barcodeN);
                 newFood.setImageTable(imageTable);
 
@@ -261,8 +263,69 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
             }
 
+        if (view == bkeyword){
+            keyWord();
+        }
+
 
     }
+
+
+    public void keyWord(){
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.n_keyword, null);
+        final CheckBox food = alertLayout.findViewById(R.id.NFood);
+        final CheckBox choco = alertLayout.findViewById(R.id.Chocolate);
+        final CheckBox des = alertLayout.findViewById(R.id.dessert);
+        final CheckBox bak = alertLayout.findViewById(R.id.Bakery);
+        final CheckBox jui = alertLayout.findViewById(R.id.juice);
+        final CheckBox cof = alertLayout.findViewById(R.id.coffee);
+        final CheckBox hd = alertLayout.findViewById(R.id.HDrink);
+        final CheckBox cd = alertLayout.findViewById(R.id.CDrink);
+
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("الكلمات المفتاحية المقترحة");
+        // this is set the view from XML inside AlertDialog
+        alert.setView(alertLayout);
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        alert.setCancelable(false);
+        alert.setNegativeButton("إلغاء", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        alert.setPositiveButton("حفظ", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (cKeyword!=null){
+                    cKeyword=cKeyword+"-";
+                }
+
+                if (food.isChecked()){cKeyword=cKeyword+"اكلات شعبية-";}
+                if (choco.isChecked()){cKeyword=cKeyword+"شوكلت-";}
+                if (des.isChecked()){cKeyword=cKeyword+"حلا-";}
+                if (bak.isChecked()){cKeyword=cKeyword+"فطائر-";}
+                if (jui.isChecked()){cKeyword=cKeyword+"عصير-";}
+                if (cof.isChecked()){cKeyword=cKeyword+"قهوة-";}
+                if (hd.isChecked()){cKeyword=cKeyword+"مشروبات ساخنة-";}
+                if (cd.isChecked()){cKeyword=cKeyword+"مشروبات باردة-";}
+                keyword.setText(cKeyword);
+
+
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+
+
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.adminloguot,menu);

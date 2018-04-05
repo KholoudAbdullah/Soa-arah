@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layoutDirection="rtl" >
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:orientation="vertical">
+
+
+            <CheckBox
+                android:id="@+id/NFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:text="اكلات شعبية"
+                tools:layout_editor_absoluteX="112dp"
+                tools:layout_editor_absoluteY="201dp"
+                />
+            <CheckBox
+                android:id="@+id/Chocolate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:text="شوكلت"
+                tools:layout_editor_absoluteX="112dp"
+                tools:layout_editor_absoluteY="201dp" />
+            <CheckBox
+                android:id="@+id/dessert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="حلا"
+                android:layoutDirection="rtl"
+                tools:layout_editor_absoluteX="64dp"
+                tools:layout_editor_absoluteY="280dp" />
+
+            <CheckBox
+                android:id="@+id/Bakery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="فطائر"
+                android:layoutDirection="rtl"
+                tools:layout_editor_absoluteX="102dp"
+                tools:layout_editor_absoluteY="337dp" />
+
+            <CheckBox
+                android:id="@+id/juice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="عصير"
+                android:layoutDirection="rtl"
+                tools:layout_editor_absoluteX="102dp"
+                tools:layout_editor_absoluteY="337dp" />
+
+            <CheckBox
+                android:id="@+id/coffee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="قهوة"
+                android:layoutDirection="rtl"
+                tools:layout_editor_absoluteX="102dp"
+                tools:layout_editor_absoluteY="337dp" />
+            <CheckBox
+                android:id="@+id/HDrink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="مشروبات ساخنة"
+                android:layoutDirection="rtl"
+                tools:layout_editor_absoluteX="102dp"
+                tools:layout_editor_absoluteY="337dp" />
+            <CheckBox
+                android:id="@+id/CDrink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="مشروبات باردة"
+                android:layoutDirection="rtl"
+                tools:layout_editor_absoluteX="102dp"
+                tools:layout_editor_absoluteY="337dp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>
