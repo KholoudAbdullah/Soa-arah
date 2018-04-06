@@ -29,8 +29,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -48,12 +51,12 @@ public class RequestByBarcode extends AppCompatActivity {
     private TextView TXbarnum;
     private Button cancle,send,upload,table;
     private StorageReference storageReference;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,checkdataF,checkdataR;
     private StorageTask mUploadTask,tablem;
     private String douTable, barnum;
     private EditText name;
     private String stander;
-    private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog,progressDialog1,progressDialog2;
     android.app.AlertDialog.Builder alert;
     private RadioButton Rfood,Rdrink;
 
@@ -69,6 +72,93 @@ public class RequestByBarcode extends AppCompatActivity {
 
 
 
+        Intent intent=getIntent();
+        barnum = intent.getExtras().getString( "BarcodeNum","" );
+
+        progressDialog1 = new ProgressDialog(RequestByBarcode.this);
+        progressDialog2= new ProgressDialog(RequestByBarcode.this);
+        progressDialog1.setMessage( "الرجاء الانتظار .." );
+        progressDialog1.show();
+
+        checkdataF = FirebaseDatabase.getInstance().getReference().child("Food");
+        checkdataR = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByBarcode");
+        checkdataF.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                if (barnum.equals(dataSnapshot.child("barcodN").getKey())){
+                    progressDialog1.dismiss();
+                    alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                    alert.setTitle("الصنف موجود مسبقاً");
+                    alert.setMessage("الانتقال الى صفحة البحث");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "نعم",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                }
+                            });
+
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+
+                }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Hiding the progressDialog after done uploading.
+                progressDialog1.dismiss();
+
+            }
+        });
+
+        progressDialog2.setMessage( "الرجاء الانتظار .." );
+        progressDialog2.show();
+
+        checkdataR.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                if (barnum.equals(dataSnapshot.child("barcodN").getKey())){
+                    progressDialog2.dismiss();
+                    alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                    alert.setTitle("تم رفع طلب لهذا المنج مسبقاً");
+                    alert.setMessage("الإنتقال الى الصفه الرئسية");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                }
+                            });
+
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Hiding the progressDialog after done uploading.
+                progressDialog2.dismiss();
+
+            }
+
+        });
+        // Hiding the progressDialog after done uploading.
+        progressDialog1.dismiss();
+        progressDialog2.dismiss();
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -110,6 +200,12 @@ public class RequestByBarcode extends AppCompatActivity {
         Rdrink=(RadioButton) findViewById(R.id.drinkS);
         cancle=(Button) findViewById(R.id.cancel);
         TXbarnum=(TextView)findViewById(R.id.barcodeNumber);
+
+
+        TXbarnum.setText(TXbarnum.getText().toString()+"  "+barnum);
+
+
+
         name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
             @Override
@@ -133,10 +229,6 @@ public class RequestByBarcode extends AppCompatActivity {
             }
         });
 
-        Intent intent=getIntent();
-
-        barnum = intent.getExtras().getString( "BarcodeNum","" );
-        TXbarnum.setText(TXbarnum.getText().toString()+"  "+barnum);
 
         //food image
         upload.setOnClickListener(new View.OnClickListener() {
