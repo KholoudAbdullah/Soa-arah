@@ -46,7 +46,7 @@ public class Barcode_Request extends AppCompatActivity implements ZXingScannerVi
        // Toast.makeText(Barcode_Request.this, rawResult.getText(), Toast.LENGTH_SHORT).show();
 
         boolean digitsOnly = TextUtils.isDigitsOnly(rawResult.getText());
-        if (!digitsOnly){
+        if (digitsOnly){
       Intent intent = new Intent(Barcode_Request.this, RequestByBarcode.class);
             intent.putExtra("BarcodeNum", rawResult.getText());
         startActivity(intent);
@@ -60,15 +60,13 @@ public class Barcode_Request extends AppCompatActivity implements ZXingScannerVi
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
-                            dialogInterface.cancel();
+                            startActivity(new Intent(getApplicationContext(), Barcode_Request.class));
 
                         }
                     });
             android.app.AlertDialog alert11 = alert.create();
             alert11.show();
 
-        // If you would like to resume scanning, call this method below:
-        mScannerView.resumeCameraPreview(this);
         }
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);

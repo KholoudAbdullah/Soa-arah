@@ -248,7 +248,7 @@ public class RequestByName extends AppCompatActivity {
                                 dialogInterface.cancel();
                             }
                         });
-               
+
                 android.app.AlertDialog alert11 = alert.create();
                 alert11.show();
             }
@@ -383,7 +383,7 @@ public class RequestByName extends AppCompatActivity {
                             databaseReference.child(uploadId).setValue(RF);
 
                             // Hiding the progressDialog after done uploading.
-                            //progressDialog.dismiss();
+                            progressDialog.dismiss();
 
 
                         }
@@ -392,7 +392,7 @@ public class RequestByName extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             // Hiding the progressDialog after done uploading.
-                            //progressDialog.dismiss();
+                            progressDialog.dismiss();
                             Toast.makeText(RequestByName.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -453,6 +453,14 @@ public class RequestByName extends AppCompatActivity {
                     });
         android.app.AlertDialog alert11 = alert.create();
             alert11.show();
+        }
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if ( progressDialog!=null && progressDialog.isShowing() ){
+            progressDialog.cancel();
         }
     }
 }

@@ -56,7 +56,7 @@ public class RequestByBarcode extends AppCompatActivity {
     private String douTable, barnum;
     private EditText name;
     private String stander;
-    private ProgressDialog progressDialog,progressDialog1,progressDialog2;
+    private ProgressDialog progressDialog,progressDialog1;
     android.app.AlertDialog.Builder alert;
     private RadioButton Rfood,Rdrink;
 
@@ -76,7 +76,6 @@ public class RequestByBarcode extends AppCompatActivity {
         barnum = intent.getExtras().getString( "BarcodeNum","" );
 
         progressDialog1 = new ProgressDialog(RequestByBarcode.this);
-        progressDialog2= new ProgressDialog(RequestByBarcode.this);
         progressDialog1.setMessage( "الرجاء الانتظار .." );
         progressDialog1.show();
 
@@ -86,7 +85,8 @@ public class RequestByBarcode extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                if (barnum.equals(dataSnapshot.child("barcodN").getKey())){
+                    Food checkFood=snapshot.getValue(Food.class);
+                if (barnum.equals(checkFood.getBarcodN())){
                     progressDialog1.dismiss();
                     alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
                     alert.setTitle("الصنف موجود مسبقاً");
@@ -118,18 +118,18 @@ public class RequestByBarcode extends AppCompatActivity {
             }
         });
 
-        progressDialog2.setMessage( "الرجاء الانتظار .." );
-        progressDialog2.show();
+        progressDialog1.show();
 
         checkdataR.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                if (barnum.equals(dataSnapshot.child("barcodN").getKey())){
-                    progressDialog2.dismiss();
+                    Food checkRequest=snapshot.getValue(Food.class);
+                    if (barnum.equals(checkRequest.getBarcodN())){
+                    progressDialog1.dismiss();
                     alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
-                    alert.setTitle("تم رفع طلب لهذا المنج مسبقاً");
-                    alert.setMessage("الإنتقال الى الصفه الرئسية");
+                    alert.setTitle("تم رفع طلب لهذا المنتج مسبقاً");
+                    alert.setMessage("الإنتقال الى الصفحة الرئسية");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
                             "موافق",
@@ -151,14 +151,13 @@ public class RequestByBarcode extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Hiding the progressDialog after done uploading.
-                progressDialog2.dismiss();
+                progressDialog1.dismiss();
 
             }
 
         });
         // Hiding the progressDialog after done uploading.
         progressDialog1.dismiss();
-        progressDialog2.dismiss();
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -475,7 +474,7 @@ public class RequestByBarcode extends AppCompatActivity {
                             databaseReference.child(uploadId).setValue(RF);
 
                             // Hiding the progressDialog after done uploading.
-                            //progressDialog.dismiss();
+                            progressDialog.dismiss();
 
 
 
@@ -578,5 +577,13 @@ public class RequestByBarcode extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if ( progressDialog!=null && progressDialog.isShowing() ){
+            progressDialog.cancel();
+        }
     }
 }

@@ -241,14 +241,11 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
-                            dialogInterface.cancel();
-
+                            startActivity(new Intent(getApplicationContext(), Barcode.class));
                         }
                     });
             android.app.AlertDialog alert11 = alert.create();
             alert11.show();
-            // If you would like to resume scanning, call this method below:
-            mScannerView.resumeCameraPreview(this);
         }
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
