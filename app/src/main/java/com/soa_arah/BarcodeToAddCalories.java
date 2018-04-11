@@ -102,15 +102,15 @@ public class BarcodeToAddCalories extends AppCompatActivity implements ZXingScan
 
                     if (!flag) {
                             alert = new AlertDialog.Builder(BarcodeToAddCalories.this);
-                            alert.setMessage("عذراً لايوجد هذا المنتج سجل دخولك لإضافته");
+                            alert.setMessage("عذراً لايوجد هذا المنتج الإنتقال لإرسال الطلب");
                             alert.setCancelable(true);
                             alert.setPositiveButton(
-                                    "سجل الدخول",
+                                    "موافق",
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
 
-                                            startActivity(new Intent(getApplicationContext(), LoginPage.class));
+                                            startActivity(new Intent(getApplicationContext(), Request_page.class));
                                             mScannerView.stopCamera();
 
                                         }
@@ -122,7 +122,7 @@ public class BarcodeToAddCalories extends AppCompatActivity implements ZXingScan
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             dialogInterface.cancel();
-                                            startActivity(new Intent(getApplicationContext(), home_page_guest.class));
+                                            startActivity(new Intent(getApplicationContext(), diet_plan.class));
                                             mScannerView.stopCamera();
 
                                         }
@@ -152,14 +152,11 @@ public class BarcodeToAddCalories extends AppCompatActivity implements ZXingScan
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
-                            dialogInterface.cancel();
-
+                            startActivity(new Intent(getApplicationContext(), BarcodeToAddCalories.class));
                         }
                     });
             android.app.AlertDialog alert11 = alert.create();
             alert11.show();
-            // If you would like to resume scanning, call this method below:
-            mScannerView.resumeCameraPreview(this);
         }
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
