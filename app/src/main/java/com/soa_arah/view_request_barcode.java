@@ -1,7 +1,10 @@
 package com.soa_arah;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,13 +18,21 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+
 
 import java.util.ArrayList;
 
@@ -33,13 +44,15 @@ import java.util.ArrayList;
 public class view_request_barcode extends AppCompatActivity {
 
     private DatabaseReference mDatabaseReference1;
-    private ListView request_barcode;
     private ArrayList<String> key1;
     private ArrayList<Food> re_barcode ;
     private TextView no_request_barcode;
     private FirebaseAuth firebaseAuth;
     private ProgressBar progressBarBarcode;
+    private int p1;
 
+    android.app.AlertDialog.Builder alert;
+    private SwipeMenuListView request_barcode;
 
 
     @Override
@@ -50,7 +63,7 @@ public class view_request_barcode extends AppCompatActivity {
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-        request_barcode=(ListView)findViewById(R.id.request_barcode);
+        request_barcode=(SwipeMenuListView)findViewById(R.id.request_barcode);
         re_barcode=new ArrayList<Food>();
         key1=new ArrayList<String>();
         no_request_barcode=(TextView)findViewById(R.id.no_request_barcode);
@@ -127,6 +140,74 @@ public class view_request_barcode extends AppCompatActivity {
                 //disp laying it to list
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByBarcode);
                 request_barcode.setAdapter(adapter);
+
+                SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+                    @Override
+                    public void create(SwipeMenu menu) {
+                        // create "open" item
+                        SwipeMenuItem openItem = new SwipeMenuItem(
+                                getApplicationContext());
+                        // set item background
+                        openItem.setBackground(new ColorDrawable(Color.rgb(255, 0,
+                                0)));
+                        // set item width
+                        openItem.setWidth(170);
+                        // set item title
+                        openItem.setTitle("رفض");
+                        // set item title fontsize
+                        openItem.setTitleSize(18);
+                        // set item title font color
+                        openItem.setTitleColor(Color.WHITE);
+                        // add to menu
+                        menu.addMenuItem(openItem);
+
+
+                    }
+                };
+
+// set creator
+                request_barcode.setMenuCreator(creator);
+
+                request_barcode.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                        switch (index) {
+                            case 0:
+                                p1 =position;
+                                alert= new android.app.AlertDialog.Builder(view_request_barcode.this);
+                                alert.setMessage("هل انت متأكد من رفض الطلب؟");
+                                alert.setCancelable(true);
+                                alert.setPositiveButton(
+                                        "نعم",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests");
+                                                mDatabaseReference1.child("ByBarcode").child(key1.get(p1)).removeValue();
+                                                startActivity(new Intent(view_request_barcode.this, view_request.class));
+
+                                            }
+                                        });
+
+                                alert.setNegativeButton(
+                                        "لا",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                dialogInterface.cancel();
+                                            }
+                                        });
+
+                                android.app.AlertDialog alert11 = alert.create();
+                                alert11.show();
+                                break;
+                        }
+                        // false : close the menu; true : not close the menu
+                        return false;
+                    }
+                });
 
 
 

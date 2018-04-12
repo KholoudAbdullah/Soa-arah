@@ -1,7 +1,10 @@
 package com.soa_arah;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,10 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,12 +39,17 @@ import java.util.ArrayList;
 public class view_request_name extends AppCompatActivity {
 
     private DatabaseReference mDatabaseReference;
-    private ListView request_name;
+    private DatabaseReference mDatabaseReference1;
+   // private ListView request_name;
+    private SwipeMenuListView request_name;
     private ArrayList<Food> re_name;
     private ArrayList<String> key;
     private TextView no_requestname;
     private FirebaseAuth firebaseAuth;
+    private int p;
     private ProgressBar progressBarName;
+
+    android.app.AlertDialog.Builder alert;
 
 
 
@@ -50,10 +61,11 @@ public class view_request_name extends AppCompatActivity {
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-        request_name=(ListView)findViewById(R.id.request_name);
+        //request_name=(ListView)findViewById(R.id.request_name);
         re_name=new ArrayList<Food>();
         key=new ArrayList<String>();
         no_requestname=(TextView)findViewById(R.id.no_requestname);
+         request_name=(SwipeMenuListView)findViewById(R.id.request_name);
 
         progressBarName = (ProgressBar) findViewById(R.id.progressbar1);
 
@@ -127,8 +139,76 @@ public class view_request_name extends AppCompatActivity {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByName);
                 request_name.setAdapter(adapter);
 
+                SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+                    @Override
+                    public void create(SwipeMenu menu) {
+                        // create "open" item
+                        SwipeMenuItem openItem = new SwipeMenuItem(
+                                getApplicationContext());
+                        // set item background
+                        openItem.setBackground(new ColorDrawable(Color.rgb(255, 0,
+                                0)));
+                        // set item width
+                        openItem.setWidth(170);
+                        // set item title
+                        openItem.setTitle("رفض");
+                        // set item title fontsize
+                        openItem.setTitleSize(18);
+                        // set item title font color
+                        openItem.setTitleColor(Color.WHITE);
+                        // add to menu
+                        menu.addMenuItem(openItem);
+
+
+                    }
+                };
+
+// set creator
+                request_name.setMenuCreator(creator);
+
+                request_name.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                        switch (index) {
+                            case 0:
+                                 p =position;
+                                alert= new android.app.AlertDialog.Builder(view_request_name.this);
+                                alert.setMessage("هل انت متأكد من رفض الطلب؟");
+                                alert.setCancelable(true);
+                                alert.setPositiveButton(
+                                        "نعم",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests");
+                                                mDatabaseReference1.child("ByName").child(key.get(p)).removeValue();
+                                                startActivity(new Intent(view_request_name.this, view_request.class));
+
+                                            }
+                                        });
+
+                                alert.setNegativeButton(
+                                        "لا",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                dialogInterface.cancel();
+                                            }
+                                        });
+
+                                android.app.AlertDialog alert11 = alert.create();
+                                alert11.show();
+                                break;
+                        }
+                        // false : close the menu; true : not close the menu
+                        return false;
+                    }
+                });
 
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
