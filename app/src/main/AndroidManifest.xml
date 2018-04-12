@@ -57,6 +57,9 @@
         <activity android:name=".searchByName" />
         <activity android:name=".Barcode" />
         <activity android:name=".view_request" />
+        <activity android:name=".view_request" />
+        <activity android:name=".view_request_barcode" />
+        <activity android:name=".view_request_name" />
         <activity android:name=".view_info_request" />
         <activity android:name=".view_info_request_Barcode" />
         <activity android:name=".home_page_Nutrition_admin" />

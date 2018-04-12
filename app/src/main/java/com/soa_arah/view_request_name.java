@@ -2,18 +2,21 @@ package com.soa_arah;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,31 +25,70 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class view_request extends AppCompatActivity {
 
-    private Button barcode,name;
-    private TextView textView15,textView16;
-    private FirebaseAuth firebaseAuth;
-    private ArrayList<Food> re_name;
-    private ArrayList<Food> re_barcode ;
+/**
+ * Created by Lama on 05/03/18.
+ */
+
+public class view_request_name extends AppCompatActivity {
+
     private DatabaseReference mDatabaseReference;
-    private DatabaseReference mDatabaseReference1;
+    private ListView request_name;
+    private ArrayList<Food> re_name;
+    private ArrayList<String> key;
+    private TextView no_requestname;
+    private FirebaseAuth firebaseAuth;
+    private ProgressBar progressBarName;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_request1);
+        setContentView(R.layout.activity_view_request_name);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
-        firebaseAuth = FirebaseAuth.getInstance();
 
-        barcode= (Button) findViewById(R.id.byBarcode);
-        name= (Button) findViewById(R.id.byName);
-        textView15=(TextView)findViewById(R.id.textView15);
-        textView16=(TextView)findViewById(R.id.textView16);
+        firebaseAuth = FirebaseAuth.getInstance();
+        request_name=(ListView)findViewById(R.id.request_name);
         re_name=new ArrayList<Food>();
-        re_barcode=new ArrayList<Food>();
+        key=new ArrayList<String>();
+        no_requestname=(TextView)findViewById(R.id.no_requestname);
+
+        progressBarName = (ProgressBar) findViewById(R.id.progressbar1);
+
+        progressBarName.setVisibility(View.VISIBLE);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null){
+
+            startActivity(new Intent(getApplicationContext(),LoginPage.class));
+        }
+
+
+        request_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+
+                String calorie =re_name.get(i).getCalories();
+                String quantity =re_name.get(i).getQuantity();
+                String image =re_name.get(i).getImage();
+                String namef =re_name.get(i).getName();
+                String standard =re_name.get(i).getStandard();
+                String keys=key.get(i);
+
+                Intent intent = new Intent(view_request_name.this, view_info_request.class);
+                intent.putExtra("calorie",calorie);
+                intent.putExtra("quantity",quantity);
+                intent.putExtra("image",image);
+                intent.putExtra("namef",namef);
+                intent.putExtra("standard",standard);
+                intent.putExtra("keys",keys);
+
+                startActivity(intent);
+
+            }
+        });
+
 
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
@@ -58,10 +100,33 @@ public class view_request extends AppCompatActivity {
 
                     Food req = postSnapshot.getValue(Food.class);
                     re_name.add(req);
+                    key.add(postSnapshot.getKey().toString());
+                }
+
+                String[] requestsByName = new String[re_name.size()];
+
+
+                for (int i = 0; i < re_name.size(); i++) {
+
+                    requestsByName[i] = re_name.get(i).getName();
 
                 }
 
-                textView15.setText(re_name.size()+"");
+                if(re_name.size()==0) {
+                    no_requestname.setText("لا توجد طلبات");
+                    progressBarName.setVisibility(View.INVISIBLE);
+                }
+
+                else {
+                    no_requestname.setText("");
+                    progressBarName.setVisibility(View.INVISIBLE);
+                }
+
+
+                //disp laying it to list
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByName);
+                request_name.setAdapter(adapter);
+
 
             }
 
@@ -71,30 +136,8 @@ public class view_request extends AppCompatActivity {
             }
         });
 
-        mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByBarcode");
-
-        mDatabaseReference1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    Food req = postSnapshot.getValue(Food.class);
-                    re_barcode.add(req);
-
-                }
 
 
-                textView16.setText(re_barcode.size()+"");
-
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
 
@@ -122,20 +165,6 @@ public class view_request extends AppCompatActivity {
                     }
                 });
 
-
-        name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), view_request_name.class));
-            }
-        });
-
-        barcode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), view_request_barcode.class));
-            }
-        });
 
         onBackPressed();
     }
