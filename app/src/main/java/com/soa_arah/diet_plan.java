@@ -203,17 +203,24 @@ public class diet_plan extends AppCompatActivity {
 
             mDatabase1 = FirebaseDatabase.getInstance().getReference().child("DietPlan").child(na);
             if (mDatabase1!=null) {
-                try {
+
                     mDatabase1.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             plan = dataSnapshot.getValue(DietPlan.class);
-                            if (flag1){
-                            Water.setText(plan.getWater());
-                            NewCalFood.setText(plan.getDailyCal());
-                            calGoal.setText(plan.getCalGoal());
 
-                            }
+                                if (flag1) {
+                                    try {
+                                    Water.setText(plan.getWater());
+                                    NewCalFood.setText(plan.getDailyCal());
+                                    calGoal.setText(plan.getCalGoal());
+
+                                } catch (NullPointerException  e) {
+                                        String l;
+                                }
+                                }
+
+
 
                         }
 
@@ -222,10 +229,7 @@ public class diet_plan extends AppCompatActivity {
                         }
 
                     });
-                } catch (Exception e) {
-                    Toast.makeText(diet_plan.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                }
 
                 Database = FirebaseDatabase.getInstance().getReference().child("Progress");
                 Database.addValueEventListener(new ValueEventListener() {
@@ -285,9 +289,14 @@ public class diet_plan extends AppCompatActivity {
                             str = "0";
                         }
                         DecimalFormat precision = new DecimalFormat("0.00");
-                        if (flag1){
-                        double cal = Double.parseDouble(str);
-                        NewCalFood.setText(precision.format(cal));}
+                        if (flag1) {
+                            try {
+                                double cal = Double.parseDouble(str);
+                                NewCalFood.setText(precision.format(cal));
+                            }catch (NullPointerException  e) {
+String l;
+                            }
+                        }
 
                     }
 

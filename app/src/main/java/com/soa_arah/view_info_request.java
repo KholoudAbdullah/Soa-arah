@@ -33,7 +33,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
     private TextView namefood ;
     private EditText calories;
-    private TextView gr;
+    private EditText gr;
     private ImageView imageView3;
     private Button reject;
     private Button accept;
@@ -64,7 +64,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
         namefood=(TextView)findViewById(R.id.namefood);
         calories=(EditText)findViewById(R.id.calories);
-        gr=(TextView)findViewById(R.id.gr);
+        gr=(EditText)findViewById(R.id.gr);
         imageView3=(ImageView)findViewById(R.id.imageView3);
         reject=(Button)findViewById(R.id.reject);
         accept=(Button)findViewById(R.id.accept);
@@ -74,7 +74,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
         cKeyword = cKeyword+keyword.getText().toString();
 
-        gr.setText(" الكميه    :    " + quantity);
+        gr.setText(quantity);
         namefood.setText(namef);
         calories.setText(calorie);
 
@@ -158,6 +158,23 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
                     return;
+                } else if (gr.getText().toString().trim().length()<1 ){
+                    alert= new android.app.AlertDialog.Builder(view_info_request.this);
+                    alert.setMessage("لم يتم إدخال الكمية");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                    return;
                 }
 
                 if (cKeyword.substring(cKeyword.length()-1).equals("-")){
@@ -166,7 +183,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
                 }
 
-                Food newFood = new Food(namef, image, cKeyword, calories.getText().toString().trim(), standard, quantity);
+                Food newFood = new Food(namef, image, cKeyword, calories.getText().toString().trim(), standard, gr.getText().toString().trim());
                 newFood.setBarcodN("لم يتم إدخال بيانات");
                 newFood.setImageTable("لم يتم إدخال بيانات");
 

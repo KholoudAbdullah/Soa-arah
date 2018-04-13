@@ -172,22 +172,40 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/gr"
-                    android:layout_width="313dp"
-                    android:layout_height="41dp"
+                    android:id="@+id/textView9"
+                    android:layout_width="150dp"
+                    android:layout_height="32dp"
                     android:layout_alignTop="@+id/image2"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="14dp"
-                    android:gravity="center"
+                    android:layout_marginTop="12dp"
+
+                    android:layout_toEndOf="@+id/gr"
+                    android:gravity="right"
+                    android:text="           الكمية : "
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/image2"
-                    app:layout_constraintHorizontal_bias="0.518"
-                    app:layout_constraintStart_toStartOf="@+id/image2"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/image2"
-                    app:layout_constraintVertical_bias="0.089"
+                    app:layout_constraintVertical_bias="0.057"
                     tools:ignore="MissingConstraints" />
+
+                <EditText
+                    android:id="@+id/gr"
+                    android:layout_width="100dp"
+                    android:layout_height="42dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/textView9"
+                    android:layout_marginStart="60dp"
+                    android:ems="10"
+                    android:textSize="18sp"
+                    android:inputType="numberDecimal"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/image2"
+                    app:layout_constraintVertical_bias="0.057"
+                    tools:ignore="MissingConstraints" />
+
             </RelativeLayout>
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
