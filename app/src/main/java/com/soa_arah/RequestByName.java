@@ -14,6 +14,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,14 +28,18 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RequestByName extends AppCompatActivity {
 
@@ -47,12 +52,15 @@ public class RequestByName extends AppCompatActivity {
     private RadioButton Rfood,Rdrink;
 
     private StorageReference storageReference;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,checkdataF,checkdataR;
     private StorageTask mUploadTask;
     private ProgressDialog progressDialog;
     private String stander;
     private FirebaseAuth firebaseAuth;
     android.app.AlertDialog.Builder alert;
+    private ArrayList<String> foodName,requestName;
+
+    boolean fin=true,fin2=true;
 
 
 
@@ -62,10 +70,51 @@ public class RequestByName extends AppCompatActivity {
         setContentView(R.layout.activity_request_by_name);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
+
+        foodName = new ArrayList<String>();
+        requestName = new ArrayList<String>();
+
         storageReference = FirebaseStorage.getInstance().getReference("Request");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
+        checkdataF = FirebaseDatabase.getInstance().getReference().child("Food");
+        checkdataR = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
 
 
+        checkdataF.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Food checkFood=snapshot.getValue(Food.class);
+                    Log.d("in for 1","*****"+checkFood.getName());
+                    foodName.add(checkFood.getName());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+
+            }
+        });
+
+        checkdataR.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Food checkFood=snapshot.getValue(Food.class);
+                    Log.d("in for 1","*****"+checkFood.getName());
+                    requestName.add(checkFood.getName());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+
+            }
+        });
 
         cancle= (Button)findViewById(R.id.cancel);
         send=(Button) findViewById(R.id.send);
@@ -77,7 +126,12 @@ public class RequestByName extends AppCompatActivity {
         Rdrink=(RadioButton) findViewById(R.id.drinkS);
         gram=(EditText) findViewById(R.id.gramL);
 
+
         firebaseAuth = FirebaseAuth.getInstance();
+
+
+
+
 
 
 
@@ -371,6 +425,74 @@ public class RequestByName extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+
+
+                            for (int i=0;i<foodName.size();i++){
+
+                                if (foodname.getText().toString().trim().equals(foodName.get(i))){
+                                    progressDialog.dismiss();
+                                    fin2=false;
+                                    Log.d("in if 1","delete"+foodName.get(i));
+                                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                                    alert.setTitle("الصنف موجود مسبقاً");
+                                    alert.setMessage("الانتقال الى صفحة البحث");
+                                    alert.setCancelable(true);
+                                    alert.setPositiveButton(
+                                            "نعم",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                                }
+                                            });
+
+                                    android.app.AlertDialog alert11 = alert.create();
+                                    alert11.show();
+                                    break;
+
+                                }
+
+                            }
+
+
+                            for (int i=0;i<requestName.size();i++){
+
+                                if (foodname.getText().toString().trim().equals(requestName.get(i))){
+                                    progressDialog.dismiss();
+                                    fin2=false;
+                                    Log.d("in if 1","delete"+requestName.get(i));
+                                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                                    alert.setTitle("الصنف موجود مسبقاً");
+                                    alert.setMessage("الانتقال الى صفحة البحث");
+                                    alert.setCancelable(true);
+                                    alert.setPositiveButton(
+                                            "نعم",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                                }
+                                            });
+
+                                    android.app.AlertDialog alert11 = alert.create();
+                                    alert11.show();
+                                    break;
+
+                                }
+                                if (fin2)
+                                    fin=false;
+
+                            }
+
+
+
+
+
+                          if (!fin) {
+
+                                Log.d("in else","*******");
                             //for standard measurement
                             if (Rfood.isChecked())
                                 stander="جرام,ملعقة شاي,ملعقة اكل,كوب";
@@ -386,7 +508,7 @@ public class RequestByName extends AppCompatActivity {
                             progressDialog.dismiss();
 
 
-                        }
+                        }}
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -396,6 +518,9 @@ public class RequestByName extends AppCompatActivity {
                             Toast.makeText(RequestByName.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
+
+            if (!fin){
             AlertDialog.Builder alert = new AlertDialog.Builder(
                     RequestByName.this);
             alert.setTitle("تم إرسال الطلب بنجاح").setIcon(R.drawable.t1);
@@ -437,7 +562,8 @@ public class RequestByName extends AppCompatActivity {
             finish();
             startActivity(new Intent(RequestByName.this, home_page_register.class));
 
-        } else {
+        }
+        }else {
             alert= new android.app.AlertDialog.Builder(RequestByName.this);
             alert.setMessage("عذراً يجب اختيار صورة");
             alert.setCancelable(true);
@@ -451,7 +577,7 @@ public class RequestByName extends AppCompatActivity {
 
                         }
                     });
-        android.app.AlertDialog alert11 = alert.create();
+            android.app.AlertDialog alert11 = alert.create();
             alert11.show();
         }
     }
