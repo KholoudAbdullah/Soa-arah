@@ -55,7 +55,7 @@ public class RequestByBarcode extends AppCompatActivity {
     private StorageTask mUploadTask,tablem;
     private String douTable, barnum;
     private EditText name,cal;
-    private String stander;
+    private String stander,calo;
     private ProgressDialog progressDialog,progressDialog1;
     android.app.AlertDialog.Builder alert;
     private RadioButton Rfood,Rdrink;
@@ -229,16 +229,8 @@ public class RequestByBarcode extends AppCompatActivity {
             }
         });
 
-        cal.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (cal.getText().toString().trim().length()<1){
 
-                    cal.setError("الرجاء إدخال عدد السعرات");
-                }
-            }
-        });
 
 
         //food image
@@ -287,23 +279,7 @@ public class RequestByBarcode extends AppCompatActivity {
                     alert11.show();
 
                 }
-                else if (cal.getText().toString().trim().length()<1){
-                    alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
-                    alert.setMessage("الرجاء إدخال عدد السعرات");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "موافق",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    dialogInterface.cancel();
-
-                                }
-                            });
-                    android.app.AlertDialog alert11 = alert.create();
-                    alert11.show();
-                } else if (!Rfood.isChecked()&& !Rdrink.isChecked()){
+                else if (!Rfood.isChecked()&& !Rdrink.isChecked()){
                     alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
                     alert.setMessage("الرجاء اختيار الصنف");
                     alert.setCancelable(true);
@@ -495,7 +471,13 @@ public class RequestByBarcode extends AppCompatActivity {
                             else if (Rdrink.isChecked())
                                 stander="مليلتر,كوب";
 
-                            Food RF =  new Food(name.getText().toString().trim(),douTable,"لايوجد",cal.getText().toString().trim(),stander,"لايوجد");
+                            if (cal.getText().toString().equals(""))
+                                calo="لايوجد" ;
+                            else
+                                calo=cal.getText().toString().trim();
+
+
+                            Food RF =  new Food(name.getText().toString().trim(),douTable,"لايوجد",calo,stander,"لايوجد");
                             RF.setImageTable( taskSnapshot.getDownloadUrl().toString());
                             RF.setBarcodN(barnum);
                             String uploadId = databaseReference.push().getKey();
