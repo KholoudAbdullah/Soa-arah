@@ -36,14 +36,13 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:background="@drawable/round_corner1"
                     android:layout_marginTop="16dp"
                     android:adjustViewBounds="false"
+                    android:background="@drawable/round_corner1"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <TextView
@@ -150,6 +149,28 @@
 
             </RelativeLayout>
 
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/keywordN"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/button_login"
+                    android:text="كلمات مفتاحية"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -162,13 +183,13 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
-                    android:adjustViewBounds="false"
                     android:layout_marginTop="23dp"
+                    android:adjustViewBounds="false"
+                    android:background="@drawable/round_corner1"
                     app:layout_constraintHorizontal_bias="0.48"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/round_corner1" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -179,7 +200,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_toEndOf="@+id/keyword"
                     android:gravity="right"
-                    android:text="الكلمات المفتاحيه : "
+                    android:text="الكلمات المفتاحية : "
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -196,7 +217,7 @@
                     android:layout_alignTop="@+id/textView8"
                     android:layout_marginStart="36dp"
                     android:ems="10"
-                    android:hint="كلمات مفتاحيه"
+                    android:hint="كلمات مفتاحية"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -206,7 +227,6 @@
                     tools:ignore="MissingConstraints" />
 
             </RelativeLayout>
-
 
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -223,11 +243,11 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
                     android:adjustViewBounds="false"
+                    android:background="@drawable/round_corner1"
                     app:layout_constraintHorizontal_bias="0.48"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/round_corner1" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -268,8 +288,6 @@
             </RelativeLayout>
 
 
-
-
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -304,7 +322,6 @@
                     app:layout_constraintLeft_toLeftOf="parent" />
 
 
-
             </RelativeLayout>
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -321,11 +338,11 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
                     android:adjustViewBounds="false"
+                    android:background="@drawable/round_corner1"
                     app:layout_constraintHorizontal_bias="0.48"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/round_corner1" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </RelativeLayout>
 
         </LinearLayout>

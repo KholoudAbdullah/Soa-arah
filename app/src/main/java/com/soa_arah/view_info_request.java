@@ -13,6 +13,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -93,6 +95,57 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         bkeyword.setOnClickListener(this);
 
 
+        gr.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (gr.getText().toString().trim().length()<2){
+
+                    gr.setError("الرجاء إدخال عدد القرام /مللتر");
+                }
+            }
+        });
+        calories.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (calories.getText().toString().trim().length()<2){
+
+                    calories.setError("الرجاء إدخال عدد السعرات الحرارية");
+                }
+            }
+        });
+
+        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (keyword.getText().toString().trim().length()<1){
+
+                    keyword.setError("الرجاء إدخال الكلمات المفتاحية");
+                }
+            }
+        });
 
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
@@ -131,7 +184,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
             if (view == accept) {
 
-                if (cKeyword.length()<2){
+                if (keyword.length()<2){
                     alert= new android.app.AlertDialog.Builder(view_info_request.this);
                     alert.setMessage("لم يتم إدخال الكلمات المفتاحية");
                     alert.setCancelable(true);
@@ -183,12 +236,27 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
                     alert11.show();
                     return;
                 }
+                else if (gr.getText().toString().trim().length()<1 ){
+                    alert= new android.app.AlertDialog.Builder(view_info_request.this);
+                    alert.setMessage("لم يتم إدخال عدد القرام/ المللتر");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                if (cKeyword.substring(cKeyword.length()-1).equals("-")){
-                   cKeyword= cKeyword.substring(0,cKeyword.length()-1);
-                    Toast.makeText(view_info_request.this, cKeyword, Toast.LENGTH_SHORT).show();
+                                    dialogInterface.cancel();
 
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                    return;
                 }
+
+
+                else {
 
                 Food newFood = new Food(namef, image, cKeyword, calories.getText().toString().trim(), standard, gr.getText().toString().trim());
                 newFood.setBarcodN("لم يتم إدخال بيانات");
@@ -240,6 +308,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
                 startActivity(new Intent(view_info_request.this, view_request.class));
 
+            }
             }
             if (view == reject) {
 

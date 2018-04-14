@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,9 +46,10 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
     private EditText keyword;
     private FirebaseAuth firebaseAuth;
     private EditText calories1;
-    private Button bkeyword;
+    private Button bkeyworde;
     private String key,cKeyword="";
     private String barcodeN,image1,namef1,imageTable,cal;
+    private Button bkeyword;
 
 
     private DatabaseReference mDatabaseReference;
@@ -68,7 +71,9 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         imageTable = getIntent().getStringExtra("imageTable");
         key = getIntent().getStringExtra("keys");
         cal = getIntent().getStringExtra("cal");
+
         firebaseAuth = FirebaseAuth.getInstance();
+
         namefood = (TextView) findViewById(R.id.name);
         reject = (Button) findViewById(R.id.reject);
         accept = (Button) findViewById(R.id.accept);
@@ -76,7 +81,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         calories1 = (EditText) findViewById(R.id.calories1);
         image = (ImageView) findViewById(R.id.image);
         imageTable1 = (ImageView) findViewById(R.id.imageTable);
-        //bkeyword=(Button)findViewById(R.id.keywordN);
+        bkeyworde=(Button)findViewById(R.id.keywordN);
 
 
         namefood.setText(namef1);
@@ -95,16 +100,58 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
         reject.setOnClickListener(this);
         accept.setOnClickListener(this);
+        bkeyword.setOnClickListener(this);
 
 
+//        gr.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//                if (gr.getText().toString().trim().length()<2){
+//
+//                    gr.setError("الرجاء إدخال عدد القرام /مللتر");
+//                }
+//            }
+//        });
+//
+        calories1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        calories1.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (calories1.getText().toString().trim().length()<2){
+
+                    calories1.setError("الرجاء إدخال عدد السعرات الحرارية");
+                }
+            }
+        });
+
+        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (calories1.getText().toString().trim().length()<1){
+                if (keyword.getText().toString().trim().length()<1){
 
-                    calories1.setError("لم يتم إدخال الكلمات المفتاحية");
+                    keyword.setError("الرجاء إدخال الكلمات المفتاحية");
                 }
             }
         });
@@ -151,7 +198,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
             if (view == accept) {
 
-                if (cKeyword.length()<2){
+                if (keyword.length()<2){
                     alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
                     alert.setMessage("لم يتم إدخال الكلمات المفتاحية");
                     alert.setCancelable(true);
@@ -187,11 +234,27 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                     alert11.show();
                     return;
                 }
-                if (cKeyword.substring(cKeyword.length()-1).equals("-")){
-                    cKeyword= cKeyword.substring(0,cKeyword.length()-1);
-                    Toast.makeText(view_info_request_Barcode.this, cKeyword, Toast.LENGTH_SHORT).show();
 
-                }
+//                else if (gr.getText().toString().trim().length()<1 ){
+//                    alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
+//                    alert.setMessage("لم يتم إدخال عدد القرام/ المللتر");
+//                    alert.setCancelable(true);
+//                    alert.setPositiveButton(
+//                            "موافق",
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                                    dialogInterface.cancel();
+//
+//                                }
+//                            });
+//                    android.app.AlertDialog alert11 = alert.create();
+//                    alert11.show();
+//                    return;
+//                }
+
+                else{
 
                 Food newFood = new Food(namef1, image1, cKeyword, calories1.getText().toString(), "لا يوجد", "لا يوجد");
                 newFood.setBarcodN(barcodeN);
@@ -241,6 +304,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                 startActivity(new Intent(view_info_request_Barcode.this, view_request.class));
 
             }
+            }
             if (view == reject) {
                 // mDatabaseReference1.child("Requests").child("ByName").child(key).removeValue();
                 alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
@@ -274,7 +338,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
             }
 
-        if (view == bkeyword){
+        if (view == bkeyworde){
             keyWord();
         }
 
