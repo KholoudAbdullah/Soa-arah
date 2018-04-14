@@ -131,7 +131,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
             if (view == accept) {
 
-                if (cKeyword==null){
+                if (cKeyword.length()<2){
                     alert= new android.app.AlertDialog.Builder(view_info_request.this);
                     alert.setMessage("لم يتم إدخال الكلمات المفتاحية");
                     alert.setCancelable(true);
