@@ -46,7 +46,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
     private EditText calories1;
     private Button bkeyword;
     private String key,cKeyword="";
-    private String barcodeN,image1,namef1,imageTable;
+    private String barcodeN,image1,namef1,imageTable,cal;
 
 
     private DatabaseReference mDatabaseReference;
@@ -63,23 +63,29 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         isConnected();
 
         namef1 = getIntent().getStringExtra("namef");
-        image1=getIntent().getStringExtra("image");
-        barcodeN=getIntent().getStringExtra("barcodeN");
-        imageTable=getIntent().getStringExtra("imageTable");
-        key=getIntent().getStringExtra("keys");
+        image1 = getIntent().getStringExtra("image");
+        barcodeN = getIntent().getStringExtra("barcodeN");
+        imageTable = getIntent().getStringExtra("imageTable");
+        key = getIntent().getStringExtra("keys");
+        cal = getIntent().getStringExtra("cal");
         firebaseAuth = FirebaseAuth.getInstance();
-        namefood=(TextView)findViewById(R.id.name);
-        reject=(Button)findViewById(R.id.reject);
-        accept=(Button)findViewById(R.id.accept);
-        keyword=(EditText)findViewById(R.id.keyword);
-        calories1=(EditText)findViewById(R.id.calories1);
-        image=(ImageView)findViewById(R.id.image);
-        imageTable1=(ImageView)findViewById(R.id.imageTable);
+        namefood = (TextView) findViewById(R.id.name);
+        reject = (Button) findViewById(R.id.reject);
+        accept = (Button) findViewById(R.id.accept);
+        keyword = (EditText) findViewById(R.id.keyword);
+        calories1 = (EditText) findViewById(R.id.calories1);
+        image = (ImageView) findViewById(R.id.image);
+        imageTable1 = (ImageView) findViewById(R.id.imageTable);
         //bkeyword=(Button)findViewById(R.id.keywordN);
 
 
-
         namefood.setText(namef1);
+
+        if (cal.equals("لايوجد"))
+        {calories1.setText(""); }
+        else {
+            calories1.setText(cal);      }
+
 
 
         Glide.with(getApplicationContext()).load(image1).into(image);
@@ -163,9 +169,9 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                     alert11.show();
                     return;
                 }
-                else if (calories1.getText().toString().trim().length()<1){
+                else if (calories1.getText().toString().trim().length()<1 ){
                     alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
-                    alert.setMessage("لم يتم إدخال الكلمات المفتاحية");
+                    alert.setMessage("لم يتم إدخال السعرات الحرارية");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
                             "موافق",

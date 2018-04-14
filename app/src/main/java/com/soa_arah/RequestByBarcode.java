@@ -58,8 +58,8 @@ public class RequestByBarcode extends AppCompatActivity {
     private DatabaseReference databaseReference,checkdataF,checkdataR;
     private StorageTask mUploadTask,tablem;
     private String douTable, barnum;
-    private EditText name;
-    private String stander;
+    private EditText name,cal;
+    private String stander,calo;
     private ProgressDialog progressDialog,progressDialog1;
     android.app.AlertDialog.Builder alert;
     private RadioButton Rfood,Rdrink;
@@ -203,6 +203,7 @@ public class RequestByBarcode extends AppCompatActivity {
         Rdrink=(RadioButton) findViewById(R.id.drinkS);
         cancle=(Button) findViewById(R.id.cancel);
         TXbarnum=(TextView)findViewById(R.id.barcodeNumber);
+        cal=(EditText)findViewById(R.id.cal);
 
 
         TXbarnum.setText(TXbarnum.getText().toString()+"  "+barnum);
@@ -231,6 +232,9 @@ public class RequestByBarcode extends AppCompatActivity {
                 }
             }
         });
+
+
+
 
 
         //food image
@@ -471,7 +475,13 @@ public class RequestByBarcode extends AppCompatActivity {
                             else if (Rdrink.isChecked())
                                 stander="مليلتر,كوب";
 
-                            Food RF =  new Food(name.getText().toString().trim(),douTable,"لايوجد","لايوجد",stander,"لايوجد");
+                            if (cal.getText().toString().equals(""))
+                                calo="لايوجد" ;
+                            else
+                                calo=cal.getText().toString().trim();
+
+
+                            Food RF =  new Food(name.getText().toString().trim(),douTable,"لايوجد",calo,stander,"لايوجد");
                             RF.setImageTable( taskSnapshot.getDownloadUrl().toString());
                             RF.setBarcodN(barnum);
                             String uploadId = databaseReference.push().getKey();
