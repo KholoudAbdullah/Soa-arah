@@ -1,9 +1,13 @@
 package com.soa_arah;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +54,7 @@ public class AddReview extends AppCompatActivity {
         setContentView(R.layout.activity_add_review);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
+        isConnected();
 
         comment= (EditText) findViewById(R.id.comment);
 
@@ -179,15 +184,45 @@ public class AddReview extends AppCompatActivity {
 //                    dbRef.child("numDisLike").setValue("0");
 //                        dbRef.child("writer").setValue(name);
 
-
-
-
-
-
-
-
+        }
 
     }
 
+    public boolean isConnected() {
 
-}}
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if ((wifiInfo != null && wifiInfo.isConnected()) || (mobileInfo != null && mobileInfo.isConnected())) {
+            return true;
+        } else {
+            showDialog();
+            return false;
+        }
+    }
+
+
+
+
+    private void showDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(" عذراً انت غير متصل بالانترنت هل تريد الاتصال بالانترنت او الاغلاق؟")
+                .setCancelable(false)
+                .setPositiveButton("الاتصال", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("إغلاق", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+}
