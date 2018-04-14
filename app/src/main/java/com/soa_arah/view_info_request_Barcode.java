@@ -43,7 +43,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
     private ImageView imageTable1;
     private Button reject;
     private Button accept;
-    private EditText keyword;
+    private EditText keyword,gr;
     private FirebaseAuth firebaseAuth;
     private EditText calories1;
     private Button bkeyworde;
@@ -78,6 +78,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         reject = (Button) findViewById(R.id.reject);
         accept = (Button) findViewById(R.id.accept);
         keyword = (EditText) findViewById(R.id.keyword);
+        gr = (EditText) findViewById(R.id.gr);
         calories1 = (EditText) findViewById(R.id.calories1);
         image = (ImageView) findViewById(R.id.image);
         imageTable1 = (ImageView) findViewById(R.id.imageTable);
@@ -103,27 +104,27 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         bkeyword.setOnClickListener(this);
 
 
-//        gr.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//                if (gr.getText().toString().trim().length()<2){
-//
-//                    gr.setError("الرجاء إدخال عدد القرام /مللتر");
-//                }
-//            }
-//        });
-//
+        gr.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (gr.getText().toString().trim().length()<2){
+
+                    gr.setError("الرجاء إدخال عدد القرام /مللتر");
+                }
+            }
+        });
+
         calories1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -235,28 +236,28 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                     return;
                 }
 
-//                else if (gr.getText().toString().trim().length()<1 ){
-//                    alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
-//                    alert.setMessage("لم يتم إدخال عدد القرام/ المللتر");
-//                    alert.setCancelable(true);
-//                    alert.setPositiveButton(
-//                            "موافق",
-//                            new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                                    dialogInterface.cancel();
-//
-//                                }
-//                            });
-//                    android.app.AlertDialog alert11 = alert.create();
-//                    alert11.show();
-//                    return;
-//                }
+                else if (gr.getText().toString().trim().length()<1 ){
+                    alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
+                    alert.setMessage("لم يتم إدخال عدد القرام/ المللتر");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                    return;
+                }
 
                 else{
 
-                Food newFood = new Food(namef1, image1, cKeyword, calories1.getText().toString(), "لا يوجد", "لا يوجد");
+                Food newFood = new Food(namef1, image1, cKeyword, calories1.getText().toString(), "لا يوجد", gr.getText().toString().trim());
                 newFood.setBarcodN(barcodeN);
                 newFood.setImageTable(imageTable);
 
