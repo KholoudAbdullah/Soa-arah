@@ -99,6 +99,7 @@ public class completDietplan  extends AppCompatActivity  {
 
             }
 
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
