@@ -73,7 +73,7 @@ public class BarcodeToAddCalories extends AppCompatActivity implements ZXingScan
         bar=rawResult.getText();
         boolean digitsOnly = TextUtils.isDigitsOnly(bar);
         if (digitsOnly){
-            final Intent intent = new Intent(this,barcodeInfo.class);
+            final Intent intent = new Intent(this,barcodeInfoToAddCalories.class);
             intent.putExtra("bar",bar);
             fData = FirebaseDatabase.getInstance().getReference().child("Food");
             fData.addValueEventListener(new ValueEventListener() {

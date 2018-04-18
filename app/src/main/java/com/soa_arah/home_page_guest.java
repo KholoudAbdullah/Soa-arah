@@ -6,16 +6,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.Layout;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +38,7 @@ import java.util.ArrayList;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class home_page_guest extends AppCompatActivity {
-
+    ArrayAdapter<String> adapter;
     private Button button;
     private Button reg;
     private EditText searchtext;
@@ -42,7 +50,7 @@ public class home_page_guest extends AppCompatActivity {
     String cal;
     String img;
     boolean flag = false;
-    private String addCal;
+    private String addCal="false";
     String stand;
     String quantity;
     private Button scan;
@@ -53,6 +61,9 @@ public class home_page_guest extends AppCompatActivity {
     String []searchR;
     int size;
     ArrayList<String>list=new ArrayList<>();
+    ArrayList<String>foods=new ArrayList<>();
+    private ListView listView;
+    TextView textView;
     FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +88,7 @@ public class home_page_guest extends AppCompatActivity {
 
             }
         }
-isConnected();
+        isConnected();
         scan = (Button) findViewById(R.id.scan);
         button = (Button) findViewById(R.id.login);
         reg = (Button) findViewById(R.id.register);
@@ -85,15 +96,46 @@ isConnected();
         searchBtn = (Button) findViewById(R.id.searchButton);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
+        listView=(ListView)findViewById(R.id.listview);
+        searchKeyword();
+        listView.setTextFilterEnabled(true);
+        listView.setTextFilterEnabled(true);
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                 searchKeyword();
+        searchtext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(!searchtext.getText().toString().equals("")){
+
+                    listView.setVisibility(View.VISIBLE);
+                    home_page_guest.this.adapter.getFilter().filter(s);
+                    adapter.notifyDataSetChanged();
+
+                }
+                else {
+
+                    listView.setVisibility(View.GONE);
+
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
+        if(searchtext.getText().toString().length()<=0){
 
+            listView.setVisibility(View.GONE);
+
+
+        }
         reg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
@@ -125,7 +167,7 @@ isConnected();
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-         if (item.getItemId() == R.id.aboutUs) {
+        if (item.getItemId() == R.id.aboutUs) {
             startActivity(new Intent(getApplicationContext(), aboutUs.class));
 
 
@@ -138,73 +180,84 @@ isConnected();
     public void scanCode(View view) {
         startActivity(new Intent(getApplicationContext(), Barcode.class));
     }
+    public void searchKeyword(){
 
-
-    public void searchKeyword() {
-        list.clear();
-        progressDialog.show();
         fData = FirebaseDatabase.getInstance().getReference().child("Food");
         fData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    key = snapshot.child("keyword").getValue(String.class);
                     f = snapshot.child("name").getValue(String.class);
-                    id = snapshot.getKey();
-                    keyword = key.split(",");
-                    int j = 0;
-                    for (int i = 0; i < keyword.length; i++) {
-                        if (keyword[i].equals(searchtext.getText().toString().trim())) {
-                            list.add(f);
+                    foods.add(f);
 
-                        }
+                }
+                adapter=new ArrayAdapter<String>(getApplicationContext(),R.layout.keywordlayout,R.id.textView14,foods );
+                listView.setAdapter(adapter);
+                listView.bringChildToFront(listView);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, final View view,final int position, long id) {
+                        //textView=(TextView)view;
+                        progressDialog.show();
+                        fData = FirebaseDatabase.getInstance().getReference().child("Food");
+                        final String selItem = (String) listView.getSelectedItem(); //
+                        fData.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    f = snapshot.child("name").getValue(String.class);
+                                    if (f.equals(listView.getItemAtPosition(position))) {
 
+                                        cal = snapshot.child("calories").getValue(String.class);
+                                        img = snapshot.child("image").getValue(String.class);
+                                        stand = snapshot.child("standard").getValue(String.class);
+                                        quantity = snapshot.child("quantity").getValue(String.class);
+                                        if(addCal.equals("true")) {
+                                            Intent intent = new Intent(getApplicationContext(), searchByNameToAddCalories.class);
+                                            intent.putExtra("name", f);
+                                            intent.putExtra("cal", cal);
+                                            intent.putExtra("img", img);
+                                            intent.putExtra("stand", stand);
+                                            intent.putExtra("quantity", quantity);
+                                            progressDialog.dismiss();
+                                            startActivity(intent);
+                                            break;
+                                        }
+                                        else{
+                                            Intent intent = new Intent(getApplicationContext(), searchByName.class);
+                                            intent.putExtra("name", f);
+                                            intent.putExtra("cal", cal);
+                                            intent.putExtra("img", img);
+                                            intent.putExtra("stand", stand);
+                                            intent.putExtra("quantity", quantity);
+                                            progressDialog.dismiss();
+                                            startActivity(intent);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
-                }
-                progressDialog.dismiss();
-                if (list.isEmpty()) {
-                    alert = new AlertDialog.Builder(home_page_guest.this);
-                    alert.setMessage("عذراً لايوجد هذا الصنف سجل دخولك لإضافة");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "سجل الدخول",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    startActivity(new Intent(getApplicationContext(), LoginPage.class));
-
-                                }
-                            });
-
-
-                    alert.setNegativeButton(
-                            "إلغاء",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    dialogInterface.cancel();
-                                }
-                            });
-                    AlertDialog alert11 = alert.create();
-                    alert11.show();
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), searchByKeyword.class);
-                    intent.putExtra("list", list);
-                    addCal="false";
-                    intent.putExtra( "addCal" ,addCal );
-                    progressDialog.dismiss();
-                    startActivity(intent);
-
-                }
+                });
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
     }
+
+
+
+
+
     public boolean isConnected() {
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

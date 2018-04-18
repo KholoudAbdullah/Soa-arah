@@ -95,7 +95,8 @@
         <activity android:name=".AddReview" />
         <activity android:name=".ViewReview" />
         <activity android:name=".ViewReviewRegisterUser" />
-        <activity android:name=".account_IT_admin"></activity>
+        <activity android:name=".account_IT_admin" />
+        <activity android:name=".chart"></activity>
     </application>
 
 </manifest>

@@ -18,11 +18,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,8 +46,12 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     private Button button;
     private Button reg;
     AlertDialog.Builder alert;
-    private String addCal;
-
+    private String addCal="false";
+    ArrayList<String>foods=new ArrayList<>();
+    private ListView listView;
+    TextView textView;
+    ArrayAdapter<String> adapter;
+    private String quantity;
     String key;
     String []keyword;
     String []searchR;
@@ -72,10 +82,50 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_nutrition_admin_activity);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        searchtext = (EditText) findViewById(R.id.searchword);
 
         scan=(Button)findViewById(R.id.scan);
         isConnected();
+        listView=(ListView)findViewById(R.id.listview);
+        searchKeyword();
+        listView.setTextFilterEnabled(true);
+        listView.setTextFilterEnabled(true);
 
+        searchtext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(!searchtext.getText().toString().equals("")){
+
+                    listView.setVisibility(View.VISIBLE);
+                    home_page_Nutrition_admin.this.adapter.getFilter().filter(s);
+                    adapter.notifyDataSetChanged();
+
+                }
+                else {
+
+                    listView.setVisibility(View.GONE);
+
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        if(searchtext.getText().toString().length()<=0){
+
+            listView.setVisibility(View.GONE);
+
+
+        }
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
 
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
@@ -104,7 +154,7 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                         PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                         Calendar cal = Calendar.getInstance();
                         cal.add(Calendar.SECOND, 15);
-                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+                        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
 
                     }
                     else {
@@ -151,7 +201,7 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                         PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                         Calendar cal = Calendar.getInstance();
                         cal.add(Calendar.SECOND, 15);
-                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+                        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
 
                     }
                     else {
@@ -173,15 +223,9 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         searchtext=(EditText)findViewById(R.id.searchword);
-        searchBtn=(Button)findViewById(R.id.searchButton);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                searchKeyword();
 
-            }
-        });
 
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
@@ -243,72 +287,84 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
         }
         return true;
     }
-    public void searchKeyword() {
-        list.clear();
-        progressDialog.show();
+    public void searchKeyword(){
+
         fData = FirebaseDatabase.getInstance().getReference().child("Food");
         fData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    key = snapshot.child("keyword").getValue(String.class);
                     f = snapshot.child("name").getValue(String.class);
-                    id = snapshot.getKey();
-                    keyword = key.split(",");
-                    int j = 0;
-                    for (int i = 0; i < keyword.length; i++) {
-                        if (keyword[i].equals(searchtext.getText().toString().trim())) {
-                            list.add(f);
+                    foods.add(f);
 
-                        }
+                }
+                adapter=new ArrayAdapter<String>(getApplicationContext(),R.layout.keywordlayout,R.id.textView14,foods );
+                listView.setAdapter(adapter);
+                listView.bringChildToFront(listView);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, final View view,final int position, long id) {
+                        //textView=(TextView)view;
+                        progressDialog.show();
+                        fData = FirebaseDatabase.getInstance().getReference().child("Food");
+                        final String selItem = (String) listView.getSelectedItem(); //
+                        fData.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    f = snapshot.child("name").getValue(String.class);
+                                    if (f.equals(listView.getItemAtPosition(position))) {
 
+                                        cal = snapshot.child("calories").getValue(String.class);
+                                        img = snapshot.child("image").getValue(String.class);
+                                        stand = snapshot.child("standard").getValue(String.class);
+                                        quantity = snapshot.child("quantity").getValue(String.class);
+                                        if(addCal.equals("true")) {
+                                            Intent intent = new Intent(getApplicationContext(), searchByNameToAddCalories.class);
+                                            intent.putExtra("name", f);
+                                            intent.putExtra("cal", cal);
+                                            intent.putExtra("img", img);
+                                            intent.putExtra("stand", stand);
+                                            intent.putExtra("quantity", quantity);
+                                            progressDialog.dismiss();
+                                            startActivity(intent);
+                                            break;
+                                        }
+                                        else{
+                                            Intent intent = new Intent(getApplicationContext(), searchByName.class);
+                                            intent.putExtra("name", f);
+                                            intent.putExtra("cal", cal);
+                                            intent.putExtra("img", img);
+                                            intent.putExtra("stand", stand);
+                                            intent.putExtra("quantity", quantity);
+                                            progressDialog.dismiss();
+                                            startActivity(intent);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
-                }
-                progressDialog.dismiss();
-                if (list.isEmpty()) {
-                    alert = new AlertDialog.Builder(home_page_Nutrition_admin.this);
-                    alert.setMessage("عذراً لايوجد هذا الصنف تحقق من طلبات الإضافة");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "طلبات الإضافة",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    startActivity(new Intent(getApplicationContext(), view_request.class));
-
-                                }
-                            });
-                    alert.setPositiveButton(
-                            "إلغاء",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    dialogInterface.cancel();
-
-                                }
-                            });
-
-
-                    AlertDialog alert11 = alert.create();
-                    alert11.show();
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), searchByKeyword.class);
-                    intent.putExtra("list", list);
-                    addCal="false";
-                    intent.putExtra( "addCal" ,addCal );
-                    progressDialog.dismiss();
-                    startActivity(intent);
-
-                }
+                });
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
     }
+
+
+
+
+
     public boolean isConnected() {
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

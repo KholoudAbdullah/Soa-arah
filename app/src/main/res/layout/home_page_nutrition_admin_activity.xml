@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background1"
-    tools:context="com.soa_arah.home_page_IT_admin">
+    >
 
 
     <!-- soaarah icon -->
@@ -149,4 +149,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView9"
         tools:ignore="MissingConstraints" />
+
+
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchword"
+        android:background="#ffff"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/searchword"
+        app:layout_constraintTop_toBottomOf="@+id/searchword"
+
+        />
 </android.support.constraint.ConstraintLayout>

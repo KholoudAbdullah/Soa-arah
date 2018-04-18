@@ -15,12 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
+//import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LegendEntry;
+//import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
+//import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -42,12 +42,12 @@ public class ProgressChart extends AppCompatActivity {
     String User_ID,username;
     private Legend legend;
     private PieDataSet pieDataSet;
-    private LegendEntry entry;
+    //private LegendEntry entry;
     private ArrayList<String> xEntrys;
-    private ArrayList<PieEntry> yEntrys;
-    private  ArrayList<LegendEntry> entries;
+    //private ArrayList<PieEntry> yEntrys;
+   // private  ArrayList<LegendEntry> entries;
     private  ArrayList<Integer> colors;
-    private Description Des;
+   // private Description Des;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class ProgressChart extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         User_ID = firebaseAuth.getCurrentUser().getEmail();
         username= User_ID.substring( 0, User_ID.lastIndexOf( "@" ) );
-        Des=new Description();
+       /* Des=new Description();
         Des.setText("السعرات الحرارية للأيام الاسبوع");
         pieChart.setDescription(Des);
         pieChart.setRotationEnabled(true);
@@ -137,7 +137,7 @@ public class ProgressChart extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
         //addDataSet();
 
     }

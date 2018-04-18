@@ -169,7 +169,7 @@ public class maxminDietplan extends AppCompatActivity {
                     SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                     String formattedDate = df.format(c);
                     plan = new DietPlan(username,goal.getText().toString().trim(),min,max,bmi,"0","0");
-                    progress=new Progress("0","0","0","0","0","0","0",formattedDate);
+                    progress=new Progress("0","0","0","0","0","0","0",formattedDate,"0","0","0","0","0","0","0");
                     databaseReference.child(username).setValue(progress);
                     mDatabase.child(username).setValue(plan);
                     Database.child("wight").setValue(Wight);

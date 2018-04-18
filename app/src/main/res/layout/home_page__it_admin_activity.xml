@@ -130,4 +130,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchword"
+        android:background="#ffff"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/searchword"
+        app:layout_constraintTop_toBottomOf="@+id/searchword"
+
+
+        />
 </android.support.constraint.ConstraintLayout>

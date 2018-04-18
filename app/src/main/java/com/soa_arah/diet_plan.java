@@ -61,7 +61,7 @@ public class diet_plan extends AppCompatActivity {
     double i;
     android.app.AlertDialog.Builder alert;
     private Date date1,date2,date3,date4,date5,date6,date7,date;
-    private String day1,day2,day3,day4,day5,day6,day7,calory,day;
+    private String day1,day2,day3,day4,day5,day6,day7,calory,day,water,w;
     int count=1;
 
 
@@ -194,7 +194,7 @@ public class diet_plan extends AppCompatActivity {
         prgress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ProgressChart.class));
+                startActivity(new Intent(getApplicationContext(), chart.class));
             }
         });
         onBackPressed();
@@ -278,20 +278,28 @@ public class diet_plan extends AppCompatActivity {
                         } catch (Exception e) {
                         }
                         if (day.equals(day1)) {
+                             w=dataSnapshot.child(na).child("water1").getValue(String.class);
                             str = dataSnapshot.child(na).child("day1").getValue(String.class);
                         } else if (day.equals(day2)) {
+                             w=dataSnapshot.child(na).child("water2").getValue(String.class);
                             str = dataSnapshot.child(na).child("day2").getValue(String.class);
                         } else if (day.equals(day3)) {
+                             w=dataSnapshot.child(na).child("water3").getValue(String.class);
                             str = dataSnapshot.child(na).child("day3").getValue(String.class);
                         } else if (day.equals(day4)) {
+                             w=dataSnapshot.child(na).child("water4").getValue(String.class);
                             str = dataSnapshot.child(na).child("day4").getValue(String.class);
                         } else if (day.equals(day5)) {
+                             w=dataSnapshot.child(na).child("water5").getValue(String.class);
                             str = dataSnapshot.child(na).child("day5").getValue(String.class);
                         } else if (day.equals(day6)) {
+                             w=dataSnapshot.child(na).child("water6").getValue(String.class);
                             str = dataSnapshot.child(na).child("day6").getValue(String.class);
                         } else if (day.equals(day7)) {
+                             w=dataSnapshot.child(na).child("water7").getValue(String.class);
                             str = dataSnapshot.child(na).child("day7").getValue(String.class);
                         } else {
+                             w="0";
                             str = "0";
                         }
                         DecimalFormat precision = new DecimalFormat("0.00");
@@ -411,8 +419,94 @@ String l;
                 }else
                     Water.setText(num.getText());
 
-                mDatabase2 = FirebaseDatabase.getInstance().getReference().child("DietPlan").child(na).child("water");
-                mDatabase2.setValue(Water.getText().toString());
+                Database = FirebaseDatabase.getInstance().getReference().child("Progress");
+                Database.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        DailyCal = dataSnapshot.child(na).child("startDate").getValue(String.class);
+
+                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        Calendar c = Calendar.getInstance();
+                        try {
+                            date = Calendar.getInstance().getTime();
+                            day = df.format(date);
+                            c.setTime(date);
+                            c.setTime(df.parse(DailyCal));
+                            day1 = df.format(c.getTime());  // dt is now the new date
+
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 1);  // number of days to add
+                            day2 = df.format(c.getTime());
+
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 2);  // number of days to add
+                            day3 = df.format(c.getTime());
+
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 3);  // number of days to add
+                            day4 = df.format(c.getTime());
+
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 4);  // number of days to add
+                            day5 = df.format(c.getTime());
+
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 5);  // number of days to add
+                            day6 = df.format(c.getTime());
+
+                            c.setTime(df.parse(DailyCal));
+                            c.add(Calendar.DATE, 6);  // number of days to add
+                            day7 = df.format(c.getTime());
+                        } catch (Exception e) {
+                        }
+                        if (day.equals(day1)) {
+                            water=dataSnapshot.child(na).child("water1").getValue(String.class);
+                            double wat=Double.parseDouble(water)+Double.parseDouble(Water.getText().toString());
+                            Database.child(na).child("water1").setValue(Double.toString(wat));
+                        } else if (day.equals(day2)) {
+                            water=dataSnapshot.child(na).child("water2").getValue(String.class);
+                            double wat=Double.parseDouble(water)+Double.parseDouble(Water.getText().toString());
+                            Database.child(na).child("water2").setValue(Double.toString(wat));
+                        } else if (day.equals(day3)) {
+                            water=dataSnapshot.child(na).child("water3").getValue(String.class);
+                            double wat=Double.parseDouble(water)+Double.parseDouble(Water.getText().toString());
+                            Database.child(na).child("water3").setValue(Double.toString(wat));
+                        } else if (day.equals(day4)) {
+                            water=dataSnapshot.child(na).child("water4").getValue(String.class);
+                            double wat=Double.parseDouble(water)+Double.parseDouble(Water.getText().toString());
+                            Database.child(na).child("water4").setValue(Double.toString(wat));
+                        } else if (day.equals(day5)) {
+                            water=dataSnapshot.child(na).child("water5").getValue(String.class);
+                            double wat=Double.parseDouble(water)+Double.parseDouble(Water.getText().toString());
+                            Database.child(na).child("water5").setValue(Double.toString(wat));
+                        } else if (day.equals(day6)) {
+                            water=dataSnapshot.child(na).child("water6").getValue(String.class);
+                            double wat=Double.parseDouble(water)+Double.parseDouble(Water.getText().toString());
+                            Database.child(na).child("water6").setValue(Double.toString(wat));
+                        } else if (day.equals(day7)) {
+                            water=dataSnapshot.child(na).child("water7").getValue(String.class);
+                            double wat=Double.parseDouble(water)+Double.parseDouble(Water.getText().toString());
+                            Database.child(na).child("water7").setValue(Double.toString(wat));
+                        }
+                        else {
+                            Database.child(na).child("water1").setValue(Water.getText().toString());
+                            Database.child(na).child("water2").setValue("0");
+                            Database.child(na).child("water3").setValue("0");
+                            Database.child(na).child("water4").setValue("0");
+                            Database.child(na).child("water5").setValue("0");
+                            Database.child(na).child("water6").setValue("0");
+                            Database.child(na).child("water7").setValue("0");
+                            Database.child(na).child("startDate").setValue(day);
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
             }
         });

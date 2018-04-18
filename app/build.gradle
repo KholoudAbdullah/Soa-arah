@@ -19,8 +19,12 @@ android {
     }
 }
 
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+
 dependencies {
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -52,4 +56,3 @@ dependencies {
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
 }
 apply plugin: 'com.google.gms.google-services'
-

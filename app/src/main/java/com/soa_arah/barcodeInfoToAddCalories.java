@@ -257,6 +257,13 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
 
                 }else
                 {
+                    mDatabase.child(username).child("water1").setValue("0");
+                    mDatabase.child(username).child("water2").setValue("0");
+                    mDatabase.child(username).child("water3").setValue("0");
+                    mDatabase.child(username).child("water4").setValue("0");
+                    mDatabase.child(username).child("water5").setValue("0");
+                    mDatabase.child(username).child("water6").setValue("0");
+                    mDatabase.child(username).child("water7").setValue("0");
                     mDatabase.child(username).child("day1").setValue("0");
                     mDatabase.child(username).child("day2").setValue("0");
                     mDatabase.child(username).child("day3").setValue("0");
