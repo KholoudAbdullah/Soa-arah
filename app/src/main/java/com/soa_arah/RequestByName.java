@@ -432,17 +432,17 @@ public class RequestByName extends AppCompatActivity {
 
 
 
-                            for (int i=0;i<foodName.size();i++){
-
-                                if (foodname.getText().toString().trim().equals(foodName.get(i))){
-                                    progressDialog.dismiss();
-                                    fin2=false;
-                                    Log.d("in if 1","delete"+foodName.get(i));
-                                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
-                                    alert.setTitle("الصنف موجود مسبقاً");
-                                    alert.setMessage("الانتقال الى صفحة البحث");
-                                    alert.setCancelable(true);
-                                    alert.setPositiveButton(
+                            if (foodName.size()>0){
+                                for (int i=0;i<foodName.size();i++){
+                                    if (foodname.getText().toString().trim().equals(foodName.get(i))){
+                                        progressDialog.dismiss();
+                                        //fin2=false;
+                                        Log.d("in if 1","delete"+foodName.get(i));
+                                        alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                                        alert.setTitle("الصنف موجود مسبقاً");
+                                        alert.setMessage("الانتقال الى صفحة البحث");
+                                        alert.setCancelable(true);
+                                        alert.setPositiveButton(
                                             "نعم",
                                             new DialogInterface.OnClickListener() {
                                                 @Override
@@ -451,27 +451,29 @@ public class RequestByName extends AppCompatActivity {
                                                     startActivity(new Intent(getApplicationContext(), home_page_register.class));
                                                 }
                                             });
-
-                                    android.app.AlertDialog alert11 = alert.create();
-                                    alert11.show();
-                                    break;
-
+                                        android.app.AlertDialog alert11 = alert.create();
+                                        alert11.show();
+                                        break;
+                                    }
+                                Log.d("end for foodName",""+foodName.get(i));
                                 }
+                                fin2=false;
+                            }else
+                                fin2=false;
 
-                            }
 
 
-                            for (int i=0;i<requestName.size();i++){
-
-                                if (foodname.getText().toString().trim().equals(requestName.get(i))){
-                                    progressDialog.dismiss();
-                                    fin2=false;
-                                    Log.d("in if 1","delete"+requestName.get(i));
-                                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
-                                    alert.setTitle("الصنف موجود مسبقاً");
-                                    alert.setMessage("الانتقال الى صفحة البحث");
-                                    alert.setCancelable(true);
-                                    alert.setPositiveButton(
+                            if(requestName.size()>0){
+                                for (int i=0;i<requestName.size();i++){
+                                    if (foodname.getText().toString().trim().equals(requestName.get(i))){
+                                        progressDialog.dismiss();
+                                        // fin2=false;
+                                        Log.d("in if 1","delete"+requestName.get(i));
+                                        alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                                        alert.setTitle("الصنف موجود مسبقاً");
+                                        alert.setMessage("الانتقال الى صفحة البحث");
+                                        alert.setCancelable(true);
+                                        alert.setPositiveButton(
                                             "نعم",
                                             new DialogInterface.OnClickListener() {
                                                 @Override
@@ -480,22 +482,21 @@ public class RequestByName extends AppCompatActivity {
                                                     startActivity(new Intent(getApplicationContext(), home_page_register.class));
                                                 }
                                             });
-
-                                    android.app.AlertDialog alert11 = alert.create();
-                                    alert11.show();
-                                    break;
-
+                                        android.app.AlertDialog alert11 = alert.create();
+                                        alert11.show();
+                                        break;
+                                    }
+                                //if (fin2)
+                                Log.d("end for requestName",""+requestName.get(i));
                                 }
-                                if (fin2)
-                                    fin=false;
-
-                            }
-
+                                fin=false;
+                            }else
+                                fin=false;
 
 
 
 
-                          if (!fin) {
+                            if (!fin&&!fin2) {
 
                                 Log.d("in else","*******");
                             //for standard measurement
@@ -512,8 +513,49 @@ public class RequestByName extends AppCompatActivity {
                             // Hiding the progressDialog after done uploading.
                             progressDialog.dismiss();
 
+                                AlertDialog.Builder alert = new AlertDialog.Builder(
+                                        RequestByName.this);
+                                alert.setTitle("تم إرسال الطلب بنجاح").setIcon(R.drawable.t1);
+                                AlertDialog dialog = alert.create();
 
-                        }}
+                                // Finally, display the alert dialog
+                                dialog.show();
+
+                                // Get screen width and height in pixels
+                                DisplayMetrics displayMetrics = new DisplayMetrics();
+                                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                                // The absolute width of the available display size in pixels.
+                                int displayWidth = displayMetrics.widthPixels;
+                                // The absolute height of the available display size in pixels.
+                                int displayHeight = displayMetrics.heightPixels;
+
+                                // Initialize a new window manager layout parameters
+                                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+                                // Copy the alert dialog window attributes to new layout parameter instance
+                                layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+
+
+                                // Set alert dialog width equal to screen width 70%
+                                int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                                // Set alert dialog height equal to screen height 70%
+                                int dialogWindowHeight = (int) (displayHeight * 0.15f);
+
+                                // Set the width and height for the layout parameters
+                                // This will bet the width and height of alert dialog
+                                layoutParams.width = dialogWindowWidth;
+                                layoutParams.height = dialogWindowHeight;
+
+                                // Apply the newly created layout parameters to the alert dialog window
+                                dialog.getWindow().setAttributes(layoutParams);
+                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                //close this activity
+                                finish();
+                                startActivity(new Intent(RequestByName.this, home_page_register.class));
+
+
+                            }}
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -525,47 +567,7 @@ public class RequestByName extends AppCompatActivity {
                     });
 
 
-            if (!fin){
-            AlertDialog.Builder alert = new AlertDialog.Builder(
-                    RequestByName.this);
-            alert.setTitle("تم إرسال الطلب بنجاح").setIcon(R.drawable.t1);
-            AlertDialog dialog = alert.create();
-
-            // Finally, display the alert dialog
-            dialog.show();
-
-            // Get screen width and height in pixels
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-            // The absolute width of the available display size in pixels.
-            int displayWidth = displayMetrics.widthPixels;
-            // The absolute height of the available display size in pixels.
-            int displayHeight = displayMetrics.heightPixels;
-
-            // Initialize a new window manager layout parameters
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-
-            // Copy the alert dialog window attributes to new layout parameter instance
-            layoutParams.copyFrom(dialog.getWindow().getAttributes());
-
-
-
-            // Set alert dialog width equal to screen width 70%
-            int dialogWindowWidth = (int) (displayWidth * 0.9f);
-            // Set alert dialog height equal to screen height 70%
-            int dialogWindowHeight = (int) (displayHeight * 0.15f);
-
-            // Set the width and height for the layout parameters
-            // This will bet the width and height of alert dialog
-            layoutParams.width = dialogWindowWidth;
-            layoutParams.height = dialogWindowHeight;
-
-            // Apply the newly created layout parameters to the alert dialog window
-            dialog.getWindow().setAttributes(layoutParams);
-            startActivity(new Intent(getApplicationContext(), home_page_register.class));
-            //close this activity
-            finish();
-            startActivity(new Intent(RequestByName.this, home_page_register.class));
+            if (!fin&&!fin2){
 
         }
         }else {
