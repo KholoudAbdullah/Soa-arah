@@ -228,7 +228,7 @@ public class RequestByBarcode extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (name.getText().toString().trim().length()<1){
 
-                    name.setError("االرجاء إدخال إسم الصنف");
+                    name.setError("الرجاء إدخال إسم الصنف");
                 }
             }
         });
@@ -397,6 +397,7 @@ public class RequestByBarcode extends AppCompatActivity {
 
                 // After selecting image change choose button above text.
                 table.setText("تم اختيار الصورة");
+                table.setBackgroundResource(R.drawable.button_login);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -412,6 +413,7 @@ public class RequestByBarcode extends AppCompatActivity {
 
                 // After selecting image change choose button above text.
                 upload.setText("تم اختيار الصورة");
+                upload.setBackgroundResource(R.drawable.button_login);
                 StorageReference fileReference1 = storageReference.child(System.currentTimeMillis()
                         + "." + getFileExtension(fImageUri));
                 // Setting progressDialog Title.

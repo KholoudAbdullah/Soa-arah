@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -404,6 +405,7 @@ public class RequestByName extends AppCompatActivity {
 
                 // After selecting image change choose button above text.
                 upload.setText("تم اختيار الصورة");
+                upload.setBackgroundResource(R.drawable.button_login);
             } catch (IOException e) {
                 e.printStackTrace();
             }

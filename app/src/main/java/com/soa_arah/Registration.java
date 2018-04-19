@@ -48,9 +48,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     android.app.AlertDialog.Builder alert;
-    boolean flag;
+    boolean flag,flag2=true;
     String hexName;
-    String m;
+    String m,valid="",specialCharacters,phone1;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -72,7 +73,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         button=(Button)findViewById(R.id.button);
         log=(Button) findViewById(R.id.log);
 
-
+        specialCharacters =" !#$%&'()*+,./:;<=>?@[]^`{|}~";
 
         //valedation
         name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
@@ -81,7 +82,14 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             public void onFocusChange(View v, boolean hasFocus) {
                 if (name.getText().toString().trim().length()<1){
 
-                    name.setError("االرجاء إدخال إسم المستخدم");
+                    name.setError("الرجاء إدخال إسم المستخدم");
+                }
+                for (int i=0;i<name.getText().toString().trim().length();i++){
+                    valid=name.getText().toString().trim().charAt(i)+"";
+                    if (specialCharacters.contains(valid)){
+                        name.setError("الرموز المسوح إستخدامها - ـ ");
+
+                    }
                 }
             }
         });
@@ -113,6 +121,16 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
                     phone.setError("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
                 }
+                phone1=phone.getText().toString().trim();
+                if (phone1.charAt(0)!='+'){
+                    if (phone1.charAt(0)=='0'&&phone1.charAt(1)=='0')
+                        phone.setText("+"+phone1.substring(2));
+                    else {
+                        phone.setError("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
+                    }
+                }
+
+
             }
         });
 
@@ -132,6 +150,29 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if(view == button ){
+            phone1=phone.getText().toString().trim();
+            if (phone1.charAt(0)!='+'){
+                if (phone1.charAt(0)=='0'&&phone1.charAt(1)=='0')
+                    phone.setText("+"+phone1.substring(2));
+                else {
+                    alert= new android.app.AlertDialog.Builder(Registration.this);
+                    alert.setMessage("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                    return;
+                }
+            }
             if (name.getText().toString().trim().length()<1){
                 alert= new android.app.AlertDialog.Builder(Registration.this);
                 alert.setMessage("الرجاء إدخال إسم المستخدم");
@@ -149,6 +190,30 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 android.app.AlertDialog alert11 = alert.create();
                 alert11.show();
                 return;
+            }else if (flag2){
+                for (int i=0;i<name.getText().toString().trim().length();i++){
+                    valid=name.getText().toString().trim().charAt(i)+"";
+
+                    if (specialCharacters.contains(valid)){
+                        alert= new android.app.AlertDialog.Builder(Registration.this);
+                        alert.setMessage("الرموز المسوح إستخدامها - ـ ");
+                        alert.setCancelable(true);
+                        alert.setPositiveButton(
+                                "موافق",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        dialogInterface.cancel();
+
+                                    }
+                                });
+                        android.app.AlertDialog alert11 = alert.create();
+                        alert11.show();
+                        return;
+                    }
+                }
+
             }
             else if (password.getText().toString().trim().length()<6){
                 alert= new android.app.AlertDialog.Builder(Registration.this);
@@ -208,6 +273,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             else{
             progressDialog.setMessage(" الرجاء الانتظار...");
             progressDialog.show();
+
 
                 mDatabase = FirebaseDatabase.getInstance().getReference().child("RegisteredUser");
 
