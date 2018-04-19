@@ -188,7 +188,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                     public void onClick(View v) {
 
                         alert= new android.app.AlertDialog.Builder(ViewReviewRegisterUser.this);
-                        alert.setMessage("هل انت متأكد من خذف التعليق؟");
+                        alert.setMessage("هل انت متأكد من حذف التعليق؟");
                         alert.setCancelable(true);
                         alert.setPositiveButton(
                                 "نعم",
