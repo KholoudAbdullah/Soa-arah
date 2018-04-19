@@ -183,6 +183,31 @@ if(mAuth.getCurrentUser()!=null){
 
                                                         deleteDatabase.removeValue();
 
+                                                android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(
+                                                        ViewReview.this);
+                                                alert.setTitle("تم حذف التعليق").setIcon(R.drawable.t1);
+
+                                                android.support.v7.app.AlertDialog dialog = alert.create();
+
+                                                // Finally, display the alert dialog
+                                                dialog.show();
+                                                alert.setPositiveButton(
+                                                        "نعم",
+                                                        new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                                Intent intent = new Intent(ViewReview.this, ViewReview.class);
+                                                                intent.putExtra("name", getIntent().getStringExtra("name"));
+                                                                startActivity(intent);
+
+                                                            }
+
+
+                                                        });
+                                                android.support.v7.app.AlertDialog alert22 = alert.create();
+                                                alert22.show();
+
 
                                             }
 

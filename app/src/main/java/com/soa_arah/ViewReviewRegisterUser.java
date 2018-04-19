@@ -210,6 +210,30 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                                     if (dataSnapshot.child("RKey").getValue().equals(RKey)) {
 
                                                         deleteDatabase.removeValue();
+                                        android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(
+                                                ViewReviewRegisterUser.this);
+                                        alert.setTitle("تم حذف التعليق").setIcon(R.drawable.t1);
+
+                                        android.support.v7.app.AlertDialog dialog = alert.create();
+
+                                        // Finally, display the alert dialog
+                                        dialog.show();
+                                        alert.setPositiveButton(
+                                                "نعم",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                        Intent intent = new Intent(ViewReviewRegisterUser.this, ViewReviewRegisterUser.class);
+                                                        intent.putExtra("name", getIntent().getStringExtra("name"));
+                                                        startActivity(intent);
+
+                                                    }
+
+
+                                                });
+                                        android.support.v7.app.AlertDialog alert22 = alert.create();
+                                        alert22.show();
 
 
                                                     }
@@ -418,7 +442,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                     if (dataSnapshot.hasChild("likes")) {
                         if (dataSnapshot.child("likes").hasChild(user_key)) {
                             if (dataSnapshot.child("likes").child(user_key).getValue().equals("like")) {
-                                likebtn.setBackgroundResource(R.drawable.like_red);
+                                likebtn.setBackgroundResource(R.drawable.like_green);
                                 dislikebtn.setBackgroundResource(R.drawable.thumb_down);
                             } else if (dataSnapshot.child("likes").child(user_key).getValue().equals("dislike")) {
                                 likebtn.setBackgroundResource(R.drawable.thumb_up);
@@ -464,7 +488,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
 
                             } else if (dataSnapshot.child("likes").child(user_key).getValue().equals("like")) {
                                 dislikebtn.setBackgroundResource(R.drawable.thumb_down);
-                                likebtn.setBackgroundResource(R.drawable.like_red);
+                                likebtn.setBackgroundResource(R.drawable.like_green);
 
                             }
 

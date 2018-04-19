@@ -144,4 +144,25 @@
         app:layout_constraintVertical_bias="0.002"
         app:srcCompat="@drawable/spoon"
         tools:ignore="MissingConstraints" />
+
+    <Button
+
+        android:id="@+id/viewReview"
+        android:layout_width="158dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="248dp"
+        android:background="@drawable/button_login"
+        android:onClick="toView"
+        android:text="التعليقات"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image2"
+        tools:ignore="MissingConstraints" />
+
 </android.support.constraint.ConstraintLayout>

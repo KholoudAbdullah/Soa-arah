@@ -11,8 +11,10 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -136,6 +138,26 @@ public class barcodeInfo extends AppCompatActivity {
     }
 
 
+    public void toView(View view) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String id = user.getUid();
+            Log.d("ff",id);
+            if (!(id.equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")) && !(id.equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2"))) {
+                Intent intent = new Intent(barcodeInfo.this, ViewReviewRegisterUser.class);
+                intent.putExtra("name", getIntent().getStringExtra("Name"));
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(barcodeInfo.this, ViewReview.class);
+                intent.putExtra("name", getIntent().getStringExtra("Name"));
+                startActivity(intent);
+            }
+        }else{
+            Intent intent = new Intent(barcodeInfo.this, ViewReview.class);
+            intent.putExtra("name", getIntent().getStringExtra("Name"));
+            startActivity(intent);
+        }
+    }
 
 
     private void showDialog()
