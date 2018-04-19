@@ -165,7 +165,7 @@ if(mAuth.getCurrentUser()!=null){
 
 
                         alert= new android.app.AlertDialog.Builder(ViewReview.this);
-                        alert.setMessage("هل انت متأكد من خذف التعليق؟");
+                        alert.setMessage("هل انت متأكد من حذف التعليق؟");
                         alert.setCancelable(true);
                         alert.setPositiveButton(
                                 "نعم",
