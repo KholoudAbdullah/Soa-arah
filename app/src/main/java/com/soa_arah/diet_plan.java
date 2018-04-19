@@ -306,6 +306,7 @@ public class diet_plan extends AppCompatActivity {
                         if (flag1) {
                             try {
                                 double cal = Double.parseDouble(str);
+                                Water.setText(w);
                                 NewCalFood.setText(precision.format(cal));
                             }catch (NullPointerException  e) {
 String l;
