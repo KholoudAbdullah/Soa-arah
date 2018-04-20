@@ -403,6 +403,7 @@ public class RequestByName extends AppCompatActivity {
                 // Getting selected image into Bitmap.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mImageUri);
 
+
                 // After selecting image change choose button above text.
                 upload.setText("تم اختيار الصورة");
                 upload.setBackgroundResource(R.drawable.button_login);
