@@ -7,7 +7,6 @@ package com.soa_arah;
 public class Food {
     private String Name;
     private String Image;
-    private String Keyword;
     private String Calories;
     private String Quantity;
     private String standard;
@@ -16,10 +15,9 @@ public class Food {
 
     public Food(){}
 
-    public Food(String name, String image, String keyword, String calories, String standard,String quantity) {
+    public Food(String name, String image, String calories, String standard,String quantity) {
         Name = name;
         Image = image;
-        Keyword = keyword;
         Calories = calories;
         Quantity = quantity;
         this.standard=standard;
@@ -66,13 +64,6 @@ public class Food {
         Image = image;
     }
 
-    public String getKeyword() {
-        return Keyword;
-    }
-
-    public void setKeyword(String keyword) {
-        Keyword = keyword;
-    }
 
     public String getCalories() {
         return Calories;

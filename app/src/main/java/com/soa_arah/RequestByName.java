@@ -507,7 +507,7 @@ public class RequestByName extends AppCompatActivity {
                                 stander="جرام,ملعقة شاي,ملعقة اكل,كوب";
                             else if (Rdrink.isChecked())
                                 stander="مليلتر,كوب";
-                            Food RF = new Food(foodname.getText().toString().trim(),taskSnapshot.getDownloadUrl().toString(), "لا يوجد",calory.getText().toString().trim(),stander,gram.getText().toString().trim());
+                            Food RF = new Food(foodname.getText().toString().trim(),taskSnapshot.getDownloadUrl().toString(),calory.getText().toString().trim(),stander,gram.getText().toString().trim());
                             RF.setImageTable("لايوجد");
                             RF.setBarcodN("لايوجد");
                             String uploadId = databaseReference.push().getKey();

@@ -483,7 +483,7 @@ public class RequestByBarcode extends AppCompatActivity {
                                 calo=cal.getText().toString().trim();
 
 
-                            Food RF =  new Food(name.getText().toString().trim(),douTable,"لايوجد",calo,stander,"لايوجد");
+                            Food RF =  new Food(name.getText().toString().trim(),douTable,calo,stander,"لايوجد");
                             RF.setImageTable( taskSnapshot.getDownloadUrl().toString());
                             RF.setBarcodN(barnum);
                             String uploadId = databaseReference.push().getKey();
