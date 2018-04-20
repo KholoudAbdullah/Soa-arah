@@ -13,12 +13,10 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,6 +43,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
+   private boolean Regestersec=false;
    private Intent intent;
     RegisteredUser user1;
     android.app.AlertDialog.Builder alert;
@@ -199,7 +198,11 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                                   registerUser();}
+                                   boolean reSuccessful=registerUser();
+                        if(reSuccessful)
+                            startActivity(new Intent(getApplicationContext(), home_page_register.class));
+
+                        }
                         else {
                             android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(ActivityPhoneAuth.this);
 
@@ -252,8 +255,9 @@ public class ActivityPhoneAuth extends AppCompatActivity {
         signInWithCredential(PhoneAuthProvider.getCredential(mVerificationId, code));
 
     }
-    private void registerUser() {
+    private boolean registerUser() {
         //getting email and password from edit texts
+
         final String Name = intent.getExtras().getString("username", "");
 
         String email =stringToHex(Name)+"@soaarah.com";;
@@ -272,6 +276,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                Regestersec=true;
                                 firebaseAuth = FirebaseAuth.getInstance();
                                 String User_ID = firebaseAuth.getCurrentUser().getUid();
                                 final String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
@@ -325,13 +330,13 @@ public class ActivityPhoneAuth extends AppCompatActivity {
 
                                 // Apply the newly created layout parameters to the alert dialog window
                                 dialog.getWindow().setAttributes(layoutParams);
-                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
-                                //close this activity
-                                finish();
-                                //opening login activity
+
+
 
 
                             } else {
+
+                                Regestersec=false;
                                 //display some message here
                                 AlertDialog.Builder alert = new AlertDialog.Builder(
                                         ActivityPhoneAuth.this );
@@ -385,6 +390,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                         }
                     } );
         }
+        return Regestersec;
     }
     public static String stringToHex(String base)
     {

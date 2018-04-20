@@ -59,10 +59,11 @@
     <EditText
         android:id="@+id/searchword"
         android:layout_width="239dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="344dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edit_text_style"
         android:drawableRight="@drawable/search"
         android:ems="11"
@@ -70,27 +71,13 @@
         android:hint="  بحث "
         android:textColorHint="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/searchButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="158dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/button_login"
-        android:text="بحث"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/searchbarcode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/searchbarcode"

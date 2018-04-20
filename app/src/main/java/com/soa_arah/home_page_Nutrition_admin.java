@@ -23,6 +23,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -83,9 +84,119 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
         setContentView(R.layout.home_page_nutrition_admin_activity);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         searchtext = (EditText) findViewById(R.id.searchword);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         scan=(Button)findViewById(R.id.scan);
         isConnected();
+
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
+
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    sumreq=sumreq+1;
+                }
+
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                if(user != null){
+                    //ID موب صح
+                    //IT admin
+                    if(user.getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                        startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
+                    }
+                    // Nutrition addmin
+                    else if(user.getUid().equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
+                        Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
+                        notificationIntent.putExtra( "SumRequest",sumreq );
+                        notificationIntent.addCategory("android.intent.category.DEFAULT");
+                        PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//                        Calendar cal = Calendar.getInstance();
+//                        cal.add(Calendar.SECOND, 15);
+//                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+                        Calendar calendar = Calendar.getInstance();
+                        Calendar calendarcurrent = Calendar.getInstance();
+                        calendarcurrent.setTimeInMillis(System.currentTimeMillis());
+                        calendar.set(Calendar.HOUR_OF_DAY,10);
+                        calendar.set(Calendar.MINUTE,5);
+                        calendar.set(Calendar.SECOND, 0);
+                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY*7, broadcast);
+                        if(System.currentTimeMillis()>calendar.getTimeInMillis()) {
+                            alarmManager.cancel( broadcast );
+                        }
+                    }
+                    else {
+                        startActivity(new Intent(getApplicationContext(), home_page_register.class));
+
+                    }
+                }
+
+
+
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByBarcode");
+
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    sumreq=sumreq+1;
+                }
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                if(user != null){
+                    //ID موب صح
+                    //IT admin
+                    if(user.getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
+                        startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
+                    }
+                    // Nutrition addmin
+                    else if(user.getUid().equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
+                        Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
+                        notificationIntent.putExtra( "SumRequest",sumreq );
+                        notificationIntent.addCategory("android.intent.category.DEFAULT");
+                        PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//                        Calendar cal = Calendar.getInstance();
+//                        cal.add(Calendar.SECOND, 15);
+//                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+                        Calendar calendar = Calendar.getInstance();
+                        Calendar calendarcurrent = Calendar.getInstance();
+                        calendarcurrent.setTimeInMillis(System.currentTimeMillis());
+                        calendar.set(Calendar.HOUR_OF_DAY,10);
+                        calendar.set(Calendar.MINUTE,5);
+                        calendar.set(Calendar.SECOND, 0);
+
+                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY*7, broadcast);
+                        if(System.currentTimeMillis()>calendar.getTimeInMillis()) {
+                            alarmManager.cancel( broadcast );
+                        }
+                    }
+                    else {
+                        startActivity(new Intent(getApplicationContext(), home_page_register.class));
+
+                    }
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         listView=(ListView)findViewById(R.id.listview);
         searchKeyword();
         listView.setTextFilterEnabled(true);
@@ -126,96 +237,7 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
 
 
         }
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
 
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    sumreq=sumreq+1;
-                }
-
-
-                AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                if(user != null){
-
-                    //IT admin
-                    if(user.getUid().equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")){
-                        startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
-                    }
-                    // Nutrition addmin
-                    else if(user.getUid().equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
-                        Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
-                        notificationIntent.putExtra( "SumRequest",sumreq );
-                        notificationIntent.addCategory("android.intent.category.DEFAULT");
-                        PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        Calendar cal = Calendar.getInstance();
-                        cal.add(Calendar.SECOND, 15);
-                        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
-
-                    }
-                    else {
-                        startActivity(new Intent(getApplicationContext(), home_page_register.class));
-
-                    }
-                }
-
-
-
-
-
-            }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByBarcode");
-
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    sumreq=sumreq+1;
-                }
-
-                AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
-
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                if(user != null){
-                    //ID موب صح
-                    //IT admin
-                    if(user.getUid().equals("aSK7RyMA8xfdaQNPF0xS6kAumam2")){
-                        startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
-                    }
-                    // Nutrition addmin
-                    else if(user.getUid().equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
-                        Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
-                        notificationIntent.putExtra( "SumRequest",sumreq );
-                        notificationIntent.addCategory("android.intent.category.DEFAULT");
-                        PendingIntent broadcast = PendingIntent.getBroadcast(home_page_Nutrition_admin.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        Calendar cal = Calendar.getInstance();
-                        cal.add(Calendar.SECOND, 15);
-                        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
-
-                    }
-                    else {
-                        startActivity(new Intent(getApplicationContext(), home_page_register.class));
-
-                    }
-                }
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
 

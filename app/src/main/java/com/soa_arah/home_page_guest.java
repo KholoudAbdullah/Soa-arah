@@ -6,18 +6,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -70,6 +69,7 @@ public class home_page_guest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_guest_activity);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -97,10 +97,14 @@ public class home_page_guest extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
         listView=(ListView)findViewById(R.id.listview);
+
         searchKeyword();
         listView.setTextFilterEnabled(true);
         listView.setTextFilterEnabled(true);
 
+        //listView.bringChildToFront(listView);
+       // listView.bringToFront();
+        scan.bringPointIntoView(2);
         searchtext.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -193,7 +197,6 @@ public class home_page_guest extends AppCompatActivity {
                 }
                 adapter=new ArrayAdapter<String>(getApplicationContext(),R.layout.keywordlayout,R.id.textView14,foods );
                 listView.setAdapter(adapter);
-                listView.bringChildToFront(listView);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, final View view,final int position, long id) {
