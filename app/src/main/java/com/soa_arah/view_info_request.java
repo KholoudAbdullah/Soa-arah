@@ -59,29 +59,29 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_info_request);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
 
         firebaseAuth = FirebaseAuth.getInstance();
         namef = getIntent().getStringExtra("namef");
-        calorie = getIntent().getStringExtra("calorie");
-        image = getIntent().getStringExtra("image");
-        quantity = getIntent().getStringExtra("quantity");
-        standard = getIntent().getStringExtra("standard");
-        key = getIntent().getStringExtra("keys");
+        calorie=getIntent().getStringExtra("calorie");
+        image=getIntent().getStringExtra("image");
+        quantity=getIntent().getStringExtra("quantity");
+        standard=getIntent().getStringExtra("standard");
+        key=getIntent().getStringExtra("keys");
 
-        namefood = (TextView) findViewById(R.id.namefood);
-        calories = (EditText) findViewById(R.id.calories);
-        gr = (EditText) findViewById(R.id.gr);
-        imageView3 = (ImageView) findViewById(R.id.imageView3);
-        reject = (Button) findViewById(R.id.reject);
-        accept = (Button) findViewById(R.id.accept);
-        keyword = (EditText) findViewById(R.id.stt);
-        bkeyword = (Button) findViewById(R.id.keywordN);
+        namefood=(TextView)findViewById(R.id.namefood);
+        calories=(EditText)findViewById(R.id.calories);
+        gr=(EditText)findViewById(R.id.gr);
+        imageView3=(ImageView)findViewById(R.id.imageView3);
+        reject=(Button)findViewById(R.id.reject);
+        accept=(Button)findViewById(R.id.accept);
+        keyword=(EditText)findViewById(R.id.stt);
+        bkeyword=(Button)findViewById(R.id.keywordN);
 
 
-        cKeyword = cKeyword + keyword.getText().toString();
+        cKeyword = cKeyword+keyword.getText().toString();
 
         gr.setText(quantity);
         namefood.setText(namef);
@@ -109,7 +109,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if (gr.getText().toString().trim().length() < 2) {
+                if (gr.getText().toString().trim().length()<2){
 
                     gr.setError("الرجاء إدخال عدد القرام /مللتر");
                 }
@@ -129,18 +129,18 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if (calories.getText().toString().trim().length() < 2) {
+                if (calories.getText().toString().trim().length()<2){
 
                     calories.setError("الرجاء إدخال عدد السعرات الحرارية");
                 }
             }
         });
 
-        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (keyword.getText().toString().trim().length() < 1) {
+                if (keyword.getText().toString().trim().length()<1){
 
                     keyword.setError("الرجاء إدخال الكلمات المفتاحية");
                 }
@@ -169,7 +169,16 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
                         return false;
                     }
                 });
+
+        onBackPressed();
     }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
+    }
+
     @Override
     public void onClick(View view) {
 
