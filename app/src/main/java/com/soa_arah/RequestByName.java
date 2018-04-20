@@ -73,7 +73,7 @@ public class RequestByName extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_by_name);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
 
@@ -89,9 +89,9 @@ public class RequestByName extends AppCompatActivity {
         checkdataF.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    Food checkFood=snapshot.getValue(Food.class);
-                    Log.d("in for 1","*****"+checkFood.getName());
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Food checkFood = snapshot.getValue(Food.class);
+                    Log.d("in for 1", "*****" + checkFood.getName());
                     foodName.add(checkFood.getName());
                 }
 
@@ -107,9 +107,9 @@ public class RequestByName extends AppCompatActivity {
         checkdataR.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    Food checkFood=snapshot.getValue(Food.class);
-                    Log.d("in for 1","*****"+checkFood.getName());
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Food checkFood = snapshot.getValue(Food.class);
+                    Log.d("in for 1", "*****" + checkFood.getName());
                     requestName.add(checkFood.getName());
                 }
 
@@ -122,51 +122,46 @@ public class RequestByName extends AppCompatActivity {
             }
         });
 
-        cancle= (Button)findViewById(R.id.cancel);
-        send=(Button) findViewById(R.id.send);
-        upload=(Button) findViewById(R.id.uploadimage);
-        foodname=(EditText) findViewById(R.id.FName);
-        calory=(EditText) findViewById(R.id.calbyg);
+        cancle = (Button) findViewById(R.id.cancel);
+        send = (Button) findViewById(R.id.send);
+        upload = (Button) findViewById(R.id.uploadimage);
+        foodname = (EditText) findViewById(R.id.FName);
+        calory = (EditText) findViewById(R.id.calbyg);
         progressDialog = new ProgressDialog(RequestByName.this);
-        Rfood= (RadioButton) findViewById(R.id.food);
-        Rdrink=(RadioButton) findViewById(R.id.drinkS);
-        gram=(EditText) findViewById(R.id.gramL);
+        Rfood = (RadioButton) findViewById(R.id.food);
+        Rdrink = (RadioButton) findViewById(R.id.drinkS);
+        gram = (EditText) findViewById(R.id.gramL);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-
-
-
-
-
-        foodname.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        foodname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (foodname.getText().toString().trim().length()<1){
+                if (foodname.getText().toString().trim().length() < 1) {
 
                     foodname.setError("الرجاء إدخال إسم الصنف");
                 }
             }
         });
-        calory.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        calory.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (calory.getText().toString().trim().length()<1){
+                if (calory.getText().toString().trim().length() < 1) {
 
                     calory.setError("الرجاء إدخال عدد السعرات");
                 }
             }
         });
 
-        gram.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        gram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (gram.getText().toString().trim().length()<1){
+                if (gram.getText().toString().trim().length() < 1) {
 
                     gram.setError("الرجاء إدخال عدد القرام/ملم");
                 }
@@ -188,8 +183,8 @@ public class RequestByName extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(foodname.getText().toString().trim().length()<1){
-                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                if (foodname.getText().toString().trim().length() < 1) {
+                    alert = new android.app.AlertDialog.Builder(RequestByName.this);
                     alert.setMessage("الرجاء ادخال إسم الصنف");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
@@ -205,9 +200,8 @@ public class RequestByName extends AppCompatActivity {
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
 
-                }
-                else if (calory.getText().toString().trim().length()<1){
-                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                } else if (calory.getText().toString().trim().length() < 1) {
+                    alert = new android.app.AlertDialog.Builder(RequestByName.this);
                     alert.setMessage("الرجاء إدخال عدد السعرات");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
@@ -222,9 +216,8 @@ public class RequestByName extends AppCompatActivity {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                }
-                else if (gram.getText().toString().trim().length()<1){
-                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                } else if (gram.getText().toString().trim().length() < 1) {
+                    alert = new android.app.AlertDialog.Builder(RequestByName.this);
                     alert.setMessage("الرجاء إدخال عدد القرام/ملم");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
@@ -239,9 +232,8 @@ public class RequestByName extends AppCompatActivity {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                }
-                else if (!Rfood.isChecked()&& !Rdrink.isChecked()){
-                    alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                } else if (!Rfood.isChecked() && !Rdrink.isChecked()) {
+                    alert = new android.app.AlertDialog.Builder(RequestByName.this);
                     alert.setMessage("الرجاء اختيار الصنف");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
@@ -256,11 +248,10 @@ public class RequestByName extends AppCompatActivity {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                }
-                else {
+                } else {
 
                     if (mUploadTask != null && mUploadTask.isInProgress()) {
-                        android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(RequestByName.this);
                         alert.setMessage("الرجاء الإنتظار يتم تحميل الصورة");
                         alert.setCancelable(true);
                         alert.setPositiveButton(
@@ -285,7 +276,7 @@ public class RequestByName extends AppCompatActivity {
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                alert = new android.app.AlertDialog.Builder(RequestByName.this);
                 alert.setMessage("هل انت متأكد من عدم الارسال؟");
                 alert.setCancelable(true);
                 alert.setPositiveButton(
@@ -315,8 +306,6 @@ public class RequestByName extends AppCompatActivity {
         });
 
 
-
-
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -341,16 +330,7 @@ public class RequestByName extends AppCompatActivity {
                 });
 
 
-
-        onBackPressed();
     }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
-    }
-
 
     //menu action_bar
     @Override

@@ -56,42 +56,29 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
-
+        firebaseAuth = FirebaseAuth.getInstance();
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
-        int MY_PERMISSIONS_REQUEST_CAMERA=0;
+        int MY_PERMISSIONS_REQUEST_CAMERA = 0;
         // Here, this is the current activity
 
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-        {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.CAMERA))
-            {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.CAMERA)) {
 
-            }
-            else
-            {
+            } else {
 
-                ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA );
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
         }
-
-        onBackPressed();
     }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
-    }
-
     @Override
     public void handleResult(Result rawResult) {
         progressDialog.show();

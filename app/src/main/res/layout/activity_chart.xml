@@ -10,20 +10,48 @@
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="351dp"
-        android:layout_height="420dp"
-        android:layout_marginBottom="88dp"
+        android:layout_height="490dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent" />
+
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart"
         android:layout_width="336dp"
         android:layout_height="336dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="144dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
+
     </com.github.mikephil.charting.charts.BarChart>
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="319dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="484dp"
+        android:text=""
+        android:gravity="center"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="320dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="96dp"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

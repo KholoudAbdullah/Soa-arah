@@ -148,14 +148,8 @@ public class account_IT_admin extends AppCompatActivity implements View.OnClickL
 
 
 
-        onBackPressed();
     }
-    @Override
-    public void onBackPressed()
-    {
 
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
-    }
 
     @Override
     public void onClick(View view) {

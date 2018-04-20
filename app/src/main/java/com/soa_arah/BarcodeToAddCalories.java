@@ -57,14 +57,9 @@ public class BarcodeToAddCalories extends AppCompatActivity implements ZXingScan
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
         firebaseAuth=FirebaseAuth.getInstance();
-        onBackPressed();
-    }
-    @Override
-    public void onBackPressed()
-    {
 
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
+
 
 
     public void handleResult(Result rawResult){

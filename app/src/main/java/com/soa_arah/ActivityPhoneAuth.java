@@ -60,7 +60,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_auth);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
 
@@ -79,35 +79,28 @@ public class ActivityPhoneAuth extends AppCompatActivity {
             }
         };
 
-        etxtPhone.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        etxtPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (etxtPhone.getText().toString().trim().length()!=13){
+                if (etxtPhone.getText().toString().trim().length() != 13) {
 
                     etxtPhone.setError("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
                 }
             }
         });
 
-        etxtPhoneCode.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        etxtPhoneCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (etxtPhoneCode.getText().toString().trim().length()<6){
+                if (etxtPhoneCode.getText().toString().trim().length() < 6) {
 
                     etxtPhoneCode.setError("الرجاء إدخال رمز التحقق");
                 }
             }
         });
 
-        onBackPressed();
-    }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     public void requestCode(View view) {

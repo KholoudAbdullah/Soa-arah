@@ -62,24 +62,24 @@ public class view_request_name extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_request_name);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
 
         firebaseAuth = FirebaseAuth.getInstance();
         //request_name=(ListView)findViewById(R.id.request_name);
-        re_name=new ArrayList<Food>();
-        key=new ArrayList<String>();
-        no_requestname=(TextView)findViewById(R.id.no_requestname);
-         request_name=(SwipeMenuListView)findViewById(R.id.request_name);
+        re_name = new ArrayList<Food>();
+        key = new ArrayList<String>();
+        no_requestname = (TextView) findViewById(R.id.no_requestname);
+        request_name = (SwipeMenuListView) findViewById(R.id.request_name);
 
         progressBarName = (ProgressBar) findViewById(R.id.progressbar1);
 
         progressBarName.setVisibility(View.VISIBLE);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null){
+        if (user == null) {
 
-            startActivity(new Intent(getApplicationContext(),LoginPage.class));
+            startActivity(new Intent(getApplicationContext(), LoginPage.class));
         }
 
 
@@ -87,26 +87,25 @@ public class view_request_name extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
 
-                String calorie =re_name.get(i).getCalories();
-                String quantity =re_name.get(i).getQuantity();
-                String image =re_name.get(i).getImage();
-                String namef =re_name.get(i).getName();
-                String standard =re_name.get(i).getStandard();
-                String keys=key.get(i);
+                String calorie = re_name.get(i).getCalories();
+                String quantity = re_name.get(i).getQuantity();
+                String image = re_name.get(i).getImage();
+                String namef = re_name.get(i).getName();
+                String standard = re_name.get(i).getStandard();
+                String keys = key.get(i);
 
                 Intent intent = new Intent(view_request_name.this, view_info_request.class);
-                intent.putExtra("calorie",calorie);
-                intent.putExtra("quantity",quantity);
-                intent.putExtra("image",image);
-                intent.putExtra("namef",namef);
-                intent.putExtra("standard",standard);
-                intent.putExtra("keys",keys);
+                intent.putExtra("calorie", calorie);
+                intent.putExtra("quantity", quantity);
+                intent.putExtra("image", image);
+                intent.putExtra("namef", namef);
+                intent.putExtra("standard", standard);
+                intent.putExtra("keys", keys);
 
                 startActivity(intent);
 
             }
         });
-
 
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
@@ -130,12 +129,10 @@ public class view_request_name extends AppCompatActivity {
 
                 }
 
-                if(re_name.size()==0) {
+                if (re_name.size() == 0) {
                     no_requestname.setText("لا توجد طلبات");
                     progressBarName.setVisibility(View.INVISIBLE);
-                }
-
-                else {
+                } else {
                     no_requestname.setText("");
                     progressBarName.setVisibility(View.INVISIBLE);
                 }
@@ -178,8 +175,8 @@ public class view_request_name extends AppCompatActivity {
                     public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                         switch (index) {
                             case 0:
-                                 p =position;
-                                alert= new android.app.AlertDialog.Builder(view_request_name.this);
+                                p = position;
+                                alert = new android.app.AlertDialog.Builder(view_request_name.this);
                                 alert.setMessage("هل انت متأكد من رفض الطلب؟");
                                 alert.setCancelable(true);
                                 alert.setPositiveButton(
@@ -223,11 +220,6 @@ public class view_request_name extends AppCompatActivity {
         });
 
 
-
-
-
-
-
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -252,13 +244,6 @@ public class view_request_name extends AppCompatActivity {
                 });
 
 
-        onBackPressed();
-    }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

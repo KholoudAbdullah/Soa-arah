@@ -289,37 +289,21 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/image7"
                     android:layout_centerVertical="true"
-                    android:paddingLeft="200dp"
-                    android:text="محيط الخصر"
                     android:layout_marginEnd="10dp"
+                    android:paddingLeft="200dp"
+                    android:text="النشاط اليومي"
                     android:textColor="#8BAF3A"
-                    android:textStyle="bold"
                     android:textSize="20sp"
-                     />
+                    android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/waist"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/textView19"
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="190dp"
+                    android:layout_height="39dp"
+                    android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="51dp"
-                    android:textSize="17sp"
-
-                    android:hint="ادخل محيط الخصر "
-                    android:inputType="numberDecimal"
-                    android:textAlignment="center" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/image7"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="23dp"
-                    android:text="سم"
-                    android:textColor="#8BAF3A"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:id="@+id/textView231" />
+                    android:layout_marginStart="18dp"
+                    android:hint="النشاط اليومي" />
 
 
             </RelativeLayout>
@@ -328,58 +312,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
-
-                <ImageView
-                    android:id="@+id/image8"
-                    android:layout_width="300dp"
-                    android:layout_height="55dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="15dp"
-                    android:adjustViewBounds="false"
-                    app:layout_constraintHorizontal_bias="0.502"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/round_corner1" />
-
-                <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:paddingLeft="200dp"
-                    android:layout_marginEnd="10dp"
-                    android:textColor="#8BAF3A"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:text="محيط الفخذ" />
-
-                <EditText
-                    android:id="@+id/hip"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="17dp"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:hint="ادخل محيط الفخذ "
-                    android:layout_toEndOf="@+id/textView234"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="center" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignStart="@+id/image8"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="20dp"
-                    android:text="سم"
-                    android:textColor="#8BAF3A"
-
-                    android:textSize="20sp"
-                    android:id="@+id/textView234" />
 
 
             </RelativeLayout>

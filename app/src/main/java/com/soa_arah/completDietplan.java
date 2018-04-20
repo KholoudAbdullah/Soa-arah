@@ -44,17 +44,19 @@ public class completDietplan  extends AppCompatActivity  {
 
 
 
-    private EditText hight,waist,hip,wight;
+    private EditText hight,wight;
     private String year1,day,month;
     private  ProgressDialog progressDialog;
-    private Spinner gen;
+    private Spinner gen,activity;
     private TextView mDisplayDate;
     String[] array;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     String date;
     String record="";
+    private double activityFactor;
     String gender[]={"أنثى","ذكر"};
-    ArrayAdapter<String> adapter;
+    String act[]={"ممارسة قليلة أو معدومة","نشاط خفيف (ممارسة خفيفة ، ممارسة الرياضة من 1-3 أيام في الأسبوع)","معتدل نشط (الرياضة / ممارسة 3-5 أيام في الأسبوع)","نشط للغاية (الرياضات المكثفة 6 أو 7 أيام في الأسبوع)","نشاط إضافي (الرياضة والتمارين الرياضية ، أو التدريب البدني أو التدريب الشاق)"};
+    ArrayAdapter<String> adapter,adapter2;
     //firebase auth object
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
@@ -80,10 +82,8 @@ public class completDietplan  extends AppCompatActivity  {
 
         cont=(Button)findViewById(R.id.con);
         cancel=(Button) findViewById(R.id.cancel);
-
+        activity=(Spinner) findViewById(R.id.spinner2);
         hight=(EditText)findViewById(R.id.hight);
-        waist=(EditText)findViewById(R.id.waist);
-        hip=(EditText)findViewById(R.id.hip);
         wight=(EditText)findViewById(R.id.wight);
         progressDialog = new ProgressDialog(completDietplan.this);
 
@@ -113,26 +113,6 @@ public class completDietplan  extends AppCompatActivity  {
                 }
             }
         });
-        hip.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-                if (hip.getText().toString().trim().length()<2){
-
-                    hip.setError("الرجاء إدخال محيط الفخذ");
-                }
-            }
-        });
         wight.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -153,26 +133,7 @@ public class completDietplan  extends AppCompatActivity  {
                 }
             }
         });
-        waist.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-                if (waist.getText().toString().trim().length()<2){
-
-                    waist.setError("الرجاء إدخال محيط الخصر");
-                }
-            }
-        });
 
         //getting firebase auth object
 
@@ -217,36 +178,6 @@ public class completDietplan  extends AppCompatActivity  {
                 }
                 else
                     hight.setText(user.getHight());
-
-                if(user.gethip().equals("لم يتم إدخال بيانات")) {
-                    hip.setHint("ادخل محيط الفخذ");
-                    hip.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-                        @Override
-                        public void onFocusChange(View v, boolean hasFocus) {
-                            if (hip.getText().toString().trim().length()<2){
-
-                                hip.setError("الرجاء إدخال محيط الفخذ");
-                            }
-                        }
-                    });
-                }else
-                    hip.setText(user.gethip());
-
-                if(user.getWaist().equals("لم يتم إدخال بيانات")) {
-                    waist.setHint("ادخل محيط الخصر");
-                    waist.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-                        @Override
-                        public void onFocusChange(View v, boolean hasFocus) {
-                            if (waist.getText().toString().trim().length()<2){
-
-                                waist.setError("الرجاء إدخال محيط الخصر");
-                            }
-                        }
-                    });
-                }else
-                    waist.setText(user.getWaist());
                 if(user.getDateOfBarth().equals( "لم يتم إدخال بيانات" ))
                     mDisplayDate.setText("اختر التاريخ");
                 else{
@@ -273,8 +204,8 @@ public class completDietplan  extends AppCompatActivity  {
             }
 
         });
-
-
+        adapter2=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,act);
+        activity.setAdapter(adapter2);
 
 
 
@@ -282,7 +213,33 @@ public class completDietplan  extends AppCompatActivity  {
         mDisplayDate = (TextView) findViewById(R.id.tvDate);
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,gender);
         gen.setAdapter(adapter);
+        activity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        activityFactor=1.2;
+                        break;
+                    case 1:
+                        activityFactor=1.375;
+                        break;
+                    case 2:
+                        activityFactor=1.55;
+                        break;
+                    case 3:
+                        activityFactor=1.725;
+                        break;
+                    case 4:
+                        activityFactor=1.9;
+                        break;
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         gen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -399,40 +356,7 @@ public class completDietplan  extends AppCompatActivity  {
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
                 }
-                else if (waist.getText().toString().trim().length()<1){
-                    alert= new android.app.AlertDialog.Builder(completDietplan.this);
-                    alert.setMessage("الرجاء إدخال محيط الخصر");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "موافق",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    dialogInterface.cancel();
-
-                                }
-                            });
-                    android.app.AlertDialog alert11 = alert.create();
-                    alert11.show();
-                }
-                else if (hip.getText().toString().trim().length()<1){
-                    alert= new android.app.AlertDialog.Builder(completDietplan.this);
-                    alert.setMessage("الرجاء إدخال محيط الفخذ");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "موافق",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    dialogInterface.cancel();
-
-                                }
-                            });
-                    android.app.AlertDialog alert11 = alert.create();
-                    alert11.show();
-                }else if (!datV){
+                else if (!datV){
                     alert= new android.app.AlertDialog.Builder(completDietplan.this);
                     alert.setMessage("الرجاء إدخال تاريخ صحيح");
                     alert.setCancelable(true);
@@ -454,8 +378,6 @@ public class completDietplan  extends AppCompatActivity  {
 
                   String Wight=wight.getText().toString().trim();
                  String Hight=hight.getText().toString().trim();
-                 String Hip=hip.getText().toString().trim();
-                String Waist = waist.getText().toString().trim();
                 String date=mDisplayDate.getText().toString();
 
                 String gen=record;
@@ -464,10 +386,12 @@ public class completDietplan  extends AppCompatActivity  {
 
                   if(record.equals("أنثى")){
                       BMR = (10.0*Double.parseDouble(Wight)) + (6.25*Double.parseDouble(Hight))- (5.0* Double.parseDouble(age)) - (161.0);
+                      BMR*=activityFactor;
                  }
                   else if(record.equals("ذكر")) {
                       BMR = (10.0*Double.parseDouble(Wight))+ (6.25*Double.parseDouble(Hight)) - (5.0*Double.parseDouble(age)) + (5.0);
-                       }
+                      BMR*=activityFactor;
+                  }
                  intent = new Intent( completDietplan.this, maxminDietplan.class );
                   double pow=(Double.parseDouble(Hight))*(Double.parseDouble(Hight));
                   bmi=(Double.parseDouble(Wight)/pow)*10000;
@@ -475,8 +399,6 @@ public class completDietplan  extends AppCompatActivity  {
                  intent.putExtra( "BMI",Double.toString(bmi) );
                  intent.putExtra( "Wight",Wight );
                   intent.putExtra( "Hight",Hight );
-                  intent.putExtra( "Hip",Hip );
-                  intent.putExtra( "Waist",Waist );
                   intent.putExtra( "date",date );
                   intent.putExtra( "gen",gen );
                   startActivity( intent );
@@ -515,13 +437,7 @@ public class completDietplan  extends AppCompatActivity  {
                 alert.show();
             }
         });
-        onBackPressed();
-    }
-    @Override
-    public void onBackPressed()
-    {
 
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
 

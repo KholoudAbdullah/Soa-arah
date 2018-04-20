@@ -57,22 +57,18 @@
         app:layout_constraintVertical_bias="0.454"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="158dp"
-        android:layout_height="34dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_login"
-        android:text="بحث"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchword" />
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchword"
+        android:background="#ffff"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/searchword"
+        app:layout_constraintTop_toBottomOf="@+id/searchword"
 
+
+        />
     <TextView
         android:id="@+id/searchbarcode"
         android:layout_width="212dp"
@@ -80,7 +76,6 @@
         android:layout_marginBottom="260dp"
         android:layout_marginEnd="84dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text=" البحث باستخدام الباركود"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -88,8 +83,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.86"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton"
-        app:layout_constraintVertical_bias="0.872"
         tools:ignore="MissingConstraints" />
 
     <Button

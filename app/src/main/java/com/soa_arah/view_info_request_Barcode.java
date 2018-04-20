@@ -61,7 +61,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_info_bar_request);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
 
@@ -82,21 +82,21 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         calories1 = (EditText) findViewById(R.id.calories1);
         image = (ImageView) findViewById(R.id.image);
         imageTable1 = (ImageView) findViewById(R.id.imageTable);
-        bkeyworde=(Button)findViewById(R.id.keywordN);
+        bkeyworde = (Button) findViewById(R.id.keywordN);
 
 
         namefood.setText(namef1);
 
-        if (cal.equals("لايوجد"))
-        {calories1.setText(""); }
-        else {
-            calories1.setText(cal);      }
-
+        if (cal.equals("لايوجد")) {
+            calories1.setText("");
+        } else {
+            calories1.setText(cal);
+        }
 
 
         Glide.with(getApplicationContext()).load(image1).into(image);
         Glide.with(getApplicationContext()).load(imageTable).into(imageTable1);
-        PhotoViewAttacher photoViewAttacher=new PhotoViewAttacher(imageTable1);
+        PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(imageTable1);
         photoViewAttacher.update();
 
         reject.setOnClickListener(this);
@@ -118,7 +118,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if (gr.getText().toString().trim().length()<2){
+                if (gr.getText().toString().trim().length() < 2) {
 
                     gr.setError("الرجاء إدخال عدد القرام /مللتر");
                 }
@@ -139,26 +139,25 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if (calories1.getText().toString().trim().length()<2){
+                if (calories1.getText().toString().trim().length() < 2) {
 
                     calories1.setError("الرجاء إدخال عدد السعرات الحرارية");
                 }
             }
         });
 
-        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (keyword.getText().toString().trim().length()<1){
+                if (keyword.getText().toString().trim().length() < 1) {
 
                     keyword.setError("الرجاء إدخال الكلمات المفتاحية");
                 }
             }
         });
 
-        cKeyword = cKeyword+keyword.getText().toString();
-
+        cKeyword = cKeyword + keyword.getText().toString();
 
 
         //menu bottom bar
@@ -184,16 +183,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                     }
                 });
 
-
-        onBackPressed();
     }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
-    }
-
     @Override
     public void onClick(View view) {
 

@@ -58,18 +58,6 @@ public class searchByName extends AppCompatActivity {
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
-
-        /*grm.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (grm.getText().toString().trim().length()<1){
-
-                    grm.setError("الرجاء إدخال إسم الصنف");
-                }
-            }
-        });*/
-
         progressDialog = new ProgressDialog(searchByName.this);
         // Setting progressDialog Title.
         progressDialog.setMessage("الرجاء الانتظار ...");
@@ -162,13 +150,6 @@ public class searchByName extends AppCompatActivity {
             }
         });
 
-        onBackPressed();
-    }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     //menu

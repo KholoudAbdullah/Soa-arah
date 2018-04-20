@@ -60,7 +60,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_review_register_user);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
 
@@ -74,8 +74,8 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if (mDatabase.hashCode()==0){
-                    alert= new android.app.AlertDialog.Builder(ViewReviewRegisterUser.this);
+                if (mDatabase.hashCode() == 0) {
+                    alert = new android.app.AlertDialog.Builder(ViewReviewRegisterUser.this);
                     alert.setTitle("لاتوجد تعليقات");
                     alert.setMessage("الانتقال لكتابة تعليق");
                     alert.setCancelable(true);
@@ -94,6 +94,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                     alert11.show();
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -141,15 +142,7 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
 //            }
 //        });
 
-        onBackPressed();
     }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
-    }
-
     @Override
     protected void onStart() {
         super.onStart();

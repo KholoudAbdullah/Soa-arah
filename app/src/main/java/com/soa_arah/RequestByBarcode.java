@@ -72,15 +72,15 @@ public class RequestByBarcode extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_by_barcode);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
 
-        Intent intent=getIntent();
-        barnum = intent.getExtras().getString( "BarcodeNum","" );
+        Intent intent = getIntent();
+        barnum = intent.getExtras().getString("BarcodeNum", "");
 
         progressDialog1 = new ProgressDialog(RequestByBarcode.this);
-        progressDialog1.setMessage( "الرجاء الانتظار .." );
+        progressDialog1.setMessage("الرجاء الانتظار ..");
         progressDialog1.show();
 
         checkdataF = FirebaseDatabase.getInstance().getReference().child("Food");
@@ -88,28 +88,28 @@ public class RequestByBarcode extends AppCompatActivity {
         checkdataF.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    Food checkFood=snapshot.getValue(Food.class);
-                if (barnum.equals(checkFood.getBarcodN())){
-                    progressDialog1.dismiss();
-                    alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
-                    alert.setTitle("الصنف موجود مسبقاً");
-                    alert.setMessage("الانتقال الى صفحة البحث");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "نعم",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Food checkFood = snapshot.getValue(Food.class);
+                    if (barnum.equals(checkFood.getBarcodN())) {
+                        progressDialog1.dismiss();
+                        alert = new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                        alert.setTitle("الصنف موجود مسبقاً");
+                        alert.setMessage("الانتقال الى صفحة البحث");
+                        alert.setCancelable(true);
+                        alert.setPositiveButton(
+                                "نعم",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
-                                }
-                            });
+                                        startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                    }
+                                });
 
-                    android.app.AlertDialog alert11 = alert.create();
-                    alert11.show();
+                        android.app.AlertDialog alert11 = alert.create();
+                        alert11.show();
 
-                }
+                    }
                 }
 
             }
@@ -127,27 +127,27 @@ public class RequestByBarcode extends AppCompatActivity {
         checkdataR.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    Food checkRequest=snapshot.getValue(Food.class);
-                    if (barnum.equals(checkRequest.getBarcodN())){
-                    progressDialog1.dismiss();
-                    alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
-                    alert.setTitle("تم رفع طلب لهذا المنتج مسبقاً");
-                    alert.setMessage("الإنتقال الى الصفحة الرئسية");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "موافق",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Food checkRequest = snapshot.getValue(Food.class);
+                    if (barnum.equals(checkRequest.getBarcodN())) {
+                        progressDialog1.dismiss();
+                        alert = new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                        alert.setTitle("تم رفع طلب لهذا المنتج مسبقاً");
+                        alert.setMessage("الإنتقال الى الصفحة الرئسية");
+                        alert.setCancelable(true);
+                        alert.setPositiveButton(
+                                "موافق",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                                    startActivity(new Intent(getApplicationContext(), home_page_register.class));
-                                }
-                            });
+                                        startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                    }
+                                });
 
-                    android.app.AlertDialog alert11 = alert.create();
-                    alert11.show();
-                }
+                        android.app.AlertDialog alert11 = alert.create();
+                        alert11.show();
+                    }
                 }
 
             }
@@ -190,31 +190,29 @@ public class RequestByBarcode extends AppCompatActivity {
                 });
 
 
-
         storageReference = FirebaseStorage.getInstance().getReference("Request");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByBarcode");
 
 
-        upload=(Button) findViewById(R.id.FImageB);
-        table=(Button) findViewById(R.id.TImageB);
-        name=(EditText) findViewById(R.id.Fname);
-        send=(Button) findViewById(R.id.sendw);
-        Rfood= (RadioButton) findViewById(R.id.food);
-        Rdrink=(RadioButton) findViewById(R.id.drinkS);
-        cancle=(Button) findViewById(R.id.cancel);
-        TXbarnum=(TextView)findViewById(R.id.barcodeNumber);
-        cal=(EditText)findViewById(R.id.cal);
+        upload = (Button) findViewById(R.id.FImageB);
+        table = (Button) findViewById(R.id.TImageB);
+        name = (EditText) findViewById(R.id.Fname);
+        send = (Button) findViewById(R.id.sendw);
+        Rfood = (RadioButton) findViewById(R.id.food);
+        Rdrink = (RadioButton) findViewById(R.id.drinkS);
+        cancle = (Button) findViewById(R.id.cancel);
+        TXbarnum = (TextView) findViewById(R.id.barcodeNumber);
+        cal = (EditText) findViewById(R.id.cal);
 
 
-        TXbarnum.setText(TXbarnum.getText().toString()+"  "+barnum);
+        TXbarnum.setText(TXbarnum.getText().toString() + "  " + barnum);
 
 
-
-        name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (name.getText().toString().trim().length()<1){
+                if (name.getText().toString().trim().length() < 1) {
 
                     name.setError("االرجاء إدخال إسم الصنف");
                 }
@@ -222,19 +220,16 @@ public class RequestByBarcode extends AppCompatActivity {
         });
         progressDialog = new ProgressDialog(RequestByBarcode.this);
 
-        name.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (name.getText().toString().trim().length()<1){
+                if (name.getText().toString().trim().length() < 1) {
 
                     name.setError("الرجاء إدخال إسم الصنف");
                 }
             }
         });
-
-
-
 
 
         //food image
@@ -265,8 +260,8 @@ public class RequestByBarcode extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(name.getText().toString().trim().length()<1){
-                    alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                if (name.getText().toString().trim().length() < 1) {
+                    alert = new android.app.AlertDialog.Builder(RequestByBarcode.this);
                     alert.setMessage("الرجاء ادخال إسم الصنف");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
@@ -282,9 +277,8 @@ public class RequestByBarcode extends AppCompatActivity {
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
 
-                }
-                else if (!Rfood.isChecked()&& !Rdrink.isChecked()){
-                    alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                } else if (!Rfood.isChecked() && !Rdrink.isChecked()) {
+                    alert = new android.app.AlertDialog.Builder(RequestByBarcode.this);
                     alert.setMessage("الرجاء اختيار الصنف");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
@@ -299,8 +293,8 @@ public class RequestByBarcode extends AppCompatActivity {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                }else {
-                uploadFile();
+                } else {
+                    uploadFile();
                 }
 
             }
@@ -318,38 +312,40 @@ public class RequestByBarcode extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (fImageUri != null){
-                                try {
+                                if (fImageUri != null) {
+                                    try {
 
 
-                                    // Create a storage reference from our app
-                                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                                        // Create a storage reference from our app
+                                        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
-                                    // Create a reference to the file to delete
-                                    //Toast.makeText(RequestByBarcode.this, douTable.toString(), Toast.LENGTH_SHORT).show();
+                                        // Create a reference to the file to delete
+                                        //Toast.makeText(RequestByBarcode.this, douTable.toString(), Toast.LENGTH_SHORT).show();
 
-                                    // StorageReference desertRef = storageRef.child("images/Request/"+tableUri.toString()+".jpg");
-                                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(douTable);
+                                        // StorageReference desertRef = storageRef.child("images/Request/"+tableUri.toString()+".jpg");
+                                        StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(douTable);
 
-                                    // Delete the file
-                                    storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            // File deleted successfully
-                                            //Toast.makeText(RequestByBarcode.this, "تم الحذف", Toast.LENGTH_SHORT).show();
+                                        // Delete the file
+                                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                // File deleted successfully
+                                                //Toast.makeText(RequestByBarcode.this, "تم الحذف", Toast.LENGTH_SHORT).show();
 
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception exception) {
-                                            // Uh-oh, an error occurred!
-                                            //Toast.makeText(RequestByBarcode.this, "error occurred", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception exception) {
+                                                // Uh-oh, an error occurred!
+                                                //Toast.makeText(RequestByBarcode.this, "error occurred", Toast.LENGTH_SHORT).show();
 
-                                        }
-                                    });}catch (Exception e){
-                                    Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } catch (Exception e) {
+                                        Toast.makeText(RequestByBarcode.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                                }}
+                                    }
+                                }
 
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
 
@@ -369,18 +365,9 @@ public class RequestByBarcode extends AppCompatActivity {
                 alert11.show();
 
 
-
             }
         });
-        onBackPressed();
     }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

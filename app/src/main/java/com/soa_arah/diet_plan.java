@@ -197,14 +197,8 @@ public class diet_plan extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), chart.class));
             }
         });
-        onBackPressed();
     }
-    @Override
-    public void onBackPressed()
-    {
 
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
-    }
         public void dietplan() {
 
             mDatabase1 = FirebaseDatabase.getInstance().getReference().child("DietPlan").child(na);

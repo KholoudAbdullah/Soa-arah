@@ -43,18 +43,18 @@ public class view_request extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_request1);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        barcode= (Button) findViewById(R.id.byBarcode);
-        name= (Button) findViewById(R.id.byName);
-        textView15=(TextView)findViewById(R.id.textView15);
-        textView16=(TextView)findViewById(R.id.textView16);
-        re_name=new ArrayList<Food>();
-        re_barcode=new ArrayList<Food>();
+        barcode = (Button) findViewById(R.id.byBarcode);
+        name = (Button) findViewById(R.id.byName);
+        textView15 = (TextView) findViewById(R.id.textView15);
+        textView16 = (TextView) findViewById(R.id.textView16);
+        re_name = new ArrayList<Food>();
+        re_barcode = new ArrayList<Food>();
 
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
@@ -69,7 +69,7 @@ public class view_request extends AppCompatActivity {
 
                 }
 
-                textView15.setText(re_name.size()+"");
+                textView15.setText(re_name.size() + "");
 
             }
 
@@ -92,8 +92,7 @@ public class view_request extends AppCompatActivity {
                 }
 
 
-                textView16.setText(re_barcode.size()+"");
-
+                textView16.setText(re_barcode.size() + "");
 
 
             }
@@ -103,8 +102,6 @@ public class view_request extends AppCompatActivity {
 
             }
         });
-
-
 
 
         //menu bottom bar
@@ -144,14 +141,6 @@ public class view_request extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), view_request_barcode.class));
             }
         });
-
-        onBackPressed();
-    }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

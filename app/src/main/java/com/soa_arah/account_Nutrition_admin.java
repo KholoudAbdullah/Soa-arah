@@ -61,17 +61,17 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_nutrition_admin);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
 
-        name = (TextView)findViewById(R.id.name);
-        password = (EditText)findViewById(R.id.password);
-        password1 = (EditText)findViewById(R.id.password1);
-        edit_pass = (ImageButton)findViewById(R.id.edit_pass);
-        edit_pass1 = (ImageButton)findViewById(R.id.edit_pass1);
-        conformpass=(RelativeLayout)findViewById(R.id.conformpass);
-        passlenght=(TextView)findViewById(R.id.passlenght);
+        name = (TextView) findViewById(R.id.name);
+        password = (EditText) findViewById(R.id.password);
+        password1 = (EditText) findViewById(R.id.password1);
+        edit_pass = (ImageButton) findViewById(R.id.edit_pass);
+        edit_pass1 = (ImageButton) findViewById(R.id.edit_pass1);
+        conformpass = (RelativeLayout) findViewById(R.id.conformpass);
+        passlenght = (TextView) findViewById(R.id.passlenght);
 
         conformpass.setVisibility(View.GONE);
         edit_pass.setVisibility(View.VISIBLE);
@@ -85,7 +85,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-        mDatabase= FirebaseDatabase.getInstance().getReference().child("admin_N").child("name");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("admin_N").child("name");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -104,7 +104,6 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
         });
 
 
-
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -119,7 +118,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if (password.getText().toString().trim().length()<6){
+                if (password.getText().toString().trim().length() < 6) {
 
                     password.setError("يجب ان تتكون كلمة المرور من ٦ خانات او اكثر");
 
@@ -142,7 +141,7 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if (!password.getText().toString().trim().equals(password1.getText().toString().trim()) || password1.getText().toString().trim().length()<6){
+                if (!password.getText().toString().trim().equals(password1.getText().toString().trim()) || password1.getText().toString().trim().length() < 6) {
 
                     password1.setError("كلمة المرور ليست متطابقة");
                 }
@@ -172,15 +171,8 @@ public class account_Nutrition_admin extends AppCompatActivity implements View.O
                 });
 
 
-
-        onBackPressed();
     }
-    @Override
-    public void onBackPressed()
-    {
 
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
-    }
 
     @Override
     public void onClick(View view) {

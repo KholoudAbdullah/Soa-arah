@@ -39,7 +39,7 @@ public class maxminDietplan extends AppCompatActivity {
     private TextView mintext,maxtext;
     private  String min="1200";
     private Button creat;
-    private String  Wight,Hight,Hip,Waist,date,gen;
+    private String  Wight,Hight,date,gen;
     private Button cancel;
     private Date c;
     private Progress progress;
@@ -55,10 +55,8 @@ public class maxminDietplan extends AppCompatActivity {
         maxtext=(TextView)findViewById(R.id.maxnumber);
         goal=(EditText) findViewById(R.id.goalnumber);
         Intent intent = getIntent();
-        Waist=intent.getExtras().getString( "Waist","" );
         Wight=intent.getExtras().getString( "Wight","" );
         Hight=intent.getExtras().getString( "Hight","" );
-        Hip=intent.getExtras().getString( "Hip","" );
         date=intent.getExtras().getString( "date","" );
         gen=intent.getExtras().getString( "gen","" );
         bmi = intent.getExtras().getString("BMI", "");
@@ -176,8 +174,7 @@ public class maxminDietplan extends AppCompatActivity {
                     Database.child("hight").setValue(Hight);
                     Database.child("dateOfBarth").setValue(date);
                     Database.child("gender").setValue(gen);
-                    Database.child("waist").setValue(Waist);
-                    Database.child("hip").setValue(Hip);
+
 
 
                     android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(
@@ -261,13 +258,6 @@ public class maxminDietplan extends AppCompatActivity {
 
 
 
-        onBackPressed();
-    }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     public boolean isConnected() {

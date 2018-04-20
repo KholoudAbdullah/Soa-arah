@@ -29,14 +29,13 @@ public class Request_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_page);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        barcode= (Button) findViewById(R.id.byBarcode);
-        name= (Button) findViewById(R.id.byName);
-
+        barcode = (Button) findViewById(R.id.byBarcode);
+        name = (Button) findViewById(R.id.byName);
 
 
         //menu bottom bar
@@ -63,7 +62,6 @@ public class Request_page extends AppCompatActivity {
                 });
 
 
-
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,14 +75,6 @@ public class Request_page extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Barcode_Request.class));
             }
         });
-
-        onBackPressed();
-    }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

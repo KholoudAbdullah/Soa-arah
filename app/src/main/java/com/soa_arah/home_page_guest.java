@@ -42,7 +42,6 @@ public class home_page_guest extends AppCompatActivity {
     private Button reg;
     private EditText searchtext;
     private DatabaseReference fData;
-    private Button searchBtn;
     private ProgressDialog progressDialog;
     String id;
     String f;
@@ -93,7 +92,6 @@ public class home_page_guest extends AppCompatActivity {
         button = (Button) findViewById(R.id.login);
         reg = (Button) findViewById(R.id.register);
         searchtext = (EditText) findViewById(R.id.searchword);
-        searchBtn = (Button) findViewById(R.id.searchButton);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
         listView=(ListView)findViewById(R.id.listview);

@@ -64,31 +64,24 @@ public class view_request_barcode extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_request_barcode);
-        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        request_barcode=(SwipeMenuListView)findViewById(R.id.request_barcode);
-        re_barcode=new ArrayList<Food>();
-        key1=new ArrayList<String>();
-        no_request_barcode=(TextView)findViewById(R.id.no_request_barcode);
+        request_barcode = (SwipeMenuListView) findViewById(R.id.request_barcode);
+        re_barcode = new ArrayList<Food>();
+        key1 = new ArrayList<String>();
+        no_request_barcode = (TextView) findViewById(R.id.no_request_barcode);
 
         progressBarBarcode = (ProgressBar) findViewById(R.id.progressbar2);
 
         progressBarBarcode.setVisibility(View.VISIBLE);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null){
+        if (user == null) {
 
-            startActivity(new Intent(getApplicationContext(),LoginPage.class));
+            startActivity(new Intent(getApplicationContext(), LoginPage.class));
         }
-
-
-
-
-
-
-
 
 
         request_barcode.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -96,20 +89,20 @@ public class view_request_barcode extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
 
 
-                String barcodeN=re_barcode.get(i).getBarcodN();
-                String image1 =re_barcode.get(i).getImage();
-                String namef1 =re_barcode.get(i).getName();
-                String imageTable =re_barcode.get(i).getImageTable();
-                String cal=re_barcode.get(i).getCalories();
-                String keys1=key1.get(i);
+                String barcodeN = re_barcode.get(i).getBarcodN();
+                String image1 = re_barcode.get(i).getImage();
+                String namef1 = re_barcode.get(i).getName();
+                String imageTable = re_barcode.get(i).getImageTable();
+                String cal = re_barcode.get(i).getCalories();
+                String keys1 = key1.get(i);
 
                 Intent intent1 = new Intent(view_request_barcode.this, view_info_request_Barcode.class);
-                intent1.putExtra("barcodeN",barcodeN);
-                intent1.putExtra("image",image1);
-                intent1.putExtra("namef",namef1);
-                intent1.putExtra("cal",cal);
-                intent1.putExtra("imageTable",imageTable);
-                intent1.putExtra("keys",keys1);
+                intent1.putExtra("barcodeN", barcodeN);
+                intent1.putExtra("image", image1);
+                intent1.putExtra("namef", namef1);
+                intent1.putExtra("cal", cal);
+                intent1.putExtra("imageTable", imageTable);
+                intent1.putExtra("keys", keys1);
 
                 startActivity(intent1);
 
@@ -137,11 +130,10 @@ public class view_request_barcode extends AppCompatActivity {
 
                 }
 
-                if(re_barcode.size()==0) {
+                if (re_barcode.size() == 0) {
                     no_request_barcode.setText("لا توجد طلبات");
                     progressBarBarcode.setVisibility(View.INVISIBLE);
-                }
-                else {
+                } else {
                     no_request_barcode.setText("");
                     progressBarBarcode.setVisibility(View.INVISIBLE);
                 }
@@ -182,8 +174,8 @@ public class view_request_barcode extends AppCompatActivity {
                     public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                         switch (index) {
                             case 0:
-                                p1 =position;
-                                alert= new android.app.AlertDialog.Builder(view_request_barcode.this);
+                                p1 = position;
+                                alert = new android.app.AlertDialog.Builder(view_request_barcode.this);
                                 alert.setMessage("هل انت متأكد من رفض الطلب؟");
                                 alert.setCancelable(true);
                                 alert.setPositiveButton(
@@ -218,7 +210,6 @@ public class view_request_barcode extends AppCompatActivity {
                 });
 
 
-
             }
 
             @Override
@@ -226,8 +217,6 @@ public class view_request_barcode extends AppCompatActivity {
 
             }
         });
-
-
 
 
         //menu bottom bar
@@ -253,14 +242,6 @@ public class view_request_barcode extends AppCompatActivity {
                     }
                 });
 
-
-        onBackPressed();
-    }
-    @Override
-    public void onBackPressed()
-    {
-
-        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

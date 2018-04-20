@@ -370,4 +370,5 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
 
 
 
+
 }
