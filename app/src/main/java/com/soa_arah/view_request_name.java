@@ -139,7 +139,7 @@ public class view_request_name extends AppCompatActivity {
 
 
                 //disp laying it to list
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByName);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.keywordlayout,R.id.textView14, requestsByName);
                 request_name.setAdapter(adapter);
 
                 SwipeMenuCreator creator = new SwipeMenuCreator() {

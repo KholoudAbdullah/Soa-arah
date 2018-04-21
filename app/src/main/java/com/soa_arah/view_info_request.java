@@ -15,13 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,8 +38,6 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     private ImageView imageView3;
     private Button reject;
     private Button accept;
-    private Button bkeyword;
-    private EditText keyword;
     private FirebaseAuth firebaseAuth;
     private String key,cKeyword="";
     private String namef,calorie,image,quantity,standard;
@@ -86,7 +82,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
         reject.setOnClickListener(this);
         accept.setOnClickListener(this);
-        bkeyword.setOnClickListener(this);
+
 
 
         gr.addTextChangedListener(new TextWatcher() {
@@ -130,16 +126,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
             }
         });
 
-        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (keyword.getText().toString().trim().length()<1){
-
-                    keyword.setError("الرجاء إدخال الكلمات المفتاحية");
-                }
-            }
-        });
 
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
@@ -178,24 +165,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
             if (view == accept) {
 
-                if (keyword.length()<2){
-                    alert= new android.app.AlertDialog.Builder(view_info_request.this);
-                    alert.setMessage("لم يتم إدخال الكلمات المفتاحية");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "موافق",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    dialogInterface.cancel();
-
-                                }
-                            });
-                    android.app.AlertDialog alert11 = alert.create();
-                    alert11.show();
-                    return;
-                } else if (calories.getText().toString().trim().length()<1 ){
+                if (calories.getText().toString().trim().length()<1 ){
                     alert= new android.app.AlertDialog.Builder(view_info_request.this);
                     alert.setMessage("لم يتم إدخال السعرات الحرارية");
                     alert.setCancelable(true);
@@ -337,66 +307,12 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
             }
 
-        if (view == bkeyword){
-                keyWord();
-        }
+
 
 
     }
 
-    public void keyWord(){
 
-        LayoutInflater inflater = getLayoutInflater();
-        View alertLayout = inflater.inflate(R.layout.n_keyword, null);
-        final CheckBox food = alertLayout.findViewById(R.id.NFood);
-        final CheckBox choco = alertLayout.findViewById(R.id.Chocolate);
-        final CheckBox des = alertLayout.findViewById(R.id.dessert);
-        final CheckBox bak = alertLayout.findViewById(R.id.Bakery);
-        final CheckBox jui = alertLayout.findViewById(R.id.juice);
-        final CheckBox cof = alertLayout.findViewById(R.id.coffee);
-        final CheckBox hd = alertLayout.findViewById(R.id.HDrink);
-        final CheckBox cd = alertLayout.findViewById(R.id.CDrink);
-
-
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("الكلمات المفتاحية المقترحة");
-        // this is set the view from XML inside AlertDialog
-        alert.setView(alertLayout);
-        // disallow cancel of AlertDialog on click of back button and outside touch
-        alert.setCancelable(false);
-        alert.setNegativeButton("إلغاء", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-
-        alert.setPositiveButton("حفظ", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                if (cKeyword!=null)
-                    cKeyword=cKeyword+"-";
-
-                if (food.isChecked()){cKeyword=cKeyword+"اكلات شعبية-";}
-                if (choco.isChecked()){cKeyword=cKeyword+"شوكلت-";}
-                if (des.isChecked()){cKeyword=cKeyword+"حلا-";}
-                if (bak.isChecked()){cKeyword=cKeyword+"فطائر-";}
-                if (jui.isChecked()){cKeyword=cKeyword+"عصير-";}
-                if (cof.isChecked()){cKeyword=cKeyword+"قهوة-";}
-                if (hd.isChecked()){cKeyword=cKeyword+"مشروبات ساخنة-";}
-                if (cd.isChecked()){cKeyword=cKeyword+"مشروبات باردة-";}
-                keyword.setText(cKeyword);
-
-            }
-        });
-        AlertDialog dialog = alert.create();
-        dialog.show();
-
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
