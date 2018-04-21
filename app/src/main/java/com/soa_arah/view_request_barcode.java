@@ -19,25 +19,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-
 
 import java.util.ArrayList;
 
@@ -138,7 +133,7 @@ public class view_request_barcode extends AppCompatActivity {
                     progressBarBarcode.setVisibility(View.INVISIBLE);
                 }
                 //disp laying it to list
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, requestsByBarcode);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.keywordlayout,R.id.textView14, requestsByBarcode);
                 request_barcode.setAdapter(adapter);
 
                 SwipeMenuCreator creator = new SwipeMenuCreator() {
