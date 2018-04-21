@@ -175,210 +175,226 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
 //                View view = LayoutInflater.from(parent.getContext())
 //                        .inflate(R.layout.review_row, parent, false);
 //
+try {
+    holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
-                holder.deleteButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        alert= new android.app.AlertDialog.Builder(ViewReviewRegisterUser.this);
-                        alert.setMessage("هل انت متأكد من حذف التعليق؟");
-                        alert.setCancelable(true);
-                        alert.setPositiveButton(
-                                "نعم",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-
-                                        pos = holder.getLayoutPosition();
-                                        R_key = getRef(pos).getKey();
-                                        deleteDatabase = deleteDatabase.child(R_key);
-
-                        deleteDatabase.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.hasChild("RKey")) {
-                                    String user_email = mAuth.getCurrentUser().getEmail();
-                                    String RKey = user_email.substring(0, user_email.lastIndexOf("@"));
-                                    if (dataSnapshot.child("RKey").getValue().equals(RKey)) {
-
-                                                        deleteDatabase.removeValue();
-                                        android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(
-                                                ViewReviewRegisterUser.this);
-                                        alert.setTitle("تم حذف التعليق").setIcon(R.drawable.t1);
-
-                                        android.support.v7.app.AlertDialog dialog = alert.create();
-
-                                        // Finally, display the alert dialog
-                                        dialog.show();
-                                        alert.setPositiveButton(
-                                                "نعم",
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                                        Intent intent = new Intent(ViewReviewRegisterUser.this, ViewReviewRegisterUser.class);
-                                                        intent.putExtra("name", getIntent().getStringExtra("name"));
-                                                        startActivity(intent);
-
-                                                    }
+            alert = new android.app.AlertDialog.Builder(ViewReviewRegisterUser.this);
+            alert.setMessage("هل انت متأكد من حذف التعليق؟");
+            alert.setCancelable(true);
+            alert.setPositiveButton(
+                    "نعم",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
 
-                                                });
-                                        android.support.v7.app.AlertDialog alert22 = alert.create();
-                                        alert22.show();
+                            pos = holder.getLayoutPosition();
+                            R_key = getRef(pos).getKey();
+                            deleteDatabase = deleteDatabase.child(R_key);
+
+                            deleteDatabase.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    R_key = getRef(pos).getKey();
+                                    if (dataSnapshot.hasChild("RKey")) {
+                                        String user_email = mAuth.getCurrentUser().getEmail();
+                                        String RKey = user_email.substring(0, user_email.lastIndexOf("@"));
+                                        if (dataSnapshot.child("RKey").getValue().equals(RKey)) {
+
+                                            deleteDatabase.removeValue();
+                                            android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(
+                                                    ViewReviewRegisterUser.this);
+                                            alert.setTitle("تم حذف التعليق").setIcon(R.drawable.t1);
+
+                                            android.support.v7.app.AlertDialog dialog = alert.create();
+
+                                            // Finally, display the alert dialog
+                                            dialog.show();
+                                            alert.setPositiveButton(
+                                                    "نعم",
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                            Intent intent = new Intent(ViewReviewRegisterUser.this, ViewReviewRegisterUser.class);
+                                                            intent.putExtra("name", getIntent().getStringExtra("name"));
+                                                            startActivity(intent);
+
+                                                        }
 
 
-                                                    }
-                                                }
+                                                    });
+                                            android.support.v7.app.AlertDialog alert22 = alert.create();
+                                            alert22.show();
 
 
-                                            }
-
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
-
-                                            }
-                                        });
+                                        }
                                     }
-                                });
 
-                        alert.setNegativeButton(
-                                "لا",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                                        dialogInterface.cancel();
-                                    }
-                                });
+                                }
 
-                        android.app.AlertDialog alert11 = alert.create();
-                        alert11.show();
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+                                }
+                            });
+                        }
+                    });
 
-                holder.likebtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        pos = holder.getLayoutPosition();
-                        Log.d("likebtn", " " + R_key);
+            alert.setNegativeButton(
+                    "لا",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+                        }
+                    });
+
+            android.app.AlertDialog alert11 = alert.create();
+            alert11.show();
+
+        }
+    });
+}catch(IndexOutOfBoundsException e){
+    String g="";
+}
+
+try {
+    holder.likebtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            pos = holder.getLayoutPosition();
+            Log.d("likebtn", " " + R_key);
 
 //                        LikeDatabase=LikeDatabase.child(R_key);
-                        proLike = true;
+            proLike = true;
 
-                        LikeDatabase.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                R_key = getRef(pos).getKey();
-                                if (proLike) {
-                                    if (dataSnapshot.child(R_key).hasChild("likes")) {
-                                        if (dataSnapshot.child(R_key).child("likes").hasChild(user_key)) {
-                                            if (dataSnapshot.child(R_key).child("likes").child(user_key).getValue().equals("like")) {
-                                                LikeDatabase.child(R_key).child("likes").child(user_key).removeValue();
-                                                int newNumLike = Integer.parseInt(dataSnapshot.child(R_key).child("numLike").getValue().toString());
-                                                newNumLike = (newNumLike - 1);
-                                                LikeDatabase.child(R_key).child("numLike").setValue(Integer.toString(newNumLike));
+            LikeDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    R_key = getRef(pos).getKey();
+                    if (proLike) {
+                        if (dataSnapshot.child(R_key).hasChild("likes")) {
+                            if (dataSnapshot.child(R_key).child("likes").hasChild(user_key)) {
+                                if (dataSnapshot.child(R_key).child("likes").child(user_key).getValue().equals("like")) {
+//                                                LikeDatabase.child(R_key).child("likes").child(user_key).setValue("null");
+//                                                LikeDatabase.child(R_key).child("likes").child(user_key).removeValue();
+//                                                int newNumLike = Integer.parseInt(dataSnapshot.child(R_key).child("numLike").getValue().toString());
+//                                                newNumLike = (newNumLike - 1);
+//                                                LikeDatabase.child(R_key).child("numLike").setValue(Integer.toString(newNumLike));
 
-                                            } else if (dataSnapshot.child(R_key).child("likes").child(user_key).getValue().equals("dislike")) {
-                                                LikeDatabase.child(R_key).child("likes").child(user_key).setValue("like");
+                                } else if (dataSnapshot.child(R_key).child("likes").child(user_key).getValue().equals("dislike")) {
+                                    LikeDatabase.child(R_key).child("likes").child(user_key).setValue("like");
 
-                                                int newNumDisLike = Integer.parseInt(dataSnapshot.child(R_key).child("numDisLike").getValue().toString());
-                                                newNumDisLike = (newNumDisLike - 1);
-                                                LikeDatabase.child(R_key).child("numDisLike").setValue(Integer.toString(newNumDisLike));
+                                    int newNumDisLike = Integer.parseInt(dataSnapshot.child(R_key).child("numDisLike").getValue().toString());
+                                    newNumDisLike = (newNumDisLike - 1);
+                                    LikeDatabase.child(R_key).child("numDisLike").setValue(Integer.toString(newNumDisLike));
 
-                                                int newNumLike = Integer.parseInt(dataSnapshot.child(R_key).child("numLike").getValue().toString());
-                                                newNumLike = (newNumLike + 1);
-                                                LikeDatabase.child(R_key).child("numLike").setValue(Integer.toString(newNumLike));
-                                            }
-                                            proLike = false;
-
-
-                                        }
-                                    } else {
-                                        LikeDatabase.child(R_key).child("likes").child(user_key).setValue("like");
-
-                                        int newNumLike = Integer.parseInt(dataSnapshot.child(R_key).child("numLike").getValue().toString());
-                                        newNumLike = (newNumLike + 1);
-                                        LikeDatabase.child(R_key).child("numLike").setValue(Integer.toString(newNumLike));
-
-                                        proLike = false;
-                                    }
+                                    int newNumLike = Integer.parseInt(dataSnapshot.child(R_key).child("numLike").getValue().toString());
+                                    newNumLike = (newNumLike + 1);
+                                    LikeDatabase.child(R_key).child("numLike").setValue(Integer.toString(newNumLike));
                                 }
+                                proLike = false;
+
 
                             }
+                        } else {
+                            LikeDatabase.child(R_key).child("likes").child(user_key).setValue("like");
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                            int newNumLike = Integer.parseInt(dataSnapshot.child(R_key).child("numLike").getValue().toString());
+                            newNumLike = (newNumLike + 1);
+                            LikeDatabase.child(R_key).child("numLike").setValue(Integer.toString(newNumLike));
 
-                            }
-                        });
-
-
+                            proLike = false;
+                        }
                     }
-                });
 
-                holder.dislikebtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        pos = holder.getLayoutPosition();
-                        Log.d("dislikebtn", " " + R_key);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+        }
+    });
+
+}catch (IndexOutOfBoundsException e){
+    String g="";
+}
+try {
+    holder.dislikebtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            pos = holder.getLayoutPosition();
+            Log.d("dislikebtn", " " + R_key);
 
 //                        disLikeDatabase=disLikeDatabase.child(R_key);
-                        prodisLike = true;
+            prodisLike = true;
 
-                        disLikeDatabase.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                R_key = getRef(pos).getKey();
-                                if (prodisLike) {
-                                    if (dataSnapshot.child(R_key).hasChild("likes")) {
-                                        if (dataSnapshot.child(R_key).child("likes").hasChild(user_key)) {
-                                            if (dataSnapshot.child(R_key).child("likes").child(user_key).getValue().equals("dislike")) {
-                                                disLikeDatabase.child(R_key).child("likes").child(user_key).removeValue();
-                                                int newNumDisLike = Integer.parseInt(dataSnapshot.child(R_key).child("numDisLike").getValue().toString());
-                                                newNumDisLike = (newNumDisLike - 1);
-                                                disLikeDatabase.child(R_key).child("numDisLike").setValue(Integer.toString(newNumDisLike));
+            disLikeDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    R_key = getRef(pos).getKey();
+                    if (prodisLike) {
+                        if (dataSnapshot.child(R_key).hasChild("likes")) {
+                            if (dataSnapshot.child(R_key).child("likes").hasChild(user_key)) {
+                                if (dataSnapshot.child(R_key).child("likes").child(user_key).getValue().equals("dislike")) {
+//                                                disLikeDatabase.child(R_key).child("likes").child(user_key).setValue("null");
+//                                                disLikeDatabase.child(R_key).child("likes").child(user_key).removeValue();
+//                                                int newNumDisLike = Integer.parseInt(dataSnapshot.child(R_key).child("numDisLike").getValue().toString());
+//                                                newNumDisLike = (newNumDisLike - 1);
+//                                                disLikeDatabase.child(R_key).child("numDisLike").setValue(Integer.toString(newNumDisLike));
 
-                                            } else if (dataSnapshot.child(R_key).child("likes").child(user_key).getValue().equals("like")) {
-                                                disLikeDatabase.child(R_key).child("likes").child(user_key).setValue("dislike");
+                                } else if (dataSnapshot.child(R_key).child("likes").child(user_key).getValue().equals("like")) {
+                                    disLikeDatabase.child(R_key).child("likes").child(user_key).setValue("dislike");
 
-                                                int newNumLike = Integer.parseInt(dataSnapshot.child(R_key).child("numLike").getValue().toString());
-                                                newNumLike = (newNumLike - 1);
-                                                disLikeDatabase.child(R_key).child("numLike").setValue(Integer.toString(newNumLike));
+                                    int newNumLike = Integer.parseInt(dataSnapshot.child(R_key).child("numLike").getValue().toString());
+                                    newNumLike = (newNumLike - 1);
+                                    disLikeDatabase.child(R_key).child("numLike").setValue(Integer.toString(newNumLike));
 
-                                                int newNumDisLike = Integer.parseInt(dataSnapshot.child(R_key).child("numDisLike").getValue().toString());
-                                                newNumDisLike = (newNumDisLike + 1);
-                                                disLikeDatabase.child(R_key).child("numDisLike").setValue(Integer.toString(newNumDisLike));
-                                            }
-                                            prodisLike = false;
-
-                                        }
-                                        prodisLike = false;
-                                    } else {
-                                        disLikeDatabase.child(R_key).child("likes").child(user_key).setValue("dislike");
-
-                                        int newNumDisLike = Integer.parseInt(dataSnapshot.child(R_key).child("numDisLike").getValue().toString());
-
-                                        newNumDisLike = (newNumDisLike + 1);
-                                        disLikeDatabase.child(R_key).child("numDisLike").setValue(Integer.toString(newNumDisLike));
-
-                                        prodisLike = false;
-                                    }
+                                    int newNumDisLike = Integer.parseInt(dataSnapshot.child(R_key).child("numDisLike").getValue().toString());
+                                    newNumDisLike = (newNumDisLike + 1);
+                                    disLikeDatabase.child(R_key).child("numDisLike").setValue(Integer.toString(newNumDisLike));
                                 }
+                                prodisLike = false;
 
                             }
+                            prodisLike = false;
+                        } else {
+                            disLikeDatabase.child(R_key).child("likes").child(user_key).setValue("dislike");
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                            int newNumDisLike = Integer.parseInt(dataSnapshot.child(R_key).child("numDisLike").getValue().toString());
 
-                            }
-                        });
+                            newNumDisLike = (newNumDisLike + 1);
+                            disLikeDatabase.child(R_key).child("numDisLike").setValue(Integer.toString(newNumDisLike));
 
-
+                            prodisLike = false;
+                        }
                     }
-                });
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+        }
+    });
+}catch (IndexOutOfBoundsException e){
+
+    String g="";
+}
 
 
             }
@@ -437,12 +453,16 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                             if (dataSnapshot.child("likes").child(user_key).getValue().equals("like")) {
                                 likebtn.setBackgroundResource(R.drawable.like_green);
                                 dislikebtn.setBackgroundResource(R.drawable.thumb_down);
-                            } else if (dataSnapshot.child("likes").child(user_key).getValue().equals("dislike")) {
-                                likebtn.setBackgroundResource(R.drawable.thumb_up);
-                                dislikebtn.setBackgroundResource(R.drawable.dislike_red);
                             }
+//                            else if (dataSnapshot.child("likes").child(user_key).getValue().equals("dislike")) {
+//                                likebtn.setBackgroundResource(R.drawable.thumb_up);
+//                                dislikebtn.setBackgroundResource(R.drawable.dislike_red);
+//                            }
 
-                        } else if (!(dataSnapshot.child("likes").hasChild(user_key))) {
+                        }
+                        else
+                            if (!(dataSnapshot.child("likes").hasChild(user_key)))
+                            {
                             dislikebtn.setBackgroundResource(R.drawable.thumb_down);
                             likebtn.setBackgroundResource(R.drawable.thumb_up);
                         }
@@ -479,13 +499,16 @@ public class ViewReviewRegisterUser extends AppCompatActivity {
                                 dislikebtn.setBackgroundResource(R.drawable.dislike_red);
                                 likebtn.setBackgroundResource(R.drawable.thumb_up);
 
-                            } else if (dataSnapshot.child("likes").child(user_key).getValue().equals("like")) {
-                                dislikebtn.setBackgroundResource(R.drawable.thumb_down);
-                                likebtn.setBackgroundResource(R.drawable.like_green);
-
                             }
+//                            else if (dataSnapshot.child("likes").child(user_key).getValue().equals("like")) {
+//                                dislikebtn.setBackgroundResource(R.drawable.thumb_down);
+//                                likebtn.setBackgroundResource(R.drawable.like_green);
+//
+//                            }
 
-                        } else if (!(dataSnapshot.child("likes").hasChild(user_key))) {
+                        } else
+                            if (!(dataSnapshot.child("likes").hasChild(user_key)))
+                            {
                             dislikebtn.setBackgroundResource(R.drawable.thumb_down);
                             likebtn.setBackgroundResource(R.drawable.thumb_up);
                         }
