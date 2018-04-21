@@ -1,6 +1,5 @@
 package com.soa_arah;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,10 +23,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,11 +74,8 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         imageView3=(ImageView)findViewById(R.id.imageView3);
         reject=(Button)findViewById(R.id.reject);
         accept=(Button)findViewById(R.id.accept);
-        keyword=(EditText)findViewById(R.id.stt);
-        bkeyword=(Button)findViewById(R.id.keywordN);
 
 
-        cKeyword = cKeyword+keyword.getText().toString();
 
         gr.setText(quantity);
         namefood.setText(namef);
@@ -258,7 +252,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
                 else {
 
-                Food newFood = new Food(namef, image, cKeyword, calories.getText().toString().trim(), standard, gr.getText().toString().trim());
+                Food newFood = new Food(namef, image, calories.getText().toString().trim(), standard, gr.getText().toString().trim());
                 newFood.setBarcodN("لم يتم إدخال بيانات");
                 newFood.setImageTable("لم يتم إدخال بيانات");
 

@@ -43,8 +43,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
-   private boolean Regestersec=false;
-   private Intent intent;
+    private Intent intent;
     RegisteredUser user1;
     android.app.AlertDialog.Builder alert;
 
@@ -60,7 +59,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_auth);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
 
@@ -79,28 +78,35 @@ public class ActivityPhoneAuth extends AppCompatActivity {
             }
         };
 
-        etxtPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etxtPhone.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (etxtPhone.getText().toString().trim().length() != 13) {
+                if (etxtPhone.getText().toString().trim().length()!=13){
 
                     etxtPhone.setError("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
                 }
             }
         });
 
-        etxtPhoneCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etxtPhoneCode.setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (etxtPhoneCode.getText().toString().trim().length() < 6) {
+                if (etxtPhoneCode.getText().toString().trim().length()<6){
 
                     etxtPhoneCode.setError("الرجاء إدخال رمز التحقق");
                 }
             }
         });
 
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        // super.onBackPressed(); // Comment this super call to avoid calling finish() or fragmentmanager's backstack pop operation.
     }
 
     public void requestCode(View view) {
@@ -191,11 +197,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                                   boolean reSuccessful=registerUser();
-                        if(reSuccessful)
-                            startActivity(new Intent(getApplicationContext(), home_page_register.class));
-
-                        }
+                            registerUser();}
                         else {
                             android.app.AlertDialog.Builder alert= new android.app.AlertDialog.Builder(ActivityPhoneAuth.this);
 
@@ -248,9 +250,8 @@ public class ActivityPhoneAuth extends AppCompatActivity {
         signInWithCredential(PhoneAuthProvider.getCredential(mVerificationId, code));
 
     }
-    private boolean registerUser() {
+    private void registerUser() {
         //getting email and password from edit texts
-
         final String Name = intent.getExtras().getString("username", "");
 
         String email =stringToHex(Name)+"@soaarah.com";;
@@ -269,7 +270,6 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Regestersec=true;
                                 firebaseAuth = FirebaseAuth.getInstance();
                                 String User_ID = firebaseAuth.getCurrentUser().getUid();
                                 final String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
@@ -323,13 +323,13 @@ public class ActivityPhoneAuth extends AppCompatActivity {
 
                                 // Apply the newly created layout parameters to the alert dialog window
                                 dialog.getWindow().setAttributes(layoutParams);
-
-
+                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+                                //close this activity
+                                finish();
+                                //opening login activity
 
 
                             } else {
-
-                                Regestersec=false;
                                 //display some message here
                                 AlertDialog.Builder alert = new AlertDialog.Builder(
                                         ActivityPhoneAuth.this );
@@ -383,7 +383,6 @@ public class ActivityPhoneAuth extends AppCompatActivity {
                         }
                     } );
         }
-        return Regestersec;
     }
     public static String stringToHex(String base)
     {

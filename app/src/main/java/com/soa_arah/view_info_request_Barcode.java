@@ -23,10 +23,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,12 +75,11 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         namefood = (TextView) findViewById(R.id.name);
         reject = (Button) findViewById(R.id.reject);
         accept = (Button) findViewById(R.id.accept);
-        keyword = (EditText) findViewById(R.id.keyword);
         gr = (EditText) findViewById(R.id.gr);
         calories1 = (EditText) findViewById(R.id.calories1);
         image = (ImageView) findViewById(R.id.image);
         imageTable1 = (ImageView) findViewById(R.id.imageTable);
-        bkeyworde=(Button)findViewById(R.id.keywordN);
+
 
 
         namefood.setText(namef1);
@@ -146,18 +143,6 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
             }
         });
 
-        keyword.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (keyword.getText().toString().trim().length()<1){
-
-                    keyword.setError("الرجاء إدخال الكلمات المفتاحية");
-                }
-            }
-        });
-
-        cKeyword = cKeyword+keyword.getText().toString();
 
 
 
@@ -257,7 +242,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
                 else{
 
-                Food newFood = new Food(namef1, image1, cKeyword, calories1.getText().toString(), "لا يوجد", gr.getText().toString().trim());
+                Food newFood = new Food(namef1, image1, calories1.getText().toString(), "لا يوجد", gr.getText().toString().trim());
                 newFood.setBarcodN(barcodeN);
                 newFood.setImageTable(imageTable);
 
