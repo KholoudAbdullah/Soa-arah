@@ -57,12 +57,13 @@ public class RequestByBarcode extends AppCompatActivity {
     private StorageReference storageReference;
     private DatabaseReference databaseReference,checkdataF,checkdataR;
     private StorageTask mUploadTask,tablem;
-    private String douTable, barnum;
+    private String douTable, barnum,invalidChar,valid;
     private EditText name,cal;
     private String stander,calo;
     private ProgressDialog progressDialog,progressDialog1;
     android.app.AlertDialog.Builder alert;
     private RadioButton Rfood,Rdrink;
+    private boolean flag2=true;
 
 
 
@@ -205,19 +206,12 @@ public class RequestByBarcode extends AppCompatActivity {
         cal = (EditText) findViewById(R.id.cal);
 
 
+
+        invalidChar ="!#$%&'()*+,./:;<=>?@[]^`{|}~0123456789";
         TXbarnum.setText(TXbarnum.getText().toString() + "  " + barnum);
 
 
-        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (name.getText().toString().trim().length() < 1) {
-
-                    name.setError("االرجاء إدخال إسم الصنف");
-                }
-            }
-        });
         progressDialog = new ProgressDialog(RequestByBarcode.this);
 
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -227,6 +221,13 @@ public class RequestByBarcode extends AppCompatActivity {
                 if (name.getText().toString().trim().length() < 1) {
 
                     name.setError("الرجاء إدخال إسم الصنف");
+                }
+                for (int i=0;i<name.getText().toString().trim().length();i++){
+                    valid=name.getText().toString().trim().charAt(i)+"";
+                    if (invalidChar.contains(valid)){
+                        name.setError("الرجاء ادخال احرف فقط");
+
+                    }
                 }
             }
         });
@@ -276,7 +277,27 @@ public class RequestByBarcode extends AppCompatActivity {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
+                }else if (flag2){
+                    for (int i=0;i<name.getText().toString().trim().length();i++){
+                        valid=name.getText().toString().trim().charAt(i)+"";
+                        if (invalidChar.contains(valid)){
+                            alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                            alert.setMessage("الرجاء ادخال احرف فقط");
+                            alert.setCancelable(true);
+                            alert.setPositiveButton(
+                                "موافق",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
 
+                                        dialogInterface.cancel();
+                                    }
+                                });
+                        android.app.AlertDialog alert11 = alert.create();
+                        alert11.show();
+                        return;
+                        }
+                    }
                 } else if (!Rfood.isChecked() && !Rdrink.isChecked()) {
                     alert = new android.app.AlertDialog.Builder(RequestByBarcode.this);
                     alert.setMessage("الرجاء اختيار الصنف");

@@ -60,12 +60,12 @@ public class RequestByName extends AppCompatActivity {
     private DatabaseReference databaseReference,checkdataF,checkdataR;
     private StorageTask mUploadTask;
     private ProgressDialog progressDialog;
-    private String stander;
+    private String stander,invalidChar,valid;
     private FirebaseAuth firebaseAuth;
     android.app.AlertDialog.Builder alert;
     private ArrayList<String> foodName,requestName;
 
-    boolean fin=true,fin2=true;
+    boolean fin=true,fin2=true,flag2=true;
 
 
 
@@ -133,6 +133,8 @@ public class RequestByName extends AppCompatActivity {
         gram = (EditText) findViewById(R.id.gramL);
 
 
+        invalidChar ="!#$%&'()*+,./:;<=>?@[]^`{|}~0123456789";
+
         firebaseAuth = FirebaseAuth.getInstance();
 
 
@@ -143,6 +145,13 @@ public class RequestByName extends AppCompatActivity {
                 if (foodname.getText().toString().trim().length() < 1) {
 
                     foodname.setError("الرجاء إدخال إسم الصنف");
+                }
+                for (int i=0;i<foodname.getText().toString().trim().length();i++){
+                    valid=foodname.getText().toString().trim().charAt(i)+"";
+                    if (invalidChar.contains(valid)){
+                        foodname.setError("الرجاء ادخال احرف فقط");
+
+                    }
                 }
             }
         });
@@ -200,6 +209,28 @@ public class RequestByName extends AppCompatActivity {
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
 
+                }else if (flag2){
+                    for (int i=0;i<foodname.getText().toString().trim().length();i++){
+                        valid=foodname.getText().toString().trim().charAt(i)+"";
+                        if (invalidChar.contains(valid)){
+                            alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                            alert.setMessage("الرجاء ادخال احرف فقط");
+                            alert.setCancelable(true);
+                            alert.setPositiveButton(
+                                "موافق",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        dialogInterface.cancel();
+                                    }
+                                });
+                        android.app.AlertDialog alert11 = alert.create();
+                        alert11.show();
+                        return;
+                        }
+                    }
+                    flag2=false;
                 } else if (calory.getText().toString().trim().length() < 1) {
                     alert = new android.app.AlertDialog.Builder(RequestByName.this);
                     alert.setMessage("الرجاء إدخال عدد السعرات");
@@ -308,8 +339,7 @@ public class RequestByName extends AppCompatActivity {
 
         //menu bottom bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.Navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
@@ -327,7 +357,7 @@ public class RequestByName extends AppCompatActivity {
                         }
                         return false;
                     }
-                });
+        });
 
 
     }
@@ -413,13 +443,11 @@ public class RequestByName extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-
-
                             if (foodName.size()>0){
                                 for (int i=0;i<foodName.size();i++){
                                     if (foodname.getText().toString().trim().equals(foodName.get(i))){
                                         progressDialog.dismiss();
-                                        //fin2=false;
+                                        fin2=true;
                                         Log.d("in if 1","delete"+foodName.get(i));
                                         alert= new android.app.AlertDialog.Builder(RequestByName.this);
                                         alert.setTitle("الصنف موجود مسبقاً");
@@ -436,25 +464,22 @@ public class RequestByName extends AppCompatActivity {
                                             });
                                         android.app.AlertDialog alert11 = alert.create();
                                         alert11.show();
-                                        break;
+                                        return;
                                     }
                                 Log.d("end for foodName",""+foodName.get(i));
                                 }
                                 fin2=false;
                             }else
                                 fin2=false;
-
-
-
                             if(requestName.size()>0){
                                 for (int i=0;i<requestName.size();i++){
                                     if (foodname.getText().toString().trim().equals(requestName.get(i))){
                                         progressDialog.dismiss();
-                                        // fin2=false;
+                                         fin=true;
                                         Log.d("in if 1","delete"+requestName.get(i));
                                         alert= new android.app.AlertDialog.Builder(RequestByName.this);
-                                        alert.setTitle("الصنف موجود مسبقاً");
-                                        alert.setMessage("الانتقال الى صفحة البحث");
+                                        alert.setTitle("تم رفع طلب لهذا المنتج مسبقاً");
+                                        alert.setMessage("الإنتقال الى الصفحة الرئسية");
                                         alert.setCancelable(true);
                                         alert.setPositiveButton(
                                             "نعم",
@@ -467,7 +492,7 @@ public class RequestByName extends AppCompatActivity {
                                             });
                                         android.app.AlertDialog alert11 = alert.create();
                                         alert11.show();
-                                        break;
+                                        return;
                                     }
                                 //if (fin2)
                                 Log.d("end for requestName",""+requestName.get(i));
@@ -548,11 +573,6 @@ public class RequestByName extends AppCompatActivity {
                             Toast.makeText(RequestByName.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-
-
-            if (!fin&&!fin2){
-
-        }
         }else {
             alert= new android.app.AlertDialog.Builder(RequestByName.this);
             alert.setMessage("عذراً يجب اختيار صورة");
