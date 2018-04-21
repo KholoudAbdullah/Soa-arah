@@ -15,6 +15,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +48,7 @@ public class view_account_register  extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         isConnected();
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         //getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
 

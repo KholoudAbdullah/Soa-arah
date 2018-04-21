@@ -71,7 +71,7 @@ public class searchByNameToAddCalories extends AppCompatActivity {
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         progressDialog = new ProgressDialog(searchByNameToAddCalories.this);
         // Setting progressDialog Title.
         progressDialog.setMessage("الرجاء الانتظار ...");

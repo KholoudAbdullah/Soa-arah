@@ -50,6 +50,7 @@ public class maxminDietplan extends AppCompatActivity {
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         mintext=(TextView)findViewById(R.id.minnumber);
         maxtext=(TextView)findViewById(R.id.maxnumber);

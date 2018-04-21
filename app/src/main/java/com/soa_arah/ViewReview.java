@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -58,7 +59,7 @@ public class ViewReview extends AppCompatActivity {
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         progressDialog = new ProgressDialog(ViewReview.this);
 
 

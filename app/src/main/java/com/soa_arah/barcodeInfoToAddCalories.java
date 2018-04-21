@@ -19,7 +19,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,7 +51,7 @@ public class barcodeInfoToAddCalories extends AppCompatActivity {
         setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         progressDialog = new ProgressDialog(barcodeInfoToAddCalories.this);
         // Setting progressDialog Title.
         progressDialog.setMessage("الرجاء الانتظار ...");

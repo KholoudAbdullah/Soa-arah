@@ -15,13 +15,10 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -45,12 +42,15 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     Intent intent;
     RegisteredUser user1;
     private static final String TAG = "MainActivity";
+    boolean flag;
+    private boolean flag2=true;
 
+    String m,valid="",specialCharacters,phone1;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     android.app.AlertDialog.Builder alert;
-    boolean flag,flag2=true;
+
     String hexName;
-    String m,valid="",specialCharacters,phone1;;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -80,15 +80,16 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (name.getText().toString().trim().length()<1){
-                    name.setError("االرجاء إدخال إسم المستخدم");
-                }
-                for (int i=0;i<name.getText().toString().trim().length();i++){
-                valid=name.getText().toString().trim().charAt(i)+"";
-                if (specialCharacters.contains(valid)){
-                    name.setError("الرموز المسوح إستخدامها - ـ ");
 
+                    name.setError("الرجاء إدخال إسم المستخدم");
+                                  }
+                              for (int i=0;i<name.getText().toString().trim().length();i++){
+                                     valid=name.getText().toString().trim().charAt(i)+"";
+                                       if (specialCharacters.contains(valid)){
+                                               name.setError("الرموز المسوح إستخدامها - ـ ");
+
+                                                   }
                 }
-            }
             }
         });
         password.setOnFocusChangeListener(new View.OnFocusChangeListener(){
@@ -115,9 +116,20 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (phone.getText().toString().trim().length()!=13){
+                if (phone.getText().toString().trim().length() != 13) {
 
                     phone.setError("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
+                }
+                phone1 = phone.getText().toString().trim();
+                if (phone1.length() != 0) {
+                    if (phone1.charAt(0) != '+') {
+                        if (phone1.charAt(0) == '0' && phone1.charAt(1) == '0')
+                            phone.setText("+" + phone1.substring(2));
+                        else {
+                            phone.setError("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
+                        }
+                    }
+
                 }
             }
         });
@@ -138,7 +150,51 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if(view == button ){
-            if (name.getText().toString().trim().length()<1){
+            phone1=phone.getText().toString().trim();
+            if (phone1.charAt(0)!='+'){
+                              if (phone1.charAt(0)=='0'&&phone1.charAt(1)=='0')
+                                  phone.setText("+"+phone1.substring(2));
+                               else {
+                                      alert= new android.app.AlertDialog.Builder(Registration.this);
+                                     alert.setMessage("الرجاء إدخال رقم الجوال مبتدئاً بمفتاح الدولة");
+                                    alert.setCancelable(true);
+                                      alert.setPositiveButton(
+                                                       "موافق",
+                                                      new DialogInterface.OnClickListener() {
+                               @Override
+                               public void onClick(DialogInterface dialogInterface, int i) {
+
+                                   dialogInterface.cancel();
+
+                               }
+                        });
+                                       android.app.AlertDialog alert11 = alert.create();
+                                      alert11.show();
+                                    return;
+                               }
+                          }
+            if (flag2){
+                for (int i=0;i<name.getText().toString().trim().length();i++){
+                    valid=name.getText().toString().trim().charAt(i)+"";
+
+                    if (specialCharacters.contains(valid)){
+                        alert= new android.app.AlertDialog.Builder(Registration.this);
+                        alert.setMessage("الرموز المسوح إستخدامها - ـ ");
+                        alert.setCancelable(true);
+                        alert.setPositiveButton("موافق", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                        android.app.AlertDialog alert11 = alert.create();
+                        alert11.show();
+
+                    }
+                }
+
+            }
+           else if (name.getText().toString().trim().length()<1){
                 alert= new android.app.AlertDialog.Builder(Registration.this);
                 alert.setMessage("الرجاء إدخال إسم المستخدم");
                 alert.setCancelable(true);
@@ -154,49 +210,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                         });
                 android.app.AlertDialog alert11 = alert.create();
                 alert11.show();
-                return;
-            }else if (flag2){
-                for (int i=0;i<name.getText().toString().trim().length();i++){
-                    valid=name.getText().toString().trim().charAt(i)+"";
 
-                    if (specialCharacters.contains(valid)){
-                        alert= new android.app.AlertDialog.Builder(Registration.this);
-                        alert.setMessage("الرموز المسوح إستخدامها - ـ ");
-                        alert.setCancelable(true);
-                        alert.setPositiveButton(
-                                "موافق",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                        dialogInterface.cancel();
-
-                                    }
-                                });
-                        android.app.AlertDialog alert11 = alert.create();
-                        alert11.show();
-                        return;
-                    }
-                }
-            }
-            else if (password.getText().toString().trim().length()<6){
-                alert= new android.app.AlertDialog.Builder(Registration.this);
-                alert.setMessage("يجب ان تتكون كلمة المرور من ٦ خانات او اكثر");
-                alert.setCancelable(true);
-                alert.setPositiveButton(
-                        "موافق",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                                dialogInterface.cancel();
-
-                            }
-                        });
-                android.app.AlertDialog alert11 = alert.create();
-                alert11.show();
                 return;
             }
+
             else if (!password.getText().toString().trim().equals(PasswordCom.getText().toString().trim()) || PasswordCom.getText().toString().trim().length()<6){
                 alert= new android.app.AlertDialog.Builder(Registration.this);
                 alert.setMessage("كلمة المرور ليست متطابقة");

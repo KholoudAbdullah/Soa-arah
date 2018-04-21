@@ -55,7 +55,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         firebaseAuth = FirebaseAuth.getInstance();
         namef = getIntent().getStringExtra("namef");
         calorie=getIntent().getStringExtra("calorie");

@@ -11,12 +11,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="71dp"
+        android:layout_width="82dp"
         android:layout_height="75dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/byBarcode"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/byBarcode"
         design:srcCompat="@drawable/imagee" />
@@ -41,12 +42,13 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="71dp"
+        android:layout_width="84dp"
         android:layout_height="75dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/byName"
+        app:layout_constraintHorizontal_bias="0.374"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/byName"
         design:srcCompat="@drawable/imagee" />
@@ -98,8 +100,8 @@
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="51dp"
+        android:layout_height="26dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:text="0"
@@ -113,8 +115,8 @@
 
     <TextView
         android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="55dp"
+        android:layout_height="26dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:text="0"
@@ -124,7 +126,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/byName"
         app:layout_constraintStart_toStartOf="@+id/byName"
         app:layout_constraintTop_toTopOf="@+id/byName"
-        app:layout_constraintVertical_bias="0.128" />
+        app:layout_constraintVertical_bias="0.094" />
 
 
 

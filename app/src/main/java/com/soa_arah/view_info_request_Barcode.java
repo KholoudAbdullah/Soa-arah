@@ -60,6 +60,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         namef1 = getIntent().getStringExtra("namef");
         image1 = getIntent().getStringExtra("image");

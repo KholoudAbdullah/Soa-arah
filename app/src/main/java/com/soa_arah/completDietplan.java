@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -79,7 +80,7 @@ public class completDietplan  extends AppCompatActivity  {
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         cont=(Button)findViewById(R.id.con);
         cancel=(Button) findViewById(R.id.cancel);
         activity=(Spinner) findViewById(R.id.spinner2);

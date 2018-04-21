@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +40,7 @@ public class barcodeInfo extends AppCompatActivity {
         setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         progressDialog = new ProgressDialog(barcodeInfo.this);
         // Setting progressDialog Title.

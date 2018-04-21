@@ -80,7 +80,7 @@ public class addCalories extends AppCompatActivity {
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
 
         isConnected();
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         scan=(Button)findViewById( R.id.scan );
         searchtext=(EditText) findViewById(R.id.searchword);
         calories=(EditText)findViewById(R.id.add);
