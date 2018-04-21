@@ -194,7 +194,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 }
 
             }
-           else if (name.getText().toString().trim().length()<1){
+            if (name.getText().toString().trim().length()<1){
                 alert= new android.app.AlertDialog.Builder(Registration.this);
                 alert.setMessage("الرجاء إدخال إسم المستخدم");
                 alert.setCancelable(true);
