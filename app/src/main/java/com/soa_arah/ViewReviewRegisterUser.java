@@ -277,8 +277,9 @@ try {
             LikeDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    R_key = getRef(pos).getKey();
+
                     if (proLike) {
+                        R_key = getRef(pos).getKey();
                         if (dataSnapshot.child(R_key).hasChild("likes")) {
                             if (dataSnapshot.child(R_key).child("likes").hasChild(user_key)) {
                                 if (dataSnapshot.child(R_key).child("likes").child(user_key).getValue().equals("like")) {
@@ -342,8 +343,9 @@ try {
             disLikeDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    R_key = getRef(pos).getKey();
+
                     if (prodisLike) {
+                        R_key = getRef(pos).getKey();
                         if (dataSnapshot.child(R_key).hasChild("likes")) {
                             if (dataSnapshot.child(R_key).child("likes").hasChild(user_key)) {
                                 if (dataSnapshot.child(R_key).child("likes").child(user_key).getValue().equals("dislike")) {
