@@ -216,16 +216,16 @@ public class RequestByBarcode extends AppCompatActivity {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (name.getText().toString().trim().length() < 1) {
-
-                    name.setError("الرجاء إدخال إسم الصنف");
-                }
                 for (int i=0;i<name.getText().toString().trim().length();i++){
                     valid=name.getText().toString().trim().charAt(i)+"";
                     if (invalidChar.contains(valid)){
                         name.setError("الرجاء ادخال احرف فقط");
 
                     }
+                }
+                if (name.getText().toString().trim().length() < 1) {
+
+                    name.setError("الرجاء إدخال إسم الصنف");
                 }
             }
         });
@@ -259,6 +259,28 @@ public class RequestByBarcode extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (flag2){
+                    for (int i=0;i<name.getText().toString().trim().length();i++){
+                        valid=name.getText().toString().trim().charAt(i)+"";
+                        if (invalidChar.contains(valid)){
+                            alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
+                            alert.setMessage("الرجاء ادخال احرف فقط");
+                            alert.setCancelable(true);
+                            alert.setPositiveButton(
+                                    "موافق",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                            android.app.AlertDialog alert11 = alert.create();
+                            alert11.show();
+                            return;
+                        }
+                    }
+                }
                 if (name.getText().toString().trim().length() < 1) {
                     alert = new android.app.AlertDialog.Builder(RequestByBarcode.this);
                     alert.setMessage("الرجاء ادخال إسم الصنف");
@@ -275,28 +297,7 @@ public class RequestByBarcode extends AppCompatActivity {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                }else if (flag2){
-                    for (int i=0;i<name.getText().toString().trim().length();i++){
-                        valid=name.getText().toString().trim().charAt(i)+"";
-                        if (invalidChar.contains(valid)){
-                            alert= new android.app.AlertDialog.Builder(RequestByBarcode.this);
-                            alert.setMessage("الرجاء ادخال احرف فقط");
-                            alert.setCancelable(true);
-                            alert.setPositiveButton(
-                                "موافق",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                        dialogInterface.cancel();
-                                    }
-                                });
-                        android.app.AlertDialog alert11 = alert.create();
-                        alert11.show();
-                        return;
-                        }
-                    }
-                } else if (!Rfood.isChecked() && !Rdrink.isChecked()) {
+                }else if (!Rfood.isChecked() && !Rdrink.isChecked()) {
                     alert = new android.app.AlertDialog.Builder(RequestByBarcode.this);
                     alert.setMessage("الرجاء اختيار الصنف");
                     alert.setCancelable(true);

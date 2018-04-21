@@ -68,6 +68,7 @@ public class RequestByName extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,10 +142,6 @@ public class RequestByName extends AppCompatActivity {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (foodname.getText().toString().trim().length() < 1) {
-
-                    foodname.setError("الرجاء إدخال إسم الصنف");
-                }
                 for (int i=0;i<foodname.getText().toString().trim().length();i++){
                     valid=foodname.getText().toString().trim().charAt(i)+"";
                     if (invalidChar.contains(valid)){
@@ -152,6 +149,11 @@ public class RequestByName extends AppCompatActivity {
 
                     }
                 }
+                if (foodname.getText().toString().trim().length() < 1) {
+
+                    foodname.setError("الرجاء إدخال إسم الصنف");
+                }
+
             }
         });
         calory.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -191,7 +193,29 @@ public class RequestByName extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (foodname.getText().toString().trim().length() < 1) {
+                if (flag2){
+                    for (int i=0;i<foodname.getText().toString().trim().length();i++){
+                        valid=foodname.getText().toString().trim().charAt(i)+"";
+                        if (invalidChar.contains(valid)){
+                            alert= new android.app.AlertDialog.Builder(RequestByName.this);
+                            alert.setMessage("الرجاء ادخال احرف فقط");
+                            alert.setCancelable(true);
+                            alert.setPositiveButton(
+                                    "موافق",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                            android.app.AlertDialog alert11 = alert.create();
+                            alert11.show();
+                            return;
+                        }
+                    }
+                    flag2=false;
+                } if (foodname.getText().toString().trim().length() < 1) {
                     alert = new android.app.AlertDialog.Builder(RequestByName.this);
                     alert.setMessage("الرجاء ادخال إسم الصنف");
                     alert.setCancelable(true);
@@ -208,29 +232,7 @@ public class RequestByName extends AppCompatActivity {
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
 
-                }else if (flag2){
-                    for (int i=0;i<foodname.getText().toString().trim().length();i++){
-                        valid=foodname.getText().toString().trim().charAt(i)+"";
-                        if (invalidChar.contains(valid)){
-                            alert= new android.app.AlertDialog.Builder(RequestByName.this);
-                            alert.setMessage("الرجاء ادخال احرف فقط");
-                            alert.setCancelable(true);
-                            alert.setPositiveButton(
-                                "موافق",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                        dialogInterface.cancel();
-                                    }
-                                });
-                        android.app.AlertDialog alert11 = alert.create();
-                        alert11.show();
-                        return;
-                        }
-                    }
-                    flag2=false;
-                } else if (calory.getText().toString().trim().length() < 1) {
+                }else  if (calory.getText().toString().trim().length() < 1) {
                     alert = new android.app.AlertDialog.Builder(RequestByName.this);
                     alert.setMessage("الرجاء إدخال عدد السعرات");
                     alert.setCancelable(true);
