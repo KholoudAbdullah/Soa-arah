@@ -72,6 +72,7 @@ public class addCalories extends AppCompatActivity {
     ArrayList<String>foods=new ArrayList<>();
     private ListView listView;
     ArrayAdapter<String> adapter;
+    boolean flag2=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public class addCalories extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         scan=(Button)findViewById( R.id.scan );
         searchtext=(EditText) findViewById(R.id.searchword);
-        calories=(EditText)findViewById(R.id.add);
+        //calories=(EditText)findViewById(R.id.add);
         addCalText=(EditText)findViewById(R.id.add);
         add=(Button)findViewById(R.id.addB);
         progressDialog = new ProgressDialog(this);
@@ -344,7 +345,11 @@ public class addCalories extends AppCompatActivity {
             }
         });
     }
-
+    public boolean addCalories(float caloriy){
+        float cal=1000;
+       cal+=caloriy;
+        return true;
+    }
     public void scanCode (View view) {
         //startActivity(new Intent(getApplicationContext(), BarcodeToAddCalories.class));
     }
@@ -502,4 +507,6 @@ public class addCalories extends AppCompatActivity {
         return true;
 
     }
+
+
 }

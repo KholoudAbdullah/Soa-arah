@@ -72,7 +72,7 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
     boolean flag;
     String stand;
     String grams;
-    private Button scan;
+    private Button scan,searchbtn;
     private Integer sumreq=0;
     private DatabaseReference mDatabaseReference;
     @SuppressLint("WrongConstant")
@@ -84,9 +84,23 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
         setContentView(R.layout.home_page_nutrition_admin_activity);
         setRequestedOrientation( ActivityInfo. SCREEN_ORIENTATION_PORTRAIT );
         searchtext = (EditText) findViewById(R.id.searchword);
+        searchbtn=(Button)findViewById(R.id.searchbtn);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         scan=(Button)findViewById(R.id.scan);
         isConnected();
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Barcode.class));
+
+            }
+        });
+        searchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                search();
+            }
+        });
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Requests").child("ByName");
 
@@ -419,5 +433,168 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    public void search(){
+        firebaseAuth = FirebaseAuth.getInstance();
+        fData = FirebaseDatabase.getInstance().getReference().child("Food");
+        fData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    f = snapshot.child("name").getValue(String.class);
+                    id = snapshot.getKey();
+                    if (f.equals(searchtext.getText().toString().trim())) {
+                        cal = snapshot.child("calories").getValue(String.class);
+                        img = snapshot.child("image").getValue(String.class);
+                        stand = snapshot.child("standard").getValue(String.class);
+                        quantity = snapshot.child("quantity").getValue(String.class);
+                        if(addCal.equals("true")) {
+                            Intent intent = new Intent(getApplicationContext(), searchByNameToAddCalories.class);
+                            intent.putExtra("name", f);
+                            intent.putExtra("id", id);
+                            intent.putExtra("cal", cal);
+                            intent.putExtra("img", img);
+                            intent.putExtra("stand", stand);
+                            intent.putExtra("quantity", quantity);
+                            progressDialog.dismiss();
+                            flag=true;
+                            startActivity(intent);
+                            break;
+                        }
+                        else{
+                            Intent intent = new Intent(getApplicationContext(), searchByName.class);
+                            intent.putExtra("name", f);
+                            intent.putExtra("id", id);
+                            intent.putExtra("cal", cal);
+                            intent.putExtra("img", img);
+                            intent.putExtra("stand", stand);
+                            intent.putExtra("quantity", quantity);
+                            progressDialog.dismiss();
+                            flag=true;
+                            startActivity(intent);
+                            break;
+                        }
+                    }else  flag=false;
+                }
+                if(!flag){
+                    if(firebaseAuth.getCurrentUser()==null){
+                        alert=new AlertDialog.Builder(home_page_Nutrition_admin.this);
+                        alert.setMessage("عذراً لايوجد هذا المنتج سجل دخولك لإضافته");
+                        alert.setCancelable(true);
+                        alert.setPositiveButton(
+                                "سجل الدخول",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        startActivity(new Intent(getApplicationContext(), LoginPage.class));
+
+                                    }
+                                });
+
+                        alert.setNegativeButton(
+                                "الغاء",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                        startActivity(new Intent(getApplicationContext(), home_page_guest.class));
+
+                                    }
+                                }
+
+                        );}
+                    else {
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        String id= user.getUid();
+                        if(id.equals("Pf7emnnQTEbmukAIDwWgkuv8JbC2")){
+                            alert=new AlertDialog.Builder(home_page_Nutrition_admin.this);
+                            alert.setTitle("عذراً لايوجد هذا المنتج ");
+                            alert.setMessage("التحقق من الطلبات المرسلة");
+                            alert.setCancelable(true);
+                            alert.setPositiveButton("تحقق", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                            startActivity(new Intent(getApplicationContext(),view_request.class));
+
+                                        }
+                                    }
+
+                            );
+                            alert.setPositiveButton("الغاء", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                            startActivity(new Intent(getApplicationContext(),home_page_Nutrition_admin.class));
+
+                                        }
+                                    }
+
+                            );
+                        }
+                        else{
+                            if(id.equals("kstgUKiRA7T3p1NNl3GuGBHgvcf2")){
+                                alert=new AlertDialog.Builder(home_page_Nutrition_admin.this);
+                                alert.setMessage("عذراً لايوجد هذا المنتج ");
+                                alert.setCancelable(true);
+                                alert.setPositiveButton(
+                                        "الغاء",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                                startActivity(new Intent(getApplicationContext(),home_page_IT_admin.class));
+
+                                            }
+                                        }
+
+                                );
+                            }
+                            else
+                            {if(firebaseAuth.getCurrentUser()!=null){
+                                alert=new AlertDialog.Builder(home_page_Nutrition_admin.this);
+                                alert.setMessage("عذراً لايوجد هاذا المنتج هل تريد اضافتة");
+                                alert.setCancelable(true);
+                                alert.setPositiveButton(
+                                        "اضافة",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                startActivity(new Intent(getApplicationContext(), Request_page.class));
+
+                                            }
+                                        });
+
+                                alert.setNegativeButton(
+                                        "الغاء",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                                startActivity(new Intent(getApplicationContext(), home_page_register.class));
+
+                                            }
+                                        }
+
+                                );
+                            }}
+
+                        }
+                    }
+                    AlertDialog alert11 = alert.create();
+                    alert11.show();
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }
