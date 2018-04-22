@@ -134,7 +134,7 @@ public class ActivityPhoneAuth extends AppCompatActivity {
 
         alert= new android.app.AlertDialog.Builder(ActivityPhoneAuth.this);
 
-        alert.setTitle( "الرجاء الانتظار حتى يتم الارسال" ).setIcon( R.drawable.f1 );
+        alert.setTitle( "الرجاء الانتظار حتى يتم الارسال" );
 
         alert.setCancelable(true);
         alert.setPositiveButton(

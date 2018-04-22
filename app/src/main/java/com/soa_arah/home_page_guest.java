@@ -88,18 +88,20 @@ public class home_page_guest extends AppCompatActivity {
             }
         }
         isConnected();
+        searchtext = (EditText) findViewById(R.id.searchword);
+
         scan = (Button) findViewById(R.id.scan);
         button = (Button) findViewById(R.id.login);
         reg = (Button) findViewById(R.id.register);
-        searchtext = (EditText) findViewById(R.id.searchword);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
         listView=(ListView)findViewById(R.id.listview);
 
         searchKeyword();
-        listView.setTextFilterEnabled(true);
-        listView.setTextFilterEnabled(true);
 
+        listView.setTextFilterEnabled(true);
+        listView.setTextFilterEnabled(true);
+listView.computeScroll();
         //listView.bringChildToFront(listView);
        // listView.bringToFront();
         scan.bringPointIntoView(2);
@@ -115,8 +117,9 @@ public class home_page_guest extends AppCompatActivity {
                 if(!searchtext.getText().toString().equals("")){
 
                     listView.setVisibility(View.VISIBLE);
-                    home_page_guest.this.adapter.getFilter().filter(s);
-                    adapter.notifyDataSetChanged();
+                    listView.bringToFront();
+                    listView.bringChildToFront(listView);
+                    home_page_guest.this.adapter.getFilter().filter(s.toString().trim());
 
                 }
                 else {
@@ -134,7 +137,7 @@ public class home_page_guest extends AppCompatActivity {
         });
         if(searchtext.getText().toString().length()<=0){
 
-            listView.setVisibility(View.GONE);
+           listView.setVisibility(View.GONE);
 
 
         }
@@ -179,9 +182,6 @@ public class home_page_guest extends AppCompatActivity {
         return true;
     }
 
-    public void scanCode(View view) {
-        startActivity(new Intent(getApplicationContext(), Barcode.class));
-    }
     public void searchKeyword(){
 
         fData = FirebaseDatabase.getInstance().getReference().child("Food");
@@ -195,6 +195,8 @@ public class home_page_guest extends AppCompatActivity {
                 }
                 adapter=new ArrayAdapter<String>(getApplicationContext(),R.layout.keywordlayout,R.id.textView14,foods );
                 listView.setAdapter(adapter);
+                listView.bringToFront();
+                listView.bringChildToFront(listView);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, final View view,final int position, long id) {
@@ -255,6 +257,9 @@ public class home_page_guest extends AppCompatActivity {
         });
     }
 
+    public void scanCode(View view) {
+        startActivity(new Intent(getApplicationContext(), Barcode.class));
+    }
 
 
 

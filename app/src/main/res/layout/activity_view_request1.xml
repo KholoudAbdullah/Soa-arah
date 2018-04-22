@@ -17,7 +17,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/byBarcode"
-        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/byBarcode"
         design:srcCompat="@drawable/imagee" />
@@ -101,32 +101,34 @@
     <TextView
         android:id="@+id/textView16"
         android:layout_width="51dp"
-        android:layout_height="26dp"
+        android:layout_height="28dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="92dp"
         android:layout_marginTop="8dp"
         android:text="0"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/byBarcode"
-        app:layout_constraintStart_toStartOf="@+id/byBarcode"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/byBarcode"
-        app:layout_constraintVertical_bias="0.128" />
+        app:layout_constraintVertical_bias="0.137" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="55dp"
         android:layout_height="26dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="88dp"
         android:layout_marginTop="8dp"
         android:text="0"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/byName"
-        app:layout_constraintStart_toStartOf="@+id/byName"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/byName"
-        app:layout_constraintVertical_bias="0.094" />
+        app:layout_constraintVertical_bias="0.118" />
 
 
 

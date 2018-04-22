@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background1">
 
+
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="168dp"
@@ -22,48 +23,120 @@
         app:srcCompat="@drawable/lo1" />
 
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="302dp"
-        android:layout_height="261dp"
-        android:layout_marginBottom="188dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.979" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp">
 
-    <TextView
-        android:id="@+id/searchText"
-        android:layout_width="270dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="160dp"
-        android:text=" البحث باستخدام الكلمات المفتاحية"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/searchword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.942"
-        tools:ignore="MissingConstraints" />
 
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="302dp"
+            android:layout_height="261dp"
+            android:layout_marginBottom="188dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/rounded_corner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.979" />
+
+        <TextView
+            android:id="@+id/searchText"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+
+            android:layout_alignStart="@+id/login"
+            android:layout_alignTop="@+id/imageView9"
+            android:layout_marginTop="18dp"
+            android:text="     البحث باستخدام اسم الصنف"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.942"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/scan"
+            android:layout_width="158dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+
+
+            android:layout_marginBottom="364dp"
+            android:layout_marginStart="120dp"
+
+            android:background="@drawable/button_login"
+            android:onClick="scanCode"
+            android:text="التقط الصورة"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="261dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="420dp"
+            android:background="@drawable/button"
+            android:text="التسجيل"
+            android:textColor="#8BAF3A"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.551"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/login"
+            android:layout_width="261dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="350dp"
+            android:background="@drawable/button_login"
+            android:text=" دخــــول"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.551"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/searchbarcode"
+            android:layout_width="220dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="90dp"
+
+            android:layout_marginTop="190dp"
+
+            android:text="      البحث باستخدام الباركود"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
+
+
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/searchword"
         android:layout_width="239dp"
         android:layout_height="35dp"
-        android:layout_marginBottom="344dp"
+        android:layout_marginBottom="376dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="10dp"
         android:background="@drawable/edit_text_style"
         android:drawableRight="@drawable/search"
         android:ems="11"
@@ -73,94 +146,27 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/searchbarcode"
-        android:layout_width="212dp"
-        android:layout_height="37dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text=" البحث باستخدام الباركود"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/scan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.629"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/scan"
-        android:layout_width="158dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="200dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/button_login"
-        android:onClick="scanCode"
-        android:text="التقط الصورة"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <Button
-        android:id="@+id/register"
-        android:layout_width="261dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/button"
-        android:text="التسجيل"
-        android:textColor="#8BAF3A"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
-        app:layout_constraintVertical_bias="0.104" />
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="261dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text=" دخــــول"
-        android:background="@drawable/button_login"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scan"
-        app:layout_constraintVertical_bias="0.668" />
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="239dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
         android:layout_below="@+id/searchword"
+        android:adjustViewBounds="false"
         android:background="#ffff"
-        android:visibility="gone"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="@+id/searchword"
         app:layout_constraintTop_toBottomOf="@+id/searchword"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="181dp"
+        android:scrollbars="vertical"
+        android:scrollbarFadeDuration="0"
+       />
 
-        />
 
 </android.support.constraint.ConstraintLayout>

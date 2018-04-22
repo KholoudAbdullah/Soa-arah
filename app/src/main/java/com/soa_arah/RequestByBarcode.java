@@ -145,7 +145,11 @@ public class RequestByBarcode extends AppCompatActivity {
                                 });
 
                         android.app.AlertDialog alert11 = alert.create();
-                        alert11.show();
+try {
+    alert11.show();
+}catch(Exception e){
+    String d="";
+}
                     }
                 }
 
