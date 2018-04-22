@@ -125,7 +125,7 @@
     <ListView
         android:id="@+id/listview"
         android:layout_width="239dp"
-        android:layout_height="200dp"
+        android:layout_height="120dp"
         android:layout_alignParentTop="true"
         android:layout_below="@+id/searchword"
         android:adjustViewBounds="false"

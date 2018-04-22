@@ -101,7 +101,7 @@ public class home_page_guest extends AppCompatActivity {
 
         listView.setTextFilterEnabled(true);
         listView.setTextFilterEnabled(true);
-listView.computeScroll();
+
         //listView.bringChildToFront(listView);
        // listView.bringToFront();
         scan.bringPointIntoView(2);
