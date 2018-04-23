@@ -90,7 +90,7 @@
             android:background="@drawable/button"
             android:text="التسجيل"
             android:visibility="visible"
-            android:textColor="#8BAF3A"
+            android:textColor="#C1282D"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
