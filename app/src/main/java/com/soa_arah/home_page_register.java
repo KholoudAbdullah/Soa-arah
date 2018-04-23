@@ -96,7 +96,7 @@ public class home_page_register extends AppCompatActivity{
                 if(!searchtext.getText().toString().equals("")){
 
                     listView.setVisibility(View.VISIBLE);
-                    home_page_register.this.adapter.getFilter().filter(s);
+                    home_page_register.this.adapter.getFilter().filter(s.toString().trim());
                     adapter.notifyDataSetChanged();
 
                 }
