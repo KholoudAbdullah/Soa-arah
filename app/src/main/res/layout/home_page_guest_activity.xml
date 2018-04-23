@@ -70,14 +70,13 @@
             android:id="@+id/scan"
             android:layout_width="180dp"
             android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/searchbarcode"
-            android:layout_marginTop="270dp"
+            android:layout_alignStart="@+id/searchbtn"
+            android:layout_below="@+id/searchbarcode"
             android:background="@drawable/button_login"
             android:text="التقط صورة"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:textStyle="bold"  />
+            android:textStyle="bold" />
 
 
         <Button
@@ -119,9 +118,10 @@
             android:layout_width="221dp"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/searchText"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="190dp"
-
+            android:layout_alignTop="@+id/searchbtn"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
             android:text="                                        البحث باستخدام الباركود"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -131,9 +131,10 @@
             android:id="@+id/searchbtn"
             android:layout_width="180dp"
             android:layout_height="40dp"
-            android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/searchbarcode"
-            android:layout_marginTop="190dp"
+            android:layout_below="@+id/searchText"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="57dp"
             android:background="@drawable/button_login"
             android:text="بحث"
             android:textColor="@android:color/white"
