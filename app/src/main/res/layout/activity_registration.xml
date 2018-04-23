@@ -164,7 +164,7 @@
         android:background="@drawable/button"
         android:text=" دخــــول"
         android:textSize="20sp"
-        android:textColor="#C1282D"
+        android:textColor="#2e6103"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
