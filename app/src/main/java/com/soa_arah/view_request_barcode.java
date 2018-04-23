@@ -134,7 +134,7 @@ public class view_request_barcode extends AppCompatActivity {
                     progressBarBarcode.setVisibility(View.INVISIBLE);
                 }
                 //disp laying it to list
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.keywordlayout,R.id.textView14, requestsByBarcode);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.listrequest,R.id.textView14, requestsByBarcode);
                 request_barcode.setAdapter(adapter);
 
                 SwipeMenuCreator creator = new SwipeMenuCreator() {
