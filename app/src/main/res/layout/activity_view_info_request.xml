@@ -235,6 +235,7 @@
                 android:layout_gravity="center">
 
 
+
                 <Button
                     android:id="@+id/reject"
                     android:layout_width="100dp"
