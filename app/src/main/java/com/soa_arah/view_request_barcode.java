@@ -91,6 +91,7 @@ public class view_request_barcode extends AppCompatActivity {
                 String imageTable = re_barcode.get(i).getImageTable();
                 String cal = re_barcode.get(i).getCalories();
                 String keys1 = key1.get(i);
+                String stand =re_barcode.get(i).getStandard();
 
                 Intent intent1 = new Intent(view_request_barcode.this, view_info_request_Barcode.class);
                 intent1.putExtra("barcodeN", barcodeN);
@@ -99,6 +100,7 @@ public class view_request_barcode extends AppCompatActivity {
                 intent1.putExtra("cal", cal);
                 intent1.putExtra("imageTable", imageTable);
                 intent1.putExtra("keys", keys1);
+                intent1.putExtra("stand", stand);
 
                 startActivity(intent1);
 

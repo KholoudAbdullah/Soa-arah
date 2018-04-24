@@ -44,7 +44,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
     private EditText calories1;
 
     private String key,cKeyword="";
-    private String barcodeN,image1,namef1,imageTable,cal;
+    private String barcodeN,image1,namef1,imageTable,cal,stand;
     private Button bkeyword;
 
 
@@ -68,6 +68,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         imageTable = getIntent().getStringExtra("imageTable");
         key = getIntent().getStringExtra("keys");
         cal = getIntent().getStringExtra("cal");
+        stand=getIntent().getStringExtra("stand");
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -223,7 +224,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
                 else{
 
-                Food newFood = new Food(namef1, image1, calories1.getText().toString(), "لا يوجد", gr.getText().toString().trim());
+                Food newFood = new Food(namef1, image1, calories1.getText().toString(), stand, gr.getText().toString().trim());
                 newFood.setBarcodN(barcodeN);
                 newFood.setImageTable(imageTable);
 
