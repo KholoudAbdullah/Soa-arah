@@ -40,13 +40,12 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
     private ImageView image;
     private ImageView imageTable1;
     private Button reject;
-    private Button accept;
-    private EditText gr;
+    private Button accept,sta;
     private FirebaseAuth firebaseAuth;
     private EditText calories1;
 
     private String key,stand="";
-    private String barcodeN,image1,namef1,imageTable,cal,stand1;
+    private String barcodeN,image1,namef1,imageTable,cal,qun;
     private Button bkeyword;
 
 
@@ -70,18 +69,18 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         imageTable = getIntent().getStringExtra("imageTable");
         key = getIntent().getStringExtra("keys");
         cal = getIntent().getStringExtra("cal");
-        stand1=getIntent().getStringExtra("stand");
+        qun=getIntent().getStringExtra("qun");
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         namefood = (TextView) findViewById(R.id.name);
         reject = (Button) findViewById(R.id.reject);
         accept = (Button) findViewById(R.id.accept);
-        gr = (EditText) findViewById(R.id.gr);
+
         calories1 = (EditText) findViewById(R.id.calories1);
         image = (ImageView) findViewById(R.id.image);
         imageTable1 = (ImageView) findViewById(R.id.imageTable);
-
+        sta=(Button)findViewById(R.id.sta);
 
 
         namefood.setText(namef1);
@@ -103,26 +102,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
 
 
-        gr.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-                if (gr.getText().toString().trim().length()<2){
-
-                    gr.setError("الرجاء إدخال عدد القرام /مللتر");
-                }
-            }
-        });
 
         calories1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -203,24 +183,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
                     return;
-                }
 
-                else if (gr.getText().toString().trim().length()<1 ){
-                    alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
-                    alert.setMessage("لم يتم إدخال عدد القرام/ المللتر");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "موافق",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    dialogInterface.cancel();
-                                }
-                            });
-                    android.app.AlertDialog alert11 = alert.create();
-                    alert11.show();
-                    return;
                 }else if (stand==""){
                     alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
                     alert.setMessage("الرجاء اختيار المقياس المناسب");
@@ -242,7 +205,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
                 else{
 
-                Food newFood = new Food(namef1, image1, calories1.getText().toString(), "لا يوجد", gr.getText().toString().trim());
+                Food newFood = new Food(namef1, image1, calories1.getText().toString(), stand, qun);
                 newFood.setBarcodN(barcodeN);
                 newFood.setImageTable(imageTable);
 
@@ -322,6 +285,9 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                 android.app.AlertDialog alert11 = alert.create();
                 alert11.show();
 
+            }
+            if( view == sta){
+                StandardList();
             }
 
 

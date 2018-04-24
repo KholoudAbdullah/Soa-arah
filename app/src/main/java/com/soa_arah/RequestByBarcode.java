@@ -56,11 +56,11 @@ public class RequestByBarcode extends AppCompatActivity {
     private DatabaseReference databaseReference,checkdataF,checkdataR;
     private StorageTask mUploadTask,tablem;
     private String douTable, barnum,invalidChar,valid;
-    private EditText name,cal;
-    private String stander,calo;
+    private EditText name,cal,quan;
+    private String calo;
     private ProgressDialog progressDialog,progressDialog1;
     android.app.AlertDialog.Builder alert;
-    private RadioButton Rfood,Rdrink;
+
     private boolean flag2=true;
 
 
@@ -201,11 +201,10 @@ try {
         table = (Button) findViewById(R.id.TImageB);
         name = (EditText) findViewById(R.id.Fname);
         send = (Button) findViewById(R.id.sendw);
-        Rfood = (RadioButton) findViewById(R.id.food);
-        Rdrink = (RadioButton) findViewById(R.id.drinkS);
         cancle = (Button) findViewById(R.id.cancel);
         TXbarnum = (TextView) findViewById(R.id.barcodeNumber);
         cal = (EditText) findViewById(R.id.cal);
+        quan=(EditText)findViewById(R.id.quan);
 
 
 
@@ -233,6 +232,18 @@ try {
                 }
             }
         });
+
+        quan.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if (quan.getText().toString().trim().length() < 1) {
+
+                    quan.setError("الرجاء إدخال الكمية");
+                }
+            }
+        });
+
 
 
         //food image
@@ -301,9 +312,10 @@ try {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                }else if (!Rfood.isChecked() && !Rdrink.isChecked()) {
+                }
+                if (quan.getText().toString().trim().length() < 1) {
                     alert = new android.app.AlertDialog.Builder(RequestByBarcode.this);
-                    alert.setMessage("الرجاء اختيار الصنف");
+                    alert.setMessage("الرجاء ادخال الكمية");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
                             "موافق",
@@ -317,9 +329,9 @@ try {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                } else {
-                    uploadFile();
                 }
+
+                uploadFile();
 
             }
         });
@@ -482,19 +494,10 @@ try {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            //for standard measurement
-                            if (Rfood.isChecked())
-                                stander="جرام,ملعقة شاي,ملعقة اكل,كوب";
-                            else if (Rdrink.isChecked())
-                                stander="مليلتر,كوب";
-
-                            if (cal.getText().toString().equals(""))
-                                calo="لايوجد" ;
-                            else
-                                calo=cal.getText().toString().trim();
 
 
-                            Food RF =  new Food(name.getText().toString().trim(),douTable,calo,stander,"لايوجد");
+
+                            Food RF =  new Food(name.getText().toString().trim(),douTable,calo,"لايوجد",quan.getText().toString().trim());
                             RF.setImageTable( taskSnapshot.getDownloadUrl().toString());
                             RF.setBarcodN(barnum);
                             String uploadId = databaseReference.push().getKey();
