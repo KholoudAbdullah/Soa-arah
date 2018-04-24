@@ -216,7 +216,6 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                                 public void onClick(DialogInterface dialogInterface, int i) {
 
                                     dialogInterface.cancel();
-
                                 }
                             });
                     android.app.AlertDialog alert11 = alert.create();
