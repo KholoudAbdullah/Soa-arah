@@ -38,7 +38,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     private EditText calories;
     private EditText gr;
     private ImageView imageView3;
-    private Button reject;
+    private Button reject,sta;
     private Button accept;
     private FirebaseAuth firebaseAuth;
     private String key,stand="";
@@ -72,7 +72,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         imageView3=(ImageView)findViewById(R.id.imageView3);
         reject=(Button)findViewById(R.id.reject);
         accept=(Button)findViewById(R.id.accept);
-
+        sta=(Button)findViewById(R.id.sta);
 
 
         gr.setText(quantity);
@@ -241,7 +241,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
                 else {
 
-                Food newFood = new Food(namef, image, calories.getText().toString().trim(), standard, gr.getText().toString().trim());
+                Food newFood = new Food(namef, image, calories.getText().toString().trim(), stand, gr.getText().toString().trim());
                 newFood.setBarcodN("لم يتم إدخال بيانات");
                 newFood.setImageTable("لم يتم إدخال بيانات");
 
@@ -326,6 +326,9 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
             }
 
+        if( view == sta){
+            StandardList();
+        }
 
 
 

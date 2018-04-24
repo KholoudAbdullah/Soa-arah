@@ -312,8 +312,7 @@ try {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                }
-                if (quan.getText().toString().trim().length() < 1) {
+                }  else if (quan.getText().toString().trim().length() < 1) {
                     alert = new android.app.AlertDialog.Builder(RequestByBarcode.this);
                     alert.setMessage("الرجاء ادخال الكمية");
                     alert.setCancelable(true);
@@ -329,9 +328,9 @@ try {
                             });
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
-                }
+                }else {
 
-                uploadFile();
+                uploadFile();}
 
             }
         });

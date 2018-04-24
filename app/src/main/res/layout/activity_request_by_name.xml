@@ -125,59 +125,7 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginTop="8dp"
-        android:text="نوع الصنف:"
-        android:textColor="#8BAF3A"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/uploadimage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout3"
-        app:layout_constraintVertical_bias="0.02" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:orientation='horizontal'
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintHorizontal_bias="0.833"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout3">
-
-        <RadioButton
-            android:id="@+id/drinkS"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:buttonTint="#8BAF3A"
-            android:layoutDirection="rtl"
-            android:text="شراب"
-            android:textColor="#8BAF3A"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <RadioButton
-            android:id="@+id/food"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#8BAF3A"
-            android:layoutDirection="rtl"
-            android:text="طعام"
-            android:textColor="#8BAF3A"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </RadioGroup>
 
     <Button
         android:id="@+id/cancel"

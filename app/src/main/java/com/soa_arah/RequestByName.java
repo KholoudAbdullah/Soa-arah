@@ -53,7 +53,7 @@ public class RequestByName extends AppCompatActivity {
     private EditText calory,gram;
     private Button cancle,send,upload;
     private Uri mImageUri;
-    private RadioButton Rfood,Rdrink;
+
 
     private StorageReference storageReference;
     private DatabaseReference databaseReference,checkdataF,checkdataR;
@@ -128,8 +128,7 @@ public class RequestByName extends AppCompatActivity {
         foodname = (EditText) findViewById(R.id.FName);
         calory = (EditText) findViewById(R.id.calbyg);
         progressDialog = new ProgressDialog(RequestByName.this);
-        Rfood = (RadioButton) findViewById(R.id.food);
-        Rdrink = (RadioButton) findViewById(R.id.drinkS);
+
         gram = (EditText) findViewById(R.id.gramL);
 
 
@@ -251,22 +250,6 @@ public class RequestByName extends AppCompatActivity {
                 } else if (gram.getText().toString().trim().length() < 1) {
                     alert = new android.app.AlertDialog.Builder(RequestByName.this);
                     alert.setMessage("الرجاء إدخال عدد القرام/ملم");
-                    alert.setCancelable(true);
-                    alert.setPositiveButton(
-                            "موافق",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    dialogInterface.cancel();
-
-                                }
-                            });
-                    android.app.AlertDialog alert11 = alert.create();
-                    alert11.show();
-                } else if (!Rfood.isChecked() && !Rdrink.isChecked()) {
-                    alert = new android.app.AlertDialog.Builder(RequestByName.this);
-                    alert.setMessage("الرجاء اختيار الصنف");
                     alert.setCancelable(true);
                     alert.setPositiveButton(
                             "موافق",
@@ -509,11 +492,8 @@ public class RequestByName extends AppCompatActivity {
 
                                 Log.d("in else","*******");
                             //for standard measurement
-                            if (Rfood.isChecked())
-                                stander="جرام,ملعقة شاي,ملعقة اكل,كوب";
-                            else if (Rdrink.isChecked())
-                                stander="مليلتر,كوب";
-                            Food RF = new Food(foodname.getText().toString().trim(),taskSnapshot.getDownloadUrl().toString(),calory.getText().toString().trim(),stander,gram.getText().toString().trim());
+
+                            Food RF = new Food(foodname.getText().toString().trim(),taskSnapshot.getDownloadUrl().toString(),calory.getText().toString().trim(),"لايوجد",gram.getText().toString().trim());
                             RF.setImageTable("لايوجد");
                             RF.setBarcodN("لايوجد");
                             String uploadId = databaseReference.push().getKey();

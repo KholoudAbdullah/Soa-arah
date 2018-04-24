@@ -208,6 +208,26 @@
 
             </RelativeLayout>
 
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/sta"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/button_login"
+                    android:text="المقاييس"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+            </RelativeLayout>
+
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
@@ -220,7 +240,7 @@
                     android:layout_width="100dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="100dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     android:background="@drawable/button_reject"
                     android:text="رفض"
                     android:textColor="@android:color/white"
@@ -234,7 +254,7 @@
                     android:layout_width="100dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="110dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     android:background="@drawable/button_accept"
                     android:text=" قبول"
                     android:textColor="@android:color/white"
