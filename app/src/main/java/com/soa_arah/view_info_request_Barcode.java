@@ -99,7 +99,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
         reject.setOnClickListener(this);
         accept.setOnClickListener(this);
-
+        sta.setOnClickListener(this);
 
 
 

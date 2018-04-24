@@ -85,7 +85,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         reject.setOnClickListener(this);
         accept.setOnClickListener(this);
 
-
+        sta.setOnClickListener(this);
 
         gr.addTextChangedListener(new TextWatcher() {
             @Override
@@ -202,6 +202,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
                     alert11.show();
                     return;
                 }
+
                 else if (gr.getText().toString().trim().length()<1 ){
                     alert= new android.app.AlertDialog.Builder(view_info_request.this);
                     alert.setMessage("لم يتم إدخال عدد القرام/ المللتر");
