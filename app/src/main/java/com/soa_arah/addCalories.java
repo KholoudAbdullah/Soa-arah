@@ -335,7 +335,6 @@ public class addCalories extends AppCompatActivity {
                 //close this activity
                 finish();
                 //opening login activity
-                Toast.makeText(addCalories.this, "تم أضافة السعرات الحرارية بنجاح", Toast.LENGTH_SHORT).show();
 
             }
 

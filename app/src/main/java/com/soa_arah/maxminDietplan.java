@@ -167,7 +167,7 @@ public class maxminDietplan extends AppCompatActivity {
                     c= Calendar.getInstance().getTime();
                     SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                     String formattedDate = df.format(c);
-                    plan = new DietPlan(username,goal.getText().toString().trim(),min,max,bmi,"0","0");
+                    plan = new DietPlan(username,goal.getText().toString().trim(),min,max,bmi);
                     progress=new Progress("0","0","0","0","0","0","0",formattedDate,"0","0","0","0","0","0","0");
                     databaseReference.child(username).setValue(progress);
                     mDatabase.child(username).setValue(plan);
@@ -182,7 +182,6 @@ public class maxminDietplan extends AppCompatActivity {
                             maxminDietplan.this);
                     alert.setTitle("تم إنشاء الخطة بنجاح").setIcon(R.drawable.t1);
                     android.support.v7.app.AlertDialog dialog = alert.create();
-
                     // Finally, display the alert dialog
                     dialog.show();
 

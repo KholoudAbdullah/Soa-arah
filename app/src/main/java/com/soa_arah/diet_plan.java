@@ -211,16 +211,12 @@ public class diet_plan extends AppCompatActivity {
 
                                 if (flag1) {
                                     try {
-                                    Water.setText(plan.getWater());
-                                    NewCalFood.setText(plan.getDailyCal());
                                     calGoal.setText(plan.getCalGoal());
 
                                 } catch (NullPointerException  e) {
                                         String l;
                                 }
                                 }
-
-
 
                         }
 

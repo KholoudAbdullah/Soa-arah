@@ -56,34 +56,15 @@ public class DietPlan {
 
     private String BMI;
 
-    public String getDailyCal() {
-        return dailyCal;
-    }
 
-    public void setDailyCal(String dailyCal) {
-        this.dailyCal = dailyCal;
-    }
 
-    private String dailyCal;
 
-    public String getWater() {
-        return water;
-    }
-
-    public void setWater(String water) {
-        this.water = water;
-    }
-
-    private String water;
-
-    public DietPlan(String rname, String calGoal, String min, String max, String BMI, String dailyCal, String water) {
+    public DietPlan(String rname, String calGoal, String min, String max, String BMI) {
         Rname = rname;
         this.calGoal = calGoal;
         this.min = min;
         this.max = max;
         this.BMI = BMI;
-        this.dailyCal = dailyCal;
-        this.water = water;
     }
     public DietPlan(){
 

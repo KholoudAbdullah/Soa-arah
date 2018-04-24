@@ -24,74 +24,48 @@
 
 
             <CheckBox
-                android:id="@+id/NFood"
+                android:id="@+id/grams"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layoutDirection="rtl"
-                android:text="اكلات شعبية"
+                android:text="جرام"
                 tools:layout_editor_absoluteX="112dp"
                 tools:layout_editor_absoluteY="201dp"
                 />
             <CheckBox
-                android:id="@+id/Chocolate"
+                android:id="@+id/foodSpoon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layoutDirection="rtl"
-                android:text="شوكلت"
+                android:text="ملعقة اكل"
                 tools:layout_editor_absoluteX="112dp"
                 tools:layout_editor_absoluteY="201dp" />
             <CheckBox
-                android:id="@+id/dessert"
+                android:id="@+id/teaSpoon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="حلا"
+                android:text="ملعقة شاي"
                 android:layoutDirection="rtl"
                 tools:layout_editor_absoluteX="64dp"
                 tools:layout_editor_absoluteY="280dp" />
 
             <CheckBox
-                android:id="@+id/Bakery"
+                android:id="@+id/piece"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="فطائر"
+                android:text="قطعة"
                 android:layoutDirection="rtl"
                 tools:layout_editor_absoluteX="102dp"
                 tools:layout_editor_absoluteY="337dp" />
 
             <CheckBox
-                android:id="@+id/juice"
+                android:id="@+id/ml"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="عصير"
+                android:text="مليلتر"
                 android:layoutDirection="rtl"
                 tools:layout_editor_absoluteX="102dp"
                 tools:layout_editor_absoluteY="337dp" />
-
-            <CheckBox
-                android:id="@+id/coffee"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="قهوة"
-                android:layoutDirection="rtl"
-                tools:layout_editor_absoluteX="102dp"
-                tools:layout_editor_absoluteY="337dp" />
-            <CheckBox
-                android:id="@+id/HDrink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="مشروبات ساخنة"
-                android:layoutDirection="rtl"
-                tools:layout_editor_absoluteX="102dp"
-                tools:layout_editor_absoluteY="337dp" />
-            <CheckBox
-                android:id="@+id/CDrink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="مشروبات باردة"
-                android:layoutDirection="rtl"
-                tools:layout_editor_absoluteX="102dp"
-                tools:layout_editor_absoluteY="337dp" />
-
 
         </LinearLayout>
 

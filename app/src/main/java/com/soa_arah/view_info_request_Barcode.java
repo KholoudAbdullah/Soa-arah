@@ -15,11 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,8 +45,8 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
     private FirebaseAuth firebaseAuth;
     private EditText calories1;
 
-    private String key,cKeyword="";
-    private String barcodeN,image1,namef1,imageTable,cal,stand;
+    private String key,stand="";
+    private String barcodeN,image1,namef1,imageTable,cal,stand1;
     private Button bkeyword;
 
 
@@ -68,7 +70,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         imageTable = getIntent().getStringExtra("imageTable");
         key = getIntent().getStringExtra("keys");
         cal = getIntent().getStringExtra("cal");
-        stand=getIntent().getStringExtra("stand");
+        stand1=getIntent().getStringExtra("stand");
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -220,11 +222,28 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                     android.app.AlertDialog alert11 = alert.create();
                     alert11.show();
                     return;
+                }else if (stand==""){
+                    alert= new android.app.AlertDialog.Builder(view_info_request_Barcode.this);
+                    alert.setMessage("الرجاء اختيار المقياس المناسب");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton(
+                            "موافق",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+
+                                }
+                            });
+                    android.app.AlertDialog alert11 = alert.create();
+                    alert11.show();
+                    return;
                 }
 
                 else{
 
-                Food newFood = new Food(namef1, image1, calories1.getText().toString(), stand, gr.getText().toString().trim());
+                Food newFood = new Food(namef1, image1, calories1.getText().toString(), "لا يوجد", gr.getText().toString().trim());
                 newFood.setBarcodN(barcodeN);
                 newFood.setImageTable(imageTable);
 
@@ -335,6 +354,52 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    public void StandardList(){
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.standard_s, null);
+        final CheckBox fs = alertLayout.findViewById(R.id.foodSpoon);
+        final CheckBox ft = alertLayout.findViewById(R.id.teaSpoon);
+        final CheckBox gra = alertLayout.findViewById(R.id.grams);
+        final CheckBox pi = alertLayout.findViewById(R.id.piece);
+        final CheckBox lm = alertLayout.findViewById(R.id.ml);
+
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("المقايس المقترحة");
+        // this is set the view from XML inside AlertDialog
+        alert.setView(alertLayout);
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        alert.setCancelable(false);
+        alert.setNegativeButton("إلغاء", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        alert.setPositiveButton("حفظ", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+
+                if (fs.isChecked()){stand=stand+"ملعقة اكل,";}
+                if (ft.isChecked()){stand=stand+"ملعقة شاي,";}
+                if (gra.isChecked()){stand=stand+"جرام,";}
+                if (pi.isChecked()){stand=stand+"قطعة,";}
+                if (lm.isChecked()){stand=stand+"مليلتر,";}
+
+                //keyword.setText(cKeyword);
+
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+
     }
 
     public boolean isConnected() {
