@@ -260,7 +260,7 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="110dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/button_accept"
                 android:text="قبول"
                 android:textColor="@android:color/white"
