@@ -329,7 +329,6 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         final CheckBox gra = alertLayout.findViewById(R.id.grams);
         final CheckBox pi = alertLayout.findViewById(R.id.piece);
         final CheckBox lm = alertLayout.findViewById(R.id.ml);
-        final CheckBox ca = alertLayout.findViewById(R.id.can);
 
 
 
@@ -356,9 +355,9 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
                 if (fs.isChecked()){stand=stand+"ملعقة اكل,";}
                 if (ft.isChecked()){stand=stand+"ملعقة شاي,";}
                 if (gra.isChecked()){stand=stand+"جرام,";}
-                if (pi.isChecked()){stand=stand+"قطعة,";}
-                if (lm.isChecked()){stand=stand+"مليلتر,";}
-                if (ca.isChecked()){stand=stand+"علبة,";}
+                if (pi.isChecked()){stand=stand+"عدد الحبات,";}
+                if (lm.isChecked()){stand=stand+"مليليتر,";}
+
 
                 //keyword.setText(cKeyword);
 

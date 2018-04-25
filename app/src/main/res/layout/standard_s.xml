@@ -53,7 +53,7 @@
                 android:id="@+id/piece"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="قطعة"
+                android:text="عدد الحبات"
                 android:layoutDirection="rtl"
                 tools:layout_editor_absoluteX="102dp"
                 tools:layout_editor_absoluteY="337dp" />
@@ -62,18 +62,11 @@
                 android:id="@+id/ml"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="مليلتر"
+                android:text="مليليتر"
                 android:layoutDirection="rtl"
                 tools:layout_editor_absoluteX="102dp"
                 tools:layout_editor_absoluteY="337dp" />
-            <CheckBox
-                android:id="@+id/can"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="علبة"
-                android:layoutDirection="rtl"
-                tools:layout_editor_absoluteX="102dp"
-                tools:layout_editor_absoluteY="337dp" />
+
 
         </LinearLayout>
 

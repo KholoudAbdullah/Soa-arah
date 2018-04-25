@@ -145,6 +145,8 @@ public class searchByName extends AppCompatActivity {
                     calor=(caldoub*q)/gramdoub;
                 }else  if(selected.equals("عدد الحبات")){
                     calor=caldoub*q;
+                }else if(selected.equals("مليليتر")){
+                    calor=(caldoub*q)/gramdoub;
                 }
                 DecimalFormat precision = new DecimalFormat("0.00");
 // dblVariable is a number variable and not a String in this case

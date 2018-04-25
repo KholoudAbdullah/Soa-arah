@@ -104,14 +104,16 @@ public class addCalories extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if(!searchtext.getText().toString().equals("")){
-
+                    scan.setVisibility(View.GONE);
+                    add.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
                     addCalories.this.adapter.getFilter().filter(s);
                     adapter.notifyDataSetChanged();
 
                 }
                 else {
-
+                    scan.setVisibility(View.VISIBLE);
+                    add.setVisibility(View.VISIBLE);
                     listView.setVisibility(View.GONE);
 
 
@@ -124,7 +126,8 @@ public class addCalories extends AppCompatActivity {
             }
         });
         if(searchtext.getText().toString().length()<=0){
-
+            scan.setVisibility(View.VISIBLE);
+            add.setVisibility(View.VISIBLE);
             listView.setVisibility(View.GONE);
 
 

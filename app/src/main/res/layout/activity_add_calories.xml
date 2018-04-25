@@ -11,11 +11,10 @@
         android:id="@+id/imageView9"
         android:layout_width="302dp"
         android:layout_height="451dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="52dp"
         android:background="@drawable/rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -25,8 +24,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:text=" البحث باستخدام الكلمات المفتاحية"
-        android:textSize="20sp"
+        android:text="اضافه السعرات الحرارية عن طرق البحث"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -60,28 +59,29 @@
     <ListView
         android:id="@+id/listview"
         android:layout_width="239dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_below="@+id/searchword"
-        android:background="#ffff"
+
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/searchword"
         app:layout_constraintTop_toBottomOf="@+id/searchword"
 
 
         />
+
     <TextView
         android:id="@+id/searchbarcode"
-        android:layout_width="212dp"
-        android:layout_height="37dp"
-        android:layout_marginBottom="260dp"
+        android:layout_width="264dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="308dp"
         android:layout_marginEnd="84dp"
-        android:layout_marginStart="8dp"
-        android:text=" البحث باستخدام الباركود"
-        android:textSize="20sp"
+        android:layout_marginStart="100dp"
+        android:text=" اضافه السعرات عن طريق مسح الباركود"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintHorizontal_bias="0.612"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
@@ -89,7 +89,7 @@
         android:id="@+id/scan"
         android:layout_width="158dp"
         android:layout_height="34dp"
-        android:layout_marginBottom="204dp"
+        android:layout_marginBottom="264dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/button_login"
@@ -143,6 +143,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add"
         app:layout_constraintVertical_bias="0.034" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="257dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="196dp"
+        android:text="اضافه عدد السعرات الحراريه"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
