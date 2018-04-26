@@ -351,8 +351,7 @@ String l;
         final ImageView minus = alertLayout.findViewById(R.id.decrease);
 
 
-        String waterNum=Water.getText().toString();
-        num.setText(waterNum);
+        num.setText("0.00");
         i = Double.parseDouble(num.getText().toString());
         plus.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
