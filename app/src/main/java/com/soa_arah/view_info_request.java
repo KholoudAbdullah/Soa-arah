@@ -344,6 +344,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         final CheckBox gra = alertLayout.findViewById(R.id.grams);
         final CheckBox pi = alertLayout.findViewById(R.id.piece);
         final CheckBox lm = alertLayout.findViewById(R.id.ml);
+        final CheckBox cu = alertLayout.findViewById(R.id.cup);
 
 
 
@@ -368,14 +369,13 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
 
 
 
+                if (gra.isChecked()){stand=stand+"جرام,";}
+                if (lm.isChecked()){stand=stand+"مليليتر,";}
                 if (fs.isChecked()){stand=stand+"ملعقة اكل,";}
                 if (ft.isChecked()){stand=stand+"ملعقة شاي,";}
-                if (gra.isChecked()){stand=stand+"جرام,";}
                 if (pi.isChecked()){stand=stand+"عدد الحبات,";}
-                if (lm.isChecked()){stand=stand+"مليليتر,";}
+                if (cu.isChecked()){stand=stand+"كوب,";}
 
-
-                //keyword.setText(cKeyword);
 
             }
         });

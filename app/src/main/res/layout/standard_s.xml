@@ -33,6 +33,15 @@
                 tools:layout_editor_absoluteY="201dp"
                 />
             <CheckBox
+                android:id="@+id/ml"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="مليليتر"
+                android:layoutDirection="rtl"
+                tools:layout_editor_absoluteX="102dp"
+                tools:layout_editor_absoluteY="337dp" />
+
+            <CheckBox
                 android:id="@+id/foodSpoon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,15 +66,15 @@
                 android:layoutDirection="rtl"
                 tools:layout_editor_absoluteX="102dp"
                 tools:layout_editor_absoluteY="337dp" />
-
             <CheckBox
-                android:id="@+id/ml"
+                android:id="@+id/cup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="مليليتر"
+                android:text="كوب"
                 android:layoutDirection="rtl"
                 tools:layout_editor_absoluteX="102dp"
                 tools:layout_editor_absoluteY="337dp" />
+
 
 
         </LinearLayout>
