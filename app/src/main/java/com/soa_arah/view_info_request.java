@@ -44,6 +44,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
     private String key,stand="";
     private String namef,calorie,image,quantity,standard;
     StringBuffer result = new StringBuffer();
+    String[] array;
 
     private DatabaseReference mDatabaseReference;
     private DatabaseReference mDatabaseReference1;
@@ -347,6 +348,23 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
         final CheckBox cu = alertLayout.findViewById(R.id.cup);
 
 
+        if(!stand.equals("")){
+            array=stand.split(",");
+            for (int i=0;i<array.length;i++){
+                if (array[i].equals("جرام"))
+                    gra.setChecked(true);
+                if (array[i].equals("مليليتر"))
+                    lm.setChecked(true);
+                if (array[i].equals("ملعقة اكل"))
+                    fs.setChecked(true);
+                if (array[i].equals("ملعقة شاي"))
+                    ft.setChecked(true);
+                if (array[i].equals("عدد الحبات"))
+                    pi.setChecked(true);
+                if (array[i].equals("كوب"))
+                    cu.setChecked(true);
+            }
+        }
 
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -368,7 +386,7 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
             public void onClick(DialogInterface dialog, int which) {
 
 
-
+                stand="";
                 if (gra.isChecked()){stand=stand+"جرام,";}
                 if (lm.isChecked()){stand=stand+"مليليتر,";}
                 if (fs.isChecked()){stand=stand+"ملعقة اكل,";}

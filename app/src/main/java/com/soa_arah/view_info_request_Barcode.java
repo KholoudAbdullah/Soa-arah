@@ -43,7 +43,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
     private Button accept,sta;
     private FirebaseAuth firebaseAuth;
     private EditText calories1;
-
+    String[] array;
     private String key,stand="";
     private String barcodeN,image1,namef1,imageTable,cal,qun;
     private Button bkeyword;
@@ -332,6 +332,23 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
         final CheckBox cu = alertLayout.findViewById(R.id.cup);
 
 
+        if(!stand.equals("")){
+            array=stand.split(",");
+            for (int i=0;i<array.length;i++){
+                if (array[i].equals("جرام"))
+                    gra.setChecked(true);
+                if (array[i].equals("مليليتر"))
+                    lm.setChecked(true);
+                if (array[i].equals("ملعقة اكل"))
+                    fs.setChecked(true);
+                if (array[i].equals("ملعقة شاي"))
+                    ft.setChecked(true);
+                if (array[i].equals("عدد الحبات"))
+                    pi.setChecked(true);
+                if (array[i].equals("كوب"))
+                    cu.setChecked(true);
+            }
+        }
 
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -352,7 +369,7 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-
+                stand="";
                 if (gra.isChecked()){stand=stand+"جرام,";}
                 if (lm.isChecked()){stand=stand+"مليليتر,";}
                 if (fs.isChecked()){stand=stand+"ملعقة اكل,";}
