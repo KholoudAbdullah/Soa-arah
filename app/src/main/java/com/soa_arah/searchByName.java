@@ -74,6 +74,7 @@ public class searchByName extends AppCompatActivity {
         span=(Spinner)findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, array);
         span.setAdapter(adapter);
+
         TextView textn=(TextView)findViewById(R.id.textView);
         final TextView cal=(TextView)findViewById(R.id.textView6);
         ImageView img=(ImageView)findViewById(R.id.imageView3);

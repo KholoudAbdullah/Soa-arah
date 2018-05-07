@@ -122,13 +122,13 @@ public class home_page_register extends AppCompatActivity{
 
         firebaseAuth = FirebaseAuth.getInstance();
         scan=(Button)findViewById(R.id.scan);
-scan.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        startActivity(new Intent(getApplicationContext(), Barcode.class));
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Barcode.class));
 
-    }
-});
+            }
+        });
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("يتم البحث، الرجاء الانتظار ...");
@@ -144,7 +144,7 @@ scan.setOnClickListener(new View.OnClickListener() {
                                 startActivity(new Intent(getApplicationContext(), home_page_register.class));
                                 break;
                             case R.id.diet_plan:
-                               startActivity(new Intent(getApplicationContext(), diet_plan.class));
+                                startActivity(new Intent(getApplicationContext(), diet_plan.class));
 
                                 break;
                             case R.id.upload:

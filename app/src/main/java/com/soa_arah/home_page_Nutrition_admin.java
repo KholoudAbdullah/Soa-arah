@@ -312,7 +312,7 @@ public class home_page_Nutrition_admin extends AppCompatActivity {
 
         if (item.getItemId() == R.id.aboutUs) {
             startActivity(new Intent(getApplicationContext(), aboutUs.class));
-    }else if (item.getItemId() == R.id.Logout){
+        }else if (item.getItemId() == R.id.Logout){
             firebaseAuth.signOut();
             //closing activity
             finish();

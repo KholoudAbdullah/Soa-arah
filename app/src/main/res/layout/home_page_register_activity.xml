@@ -190,7 +190,7 @@
     <ListView
         android:id="@+id/listview"
         android:layout_width="239dp"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:scrollingCache="false"
         android:layout_alignParentTop="true"
         android:layout_below="@+id/searchword"
