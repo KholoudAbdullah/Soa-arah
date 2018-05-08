@@ -260,7 +260,6 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
                 AlertDialog dialog = alert.create();
                 // Finally, display the alert dialog
                 dialog.show();
-
                 // Get screen width and height in pixels
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics( displayMetrics );
@@ -290,8 +289,8 @@ public class view_info_request extends AppCompatActivity implements View.OnClick
                 // Apply the newly created layout parameters to the alert dialog window
                 dialog.getWindow().setAttributes( layoutParams );
 
+                    startActivity(new Intent(view_info_request.this, view_request.class));
 
-                startActivity(new Intent(view_info_request.this, view_request.class));
 
             }
             }
