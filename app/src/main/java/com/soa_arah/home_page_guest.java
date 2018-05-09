@@ -426,7 +426,7 @@ public class home_page_guest extends AppCompatActivity {
                             else
                             {if(firebaseAuth.getCurrentUser()!=null){
                                 alert=new AlertDialog.Builder(home_page_guest.this);
-                                alert.setMessage("عذراً لايوجد هاذا المنتج هل تريد اضافتة");
+                                alert.setMessage("عذراً لايوجد هذا المنتج هل تريد اضافتة");
                                 alert.setCancelable(true);
                                 alert.setPositiveButton(
                                         "اضافة",
