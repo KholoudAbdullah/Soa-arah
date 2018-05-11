@@ -25,7 +25,6 @@ import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -205,6 +204,7 @@ try {
         TXbarnum = (TextView) findViewById(R.id.barcodeNumber);
         cal = (EditText) findViewById(R.id.cal);
         quan=(EditText)findViewById(R.id.quan);
+
 
 
 
@@ -478,7 +478,7 @@ try {
     }
 
     private void uploadFile() {
-
+        calo=cal.getText().toString().trim();
         if (fImageUri != null && tableUri!= null) {
             progressDialog.setMessage( "الرجاء الانتظار حتى يتم رفع الطلب" );
             progressDialog.show();
@@ -496,10 +496,10 @@ try {
 
 
 
-
-                            Food RF =  new Food(name.getText().toString().trim(),douTable,calo,"لايوجد",quan.getText().toString().trim());
+                            Food RF =  new Food(name.getText().toString().trim(),calo,"لايوجد",quan.getText().toString().trim());
                             RF.setImageTable( taskSnapshot.getDownloadUrl().toString());
                             RF.setBarcodN(barnum);
+                            RF.setImage(douTable);
                             String uploadId = databaseReference.push().getKey();
                             databaseReference.child(uploadId).setValue(RF);
 

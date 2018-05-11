@@ -22,7 +22,12 @@ public class Food {
         Quantity = quantity;
         this.standard=standard;
     }
-
+    public Food(String name,  String calories, String standard,String quantity) {
+        Name = name;
+        Calories = calories;
+        Quantity = quantity;
+        this.standard=standard;
+    }
 
     public void setBarcodN(String barcodN) {
         BarcodN = barcodN;

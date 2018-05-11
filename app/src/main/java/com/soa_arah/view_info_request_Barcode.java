@@ -85,10 +85,8 @@ public class view_info_request_Barcode extends AppCompatActivity implements View
 
         namefood.setText(namef1);
 
-        if (cal.equals("لايوجد"))
-        {calories1.setText(""); }
-        else {
-            calories1.setText(cal);      }
+
+            calories1.setText(cal);
 
 
 
